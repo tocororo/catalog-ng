@@ -2,5 +2,250 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "catalog": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/catalog",
+      "sourceRoot": "projects/catalog/src",
+      "prefix": "catalog",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/catalog",
+            "index": "projects/catalog/src/index.html",
+            "main": "projects/catalog/src/main.ts",
+            "polyfills": "projects/catalog/src/polyfills.ts",
+            "tsConfig": "projects/catalog/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/catalog/src/favicon.ico",
+              "projects/catalog/src/assets"
+            ],
+            "styles": [
+              "projects/catalog/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/catalog/src/environments/environment.ts",
+                  "with": "projects/catalog/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "catalog:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "catalog:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "catalog:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/catalog/src/test.ts",
+            "polyfills": "projects/catalog/src/polyfills.ts",
+            "tsConfig": "projects/catalog/tsconfig.spec.json",
+            "karmaConfig": "projects/catalog/karma.conf.js",
+            "assets": [
+              "projects/catalog/src/favicon.ico",
+              "projects/catalog/src/assets"
+            ],
+            "styles": [
+              "projects/catalog/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/catalog/tsconfig.app.json",
+              "projects/catalog/tsconfig.spec.json",
+              "projects/catalog/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/catalog/e2e/protractor.conf.js",
+            "devServerTarget": "catalog:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "catalog:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "revistasmes": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/revistasmes",
+      "sourceRoot": "projects/revistasmes/src",
+      "prefix": "revistasmes",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/revistasmes",
+            "index": "projects/revistasmes/src/index.html",
+            "main": "projects/revistasmes/src/main.ts",
+            "polyfills": "projects/revistasmes/src/polyfills.ts",
+            "tsConfig": "projects/revistasmes/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/revistasmes/src/favicon.ico",
+              "projects/revistasmes/src/assets"
+            ],
+            "styles": [
+              "projects/revistasmes/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/revistasmes/src/environments/environment.ts",
+                  "with": "projects/revistasmes/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "revistasmes:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "revistasmes:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "revistasmes:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/revistasmes/src/test.ts",
+            "polyfills": "projects/revistasmes/src/polyfills.ts",
+            "tsConfig": "projects/revistasmes/tsconfig.spec.json",
+            "karmaConfig": "projects/revistasmes/karma.conf.js",
+            "assets": [
+              "projects/revistasmes/src/favicon.ico",
+              "projects/revistasmes/src/assets"
+            ],
+            "styles": [
+              "projects/revistasmes/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/revistasmes/tsconfig.app.json",
+              "projects/revistasmes/tsconfig.spec.json",
+              "projects/revistasmes/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/revistasmes/e2e/protractor.conf.js",
+            "devServerTarget": "revistasmes:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "revistasmes:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "catalog"
 }
