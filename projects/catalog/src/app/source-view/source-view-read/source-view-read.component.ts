@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SourceService } from '@toco/tools/backend';
-import { MessageHandler, StatusCode } from '@toco/tools/core';
-import { JournalData, JournalVersion, SourceData, SourceTypes, SourceVersion } from '@toco/tools/entities';
-
+import { SourceTypes, SourceVersion, SourceService, JournalData, JournalVersion, SourceData, MessageHandler, StatusCode } from 'toco-lib';
 @Component({
   selector: 'catalog-source-view-read',
   templateUrl: './source-view-read.component.html',

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SourceClasification } from '@toco/tools/entities';
+import { SourceClasification } from 'toco-lib';
 
 /**
  * This component share the same scss that `JournalViewComponent`.

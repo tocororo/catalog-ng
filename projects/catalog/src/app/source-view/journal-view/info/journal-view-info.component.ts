@@ -1,18 +1,9 @@
 import { Component, OnInit, OnChanges, Input, ViewChild } from "@angular/core";
-import {
-  SourceClasification,
-  VocabulariesInmutableNames,
-  JournalVersion,
-  JournalData,
-  IdentifierSchemas,
-  SourceTypes,
-  SourceSystems,
-} from "@toco/tools/entities";
-import { SourceService } from "@toco/tools/backend";
-import { MatSnackBar } from "@angular/material";
-import { JournalInstitutionsComponent } from "../journal-institutions/journal-institutions.component";
-import { SourceOrganizationsComponent } from '../source-edit/source-organizations/source-organizations.component';
-import { SourceIndexesComponent } from '../source-edit/source-indexes/source-indexes.component';
+import { MatSnackBar } from '@angular/material';
+import { JournalVersion, JournalData, SourceTypes, SourceSystems, SourceClasification, VocabulariesInmutableNames, IdentifierSchemas, SourceService } from 'toco-lib';
+import { SourceIndexesComponent } from 'toco-lib/lib/sources/source-edit/source-indexes/source-indexes.component';
+import { SourceOrganizationsComponent } from 'toco-lib/lib/sources/source-edit/source-organizations/source-organizations.component';
+;
 
 /**
  * This component share the same scss that `JournalViewComponent`.

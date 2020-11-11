@@ -3,9 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-
-import { SourceServiceNoAuth, SourceService } from '@toco/tools/backend';
-import { Source } from '@toco/tools/entities';
+import { Source, SourceServiceNoAuth, SourceService } from 'toco-lib';
 
 @Injectable()
 export class SourceResolver implements Resolve<Source>

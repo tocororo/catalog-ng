@@ -6,17 +6,8 @@ import {
   Output,
   EventEmitter,
 } from "@angular/core";
-import {
-  JournalData,
-  Journal,
-  SourceClasification,
-  VocabulariesInmutableNames,
-  JournalVersion,
-  SourceOrganization,
-} from "@toco/tools/entities";
-import { MatSnackBar } from "@angular/material";
-import { MessageHandler, StatusCode } from "@toco/tools/core";
-import { JournalDataType } from "./journal-view.component";
+import { MatSnackBar } from '@angular/material';
+import { JournalVersion, JournalDataType, SourceClasification, VocabulariesInmutableNames, MessageHandler, StatusCode, SourceOrganization } from 'toco-lib';
 
 @Component({
   selector: "toco-journal-view-version",
