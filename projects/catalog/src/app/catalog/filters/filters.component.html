@@ -1,5 +1,7 @@
 <ng-container *ngIf="formGroup">
-  <form [formGroup]="formGroup">
+  <!-- <form [formGroup]="formGroup">
+    <container-panel [content]="panels"> </container-panel>
+
     <toco-form-container
       [panelsContent]="panels"
       [useAccordion]="true"
@@ -7,8 +9,7 @@
       [deleteValuesAfterAction]="false"
       [formGroup]="formGroup"
     ></toco-form-container>
-  </form>
-
+  </form> -->
 </ng-container>
 
 <toco-progress [loading]="!formGroup" [position]="'absolute'"></toco-progress>

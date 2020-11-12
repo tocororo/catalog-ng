@@ -1,32 +1,30 @@
 import {
   Component,
-  Input,
-  OnInit,
-  Inject,
-  Output,
-  EventEmitter,
-  ViewChild,
-} from "@angular/core";
-import { HttpErrorResponse } from "@angular/common/http";
-import { of } from "rxjs";
-import { catchError, finalize } from "rxjs/operators";
-import { MatDialog, MatSnackBar, MAT_DIALOG_DATA } from "@angular/material";
 
+
+
+
+  EventEmitter, Input,
+  OnInit,
+
+  Output
+} from "@angular/core";
 import {
   FormBuilder,
-  FormGroup,
-  Validators,
-  FormControl,
+
+
+  FormControl, FormGroup
 } from "@angular/forms";
-import { JournalData, JournalVersion, Organization, PanelContent, SourceClasification, FormContainerAction, MetadataService, SourceService, CatalogService, TaxonomyService, ContainerPanelComponent, InputTextComponent, FormFieldType, HintValue, HintPosition, IdentifierSchemas, InputRnpsComponent, SelectComponent, SourceTypes, TextareaComponent, InputUrlComponent, SourceSystems, InputEmailComponent, VocabularyComponent, VocabulariesInmutableNames, DatepickerComponent, Term } from 'toco-lib';
-import { VocabularyTreeComponent } from 'toco-lib/lib/forms/experimental/vocabulary-tree/vocabulary-tree.component';
+import { MatSnackBar } from "@angular/material";
+import { CatalogService, ContainerPanelComponent, DatepickerComponent, FormContainerAction, FormFieldType, HintPosition, HintValue, IdentifierSchemas, InputEmailComponent, InputRnpsComponent, InputTextComponent, InputUrlComponent, JournalData, JournalVersion, MetadataService, Organization, PanelContent, SelectComponent, SourceClasification, SourceService, SourceSystems, SourceTypes, TaxonomyService, Term, TextareaComponent, VocabulariesInmutableNames, VocabularyComponent, VocabularyTreeComponent } from 'toco-lib';
+
 
 @Component({
-  selector: "catalog-source-edit-journal-edit",
+  selector: "catalog-source-edit-journal",
   templateUrl: "./journal-edit.component.html",
   styleUrls: ["./journal-edit.component.scss"],
 })
-export class JournalEditComponent implements OnInit {
+export class SourceEditJournalComponent implements OnInit {
   // TODO: Idea del componente:
   // trabajan internamente con un journal, si recibe null entonces es uno nuevo, si recibe un journal entonces es editar.
   // en ambos casos devuelve el journal editado, o sea el contenido, listo para hacer post en el backend.

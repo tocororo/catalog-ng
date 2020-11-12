@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TermPermissionComponent } from './term-permission.component';
+import { MySourcesTermPermissionComponent } from './term-permission.component';
 
 describe('TermPermissionComponent', () => {
-  let component: TermPermissionComponent;
-  let fixture: ComponentFixture<TermPermissionComponent>;
+  let component: MySourcesTermPermissionComponent;
+  let fixture: ComponentFixture<MySourcesTermPermissionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TermPermissionComponent ]
+      declarations: [ MySourcesTermPermissionComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TermPermissionComponent);
+    fixture = TestBed.createComponent(MySourcesTermPermissionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -4,11 +4,11 @@
  */
 
 import { Component, OnInit, Input } from '@angular/core';
-import { MetadataService } from '@toco/tools/core';
 import { ActivatedRoute, Data, RouterOutlet } from '@angular/router';
+import { MetadataService } from 'toco-lib';
 
 @Component({
-    selector: 'revistasmes-static-pages',
+    selector: 'catalog-static-pages',
     templateUrl: './static-pages.component.html',
     styleUrls: ['./static-pages.component.scss']
 })

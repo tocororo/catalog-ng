@@ -333,7 +333,7 @@ export class SourceViewComponent implements OnInit {
 }
 
 @Component({
-  selector: "toco-journal-view-save-dialog",
+  selector: "catalog-journal-view-save-dialog",
   template: `
       <ng-container *ngIf="data.edit">
         <h1 mat-dialog-title>Guardar cambios</h1>

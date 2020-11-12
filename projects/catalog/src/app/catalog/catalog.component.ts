@@ -391,11 +391,11 @@ export class CatalogComponent implements OnInit, OnChanges {
   selector: "dialog-catalog-journal-info",
   template: `
     <mat-dialog-content class="height-auto">
-      <toco-journal-view-info
+      <catalog-journal-view-info
         [journalVersion]="data.journalVersion"
         [showVersionLabel]="false"
       >
-      </toco-journal-view-info>
+      </catalog-journal-view-info>
     </mat-dialog-content>
   `,
 })

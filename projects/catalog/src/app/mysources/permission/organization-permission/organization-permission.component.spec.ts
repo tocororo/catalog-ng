@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OrganizationPermissionComponent } from './organization-permission.component';
+import { MySourcesOrganizationPermissionComponent } from './organization-permission.component';
 
 describe('OrganizationPermissionComponent', () => {
-  let component: OrganizationPermissionComponent;
-  let fixture: ComponentFixture<OrganizationPermissionComponent>;
+  let component: MySourcesOrganizationPermissionComponent;
+  let fixture: ComponentFixture<MySourcesOrganizationPermissionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OrganizationPermissionComponent ]
+      declarations: [ MySourcesOrganizationPermissionComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OrganizationPermissionComponent);
+    fixture = TestBed.createComponent(MySourcesOrganizationPermissionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

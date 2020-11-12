@@ -41,7 +41,7 @@
     </mat-accordion>
   </mat-card-content>
   <mat-card-actions>
-    <app-user-search (selectedUser)="selectedUser($event)"></app-user-search>
+    <catalog-user-search (selectedUser)="selectedUser($event)"></catalog-user-search>
     <mat-chip *ngIf="user">{{ user.email }}</mat-chip>
 
     <button

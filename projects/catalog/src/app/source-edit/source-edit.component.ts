@@ -4,9 +4,9 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
-import { Organization, SourceTypes, SourceData, SourceVersion, SourceService, TaxonomyService, EnvService, JournalData, JournalVersion, MessageHandler, StatusCode } from 'toco-lib';
+import { ActivatedRoute, Router } from '@angular/router';
+import { EnvService, JournalData, JournalVersion, MessageHandler, Organization, SourceData, SourceService, SourceTypes, SourceVersion, StatusCode, TaxonomyService } from 'toco-lib';
 
 @Component({
   selector: 'catalog-source-edit',

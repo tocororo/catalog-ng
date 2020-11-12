@@ -224,7 +224,7 @@ export class SourceInclusionComponent implements OnInit {
 
 
 @Component({
-  selector: "toco-journal-addinstextra",
+  selector: "catalog-journal-addinstextra",
   template: `
 
   <h2>

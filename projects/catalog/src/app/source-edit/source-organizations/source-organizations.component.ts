@@ -9,7 +9,7 @@ import { SourceData, Organization, SourceOrganizationRole, OrganizationServiceNo
   templateUrl: "./source-organizations.component.html",
   styleUrls: ["./source-organizations.component.scss"],
 })
-export class SourceOrganizationsComponent implements OnInit {
+export class SourceEditOrganizationsComponent implements OnInit {
   @Input()
   public sourceData: SourceData;
 
@@ -35,7 +35,7 @@ export class SourceOrganizationsComponent implements OnInit {
 
   addOrg(cuban = true, topMain = false) {
     if (topMain && this.topMainOrganization) {
-      this.dialog.open(SourceOrganizationSelectTopDialog, {
+      this.dialog.open(SourceEditOrganizationSelectTopDialog, {
         width: "500px",
         data: {
           topMainOrganization: this.topMainOrganization,
@@ -51,7 +51,7 @@ export class SourceOrganizationsComponent implements OnInit {
         },
       });
     } else {
-      this.dialog.open(SourceOrganizationSelectDialog, {
+      this.dialog.open(SourceEditOrganizationSelectDialog, {
         width: "500px",
         data: {
           filter: cuban ? { type: "country", value: "Cuba" } : null,
@@ -211,7 +211,7 @@ export class SourceOrganizationsComponent implements OnInit {
 }
 
 @Component({
-  selector: "toco-source-organizations-select-top-main",
+  selector: "catalog-source-organizations-select-top-main",
   template: `<mat-dialog-content class="height-auto">
     <ng-container *ngIf="toSelect"
       >{{ topMainOrganization.name }}
@@ -237,9 +237,9 @@ export class SourceOrganizationsComponent implements OnInit {
     <button mat-raised-button (click)="ok()">OK</button>
   </mat-dialog-content>`,
 })
-export class SourceOrganizationSelectTopDialog implements OnInit {
+export class SourceEditOrganizationSelectTopDialog implements OnInit {
   constructor(
-    public dialogRef: MatDialogRef<SourceOrganizationSelectTopDialog>,
+    public dialogRef: MatDialogRef<SourceEditOrganizationSelectTopDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private orgService: OrganizationServiceNoAuth
   ) {}
@@ -281,7 +281,7 @@ export class SourceOrganizationSelectTopDialog implements OnInit {
 }
 
 @Component({
-  selector: "toco-source-organizations-select-dialog",
+  selector: "catalog-source-organizations-select-dialog",
   template: `<mat-dialog-content class="height-auto">
     <toco-org-search
       [orgFilter]="data.filter"
@@ -316,9 +316,9 @@ export class SourceOrganizationSelectTopDialog implements OnInit {
     <button mat-raised-button (click)="ok()">OK</button>
   </mat-dialog-content>`,
 })
-export class SourceOrganizationSelectDialog implements OnInit {
+export class SourceEditOrganizationSelectDialog implements OnInit {
   constructor(
-    public dialogRef: MatDialogRef<SourceOrganizationSelectDialog>,
+    public dialogRef: MatDialogRef<SourceEditOrganizationSelectDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private orgService: OrganizationServiceNoAuth
   ) {}

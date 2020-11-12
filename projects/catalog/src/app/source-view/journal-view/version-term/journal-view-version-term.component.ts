@@ -8,9 +8,9 @@ import { SourceClasification } from 'toco-lib';
 @Component({
     selector: 'catalog-journal-view-version-term',
     templateUrl: './journal-view-version-term.component.html',
-    styleUrls: ['./journal-view.component.scss']
+    styleUrls: ['../journal-view.component.scss']
 })
-export class JournalViewTermComponent implements OnInit {
+export class SourceJournalViewVersionTermComponent implements OnInit {
 
     @Input() public title: string;
 

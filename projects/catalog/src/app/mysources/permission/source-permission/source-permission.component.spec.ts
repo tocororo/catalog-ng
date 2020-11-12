@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SourcePermissionComponent } from './source-permission.component';
+import { MySourcesSourcePermissionComponent } from './source-permission.component';
 
 describe('SourcePermissionComponent', () => {
-  let component: SourcePermissionComponent;
-  let fixture: ComponentFixture<SourcePermissionComponent>;
+  let component: MySourcesSourcePermissionComponent;
+  let fixture: ComponentFixture<MySourcesSourcePermissionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SourcePermissionComponent ]
+      declarations: [ MySourcesSourcePermissionComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SourcePermissionComponent);
+    fixture = TestBed.createComponent(MySourcesSourcePermissionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

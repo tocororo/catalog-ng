@@ -81,7 +81,7 @@
   </mat-toolbar>
 
   <ng-container *ngIf="versions != undefined">
-    <toco-journal-edit
+    <catalog-source-edit-journal
       *ngIf="editVersion"
       [journalVersion]="editingJournal"
       (journalEditDone)="sourceEditDone($event)"
@@ -89,24 +89,24 @@
       [showFinalStep]="false"
       [topMainOrganization]="topMainOrganization"
     >
-    </toco-journal-edit>
-    <toco-journal-view-info
+    </catalog-source-edit-journal>
+    <catalog-journal-view-info
       *ngIf="!editVersion && !showVersions"
       [journalVersion]="editingJournal"
       fxFlex="1 2 calc(15em + 20px)"
       style="margin: 0.5em"
     >
-    </toco-journal-view-info>
+    </catalog-journal-view-info>
     <ng-container *ngIf="!editVersion && showVersions">
-      <toco-journal-view-info
+      <catalog-journal-view-info
         #journalViewInfo
         [journalVersion]="editingJournal"
         fxFlex="1 2 calc(15em + 20px)"
         style="margin: 0.5em"
       >
-      </toco-journal-view-info>
+      </catalog-journal-view-info>
 
-      <toco-journal-view-version
+      <catalog-journal-view-version
         #versionsPanel
         [editingJournal]="editingJournal"
         [currentJournal]="selectedJournal"
@@ -115,7 +115,7 @@
         "
         fxFlex="1 2 calc(15em + 20px)"
         style="margin: 0.5em"
-      ></toco-journal-view-version>
+      ></catalog-journal-view-version>
     </ng-container>
   </ng-container>
 

@@ -136,9 +136,9 @@ export class MySourcesTermsComponent implements OnInit {
 
 
 @Component({
-  selector: "toco-mysources-terms-permissions",
+  selector: "catalog-mysources-terms-permissions",
   template: `<mat-dialog-content class="height-auto">
-  <toco-term-permission [term]="term"></toco-term-permission>
+  <catalog-term-permission [term]="term"></catalog-term-permission>
   </mat-dialog-content>`,
 })
 export class MySourcesTermsPermissionDialog implements OnInit {

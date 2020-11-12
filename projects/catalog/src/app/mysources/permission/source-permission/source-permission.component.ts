@@ -6,7 +6,7 @@ import { Source, User, SourceService } from 'toco-lib';
   templateUrl: './source-permission.component.html',
   styleUrls: ['./source-permission.component.scss']
 })
-export class SourcePermissionComponent implements OnInit {
+export class MySourcesSourcePermissionComponent implements OnInit {
 
   @Input() source: Source;
 

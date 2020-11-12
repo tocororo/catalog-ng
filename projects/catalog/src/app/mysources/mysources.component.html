@@ -23,31 +23,31 @@
 <mat-tab-group>
   <mat-tab label="Editor" *ngIf="asEditor && asEditor.length > 0">
     <div class="mat-elevation-z8">
-      <toco-mysources-editor [asEditor]="asEditor"></toco-mysources-editor>
+      <catalog-mysources-editor [asEditor]="asEditor"></catalog-mysources-editor>
     </div>
   </mat-tab>
 
   <mat-tab label="Gestor" *ngIf="asManager && asManager.length > 0">
     <div class="mat-elevation-z8">
-      <toco-mysources-manager [asManager]="asManager"></toco-mysources-manager>
+      <catalog-mysources-manager [asManager]="asManager"></catalog-mysources-manager>
     </div>
   </mat-tab>
 
   <mat-tab label="Términos" *ngIf="isAdmin">
     <div class="mat-elevation-z8">
-      <toco-mysources-terms-admin></toco-mysources-terms-admin>
+      <catalog-mysources-terms-admin></catalog-mysources-terms-admin>
     </div>
   </mat-tab>
 
   <mat-tab label="Términos" *ngIf="!isAdmin && terms && terms.length > 0">
     <div class="mat-elevation-z8">
-      <toco-mysources-terms [terms]="terms"></toco-mysources-terms>
+      <catalog-mysources-terms [terms]="terms"></catalog-mysources-terms>
     </div>
   </mat-tab>
 
   <mat-tab label="Organizaciones" *ngIf="organizations && organizations.length > 0">
     <div class="mat-elevation-z8">
-      <toco-mysources-organizations [organizations]="organizations"></toco-mysources-organizations>
+      <catalog-mysources-organizations [organizations]="organizations"></catalog-mysources-organizations>
     </div>
   </mat-tab>
 

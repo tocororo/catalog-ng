@@ -1,14 +1,14 @@
-import { Component, OnInit, Inject, Input, OnChanges } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
-import { SourceData, TermNode, Term, SourceClasification, TaxonomyService, VocabulariesInmutableNames, PanelContent_Depr, FormContainerAction, InputTextComponent, FormFieldType, SelectComponent, SelectOption, InputUrlComponent, HintValue, HintPosition } from 'toco-lib';
+import { ContainerPanelComponent, FormContainerAction, FormFieldType, HintPosition, HintValue, InputTextComponent, InputUrlComponent, PanelActionContent, PanelContent, PanelContent_Depr, SelectComponent, SelectOption, SourceClasification, SourceData, TaxonomyService, Term, TermNode, VocabulariesInmutableNames } from 'toco-lib';
 
 @Component({
   selector: "catalog-source-edit-indexes",
   templateUrl: './source-indexes.component.html',
   styleUrls: ['./source-indexes.component.scss'],
 })
-export class SourceIndexesComponent implements OnInit {
+export class SourceEditIndexesComponent implements OnInit {
 
   @Input()
   public sourceData: SourceData;
@@ -216,23 +216,17 @@ export class SourceIndexesComponent implements OnInit {
 }
 
 @Component({
-  selector: "toco-source-addindex",
+  selector: "catalog-source-addindex",
   styleUrls: ['./source-indexes.component.scss'],
   template: `
-    <toco-form-container
-      #indexPanelContainer
-      [panelsContent]="indexPanel"
-      [useAccordion]="false"
-      fxLayout="row"
-      [formGroup]="indexFormGroup"
-      [action]="addIndexAction"
-      [actionLabel]="'OK'"
-      [deleteValuesAfterAction]="false"
-    ></toco-form-container>
+  <container-panel-action
+  [content]="indexPanel"
+>
+</container-panel-action>
   `,
 })
 export class SourceEditAddIndexComponent implements OnInit {
-  indexPanel: PanelContent_Depr[] = null;
+  indexPanel: PanelActionContent = null;
   indexFormGroup: FormGroup;
 
   addIndexAction: FormContainerAction;
@@ -262,9 +256,11 @@ export class SourceEditAddIndexComponent implements OnInit {
   ngOnInit() {
     this.indexFormGroup = this._formBuilder.group({});
     if (this.dbclass) {
-      this.indexPanel = [
+      this.indexPanel =
         {
-          title: (this.editing) ? 'Editar' : 'Adicionar',
+          label: (this.editing) ? 'Editar' : 'Adicionar',
+          name: 'indexPanel',
+          controlType: ContainerPanelComponent,
           description: '',
           iconName: '',
           formSection: this.indexFormGroup,
@@ -332,34 +328,33 @@ export class SourceEditAddIndexComponent implements OnInit {
               value: (this.editing) ? [this.editing.data['end_cover']] : '',
             },
           ],
-        },
-      ];
-    }
+          action: {
+            doit: (data: any) => {
+              if (this.indexFormGroup.valid) {
+                const result = new SourceClasification();
+                // console.log(this.indexFormGroup);
 
+                if (this.indexFormGroup.controls['indexes'].value) {
+                  const node = this.options.find(value => value.term.uuid == this.indexFormGroup.controls['indexes'].value);
+                  if (node) {
+                    result.vocabulary = node.term.vocabulary_id;
+                    result.description = node.term.description;
+                    result.id = node.term.uuid;
+                    result.data = {
+                      url: this.indexFormGroup.controls['url'].value,
+                      initial_cover: this.indexFormGroup.controls['initial_cover'].value,
+                      end_cover: this.indexFormGroup.controls['end_cover'].value,
+                    };
+                    this.addIndex(result);
+                  }
+                }
+              }
 
-    this.addIndexAction = {
-      doit: (data: any) => {
-        if (this.indexFormGroup.valid) {
-          const result = new SourceClasification();
-          // console.log(this.indexFormGroup);
-
-          if (this.indexFormGroup.controls['indexes'].value) {
-            const node = this.options.find(value => value.term.uuid == this.indexFormGroup.controls['indexes'].value);
-            if (node) {
-              result.vocabulary = node.term.vocabulary_id;
-              result.description = node.term.description;
-              result.id = node.term.uuid;
-              result.data = {
-                url: this.indexFormGroup.controls['url'].value,
-                initial_cover: this.indexFormGroup.controls['initial_cover'].value,
-                end_cover: this.indexFormGroup.controls['end_cover'].value,
-              };
-              this.addIndex(result);
             }
           }
         }
+      ;
+    }
 
-      },
-    };
   }
 }

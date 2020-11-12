@@ -6,7 +6,7 @@ import { Term, User, SourceService } from 'toco-lib';
   templateUrl: './term-permission.component.html',
   styleUrls: ['./term-permission.component.scss']
 })
-export class TermPermissionComponent implements OnInit {
+export class MySourcesTermPermissionComponent implements OnInit {
 
   @Input() term: Term;
   managers: User[] = new Array<User>();

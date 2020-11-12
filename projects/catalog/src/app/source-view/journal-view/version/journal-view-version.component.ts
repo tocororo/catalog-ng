@@ -10,11 +10,11 @@ import { MatSnackBar } from '@angular/material';
 import { JournalVersion, JournalDataType, SourceClasification, VocabulariesInmutableNames, MessageHandler, StatusCode, SourceOrganization } from 'toco-lib';
 
 @Component({
-  selector: "toco-journal-view-version",
+  selector: "catalog-journal-view-version",
   templateUrl: "./journal-view-version.component.html",
-  styleUrls: ["./journal-view.component.scss"],
+  styleUrls: ["../journal-view.component.scss"],
 })
-export class JournalViewVersionComponent implements OnInit, OnChanges {
+export class SourceJournalViewVersionComponent implements OnInit, OnChanges {
   @Input() public currentJournal: JournalVersion;
 
   @Input() public type: number;

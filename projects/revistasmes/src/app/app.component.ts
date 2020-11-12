@@ -6,8 +6,9 @@
 import { Component } from '@angular/core';
 import { Subscription, PartialObserver } from 'rxjs';
 import { OAuthStorage, OAuthService } from 'angular-oauth2-oidc';
-import { AuthenticationService } from '@toco/tools/authentication/authentication.service';
+
 import { Router, NavigationStart, RouterEvent, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
+import { AuthenticationService } from 'toco-lib';
 
 @Component({
     selector: 'revistasmes-root',

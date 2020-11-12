@@ -13,9 +13,9 @@ import { JournalVersion, JournalDataType, IdentifierSchemas, JournalData } from 
 @Component({
     selector: 'catalog-journal-view-version-field',
     templateUrl: './journal-view-version-field.component.html',
-    styleUrls: ['./journal-view.component.scss']
+    styleUrls: ['../journal-view.component.scss']
 })
-export class JournalViewFieldComponent implements OnInit {
+export class SourceJournalViewVersionFieldComponent implements OnInit {
 
     @Input() public editingJournal: JournalVersion;
 

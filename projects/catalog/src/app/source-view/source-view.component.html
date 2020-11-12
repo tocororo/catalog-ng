@@ -51,14 +51,14 @@
   </mat-toolbar>
 
   <ng-container *ngIf="editingVersion && versions && topMainOrganization">
-  <toco-journal-view
+  <catalog-journal-view
     #view
     *ngSwitchCase="sourceType.JOURNAL.value"
     [editingJournal]="editingVersion"
     [versions]="versions"
     [topMainOrganization]="topMainOrganization"
   >
-  </toco-journal-view>
+  </catalog-journal-view>
 
   <p #view *ngSwitchDefault>
     {{ sourceType.JOURNAL.value }}

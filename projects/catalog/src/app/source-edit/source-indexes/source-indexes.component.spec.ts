@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SourceIndexesComponent } from './source-indexes.component';
+import { SourceEditIndexesComponent } from './source-indexes.component';
 
-describe('SourceIndexesComponent', () => {
-  let component: SourceIndexesComponent;
-  let fixture: ComponentFixture<SourceIndexesComponent>;
+describe('SourceEditIndexesComponent', () => {
+  let component: SourceEditIndexesComponent;
+  let fixture: ComponentFixture<SourceEditIndexesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SourceIndexesComponent ]
+      declarations: [ SourceEditIndexesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SourceIndexesComponent);
+    fixture = TestBed.createComponent(SourceEditIndexesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

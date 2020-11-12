@@ -28,7 +28,7 @@
   [deleteValuesAfterAction]="true"
 ></toco-form-container> -->
 <ng-container *ngIf="source && versionToEdit" [ngSwitch]="source.source_type">
-  <toco-journal-edit
+  <catalog-source-edit-journal
   *ngSwitchCase="sourceType.JOURNAL.value"
   [journalVersion]="versionToEdit"
   (journalEditDone)="finishInclusion()"
@@ -36,7 +36,7 @@
   [description]="'Complete y compruebe todos los datos solicitados.'"
   [topMainOrganization]="topMainOrganization"
 >
-</toco-journal-edit>
+</catalog-source-edit-journal>
 
 <p *ngSwitchDefault>
   {{ sourceType.JOURNAL.value }}
@@ -58,13 +58,13 @@
       <mat-icon>done</mat-icon>
     </ng-template>
     <mat-step label="Revista" state="journal" completed="false" #journalStep>
-      <toco-journal-edit
+      <catalog-source-edit-journal
         [journalVersion]="versionToEdit"
         (journalEditDone)="journalStep.completed = true; stepper.next()"
         [showEditHeader]="false"
         [description]="'Complete y compruebe todos los datos solicitados.'"
       >
-      </toco-journal-edit>
+      </catalog-source-edit-journal>
     </mat-step>
     <mat-step label="Persona" state="person" [stepControl]="personFormGroup">
       <h2>

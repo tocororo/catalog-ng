@@ -56,9 +56,9 @@ export class MySourcesManagerComponent implements OnInit {
 }
 
 @Component({
-  selector: "toco-mysources-manager-permissions",
+  selector: "catalog-mysources-manager-permissions",
   template: `<mat-dialog-content class="height-auto">
-  <toco-source-permission [source]="source"></toco-source-permission>
+  <catalog-source-permission [source]="source"></catalog-source-permission>
   </mat-dialog-content>`,
 })
 export class MySourcesManagerPermissionDialog implements OnInit {

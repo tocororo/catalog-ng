@@ -7,7 +7,7 @@ import { Organization, User, SourceService } from 'toco-lib';
   templateUrl: './organization-permission.component.html',
   styleUrls: ['./organization-permission.component.scss']
 })
-export class OrganizationPermissionComponent implements OnInit {
+export class MySourcesOrganizationPermissionComponent implements OnInit {
 
   @Input() org: Organization;
   managers: User[] = new Array<User>();

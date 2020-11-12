@@ -22,14 +22,14 @@
     </button>
   </mat-toolbar>
 
-  <toco-journal-edit
+  <catalog-source-edit-journal
     *ngSwitchCase="sourceType.JOURNAL.value"
     [journalVersion]="sourceVersion"
     [topMainOrganization]="topMainOrganization"
     (journalEditDone)="sourceEditDone($event)"
     [showEditHeader]="false"
   >
-  </toco-journal-edit>
+  </catalog-source-edit-journal>
 
   <p *ngSwitchDefault>
     {{ sourceType.JOURNAL.value }}

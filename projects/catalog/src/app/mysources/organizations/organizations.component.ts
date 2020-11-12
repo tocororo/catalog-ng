@@ -139,7 +139,7 @@ export class MySourcesOrganizationsComponent implements OnInit {
 @Component({
   selector: "catalog-mysources-organizations-permissions",
   template: `<mat-dialog-content class="height-auto">
-  <toco-organization-permission [org]="org"></toco-organization-permission>
+  <catalog-organization-permission [org]="org"></catalog-organization-permission>
   </mat-dialog-content>`,
 })
 export class MySourcesOrganizationsPermissionDialog implements OnInit {

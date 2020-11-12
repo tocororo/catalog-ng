@@ -42,7 +42,7 @@ export enum JournalDataType {
     templateUrl: './journal-view.component.html',
     styleUrls: ['./journal-view.component.scss']
 })
-export class JournalViewComponent implements OnInit {
+export class SourceJournalViewComponent implements OnInit {
 
 
     @Input()

@@ -4,13 +4,12 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { UserProfile } from '@toco/tools/entities';
-import { EnvService } from '@tocoenv/tools/env.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { UserProfileService } from '@toco/tools/backend/user-profile.service';
+import { UserProfile, UserProfileService, EnvService } from 'toco-lib';
+;
 
 @Component({
-    selector: 'revistasmes-user-profile',
+    selector: 'catalog-user-profile',
     templateUrl: './user-profile.component.html',
     styleUrls: ['./user-profile.component.scss']
 })

@@ -50,64 +50,64 @@
     </ng-container>
 
     <ng-container *ngSwitchCase="journalDataType.issnP">
-      <toco-journal-view-info-field
+      <catalog-journal-view-info-field
         [label]="'Impreso'"
         [value]="
           currentJournal.data.getIdentifierValue(IdentifierSchemas.pissn)
         "
-      ></toco-journal-view-info-field>
+      ></catalog-journal-view-info-field>
     </ng-container>
 
     <ng-container *ngSwitchCase="journalDataType.issnE">
-      <toco-journal-view-info-field
+      <catalog-journal-view-info-field
         [label]="'Electrónico'"
         [value]="
           currentJournal.data.getIdentifierValue(IdentifierSchemas.eissn)
         "
-      ></toco-journal-view-info-field>
+      ></catalog-journal-view-info-field>
     </ng-container>
 
     <ng-container *ngSwitchCase="journalDataType.issnL">
-      <toco-journal-view-info-field
+      <catalog-journal-view-info-field
         [label]="'De enlace'"
         [value]="
           currentJournal.data.getIdentifierValue(IdentifierSchemas.lissn)
         "
-      ></toco-journal-view-info-field>
+      ></catalog-journal-view-info-field>
     </ng-container>
 
     <ng-container *ngSwitchCase="journalDataType.rnpsP">
-      <toco-journal-view-info-field
+      <catalog-journal-view-info-field
         [label]="'Impreso'"
         [value]="
           currentJournal.data.getIdentifierValue(IdentifierSchemas.prnps)
         "
-      ></toco-journal-view-info-field>
+      ></catalog-journal-view-info-field>
     </ng-container>
 
     <ng-container *ngSwitchCase="journalDataType.rnpsE">
-      <toco-journal-view-info-field
+      <catalog-journal-view-info-field
         [label]="'Electrónico'"
         [value]="
           currentJournal.data.getIdentifierValue(IdentifierSchemas.ernps)
         "
-      ></toco-journal-view-info-field>
+      ></catalog-journal-view-info-field>
     </ng-container>
 
     <ng-container *ngSwitchCase="journalDataType.url">
-      <toco-journal-view-info-field
+      <catalog-journal-view-info-field
         [label]="'URL'"
         [value]="currentJournal.data.getIdentifierValue(IdentifierSchemas.url)"
-      ></toco-journal-view-info-field>
+      ></catalog-journal-view-info-field>
     </ng-container>
 
     <ng-container *ngSwitchCase="journalDataType.oaiurl">
-      <toco-journal-view-info-field
+      <catalog-journal-view-info-field
         [label]="'OAIURL'"
         [value]="
           currentJournal.data.getIdentifierValue(IdentifierSchemas.oaiurl)
         "
-      ></toco-journal-view-info-field>
+      ></catalog-journal-view-info-field>
     </ng-container>
 
     <ng-container *ngSwitchCase="journalDataType.email">

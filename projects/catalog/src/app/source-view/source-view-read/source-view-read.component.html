@@ -28,13 +28,13 @@
 
 
   <ng-container *ngIf="source">
-  <toco-journal-view-info
+  <catalog-journal-view-info
     #view
     *ngSwitchCase="sourceType.JOURNAL.value"
     [journalVersion]="source"
     [showVersionLabel]="false"
   >
-  </toco-journal-view-info>
+  </catalog-journal-view-info>
 
   <p #view *ngSwitchDefault>
     {{ sourceType.JOURNAL.value }}

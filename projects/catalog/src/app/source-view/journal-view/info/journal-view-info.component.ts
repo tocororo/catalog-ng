@@ -1,8 +1,8 @@
 import { Component, OnInit, OnChanges, Input, ViewChild } from "@angular/core";
 import { MatSnackBar } from '@angular/material';
 import { JournalVersion, JournalData, SourceTypes, SourceSystems, SourceClasification, VocabulariesInmutableNames, IdentifierSchemas, SourceService } from 'toco-lib';
-import { SourceIndexesComponent } from 'toco-lib/lib/sources/source-edit/source-indexes/source-indexes.component';
-import { SourceOrganizationsComponent } from 'toco-lib/lib/sources/source-edit/source-organizations/source-organizations.component';
+import { SourceEditIndexesComponent } from '../../../source-edit/source-indexes/source-indexes.component';
+import { SourceEditOrganizationsComponent } from '../../../source-edit/source-organizations/source-organizations.component';
 ;
 
 /**
@@ -10,11 +10,11 @@ import { SourceOrganizationsComponent } from 'toco-lib/lib/sources/source-edit/s
  * His goal, shows a Journal
  */
 @Component({
-  selector: "toco-journal-view-info",
+  selector: "catalog-journal-view-info",
   templateUrl: "./journal-view-info.component.html",
-  styleUrls: ["./journal-view.component.scss"],
+  styleUrls: ["../journal-view.component.scss"],
 })
-export class JournalViewInfoComponent implements OnInit, OnChanges {
+export class SourceJournalViewInfoComponent implements OnInit, OnChanges {
   @Input() public journalVersion: JournalVersion;
   @Input() public showVersionLabel: boolean = true;
   public journalData: JournalData;
@@ -39,11 +39,11 @@ export class JournalViewInfoComponent implements OnInit, OnChanges {
 
   public IdentifierSchemas = IdentifierSchemas;
 
-  @ViewChild(SourceOrganizationsComponent, { static: false })
-  orgs: SourceOrganizationsComponent;
+  @ViewChild(SourceEditOrganizationsComponent, { static: false })
+  orgs: SourceEditOrganizationsComponent;
 
-  @ViewChild(SourceIndexesComponent, { static: false })
-  indexes: SourceIndexesComponent;
+  @ViewChild(SourceEditIndexesComponent, { static: false })
+  indexes: SourceEditIndexesComponent;
 
 
   constructor(
@@ -122,8 +122,8 @@ export class JournalViewInfoComponent implements OnInit, OnChanges {
 
 
 @Component({
-    selector: "toco-journal-view-info-field",
-    styleUrls: ["./journal-view.component.scss"],
+    selector: "catalog-journal-view-info-field",
+    styleUrls: ["../journal-view.component.scss"],
     template: `
     <mat-label style="font-weight: bold;">{{label}}: </mat-label>
     <mat-label *ngIf="value">
@@ -136,7 +136,7 @@ export class JournalViewInfoComponent implements OnInit, OnChanges {
     </mat-label
     >`
   })
-  export class JournalViewInfoFieldComponent {
+  export class SourceJournalViewInfoFieldComponent {
     @Input()
     label: string;
     @Input()
