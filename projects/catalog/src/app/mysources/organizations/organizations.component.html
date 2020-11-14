@@ -1,4 +1,14 @@
-<mat-tree
+<toco-org-tree-viewer
+  [organizations]="organizations"
+  [orgRelationshipType]="'child'"
+  [iconAction]="'vpn_key'"
+  [labelAction]="'Permisos'"
+  (action)="openPermission($event)"
+>
+
+</toco-org-tree-viewer>
+
+<!-- <mat-tree
   [dataSource]="dataSource"
   [treeControl]="treeControl"
 >
@@ -45,4 +55,4 @@
       class="example-tree-progress-bar"
     ></mat-progress-bar>
   </mat-tree-node>
-</mat-tree>
+</mat-tree> -->

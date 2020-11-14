@@ -28,7 +28,7 @@ import { SourceJournalViewInfoComponent, SourceJournalViewInfoFieldComponent } f
 import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HomeComponent } from './home/home.component';
-import { AngularMaterialModule, AuthenticationModule, AuthenticationService, CoreModule, EnvServiceProvider, NotificationModule, OrganizationServiceNoAuth, OrganizationsModule, SharedModule, SourceService, SourceServiceNoAuth, TocoFormsModule } from 'toco-lib';
+import { AngularMaterialModule, AuthenticationModule, AuthenticationService, CoreModule, EnvServiceProvider, HTTP_INTERCEPTOR_PROVIDERS, NotificationModule, OrganizationServiceNoAuth, OrganizationsModule, REQUEST_CACHE_DIFFERENT_TIME_WITH_MAP_PROVIDER, SharedModule, SourceService, SourceServiceNoAuth, TaxonomyModule, TaxonomyService, TocoFormsModule, UserProfileService } from 'toco-lib';
 import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MarkdownModule } from 'ngx-markdown';
@@ -100,6 +100,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     AuthenticationModule,
     AngularMaterialModule,
+    // TaxonomyModule,
     FlexLayoutModule,
     MarkdownModule.forRoot({
       loader: HttpClient
@@ -109,8 +110,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     EnvServiceProvider,
     SourceService,
     SourceServiceNoAuth,
+    UserProfileService,
+    TaxonomyService,
     OrganizationServiceNoAuth,
-    // { provide: HTTP_INTERCEPTORS, useClass: AuthenticationService, multi: true }
+    HTTP_INTERCEPTOR_PROVIDERS,
+    REQUEST_CACHE_DIFFERENT_TIME_WITH_MAP_PROVIDER,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationService, multi: true }
   ],
   bootstrap: [AppComponent]
 })

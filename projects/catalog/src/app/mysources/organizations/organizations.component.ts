@@ -97,6 +97,7 @@ export class DynamicDataSource {
 export class MySourcesOrganizationsComponent implements OnInit {
 
   @Input() organizations: Array<Hit<Organization>> = new Array();
+
   public error = false;
 
   treeControl: FlatTreeControl<DynamicFlatNode>;
@@ -111,15 +112,16 @@ export class MySourcesOrganizationsComponent implements OnInit {
 
   constructor(
     private orgService: OrganizationServiceNoAuth, public dialog: MatDialog) {
-    this.treeControl = new FlatTreeControl<DynamicFlatNode>(this.getLevel, this.isExpandable);
-    this.dataSource = new DynamicDataSource(this.treeControl, orgService);
+    // this.treeControl = new FlatTreeControl<DynamicFlatNode>(this.getLevel, this.isExpandable);
+    // this.dataSource = new DynamicDataSource(this.treeControl, orgService);
   }
 
   ngOnInit() {
-    this.dataSource.data = this.organizations.map(
-      org =>
-        new DynamicFlatNode(org, 1, org.metadata.relationships.length > 0)
-    );
+    // this.dataSource.data = this.organizations.map(
+    //   org =>
+    //     new DynamicFlatNode(org, 1, org.metadata.relationships.length > 0)
+    // );
+
   }
 
   openPermission(org) {

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthenticationService } from 'toco-lib';
+import { AuthenticationService, NotificationListComponent } from 'toco-lib';
 import { CatalogComponent } from './catalog/catalog.component';
 import { HomeComponent } from './home/home.component';
 import { MySourcesComponent } from './mysources/mysources.component';
@@ -98,11 +98,11 @@ const routes: Routes = [
     ],
     canActivate: [AuthenticationService]
 },
-// {
-//     path: 'notifications',
-//     component: NotificationListComponent,
-//     canActivate: [AuthenticationService]
-// },
+{
+    path: 'notifications',
+    component: NotificationListComponent,
+    canActivate: [AuthenticationService]
+},
 {
     path: '**',
     redirectTo: ''

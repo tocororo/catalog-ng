@@ -6,7 +6,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EnvService, JournalData, JournalVersion, MessageHandler, Organization, SourceData, SourceService, SourceTypes, SourceVersion, StatusCode, TaxonomyService } from 'toco-lib';
+import { EnvService, Hit, JournalData, JournalVersion, MessageHandler, Organization, SourceData, SourceService, SourceTypes, SourceVersion, StatusCode, TaxonomyService } from 'toco-lib';
 
 @Component({
   selector: 'catalog-source-edit',
@@ -16,7 +16,7 @@ import { EnvService, JournalData, JournalVersion, MessageHandler, Organization, 
 export class SourceEditComponent implements OnInit {
 
   public topOrganizationPID = null;
-  public topMainOrganization: Organization = null;
+  public topMainOrganization: Hit<Organization> = null;
 
   public sourceType = SourceTypes;
   public source: SourceData;
@@ -29,7 +29,6 @@ export class SourceEditComponent implements OnInit {
     private _router: Router,
     private _snackBar: MatSnackBar,
     private sourceService: SourceService,
-    private taxonomyService: TaxonomyService,
     private env: EnvService,
   ) {
     if (env.extraArgs && env.extraArgs["topOrganizationPID"]) {
@@ -39,6 +38,7 @@ export class SourceEditComponent implements OnInit {
 
   ngOnInit() {
     console.log("EDIT SOURCE")
+    this.saving = true;
     this.route.data
       .subscribe((response) => {
 
@@ -55,6 +55,7 @@ export class SourceEditComponent implements OnInit {
               this.sourceVersion = new JournalVersion();
               this.sourceVersion.source_uuid = this.source.id;
               this.sourceVersion.data.deepcopy(this.source);
+              this.saving = false;
 
 
 

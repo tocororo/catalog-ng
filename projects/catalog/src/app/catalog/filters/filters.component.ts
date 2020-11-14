@@ -16,7 +16,7 @@ import { FormGroup, FormBuilder, FormControl } from "@angular/forms";
 
 import { ParamMap, ActivatedRoute, convertToParamMap, Params } from "@angular/router";
 
-import { EnvService, FlatTreeNode, FormFieldType, Organization, OrganizationServiceNoAuth, PanelContent_Depr, Relationship, SearchService, SelectOption, SelectOptionNode, SourceTypes, VocabulariesInmutableNames } from 'toco-lib';
+import { EnvService, FlatTreeNode, FormFieldType, Hit, Organization, OrganizationServiceNoAuth, PanelContent_Depr, Relationship, SearchService, SelectOption, SelectOptionNode, SourceTypes, VocabulariesInmutableNames } from 'toco-lib';
 
 export const CatalogFilterKeys = {
   source_type: "source_type",
@@ -37,7 +37,7 @@ export class FiltersComponent implements OnInit {
   params: ParamMap;
 
   @Input()
-  public topMainOrganization: Organization = null;
+  public topMainOrganization: Hit<Organization> = null;
 
   @Output()
   paramsChange: EventEmitter<Params> = new EventEmitter();
@@ -53,11 +53,7 @@ export class FiltersComponent implements OnInit {
   filters: Map<string, string> = new Map<string, string>();
 
   constructor(
-    private searchService: SearchService,
-    private envService: EnvService,
-    private _formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private orgService: OrganizationServiceNoAuth,
+    private _formBuilder: FormBuilder
   ) {
 
   }
@@ -168,8 +164,8 @@ export class FiltersComponent implements OnInit {
               // observable: this.searchService.getOrganizationById(this.topOrganizationPID),
               getOptions: () => {
                 const opts: SelectOption[] = [];
-                console.log(this.topMainOrganization.relationships)
-                this.topMainOrganization.relationships.forEach((child: Relationship) => {
+                console.log(this.topMainOrganization.metadata.relationships)
+                this.topMainOrganization.metadata.relationships.forEach((child: Relationship) => {
                   opts.push({
                     value: child.id,
                     label: child.label,

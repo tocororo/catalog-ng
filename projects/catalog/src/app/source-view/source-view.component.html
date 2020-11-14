@@ -24,7 +24,7 @@
 </mat-card>
 
 
-<ng-container *ngIf="!error && editingVersion" [ngSwitch]="editingVersion.data.source_type">
+<ng-container *ngIf="!loading && !error && editingVersion" [ngSwitch]="editingVersion.data.source_type">
   <mat-toolbar
     fxLayout="row wrap"
     fxLayoutAlign="space-between center"

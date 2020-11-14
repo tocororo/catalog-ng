@@ -8,27 +8,27 @@ import {
   OnInit,
 
   Output
-} from "@angular/core";
+} from '@angular/core';
 import {
   FormBuilder,
 
 
   FormControl, FormGroup
-} from "@angular/forms";
-import { MatSnackBar } from "@angular/material";
-import { CatalogService, ContainerPanelComponent, DatepickerComponent, FormContainerAction, FormFieldType, HintPosition, HintValue, IdentifierSchemas, InputEmailComponent, InputRnpsComponent, InputTextComponent, InputUrlComponent, JournalData, JournalVersion, MetadataService, Organization, PanelContent, SelectComponent, SourceClasification, SourceService, SourceSystems, SourceTypes, TaxonomyService, Term, TextareaComponent, VocabulariesInmutableNames, VocabularyComponent, VocabularyTreeComponent } from 'toco-lib';
+} from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
+import { CatalogService, ContainerPanelComponent, DatepickerComponent, DatepickerYearComponent, FormContainerAction, FormFieldType, HintPosition, HintValue, Hit, IdentifierSchemas, InputEmailComponent, InputRnpsComponent, InputTextComponent, InputUrlComponent, JournalData, JournalVersion, MetadataService, Organization, PanelContent, SelectComponent, SourceClasification, SourceService, SourceSystems, SourceTypes, TaxonomyService, Term, TextareaComponent, VocabulariesInmutableNames, VocabularyComponent, VocabularyTreeComponent } from 'toco-lib';
 
 
 @Component({
-  selector: "catalog-source-edit-journal",
-  templateUrl: "./journal-edit.component.html",
-  styleUrls: ["./journal-edit.component.scss"],
+  selector: 'catalog-source-edit-journal',
+  templateUrl: './journal-edit.component.html',
+  styleUrls: ['./journal-edit.component.scss'],
 })
 export class SourceEditJournalComponent implements OnInit {
   // TODO: Idea del componente:
   // trabajan internamente con un journal, si recibe null entonces es uno nuevo, si recibe un journal entonces es editar.
   // en ambos casos devuelve el journal editado, o sea el contenido, listo para hacer post en el backend.
-  public pageTitle = "";
+  public pageTitle = '';
 
   public journalData: JournalData = null;
 
@@ -39,10 +39,10 @@ export class SourceEditJournalComponent implements OnInit {
   public showEditHeader = false;
 
   @Input()
-  public description = "";
+  public description = '';
 
   @Input()
-  public topMainOrganization: Organization = null;
+  public topMainOrganization: Hit<Organization> = null;
 
   @Input()
   public showFinalStep = true;
@@ -84,25 +84,23 @@ export class SourceEditJournalComponent implements OnInit {
   @Output()
   editCanceled = new EventEmitter<boolean>();
 
+  loading = true;
   public constructor(
     private metadata: MetadataService,
-    private sourceService: SourceService,
-    private catalogService: CatalogService,
-    private taxonomyService: TaxonomyService,
     public snackBar: MatSnackBar,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.journalData = new JournalData();
     this.journalData.deepcopy(this.journalVersion.data);
 
     this.pageTitle = this.journalData.isNew
-      ? "Nueva Revista"
-      : "Editando : " + this.journalData.title;
-    this.metadata.setTitleDescription(this.pageTitle, "");
+      ? 'Nueva Revista'
+      : 'Editando : ' + this.journalData.title;
+    this.metadata.setTitleDescription(this.pageTitle, '');
 
-    console.log("journal edit INIT");
+    console.log('journal edit INIT');
     this.resetStepper();
     this.initStep2();
     this.initStep0Identifiers();
@@ -110,6 +108,8 @@ export class SourceEditJournalComponent implements OnInit {
 
     this.initStep3();
     this.initStepFinal();
+
+    this.loading = false;
   }
 
   resetStepper() {
@@ -133,452 +133,450 @@ export class SourceEditJournalComponent implements OnInit {
   initStep0Identifiers() {
     this.identifiersFormGroup = this.formBuilder.group({});
 
-    this.identifiersPanel =
-      {
-        name: 'identifiersPanel',
-        label: 'Identificadores',
-        controlType: ContainerPanelComponent,
-        description: "",
-        iconName: "",
-        formSection: this.identifiersFormGroup,
-        formSectionContent: [
-          {
-            formControl: InputTextComponent.getFormControlByDefault(),
-            name: "issn_l",
-            label: "ISSN de Enlace",
-            type: FormFieldType.text,
-            controlType: InputTextComponent,
-            required: false,
-            startHint: new HintValue(HintPosition.start, "XXXX-XXXX"),
-            width: "23%",
-            value: this.journalData
-              ? this.journalData.getIdentifierValue(IdentifierSchemas.issn_l)
-              : "",
-            // value: this.journalVersion ? IssnValue.createIssnValueFromString(this.journalVersion.issn.l) : null
-          },
-          {
-            formControl: InputTextComponent.getFormControlByDefault(),
-            name: "issn_p",
-            label: "ISSN Impreso",
-            type: FormFieldType.text,
-            controlType: InputTextComponent,
-            required: false,
-            startHint: new HintValue(HintPosition.start, "XXXX-XXXX"),
-            width: "23%",
-            value: this.journalData
-              ? this.journalData.getIdentifierValue(IdentifierSchemas.issn_p)
-              : "",
-            // value: this.journalVersion ? IssnValue.createIssnValueFromString(this.journalVersion.issn.p) : null
-          },
-          {
-            formControl: InputTextComponent.getFormControlByDefault(),
-            name: "issn_e",
-            label: "ISSN Electrónico",
-            type: FormFieldType.text,
-            controlType: InputTextComponent,
-            required: false,
-            startHint: new HintValue(HintPosition.start, "XXXX-XXXX"),
-            width: "23%",
-            value: this.journalData
-              ? this.journalData.getIdentifierValue(IdentifierSchemas.issn_e)
-              : "",
-            // value: this.journalVersion ? IssnValue.createIssnValueFromString(this.journalVersion.issn.e) : null
-          },
-          {
-            formControl: InputRnpsComponent.getFormControlByDefault(),
-            name: "rnps_p",
-            label: "RNPS Impreso",
-            type: FormFieldType.rnps,
-            controlType: InputRnpsComponent,
-            required: true,
-            startHint: new HintValue(HintPosition.start, "XXXX."),
-            width: "23%",
-            value: this.journalData
-              ? this.journalData.getIdentifierValue(IdentifierSchemas.prnps)
-              : "",
-          },
-          {
-            formControl: InputRnpsComponent.getFormControlByDefault(),
-            name: "rnps_e",
-            label: "RNPS Electrónico",
-            type: FormFieldType.rnps,
-            controlType: InputRnpsComponent,
-            required: true,
-            startHint: new HintValue(HintPosition.start, "XXXX."),
-            width: "23%",
-            value: this.journalData
-              ? this.journalData.getIdentifierValue(IdentifierSchemas.ernps)
-              : "",
-          },
-        ],
-      };
+    this.identifiersPanel = {
+      name: 'identifiersPanel',
+      label: 'Identificadores',
+      controlType: ContainerPanelComponent,
+      description: '',
+      iconName: '',
+      formSection: this.identifiersFormGroup,
+      formSectionContent: [
+        {
+          formControl: InputTextComponent.getFormControlByDefault(),
+          name: 'issn_l',
+          label: 'ISSN de Enlace',
+          type: FormFieldType.text,
+          controlType: InputTextComponent,
+          required: false,
+          startHint: new HintValue(HintPosition.start, 'XXXX-XXXX'),
+          width: '23%',
+          value: this.journalData
+            ? this.journalData.getIdentifierValue(IdentifierSchemas.issn_l)
+            : '',
+          // value: this.journalVersion ? IssnValue.createIssnValueFromString(this.journalVersion.issn.l) : null
+        },
+        {
+          formControl: InputTextComponent.getFormControlByDefault(),
+          name: 'issn_p',
+          label: 'ISSN Impreso',
+          type: FormFieldType.text,
+          controlType: InputTextComponent,
+          required: false,
+          startHint: new HintValue(HintPosition.start, 'XXXX-XXXX'),
+          width: '23%',
+          value: this.journalData
+            ? this.journalData.getIdentifierValue(IdentifierSchemas.issn_p)
+            : '',
+          // value: this.journalVersion ? IssnValue.createIssnValueFromString(this.journalVersion.issn.p) : null
+        },
+        {
+          formControl: InputTextComponent.getFormControlByDefault(),
+          name: 'issn_e',
+          label: 'ISSN Electrónico',
+          type: FormFieldType.text,
+          controlType: InputTextComponent,
+          required: false,
+          startHint: new HintValue(HintPosition.start, 'XXXX-XXXX'),
+          width: '23%',
+          value: this.journalData
+            ? this.journalData.getIdentifierValue(IdentifierSchemas.issn_e)
+            : '',
+          // value: this.journalVersion ? IssnValue.createIssnValueFromString(this.journalVersion.issn.e) : null
+        },
+        {
+          formControl: InputRnpsComponent.getFormControlByDefault(),
+          name: 'rnps_p',
+          label: 'RNPS Impreso',
+          type: FormFieldType.rnps,
+          controlType: InputRnpsComponent,
+          required: false,
+          startHint: new HintValue(HintPosition.start, 'XXXX.'),
+          width: '23%',
+          value: this.journalData
+            ? this.journalData.getIdentifierValue(IdentifierSchemas.prnps)
+            : '',
+        },
+        {
+          formControl: InputRnpsComponent.getFormControlByDefault(),
+          name: 'rnps_e',
+          label: 'RNPS Electrónico',
+          type: FormFieldType.rnps,
+          controlType: InputRnpsComponent,
+          required: false,
+          startHint: new HintValue(HintPosition.start, 'XXXX.'),
+          width: '23%',
+          value: this.journalData
+            ? this.journalData.getIdentifierValue(IdentifierSchemas.ernps)
+            : '',
+        },
+      ],
+    };
   }
 
   initStep1(): void {
     this.informationFormGroup = this.formBuilder.group({
       // 'description': descriptionControl,
-      start_year: new FormControl(""),
-      end_year: new FormControl(""),
+      // start_year: new FormControl(''),
+      // end_year: new FormControl(''),
     });
 
     this.informationSocialFormGroup = this.formBuilder.group({});
 
-    this.informationPanel =
-      {
-        name: 'informationPanel',
-        label: 'Datos de la Revista',
-        description: "",
-        iconName: "",
-        controlType: ContainerPanelComponent,
-        formSection: this.informationFormGroup,
-        formSectionContent: [
-          {
-            formControl: InputTextComponent.getFormControlByDefault(),
-            name: "title",
-            label: "Título",
-            type: FormFieldType.text,
-            controlType: InputTextComponent,
-            required: true,
-            width: "100%",
-            value: this.journalData ? this.journalData.title : "",
-          },
-          {
-            formControl: InputTextComponent.getFormControlByDefault(),
-            name: "subtitle",
-            label: "Subtítulo",
-            type: FormFieldType.text,
-            controlType: InputTextComponent,
-            required: false,
-            width: "30%",
-            startHint: new HintValue(HintPosition.start, ""),
-            value: this.journalData ? this.journalData.subtitle : "",
-          },
-          {
-            formControl: InputTextComponent.getFormControlByDefault(),
-            name: "shortname",
-            label: "Título abreviado",
-            type: FormFieldType.text,
-            controlType: InputTextComponent,
-            required: false,
-            width: "30%",
-            startHint: new HintValue(HintPosition.start, ""),
-            value: this.journalData ? this.journalData.shortname : "",
-          },
-          {
-            formControl: InputTextComponent.getFormControlByDefault(),
-            name: "source_type",
-            label: "Tipo de Revista",
-            type: FormFieldType.select_expr,
-            controlType: SelectComponent,
-            required: true,
-            width: "30%",
-            value: this.journalData ? this.journalData.source_type : "",
-            extraContent: {
-              multiple: false,
-              getOptions: () => {
-                return [
-                  {
-                    label: SourceTypes.JOURNAL.label,
-                    value: SourceTypes.JOURNAL.value,
-                  },
-                  {
-                    label: SourceTypes.STUDENT.label,
-                    value: SourceTypes.STUDENT.value,
-                  },
-                  {
-                    label: SourceTypes.POPULARIZATION.label,
-                    value: SourceTypes.POPULARIZATION.value,
-                  },
-                ];
-              },
+    this.informationPanel = {
+      name: 'informationPanel',
+      label: 'Datos de la Revista',
+      description: '',
+      iconName: '',
+      controlType: ContainerPanelComponent,
+      formSection: this.informationFormGroup,
+      formSectionContent: [
+        {
+          formControl: InputTextComponent.getFormControlByDefault(),
+          name: 'title',
+          label: 'Título',
+          type: FormFieldType.text,
+          controlType: InputTextComponent,
+          required: true,
+          width: '100%',
+          value: this.journalData ? this.journalData.title : '',
+        },
+        {
+          formControl: InputTextComponent.getFormControlByDefault(),
+          name: 'subtitle',
+          label: 'Subtítulo',
+          type: FormFieldType.text,
+          controlType: InputTextComponent,
+          required: false,
+          width: '30%',
+          startHint: new HintValue(HintPosition.start, ''),
+          value: this.journalData ? this.journalData.subtitle : '',
+        },
+        {
+          formControl: InputTextComponent.getFormControlByDefault(),
+          name: 'shortname',
+          label: 'Título abreviado',
+          type: FormFieldType.text,
+          controlType: InputTextComponent,
+          required: false,
+          width: '30%',
+          startHint: new HintValue(HintPosition.start, ''),
+          value: this.journalData ? this.journalData.shortname : '',
+        },
+        {
+          formControl: InputTextComponent.getFormControlByDefault(),
+          name: 'source_type',
+          label: 'Tipo de Revista',
+          type: FormFieldType.select_expr,
+          controlType: SelectComponent,
+          required: true,
+          width: '30%',
+          value: this.journalData ? this.journalData.source_type : '',
+          extraContent: {
+            multiple: false,
+            getOptions: () => {
+              return [
+                {
+                  label: SourceTypes.JOURNAL.label,
+                  value: SourceTypes.JOURNAL.value,
+                },
+                {
+                  label: SourceTypes.STUDENT.label,
+                  value: SourceTypes.STUDENT.value,
+                },
+                {
+                  label: SourceTypes.POPULARIZATION.label,
+                  value: SourceTypes.POPULARIZATION.value,
+                },
+              ];
             },
           },
-          {
-            formControl: InputTextComponent.getFormControlByDefault(),
-            name: "description",
-            label: "Descripción",
-            type: FormFieldType.textarea,
-            controlType: TextareaComponent,
-            required: true,
-            width: "100%",
-            value: this.journalData ? this.journalData.description : "",
-          },
-          // {
-          //   name: 'purpose',
-          //   label: 'Propósito',
-          //   type: FormFieldType.textarea,
-          //   required: true,
-          //   width: '100%',
-          //   value: this.journalVersion ? this.journalVersion.purpose : ''
-          // },
-          {
-            formControl: InputUrlComponent.getFormControlByDefault(),
-            name: "url",
-            label: "URL",
-            type: FormFieldType.url,
-            controlType: InputUrlComponent,
-            required: true,
-            startHint: new HintValue(
-              HintPosition.start,
-              "Escriba una URL válida."
-            ),
-            width: "100%",
-            value: this.journalData
-              ? this.journalData.getIdentifierValue(IdentifierSchemas.url)
-              : "",
-          },
-          {
-            formControl: InputTextComponent.getFormControlByDefault(),
-            name: "source_system",
-            label: "Tipo de Sistema que soporta la revista",
-            type: FormFieldType.select_expr,
-            controlType: SelectComponent,
-            required: false,
-            width: "35%",
-            value: this.journalData ? this.journalData.source_system : "",
-            extraContent: {
-              multiple: false,
-              getOptions: () => {
-                return [
-                  {
-                    label: SourceSystems.OJS.label,
-                    value: SourceSystems.OJS.value,
-                  },
-                  {
-                    label: SourceSystems.CMS.label,
-                    value: SourceSystems.CMS.value,
-                  },
-                  {
-                    label: SourceSystems.OTHER.label,
-                    value: SourceSystems.OTHER.value,
-                  },
-                ];
-              },
+        },
+        {
+          formControl: InputTextComponent.getFormControlByDefault(),
+          name: 'description',
+          label: 'Descripción',
+          type: FormFieldType.textarea,
+          controlType: TextareaComponent,
+          required: false,
+          width: '100%',
+          value: this.journalData ? this.journalData.description : '',
+        },
+        // {
+        //   name: 'purpose',
+        //   label: 'Propósito',
+        //   type: FormFieldType.textarea,
+        //   required: true,
+        //   width: '100%',
+        //   value: this.journalVersion ? this.journalVersion.purpose : ''
+        // },
+        {
+          formControl: InputUrlComponent.getFormControlByDefault(),
+          name: 'url',
+          label: 'URL',
+          type: FormFieldType.url,
+          controlType: InputUrlComponent,
+          required: true,
+          startHint: new HintValue(
+            HintPosition.start,
+            'Escriba una URL válida.'
+          ),
+          width: '100%',
+          value: this.journalData
+            ? this.journalData.getIdentifierValue(IdentifierSchemas.url)
+            : '',
+        },
+        {
+          formControl: InputTextComponent.getFormControlByDefault(),
+          name: 'source_system',
+          label: 'Tipo de Sistema que soporta la revista',
+          type: FormFieldType.select_expr,
+          controlType: SelectComponent,
+          required: false,
+          width: '35%',
+          value: this.journalData ? this.journalData.source_system : '',
+          extraContent: {
+            multiple: false,
+            getOptions: () => {
+              return [
+                {
+                  label: SourceSystems.OJS.label,
+                  value: SourceSystems.OJS.value,
+                },
+                {
+                  label: SourceSystems.CMS.label,
+                  value: SourceSystems.CMS.value,
+                },
+                {
+                  label: SourceSystems.OTHER.label,
+                  value: SourceSystems.OTHER.value,
+                },
+              ];
             },
           },
-          {
-            formControl: InputUrlComponent.getFormControlByDefault(),
-            name: "oaiurl",
-            label: "OAI-PMH",
-            type: FormFieldType.url,
-            controlType: InputUrlComponent,
-            required: false,
-            startHint: new HintValue(
-              HintPosition.start,
-              "Escriba una URL válida."
-            ),
-            width: "60%",
-            value: this.journalData
-              ? this.journalData.getIdentifierValue(IdentifierSchemas.oaiurl)
-              : "",
-          },
-          // {
-          //   name: 'seriadas_cubanas',
-          //   label: 'URL en Seriadas Cubanas',
-          //   type: FormFieldType.url,
-          //   required: false,
-          //   startHint: new HintValue(HintPosition.start, ''),
-          //   width: '100%',
-          //   value: this.journalVersion ? this.journalVersion.seriadas_cubanas : ''
-          // },
+        },
+        {
+          formControl: InputUrlComponent.getFormControlByDefault(),
+          name: 'oaiurl',
+          label: 'OAI-PMH',
+          type: FormFieldType.url,
+          controlType: InputUrlComponent,
+          required: false,
+          startHint: new HintValue(
+            HintPosition.start,
+            'Escriba una URL válida.'
+          ),
+          width: '60%',
+          value: this.journalData
+            ? this.journalData.getIdentifierValue(IdentifierSchemas.oaiurl)
+            : '',
+        },
+        // {
+        //   name: 'seriadas_cubanas',
+        //   label: 'URL en Seriadas Cubanas',
+        //   type: FormFieldType.url,
+        //   required: false,
+        //   startHint: new HintValue(HintPosition.start, ''),
+        //   width: '100%',
+        //   value: this.journalVersion ? this.journalVersion.seriadas_cubanas : ''
+        // },
 
-          {
-            formControl: InputEmailComponent.getFormControlByDefault(),
-            name: "email",
-            label: "Correo Electrónico",
-            type: FormFieldType.email,
-            controlType: InputEmailComponent,
-            required: true,
-            startHint: new HintValue(
-              HintPosition.start,
-              "Escriba un email válido."
-            ),
-            width: "45%",
-            value: this.journalData ? this.journalData.email : "",
+        {
+          formControl: InputEmailComponent.getFormControlByDefault(),
+          name: 'email',
+          label: 'Correo Electrónico',
+          type: FormFieldType.email,
+          controlType: InputEmailComponent,
+          required: false,
+          startHint: new HintValue(
+            HintPosition.start,
+            'Escriba un email válido.'
+          ),
+          width: '45%',
+          value: this.journalData ? this.journalData.email : '',
+        },
+        {
+          formControl: InputTextComponent.getFormControlByDefault(),
+          name: 'licence',
+          label: 'Licencia',
+          type: FormFieldType.vocabulary,
+          controlType: VocabularyComponent,
+          required: false,
+          width: '45%',
+          extraContent: {
+            multiple: false,
+            selectedTermsIds: this.journalData
+              ? this.journalData.classifications.map(
+                (termSource) => termSource.id
+              )
+              : null,
+            vocab: VocabulariesInmutableNames.LICENCES,
+            level: 0,
           },
-          {
-            formControl: InputTextComponent.getFormControlByDefault(),
-            name: "licence",
-            label: "Licencia",
-            type: FormFieldType.vocabulary,
-            controlType: VocabularyComponent,
-            required: false,
-            width: "45%",
-            extraContent: {
-              multiple: false,
-              selectedTermsIds: this.journalData
-                ? this.journalData.classifications.map(
-                    (termSource) => termSource.id
-                  )
-                : null,
-              vocab: VocabulariesInmutableNames.LICENCES,
-              level: 0,
-            },
-          },
-          {
-            formControl: InputTextComponent.getFormControlByDefault(),
-            name: "start_year",
-            label: "Año de inicio",
-            type: FormFieldType.datepicker,
-            controlType: DatepickerComponent,
-            required: false,
-            width: "30%",
-            value: this.journalData ? this.journalData.start_year : "",
-          },
-          {
-            formControl: InputTextComponent.getFormControlByDefault(),
-            name: "end_year",
-            label: "Año final",
-            type: FormFieldType.datepicker,
-            controlType: DatepickerComponent,
-            required: false,
-            width: "30%",
-            value: this.journalData ? this.journalData.end_year : "",
-          },
-          {
-            formControl: InputTextComponent.getFormControlByDefault(),
-            name: "frequency",
-            label: "Frecuencia",
-            type: FormFieldType.text,
-            controlType: InputTextComponent,
-            required: false,
-            startHint: new HintValue(HintPosition.start, ""),
-            width: "30%",
-            value: this.journalData ? this.journalData.frequency : "",
-          },
-          // {
-          //   // TODO: el top level de unesco de materias....
-          //   name: "cover",
-          //   label: "Cobertura Temática",
-          //   type: FormFieldType.select_expr,
-          //   required: true,
-          //   width: "45%",
-          //   extraContent: {
-          //     multiple: false,
-          //     observable: this.taxonomyService.getTermsTreeByVocab(
-          //       VocabulariesInmutableNames.SUBJECTS,
-          //       0
-          //     ),
-          //     getOptions: (response: any) => {
-          //       const opts: SelectOption[] = [];
-          //       response.data.tree.term_node.forEach((node: TermNode) => {
-          //         opts.push({
-          //           value: node.term,
-          //           label: node.term.description,
-          //         });
-          //       });
-          //       return opts;
-          //     },
-          //     selectionChange: (term) => {
-          //       this.journalCover = new SourceClasification();
-          //       this.journalCover.description = term.description;
-          //       this.journalCover.id = term.uuid;
-          //       this.journalCover.vocabulary = term.vocabulary_id;
+        },
+        {
+          formControl: InputTextComponent.getFormControlByDefault(),
+          name: 'start_year',
+          label: 'Año de inicio',
+          type: FormFieldType.datepicker,
+          controlType: DatepickerYearComponent,
+          required: false,
+          width: '30%',
+          value: this.journalData ? this.journalData.start_year : '',
+        },
+        {
+          formControl: InputTextComponent.getFormControlByDefault(),
+          name: 'end_year',
+          label: 'Año final',
+          type: FormFieldType.datepicker,
+          controlType: DatepickerYearComponent,
+          required: false,
+          width: '30%',
+          value: this.journalData ? this.journalData.end_year : '',
+        },
+        {
+          formControl: InputTextComponent.getFormControlByDefault(),
+          name: 'frequency',
+          label: 'Frecuencia',
+          type: FormFieldType.text,
+          controlType: InputTextComponent,
+          required: false,
+          startHint: new HintValue(HintPosition.start, ''),
+          width: '30%',
+          value: this.journalData ? this.journalData.frequency : '',
+        },
+        // {
+        //   // TODO: el top level de unesco de materias....
+        //   name: 'cover',
+        //   label: 'Cobertura Temática',
+        //   type: FormFieldType.select_expr,
+        //   required: true,
+        //   width: '45%',
+        //   extraContent: {
+        //     multiple: false,
+        //     observable: this.taxonomyService.getTermsTreeByVocab(
+        //       VocabulariesInmutableNames.SUBJECTS,
+        //       0
+        //     ),
+        //     getOptions: (response: any) => {
+        //       const opts: SelectOption[] = [];
+        //       response.data.tree.term_node.forEach((node: TermNode) => {
+        //         opts.push({
+        //           value: node.term,
+        //           label: node.term.description,
+        //         });
+        //       });
+        //       return opts;
+        //     },
+        //     selectionChange: (term) => {
+        //       this.journalCover = new SourceClasification();
+        //       this.journalCover.description = term.description;
+        //       this.journalCover.id = term.uuid;
+        //       this.journalCover.vocabulary = term.vocabulary_id;
 
-          //     },
-          //   },
-          // },
-          {
-            formControl: InputTextComponent.getFormControlByDefault(),
-            name: "subjects",
-            label: "Materias",
-            type: FormFieldType.vocabulary_tree,
-            controlType: VocabularyTreeComponent,
-            required: false,
-            width: "80%",
-            extraContent: {
-              multiple: true,
-              selectedTermsIds: this.journalData
-                ? this.journalData.classifications.map(
-                    (termSource) => termSource.id
-                  )
-                : null,
-              vocab: VocabulariesInmutableNames.SUBJECTS,
-              level: 1,
-            },
+        //     },
+        //   },
+        // },
+        {
+          formControl: InputTextComponent.getFormControlByDefault(),
+          name: 'subjects',
+          label: 'Materias',
+          type: FormFieldType.vocabulary_tree,
+          controlType: VocabularyTreeComponent,
+          required: false,
+          width: '80%',
+          extraContent: {
+            multiple: true,
+            selectedTermsIds: this.journalData
+              ? this.journalData.classifications.map(
+                (termSource) => termSource.id
+              )
+              : null,
+            vocab: VocabulariesInmutableNames.SUBJECTS,
+            level: 1,
           },
-          {
-            formControl: InputUrlComponent.getFormControlByDefault(),
-            name: "facebook",
-            label: "Facebook",
-            type: FormFieldType.url,
-            controlType: InputUrlComponent,
-            required: false,
-            width: "33%",
-            value: this.journalData
-              ? this.journalData.socialNetworks.facebook
-              : "",
-          },
-          {
-            formControl: InputUrlComponent.getFormControlByDefault(),
-            name: "twitter",
-            label: "Twitter",
-            type: FormFieldType.url,
-            controlType: InputUrlComponent,
-            required: false,
-            width: "33%",
-            value: this.journalData
-              ? this.journalData.socialNetworks.twitter
-              : "",
-          },
-          {
-            formControl: InputUrlComponent.getFormControlByDefault(),
-            name: "linkedin",
-            label: "LinkedIN",
-            type: FormFieldType.url,
-            controlType: InputUrlComponent,
-            required: false,
-            width: "33%",
-            value: this.journalData
-              ? this.journalData.socialNetworks.linkedin
-              : "",
-          }
-        ],
-      };
-      // {
-      //   title: "Redes Sociales",
-      //   description: "",
-      //   iconName: "",
-      //   formSection: this.informationFormGroup,
-      //   formSectionContent: [
-      //     {
-      //       name: "facebook",
-      //       label: "Facebook",
-      //       type: FormFieldType.url,
-      //       required: false,
-      //       width: "33%",
-      //       value: this.journalData
-      //         ? this.journalData.socialNetworks.facebook
-      //         : "",
-      //     },
-      //     {
-      //       name: "twitter",
-      //       label: "Twitter",
-      //       type: FormFieldType.url,
-      //       required: false,
-      //       width: "33%",
-      //       value: this.journalData
-      //         ? this.journalData.socialNetworks.twitter
-      //         : "",
-      //     },
-      //     {
-      //       name: "linkedin",
-      //       label: "LinkedIN",
-      //       type: FormFieldType.url,
-      //       required: false,
-      //       width: "33%",
-      //       value: this.journalData
-      //         ? this.journalData.socialNetworks.linkedin
-      //         : "",
-      //     },
-      //   ],
-      // },
+        },
+        {
+          formControl: InputUrlComponent.getFormControlByDefault(),
+          name: 'facebook',
+          label: 'Facebook',
+          type: FormFieldType.url,
+          controlType: InputUrlComponent,
+          required: false,
+          width: '33%',
+          value: this.journalData
+            ? this.journalData.socialNetworks.facebook
+            : '',
+        },
+        {
+          formControl: InputUrlComponent.getFormControlByDefault(),
+          name: 'twitter',
+          label: 'Twitter',
+          type: FormFieldType.url,
+          controlType: InputUrlComponent,
+          required: false,
+          width: '33%',
+          value: this.journalData
+            ? this.journalData.socialNetworks.twitter
+            : '',
+        },
+        {
+          formControl: InputUrlComponent.getFormControlByDefault(),
+          name: 'linkedin',
+          label: 'LinkedIN',
+          type: FormFieldType.url,
+          controlType: InputUrlComponent,
+          required: false,
+          width: '33%',
+          value: this.journalData
+            ? this.journalData.socialNetworks.linkedin
+            : '',
+        }
+      ],
+    };
+    // {
+    //   title: 'Redes Sociales',
+    //   description: '',
+    //   iconName: '',
+    //   formSection: this.informationFormGroup,
+    //   formSectionContent: [
+    //     {
+    //       name: 'facebook',
+    //       label: 'Facebook',
+    //       type: FormFieldType.url,
+    //       required: false,
+    //       width: '33%',
+    //       value: this.journalData
+    //         ? this.journalData.socialNetworks.facebook
+    //         : '',
+    //     },
+    //     {
+    //       name: 'twitter',
+    //       label: 'Twitter',
+    //       type: FormFieldType.url,
+    //       required: false,
+    //       width: '33%',
+    //       value: this.journalData
+    //         ? this.journalData.socialNetworks.twitter
+    //         : '',
+    //     },
+    //     {
+    //       name: 'linkedin',
+    //       label: 'LinkedIN',
+    //       type: FormFieldType.url,
+    //       required: false,
+    //       width: '33%',
+    //       value: this.journalData
+    //         ? this.journalData.socialNetworks.linkedin
+    //         : '',
+    //     },
+    //   ],
+    // },
 
   }
 
   initStep2() {
     this.organizationFormGroup = this.formBuilder.group({
-      institutions: new FormControl(""),
+      institutions: new FormControl(''),
     });
   }
 
@@ -596,29 +594,28 @@ export class SourceEditJournalComponent implements OnInit {
 
   initStepFinal() {
     this.finalFormGroup = this.formBuilder.group({});
-    this.finalPanel =
-      {
-        name: 'finalPanel',
-        label: '',
-        description: "",
-        iconName: "",
-        formSection: this.finalFormGroup,
-        controlType: ContainerPanelComponent,
-        formSectionContent: [
-          {
-            formControl: InputTextComponent.getFormControlByDefault(),
-            name: "comment",
-            label: "Puede agregar aquí un comentario.",
-            type: FormFieldType.textarea,
-            controlType: TextareaComponent,
-            required: false,
-            startHint: new HintValue(HintPosition.start, ""),
-            width: "100%",
-            minWidth: "100%",
-            value: this.journalData ? this.journalData._save_info.comment : "",
-          },
-        ],
-      };
+    this.finalPanel = {
+      name: 'finalPanel',
+      label: '',
+      description: '',
+      iconName: '',
+      formSection: this.finalFormGroup,
+      controlType: ContainerPanelComponent,
+      formSectionContent: [
+        {
+          formControl: InputTextComponent.getFormControlByDefault(),
+          name: 'comment',
+          label: 'Puede agregar aquí un comentario.',
+          type: FormFieldType.textarea,
+          controlType: TextareaComponent,
+          required: false,
+          startHint: new HintValue(HintPosition.start, ''),
+          width: '100%',
+          minWidth: '100%',
+          value: this.journalData ? this.journalData._save_info.comment : '',
+        },
+      ],
+    };
   }
 
   private fillJournalFields() {
@@ -666,7 +663,7 @@ export class SourceEditJournalComponent implements OnInit {
     );
 
     this.journalData.source_type = this.informationFormGroup.value[
-      "source_type"
+      'source_type'
     ];
 
     const indexes = this.journalData.classifications.filter(
@@ -674,8 +671,8 @@ export class SourceEditJournalComponent implements OnInit {
     );
     this.journalData.classifications = [];
 
-    if (this.informationFormGroup.value["licence"]){
-        this.informationFormGroup.value["licence"].forEach((term: Term) => {
+    if (this.informationFormGroup.value['licence']) {
+      this.informationFormGroup.value['licence'].forEach((term: Term) => {
         const ts = new SourceClasification();
         ts.description = term.description;
         ts.id = term.uuid;
@@ -683,7 +680,7 @@ export class SourceEditJournalComponent implements OnInit {
         this.journalData.classifications.push(ts);
       });
     }
-    // this.informationFormGroup.value["cover"].forEach((term) => {
+    // this.informationFormGroup.value['cover'].forEach((term) => {
     //   const ts = new SourceClasification();
     //   ts.description = term.description;
     //   ts.id = term.uuid;
@@ -691,8 +688,8 @@ export class SourceEditJournalComponent implements OnInit {
     //   this.journalData.classifications.push(ts);
     // });
 
-    if (this.informationFormGroup.value["subjects"]){
-      this.informationFormGroup.value["subjects"].forEach((term) => {
+    if (this.informationFormGroup.value['subjects']) {
+      this.informationFormGroup.value['subjects'].forEach((term) => {
         const ts = new SourceClasification();
         ts.description = term.description;
         ts.id = term.uuid;
@@ -709,7 +706,7 @@ export class SourceEditJournalComponent implements OnInit {
     // this.journalData.organizations = this.source.data.organizations;
 
     // this.organizationFormGroup.value[
-    //   "institutions"
+    //   'institutions'
     // ].forEach((panel: JournalInstitutionsPanel) => {
     //   const ts = new SourceClasification();
     //   ts.deepcopy(panel.inst);
@@ -740,8 +737,8 @@ export class SourceEditJournalComponent implements OnInit {
     //   this.journalData.classifications.push(ts);
     // });
 
-    this.journalData._save_info.comment = this.finalFormGroup.value["comment"];
-    this.journalVersion.comment = this.finalFormGroup.value["comment"];
+    this.journalData._save_info.comment = this.finalFormGroup.value['comment'];
+    this.journalVersion.comment = this.finalFormGroup.value['comment'];
     this.journalVersion.data.deepcopy(this.journalData);
 
     console.log(this.identifiersFormGroup);

@@ -45,7 +45,7 @@ export class SourceJournalViewInfoComponent implements OnInit, OnChanges {
   @ViewChild(SourceEditIndexesComponent, { static: false })
   indexes: SourceEditIndexesComponent;
 
-
+  loading = true;
   constructor(
     private _sourveService: SourceService,
     private _snackBar: MatSnackBar
@@ -57,6 +57,7 @@ export class SourceJournalViewInfoComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     console.log("changes....");
     this.loadJournalData();
+    this.loading = false;
   }
   loadJournalData() {
     if (this.journalData == undefined)

@@ -100,13 +100,11 @@ export class CatalogComponent implements OnInit, OnChanges {
   searchParams: HttpParams;
 
   public topOrganizationPID = null;
-  public topMainOrganization: Organization = null;
+  public topMainOrganization: Hit<Organization> = null;
 
   constructor(
-    private sourceService: SourceService,
     private sourceServiceNoAuth: SourceServiceNoAuth,
     private metadata: MetadataService,
-    private filterService: FiltersService,
     private env: EnvService,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
@@ -126,8 +124,9 @@ export class CatalogComponent implements OnInit, OnChanges {
       this.orgService.getOrganizationByPID(this.topOrganizationPID).subscribe(
         (response) => {
           // console.log(response)
-          this.topMainOrganization = new Organization();
-          this.topMainOrganization.deepcopy(response.metadata);
+          this.topMainOrganization = response;
+          // new Organization();
+          // this.topMainOrganization.deepcopy(response.metadata);
           this.init()
         },
         (error) => {

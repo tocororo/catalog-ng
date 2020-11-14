@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder, FormControl } from "@angular/forms";
 
 import { MatDialog, MatStep, MatStepper, MAT_DIALOG_DATA } from "@angular/material";
 import { Router } from '@angular/router';
-import { Source, SourceVersion, Organization, SourceTypes, FormContainerAction, SourceService, SourceServiceNoAuth, OrganizationServiceNoAuth, EnvService, InputTextComponent, FormFieldType, HintValue, HintPosition, MessageHandler, Journal, JournalVersion, StatusCode, HandlerComponent, SelectOption, SourcePersonRole, ContainerPanelActionComponent, PanelActionContent } from 'toco-lib';
+import { Source, SourceVersion, Organization, SourceTypes, FormContainerAction, SourceService, SourceServiceNoAuth, OrganizationServiceNoAuth, EnvService, InputTextComponent, FormFieldType, HintValue, HintPosition, MessageHandler, Journal, JournalVersion, StatusCode, HandlerComponent, SelectOption, SourcePersonRole, ContainerPanelActionComponent, PanelActionContent, Hit } from 'toco-lib';
 
 @Component({
   selector: "catalog-source-inclusion",
@@ -17,7 +17,7 @@ export class SourceInclusionComponent implements OnInit {
   public versionToEdit: SourceVersion = null;
 
   public topOrganizationPID = null;
-  public topMainOrganization: Organization = null;
+  public topMainOrganization: Hit<Organization> = null;
 
 
   public sourceType = SourceTypes;
@@ -41,20 +41,27 @@ export class SourceInclusionComponent implements OnInit {
 
 
   ngOnInit() {
-    if (this.env.extraArgs["topOrganizationPID"]) {
-      this.topOrganizationPID = this.env.extraArgs["topOrganizationPID"];
-      this.orgService
-        .getOrganizationByPID(this.topOrganizationPID)
-        .subscribe(
-          (response) => {
-            this.topMainOrganization = new Organization();
-            this.topMainOrganization.deepcopy(response.metadata);
-          },
-          (error) => {
-            console.log("error");
-          },
-          () => { }
-        );
+    if (localStorage.getItem('topMainOrganization') && localStorage.getItem('topMainOrganization') != '') {
+      const response = JSON.parse(localStorage.getItem('topMainOrganization'));
+      this.topMainOrganization = response;
+
+    } else {
+      if (this.env.extraArgs["topOrganizationPID"]) {
+        this.topOrganizationPID = this.env.extraArgs["topOrganizationPID"];
+        this.orgService
+          .getOrganizationByPID(this.topOrganizationPID)
+          .subscribe(
+            (response) => {
+              this.topMainOrganization = response;
+              // new Organization();
+              // this.topMainOrganization.deepcopy(response.metadata);
+            },
+            (error) => {
+              console.log("error");
+            },
+            () => { }
+          );
+      }
     }
     this.findFormGroup = this._formBuilder.group({});
     this.findPanel =

@@ -328,6 +328,7 @@ export class SourceEditAddIndexComponent implements OnInit {
               value: (this.editing) ? [this.editing.data['end_cover']] : '',
             },
           ],
+          actionLabel:'OK',
           action: {
             doit: (data: any) => {
               if (this.indexFormGroup.valid) {

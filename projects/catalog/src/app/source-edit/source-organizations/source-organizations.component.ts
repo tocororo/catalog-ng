@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Inject } from "@angular/core";
 
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from "@angular/material";
 import { FormArray } from "@angular/forms";
-import { SourceData, Organization, SourceOrganizationRole, OrganizationServiceNoAuth, SourceOrganization, MessageHandler, StatusCode, HandlerComponent, OrganizationRelationships, Relationship } from 'toco-lib';
+import { SourceData, Organization, SourceOrganizationRole, OrganizationServiceNoAuth, SourceOrganization, MessageHandler, StatusCode, HandlerComponent, OrganizationRelationships, Relationship, Hit, OrganizationFlatNode } from 'toco-lib';
 
 @Component({
   selector: "catalog-source-edit-organizations",
@@ -17,7 +17,7 @@ export class SourceEditOrganizationsComponent implements OnInit {
   public editable: boolean = true;
 
   @Input()
-  public topMainOrganization: Organization = null;
+  public topMainOrganization: Hit<Organization> = null;
 
   public roles = SourceOrganizationRole;
   constructor(
@@ -213,45 +213,54 @@ export class SourceEditOrganizationsComponent implements OnInit {
 @Component({
   selector: "catalog-source-organizations-select-top-main",
   template: `<mat-dialog-content class="height-auto">
-    <ng-container *ngIf="toSelect"
-      >{{ topMainOrganization.name }}
-      <br />
-      <mat-form-field>
-        <mat-label>Seleccione la Organización Principal: </mat-label>
-        <mat-select [(value)]="selected" required>
-          <mat-option
-            *ngFor="let item of toSelect; let index = index"
-            value="{{ index }}"
-            >{{ item.label }}</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
 
-      <br />
-      <mat-label *ngIf="selected >= 0">{{
-        toSelect[selected].label
-      }}</mat-label>
-      <br />
-    </ng-container>
+  <ng-container *ngIf="selectedOrg">
+  <mat-label>Principal: </mat-label>
+  <br />
+    <mat-label>{{ selectedOrg.metadata.name }}</mat-label>
+  <br />
+  </ng-container>
+
+  <ng-container *ngIf="parents.length > 0">
+  <mat-label>Colaboradores: </mat-label>
+  <ng-container *ngFor="let item of parents">
     <br />
+    <mat-label>{{ item.name }}</mat-label>
+    <br />
+  </ng-container>
+  <br />
+  </ng-container>
+
+  <toco-org-tree-viewer
+  [organizations]="[topMainOrganization]"
+  [orgRelationshipType]="'child'"
+  [iconAction]="'done'"
+  [labelAction]="'Seleccionar'"
+  (action)="selectOrg($event)"
+  [ngStyle]="{'height': '300px','overflow': 'auto'}"
+>
+</toco-org-tree-viewer>
     <button mat-raised-button (click)="ok()">OK</button>
   </mat-dialog-content>`,
 })
 export class SourceEditOrganizationSelectTopDialog implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<SourceEditOrganizationSelectTopDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private orgService: OrganizationServiceNoAuth
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  public topMainOrganization: Organization = null;
+  public topMainOrganization: Hit<Organization> = null;
   public toSelect: Array<Relationship> = null;
   public selected = -1;
+
+  public selectedOrg: Hit<Organization> = null
+  public parents: Array<Organization> = new Array<Organization>();
+
 
   ngOnInit(): void {
     this.topMainOrganization = this.data.topMainOrganization;
     this.toSelect = new Array<Relationship>();
-    this.topMainOrganization.relationships.forEach((element) => {
+    this.topMainOrganization.metadata.relationships.forEach((element) => {
       if (element.type == OrganizationRelationships.CHILD.value) {
         this.toSelect.push(element);
       }
@@ -261,21 +270,50 @@ export class SourceEditOrganizationSelectTopDialog implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  selectOrg(org: OrganizationFlatNode) {
+    this.selectedOrg = org.item;
+    this.parents = new Array<Organization>();
+    this.addParents(org);
+  }
+
+  private addParents(org: OrganizationFlatNode) {
+    if(org.parent != null){
+      this.parents.push(org.parent.item.metadata);
+      this.addParents(org.parent);
+    }
+    // child.relationships.forEach((p) => {
+    //   if (p.type == OrganizationRelationships.PARENT.value) {
+    //     if (p.identifiers.length > 0 && p.identifiers[0].value) {
+    //       this.orgService
+    //         .getOrganizationByPID(p.identifiers[0].value)
+    //         .subscribe({
+    //           next: (response) => {
+    //             console.log(response);
+    //             this.parents.push(response.metadata);
+    //             this.addParents(response.metadata);
+    //           },
+    //         });
+    //     }
+    //   }
+    // });
+  }
 
   public ok() {
     // let selected = new SourceOrganization()
     // selected.organization = org;
     // selected.role = SourceOrganizationRole.MAIN.value;
-    if (this.selected >= 0) {
-      console.log(this.toSelect[this.selected]);
-      this.orgService
-        .getOrganizationByPID(this.toSelect[this.selected].identifiers[0].value)
-        .subscribe({
-          next: (response) => {
-            this.data.selectOrg(response.metadata, [this.topMainOrganization]);
-            this.dialogRef.close();
-          },
-        });
+    if (this.selectedOrg ) {
+      this.data.selectOrg(this.selectedOrg.metadata, this.parents);
+      this.dialogRef.close();
+      // console.log(this.toSelect[this.selected]);
+      // this.orgService
+      //   .getOrganizationByPID(this.toSelect[this.selected].identifiers[0].value)
+      //   .subscribe({
+      //     next: (response) => {
+      //       this.data.selectOrg(response.metadata, [this.topMainOrganization]);
+      //       this.dialogRef.close();
+      //     },
+      //   });
     }
   }
 }

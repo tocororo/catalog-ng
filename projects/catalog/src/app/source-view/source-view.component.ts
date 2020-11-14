@@ -8,7 +8,7 @@ import {
 } from "@angular/material";
 import { of } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { SourceTypes, Organization, SourceVersion, SourceService, OrganizationServiceNoAuth, EnvService, MessageHandler, StatusCode, SourceOrganization, SourceClasification, JournalVersion, ResponseStatus, HandlerComponent, SourceStatus, Response } from 'toco-lib';
+import { SourceTypes, Organization, SourceVersion, SourceService, OrganizationServiceNoAuth, EnvService, MessageHandler, StatusCode, SourceOrganization, SourceClasification, JournalVersion, ResponseStatus, HandlerComponent, SourceStatus, Response, Hit } from 'toco-lib';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class SourceViewComponent implements OnInit {
   public sourceType = SourceTypes;
 
   public topOrganizationPID = null;
-  public topMainOrganization: Organization = null;
+  public topMainOrganization: Hit<Organization> = null;
 
   public editingVersion: SourceVersion;
   public versions: Array<SourceVersion>;
@@ -41,21 +41,28 @@ export class SourceViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.env.extraArgs["topOrganizationPID"]) {
-      this.topOrganizationPID = this.env.extraArgs["topOrganizationPID"];
-      this.orgService
-        .getOrganizationByPID(this.topOrganizationPID)
-        .subscribe(
-          (response) => {
-            this.topMainOrganization = new Organization();
-            this.topMainOrganization.deepcopy(response.metadata);
-          },
-          (error) => {
-            console.log("error");
-          },
-          () => { }
-        );
+    if (localStorage.getItem('topMainOrganization') && localStorage.getItem('topMainOrganization') != '') {
+      const response = JSON.parse(localStorage.getItem('topMainOrganization'));
+      this.topMainOrganization = response;
+
+    } else {
+      if (this.env.extraArgs["topOrganizationPID"]) {
+        this.topOrganizationPID = this.env.extraArgs["topOrganizationPID"];
+        this.orgService
+          .getOrganizationByPID(this.topOrganizationPID)
+          .subscribe(
+            (response) => {
+              this.topMainOrganization = response;
+              // this.topMainOrganization.deepcopy(response.metadata);
+            },
+            (error) => {
+              console.log("error");
+            },
+            () => { }
+          );
+      }
     }
+
     this.route.data.subscribe(
       (response) => {
         console.log("VIEW SOURCE");
@@ -95,6 +102,7 @@ export class SourceViewComponent implements OnInit {
     });
     v.data.classifications = sc;
   }
+
   init(id, src) {
 
     switch (src.source_type) {

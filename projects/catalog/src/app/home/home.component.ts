@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatPaginatorIntl, MatDialog, MatSnackBar } from '@angular/material';
 import { DialogCatalogJournalInfoDialog } from 'projects/catalog/src/app/catalog/catalog.component';
 import { OAuthStorage } from 'angular-oauth2-oidc';
-import { Organization, Journal, EnvService, SourceService, SourceServiceNoAuth, OrganizationServiceNoAuth, ResponseStatus, SourceTypes, JournalVersion, MessageHandler, StatusCode } from 'toco-lib';
+import { Organization, Journal, EnvService, SourceService, SourceServiceNoAuth, OrganizationServiceNoAuth, ResponseStatus, SourceTypes, JournalVersion, MessageHandler, StatusCode, Hit } from 'toco-lib';
 
 @Component({
     selector: 'catalog-home',
@@ -17,7 +17,7 @@ import { Organization, Journal, EnvService, SourceService, SourceServiceNoAuth, 
 export class HomeComponent implements OnInit {
 
     public topOrganizationPID: string;
-    public topMainOrganization: Organization = null;
+    public topMainOrganization: Hit<Organization> = null;
 
     public institutionsCount: number;
 
@@ -46,15 +46,17 @@ export class HomeComponent implements OnInit {
           this.topOrganizationPID = this.env.extraArgs["topOrganizationPID"];
           if (localStorage.getItem('topMainOrganization') && localStorage.getItem('topMainOrganization') != '' ) {
             const response = JSON.parse(localStorage.getItem('topMainOrganization'));
-            this.topMainOrganization = new Organization();
-            this.topMainOrganization.deepcopy(response.metadata);
+            this.topMainOrganization = response;
+            // new Organization();
+            // this.topMainOrganization.deepcopy(response.metadata);
             this.init();
           } else {
             this.orgService.getOrganizationByPID(this.topOrganizationPID).subscribe(
               (response) => {
                 // console.log(response)
-                this.topMainOrganization = new Organization();
-                this.topMainOrganization.deepcopy(response.metadata);
+                this.topMainOrganization = response;
+                // new Organization();
+                // this.topMainOrganization.deepcopy(response.metadata);
                 localStorage.setItem('topMainOrganization', JSON.stringify(response));
                 this.init();
               },

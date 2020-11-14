@@ -6,7 +6,7 @@
 
 import { Component, OnInit, Input } from '@angular/core';
 import { MatSnackBar, MatDialog } from '@angular/material';
-import { Organization, VocabulariesInmutableNames, JournalVersion, MetadataService, EnvService, MessageHandler, StatusCode } from 'toco-lib';
+import { Organization, VocabulariesInmutableNames, JournalVersion, MetadataService, EnvService, MessageHandler, StatusCode, Hit } from 'toco-lib';
 
 
 
@@ -46,7 +46,7 @@ export class SourceJournalViewComponent implements OnInit {
 
 
     @Input()
-    public topMainOrganization: Organization = null;
+    public topMainOrganization: Hit<Organization> = null;
 
 
     /**************** auxiliary variables *******************/

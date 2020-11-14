@@ -39,6 +39,8 @@ export class SourceJournalViewVersionComponent implements OnInit, OnChanges {
   @Output()
   editingJournalChange = new EventEmitter<JournalVersion>();
 
+  loading = true;
+
   constructor(private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
@@ -50,8 +52,10 @@ export class SourceJournalViewVersionComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
+    this.loading = true;
     console.log("***////****////***///");
     this.ngOnInit();
+    this.loading = false;
   }
 
   loadJournalData() {
