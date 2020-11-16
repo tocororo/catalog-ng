@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { ContainerPanelComponent, FormContainerAction, FormFieldType, HintPosition, HintValue, InputTextComponent, InputUrlComponent, PanelActionContent, PanelContent, PanelContent_Depr, SelectComponent, SelectOption, SourceClasification, SourceData, TaxonomyService, Term, TermNode, VocabulariesInmutableNames } from 'toco-lib';
@@ -8,7 +8,7 @@ import { ContainerPanelComponent, FormContainerAction, FormFieldType, HintPositi
   templateUrl: './source-indexes.component.html',
   styleUrls: ['./source-indexes.component.scss'],
 })
-export class SourceEditIndexesComponent implements OnInit {
+export class SourceEditIndexesComponent implements OnInit, OnChanges {
 
   @Input()
   public sourceData: SourceData;
@@ -44,34 +44,51 @@ export class SourceEditIndexesComponent implements OnInit {
   */
   selectedDatabases: Array<{ dbclass: Term, dblist: SourceClasification[] }> = null;
 
+  loading = true;
+
   constructor(public dialog: MatDialog, private service: TaxonomyService) { }
 
 
   ngOnInit() {
-    this.service.getTermsTreeByVocab(VocabulariesInmutableNames.INDEXES, 1).subscribe(
-      (response) => {
-        if (response.data.tree.term_node) {
-          this.databases = response.data.tree.term_node;
-          this.initIndexes();
+    this.loading = true;
+    console.log()
+    if (localStorage.getItem('vocab_indexes') && localStorage.getItem('vocab_indexes') != ''){
+      const response = JSON.parse(localStorage.getItem('vocab_indexes'));
+      this.databases = response.data.tree.term_node;
+      this.initIndexes();
+    } else {
+      this.service.getTermsTreeByVocab(VocabulariesInmutableNames.INDEXES, 1).subscribe(
+        (response) => {
+          if (response.data.tree.term_node) {
+            localStorage.setItem('vocab_indexes', JSON.stringify(response));
+            this.databases = response.data.tree.term_node;
+            this.initIndexes();
+          }
+        },
+        (err: any) => {
+          console.log(
+            'ERROR: ' + err + '.'
+          );
+        },
+
+        () => {
         }
-      },
-      (err: any) => {
-        console.log(
-          'ERROR: ' + err + '.'
-        );
-      },
-
-      () => {
-      }
-    );
+      );
+    }
   }
-
-  public initIndexes(){
-
+  ngOnChanges(): void {
+    this.loading = true;
+    this.ngOnInit();
+    this.loading = false;
+  }
+  public initIndexes() {
+    this.loading = true;
     this.selectedDatabases = new Array(this.databases.length);
     this._setSelectedDatabses();
     this._setIndexesToSource();
-    console.log('******* complete process');
+    console.log('**** SourceEditIndexesComponent *** complete process initIndexes', this.sourceData, this.selectedDatabases);
+    this.loading = false;
+
   }
 
   /**
@@ -121,8 +138,8 @@ export class SourceEditIndexesComponent implements OnInit {
       value => value.vocabulary != VocabulariesInmutableNames.INDEXES
     );
 
-
-    this.selectedDatabases.forEach(element => {
+    for (let index = 0; index < this.selectedDatabases.length; index++) {
+      const element = this.selectedDatabases[index];
       // por cada elemento en selectedDatabases, si tiene algun elemento en dblist
       // entonces dbclass y dblist tambien son parte de sourceData.classifications
       if (element.dblist.length > 0) {
@@ -134,8 +151,8 @@ export class SourceEditIndexesComponent implements OnInit {
         this.sourceData.classifications = this.sourceData.classifications.concat(element.dblist);
 
       }
-    });
-    console.log(this.sourceData);
+    }
+
 
   }
 

@@ -117,7 +117,7 @@ export class SourceJournalViewInfoComponent implements OnInit, OnChanges {
 
     this.loadJournalData();
     this.orgs.ngOnInit();
-    this.indexes.initIndexes();
+    this.indexes.ngOnInit();
   }
 }
 

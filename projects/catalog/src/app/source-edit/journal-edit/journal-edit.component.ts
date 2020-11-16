@@ -149,7 +149,7 @@ export class SourceEditJournalComponent implements OnInit {
           controlType: InputTextComponent,
           required: false,
           startHint: new HintValue(HintPosition.start, 'XXXX-XXXX'),
-          width: '23%',
+          width: '30%',
           value: this.journalData
             ? this.journalData.getIdentifierValue(IdentifierSchemas.issn_l)
             : '',
@@ -163,7 +163,7 @@ export class SourceEditJournalComponent implements OnInit {
           controlType: InputTextComponent,
           required: false,
           startHint: new HintValue(HintPosition.start, 'XXXX-XXXX'),
-          width: '23%',
+          width: '30%',
           value: this.journalData
             ? this.journalData.getIdentifierValue(IdentifierSchemas.issn_p)
             : '',
@@ -177,7 +177,7 @@ export class SourceEditJournalComponent implements OnInit {
           controlType: InputTextComponent,
           required: false,
           startHint: new HintValue(HintPosition.start, 'XXXX-XXXX'),
-          width: '23%',
+          width: '30%',
           value: this.journalData
             ? this.journalData.getIdentifierValue(IdentifierSchemas.issn_e)
             : '',
@@ -191,7 +191,7 @@ export class SourceEditJournalComponent implements OnInit {
           controlType: InputRnpsComponent,
           required: false,
           startHint: new HintValue(HintPosition.start, 'XXXX.'),
-          width: '23%',
+          width: '45%',
           value: this.journalData
             ? this.journalData.getIdentifierValue(IdentifierSchemas.prnps)
             : '',
@@ -204,7 +204,7 @@ export class SourceEditJournalComponent implements OnInit {
           controlType: InputRnpsComponent,
           required: false,
           startHint: new HintValue(HintPosition.start, 'XXXX.'),
-          width: '23%',
+          width: '45%',
           value: this.journalData
             ? this.journalData.getIdentifierValue(IdentifierSchemas.ernps)
             : '',
@@ -220,7 +220,7 @@ export class SourceEditJournalComponent implements OnInit {
       // end_year: new FormControl(''),
     });
 
-    this.informationSocialFormGroup = this.formBuilder.group({});
+    // this.informationSocialFormGroup = this.formBuilder.group({});
 
     this.informationPanel = {
       name: 'informationPanel',
@@ -326,13 +326,43 @@ export class SourceEditJournalComponent implements OnInit {
             : '',
         },
         {
+          formControl: InputUrlComponent.getFormControlByDefault(),
+          name: 'oaiurl',
+          label: 'OAI-PMH',
+          type: FormFieldType.url,
+          controlType: InputUrlComponent,
+          required: false,
+          startHint: new HintValue(
+            HintPosition.start,
+            'Escriba una URL válida.'
+          ),
+          width: '100%',
+          value: this.journalData
+            ? this.journalData.getIdentifierValue(IdentifierSchemas.oaiurl)
+            : '',
+        },
+        {
+          formControl: InputEmailComponent.getFormControlByDefault(),
+          name: 'email',
+          label: 'Correo Electrónico',
+          type: FormFieldType.email,
+          controlType: InputEmailComponent,
+          required: false,
+          startHint: new HintValue(
+            HintPosition.start,
+            'Escriba un email válido.'
+          ),
+          width: '45%',
+          value: this.journalData ? this.journalData.email : '',
+        },
+        {
           formControl: InputTextComponent.getFormControlByDefault(),
           name: 'source_system',
           label: 'Tipo de Sistema que soporta la revista',
           type: FormFieldType.select_expr,
           controlType: SelectComponent,
           required: false,
-          width: '35%',
+          width: '45%',
           value: this.journalData ? this.journalData.source_system : '',
           extraContent: {
             multiple: false,
@@ -354,22 +384,6 @@ export class SourceEditJournalComponent implements OnInit {
             },
           },
         },
-        {
-          formControl: InputUrlComponent.getFormControlByDefault(),
-          name: 'oaiurl',
-          label: 'OAI-PMH',
-          type: FormFieldType.url,
-          controlType: InputUrlComponent,
-          required: false,
-          startHint: new HintValue(
-            HintPosition.start,
-            'Escriba una URL válida.'
-          ),
-          width: '60%',
-          value: this.journalData
-            ? this.journalData.getIdentifierValue(IdentifierSchemas.oaiurl)
-            : '',
-        },
         // {
         //   name: 'seriadas_cubanas',
         //   label: 'URL en Seriadas Cubanas',
@@ -379,21 +393,6 @@ export class SourceEditJournalComponent implements OnInit {
         //   width: '100%',
         //   value: this.journalVersion ? this.journalVersion.seriadas_cubanas : ''
         // },
-
-        {
-          formControl: InputEmailComponent.getFormControlByDefault(),
-          name: 'email',
-          label: 'Correo Electrónico',
-          type: FormFieldType.email,
-          controlType: InputEmailComponent,
-          required: false,
-          startHint: new HintValue(
-            HintPosition.start,
-            'Escriba un email válido.'
-          ),
-          width: '45%',
-          value: this.journalData ? this.journalData.email : '',
-        },
         {
           formControl: InputTextComponent.getFormControlByDefault(),
           name: 'licence',
@@ -415,6 +414,25 @@ export class SourceEditJournalComponent implements OnInit {
         },
         {
           formControl: InputTextComponent.getFormControlByDefault(),
+          name: 'subjects',
+          label: 'Materias',
+          type: FormFieldType.vocabulary_tree,
+          controlType: VocabularyTreeComponent,
+          required: false,
+          width: '45%',
+          extraContent: {
+            multiple: true,
+            selectedTermsIds: this.journalData
+              ? this.journalData.classifications.map(
+                (termSource) => termSource.id
+              )
+              : null,
+            vocab: VocabulariesInmutableNames.SUBJECTS,
+            level: 1,
+          },
+        },
+        {
+          formControl: InputTextComponent.getFormControlByDefault(),
           name: 'start_year',
           label: 'Año de inicio',
           type: FormFieldType.datepicker,
@@ -422,6 +440,10 @@ export class SourceEditJournalComponent implements OnInit {
           required: false,
           width: '30%',
           value: this.journalData ? this.journalData.start_year : '',
+          extraContent: {
+            minYear: 1492,
+            maxYear: new Date(Date.now())
+          }
         },
         {
           formControl: InputTextComponent.getFormControlByDefault(),
@@ -432,6 +454,10 @@ export class SourceEditJournalComponent implements OnInit {
           required: false,
           width: '30%',
           value: this.journalData ? this.journalData.end_year : '',
+          extraContent: {
+            minYear: 1492,
+            maxYear: new Date(Date.now())
+          }
         },
         {
           formControl: InputTextComponent.getFormControlByDefault(),
@@ -476,25 +502,7 @@ export class SourceEditJournalComponent implements OnInit {
         //     },
         //   },
         // },
-        {
-          formControl: InputTextComponent.getFormControlByDefault(),
-          name: 'subjects',
-          label: 'Materias',
-          type: FormFieldType.vocabulary_tree,
-          controlType: VocabularyTreeComponent,
-          required: false,
-          width: '80%',
-          extraContent: {
-            multiple: true,
-            selectedTermsIds: this.journalData
-              ? this.journalData.classifications.map(
-                (termSource) => termSource.id
-              )
-              : null,
-            vocab: VocabulariesInmutableNames.SUBJECTS,
-            level: 1,
-          },
-        },
+
         {
           formControl: InputUrlComponent.getFormControlByDefault(),
           name: 'facebook',
@@ -502,7 +510,7 @@ export class SourceEditJournalComponent implements OnInit {
           type: FormFieldType.url,
           controlType: InputUrlComponent,
           required: false,
-          width: '33%',
+          width: '30%',
           value: this.journalData
             ? this.journalData.socialNetworks.facebook
             : '',
@@ -514,7 +522,7 @@ export class SourceEditJournalComponent implements OnInit {
           type: FormFieldType.url,
           controlType: InputUrlComponent,
           required: false,
-          width: '33%',
+          width: '30%',
           value: this.journalData
             ? this.journalData.socialNetworks.twitter
             : '',
@@ -526,7 +534,7 @@ export class SourceEditJournalComponent implements OnInit {
           type: FormFieldType.url,
           controlType: InputUrlComponent,
           required: false,
-          width: '33%',
+          width: '30%',
           value: this.journalData
             ? this.journalData.socialNetworks.linkedin
             : '',

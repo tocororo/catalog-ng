@@ -4,9 +4,10 @@
  */
 
 
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { Organization, VocabulariesInmutableNames, JournalVersion, MetadataService, EnvService, MessageHandler, StatusCode, Hit } from 'toco-lib';
+import { SourceJournalViewVersionComponent } from './version/journal-view-version.component';
 
 
 
@@ -121,6 +122,8 @@ export class SourceJournalViewComponent implements OnInit {
     public showVersions = false;
     public editVersion = false;
 
+    @ViewChild(SourceJournalViewVersionComponent, { static: false })
+    versionComponent: SourceJournalViewVersionComponent;
 
 
     constructor(
@@ -212,19 +215,23 @@ export class SourceJournalViewComponent implements OnInit {
      * Selects the selected journal as a JournalVersion
      */
     public SelectJournalVersion(): void {
-        if (this.versions.length >= 0 &&
-            this.selectedVersion >= 0 &&
-            this.selectedVersion < this.versions.length) {
 
-            // load the selected journal
-            let version = new JournalVersion();
-            version.deepcopy(this.versions[this.selectedVersion]);
-            this.selectedJournal = version;
+      if (this.versions.length >= 0 &&
+          this.selectedVersion >= 0 &&
+          this.selectedVersion < this.versions.length) {
 
-            // load if was viewed
-            // this.selectedJournalChecked = this.selectedJournal.reviewed;
+          // load the selected journal
+          this.selectedJournal = new JournalVersion();
+          this.selectedJournal.deepcopy(this.versions[this.selectedVersion]);
+          // this.selectedJournal = version;
+          console.log('this.selectedVersion', this.selectedVersion, this.selectedJournal)
+          // if(this.versionComponent) {
+          //   this.versionComponent.ngOnChanges();
+          // }
+          // load if was viewed
+          // this.selectedJournalChecked = this.selectedJournal.reviewed;
 
-        }
+      }
     }
 
 

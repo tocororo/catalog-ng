@@ -5,9 +5,12 @@ import {
   Input,
   Output,
   EventEmitter,
+  ViewChild,
 } from "@angular/core";
 import { MatSnackBar } from '@angular/material';
-import { JournalVersion, JournalDataType, SourceClasification, VocabulariesInmutableNames, MessageHandler, StatusCode, SourceOrganization } from 'toco-lib';
+import { JournalVersion, JournalDataType, SourceClasification, VocabulariesInmutableNames, MessageHandler, StatusCode, SourceOrganization, JournalData } from 'toco-lib';
+import { SourceEditIndexesComponent } from '../../../source-edit/source-indexes/source-indexes.component';
+import { SourceEditOrganizationsComponent } from '../../../source-edit/source-organizations/source-organizations.component';
 
 @Component({
   selector: "catalog-journal-view-version",
@@ -16,6 +19,8 @@ import { JournalVersion, JournalDataType, SourceClasification, VocabulariesInmut
 })
 export class SourceJournalViewVersionComponent implements OnInit, OnChanges {
   @Input() public currentJournal: JournalVersion;
+
+  public currentJournalData: JournalData;
 
   @Input() public type: number;
 
@@ -41,6 +46,15 @@ export class SourceJournalViewVersionComponent implements OnInit, OnChanges {
 
   loading = true;
 
+
+  @ViewChild(SourceEditOrganizationsComponent, { static: false })
+  orgs: SourceEditOrganizationsComponent;
+
+  @ViewChild(SourceEditIndexesComponent, { static: false })
+  indexes: SourceEditIndexesComponent;
+
+
+
   constructor(private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
@@ -53,12 +67,21 @@ export class SourceJournalViewVersionComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
     this.loading = true;
-    console.log("***////****////***///");
+
     this.ngOnInit();
+    console.log("***//// SourceJournalViewVersionComponent ****////***///", this.currentJournal);
+    // if(this.orgs && this.indexes) {
+    //   this.orgs.ngOnInit();
+    //   this.indexes.ngOnInit();
+    // }
     this.loading = false;
   }
 
   loadJournalData() {
+    // if (this.currentJournalData == undefined)
+    //   this.currentJournalData = new JournalData();
+    // this.currentJournalData.deepcopy(this.currentJournal.data);
+
     this.currentDataBaseTerms = new Array<SourceClasification>();
     this.currentGroupTerms = new Array<SourceClasification>();
     this.currentInstitutionTerms = new Array<SourceClasification>();

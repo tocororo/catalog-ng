@@ -85,21 +85,24 @@ export class SourceViewComponent implements OnInit {
     );
   }
 
-  _init_source_relations(v: SourceVersion){
+  _init_source_relations(v: SourceVersion) {
     let so = new Array<SourceOrganization>();
-    v.data.organizations.forEach(element => {
-      let o = new SourceOrganization();
-      o.deepcopy(element);
-      so.push(o);
-    });
+    if (v.data.organizations) {
+      v.data.organizations.forEach(element => {
+        let o = new SourceOrganization();
+        o.deepcopy(element);
+        so.push(o);
+      });
+    }
     v.data.organizations = so;
-
     let sc = new Array<SourceClasification>();
-    v.data.classifications.forEach(element => {
-      let o = new SourceClasification();
-      o.deepcopy(element);
-      sc.push(o);
-    });
+    if (v.data.classifications) {
+      v.data.classifications.forEach(element => {
+        let o = new SourceClasification();
+        o.deepcopy(element);
+        sc.push(o);
+      });
+    }
     v.data.classifications = sc;
   }
 

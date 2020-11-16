@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject } from "@angular/core";
+import { Component, OnInit, Input, Inject, OnChanges } from "@angular/core";
 
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from "@angular/material";
 import { FormArray } from "@angular/forms";
@@ -9,7 +9,7 @@ import { SourceData, Organization, SourceOrganizationRole, OrganizationServiceNo
   templateUrl: "./source-organizations.component.html",
   styleUrls: ["./source-organizations.component.scss"],
 })
-export class SourceEditOrganizationsComponent implements OnInit {
+export class SourceEditOrganizationsComponent implements OnInit, OnChanges {
   @Input()
   public sourceData: SourceData;
 
@@ -26,13 +26,15 @@ export class SourceEditOrganizationsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.sourceData.organizations);
+    // solo las organizaciones con algun rol son validas
     this.sourceData.organizations = this.sourceData.organizations.filter(
       (element) => element && element.role
     );
-    console.log(this.sourceData.organizations);
+    console.log('**** SourceEditOrganizationsComponent *** complete process initIndexes', this.sourceData);
   }
-
+  ngOnChanges(): void {
+    this.ngOnInit();
+  }
   addOrg(cuban = true, topMain = false) {
     if (topMain && this.topMainOrganization) {
       this.dialog.open(SourceEditOrganizationSelectTopDialog, {

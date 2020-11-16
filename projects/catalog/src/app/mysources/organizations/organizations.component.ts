@@ -5,7 +5,7 @@ import { MatTreeFlattener, MatTreeFlatDataSource, MAT_DIALOG_DATA, MatDialog, Ma
 
 import { BehaviorSubject, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Hit, Organization, OrganizationServiceNoAuth, OrganizationRelationships } from 'toco-lib';
+import { Hit, Organization, OrganizationServiceNoAuth, OrganizationRelationships, OrganizationFlatNode } from 'toco-lib';
 
 
 
@@ -124,12 +124,12 @@ export class MySourcesOrganizationsComponent implements OnInit {
 
   }
 
-  openPermission(org) {
+  openPermission(org: OrganizationFlatNode) {
     console.log(org);
     this.dialog.open(MySourcesOrganizationsPermissionDialog, {
       width: "80%",
       data: {
-        org: org,
+        org: org.item.metadata,
       },
     });
   }

@@ -1,9 +1,9 @@
 <mat-progress-bar
-  *ngIf="!selectedDatabases"
+  *ngIf="loading"
   mode="indeterminate"
 ></mat-progress-bar>
 
-<mat-accordion *ngIf="selectedDatabases">
+<mat-accordion *ngIf="!loading">
   <mat-expansion-panel
     *ngFor="let clasification of selectedDatabases; let classIndex = index"
   >

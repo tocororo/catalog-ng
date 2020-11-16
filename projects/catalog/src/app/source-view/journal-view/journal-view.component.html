@@ -1,6 +1,15 @@
-<div *ngIf="editingJournal != undefined" fxLayout="row wrap" style="margin: 1em">
+<div
+  *ngIf="editingJournal != undefined"
+  fxLayout="row wrap"
+  style="margin: 1em"
+>
   <!-- navigate buttons -->
-  <mat-toolbar>
+  <mat-toolbar
+  style="  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 1000;"
+  >
     <mat-toolbar-row fxLayoutGap="1em" fxLayoutAlign="end center">
       <!-- <mat-slide-toggle
         (change)="editVersion = !editVersion"
