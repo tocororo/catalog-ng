@@ -1,9 +1,9 @@
 
 import { Component } from '@angular/core';
-import { OAuthStorage, OAuthService } from 'angular-oauth2-oidc';
-import { Subscription, PartialObserver } from 'rxjs';
-import { Router, RouterEvent, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
-import { AuthenticationService } from 'toco-lib';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent } from '@angular/router';
+import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
+import { PartialObserver, Subscription } from 'rxjs';
+import { OauthAuthenticationService } from 'toco-lib';
 
 @Component({
     selector: 'catalog-root',
@@ -39,7 +39,7 @@ export class AppComponent {
     constructor(
         private oauthStorage: OAuthStorage,
         private oauthService: OAuthService,
-        private authenticateService: AuthenticationService,
+        private authenticateService: OauthAuthenticationService,
         private router: Router) {
         this.isOnline = true; //navigator.onLine;
         this.router.events.subscribe(
@@ -63,8 +63,23 @@ export class AppComponent {
         );
     }
     ngOnInit(): void {
-        this.authenticateSuscription = this.authenticateService.authenticationSubjectObservable
-            .subscribe(this.authenticateObserver);
+        this.authenticateSuscription = this.authenticateService.authenticationSubjectObservable.subscribe(
+          (user) => {
+            if (user != null) {
+              this.user = user;
+              // if (this.oauthStorage.getItem('access_token')) {
+              //   this.user = this.oauthStorage.getItem('email');
+              // }
+            } else {
+              this.logoff();
+            }
+          },
+          (error: any) => {
+            this.user = null;
+          },
+          () => {
+          }
+        );
     }
 
     ngOnDestroy(): void {
@@ -76,6 +91,6 @@ export class AppComponent {
     public logoff() {
         this.oauthService.logOut();
         this.oauthStorage.removeItem('email');
-        this.authenticateService.logguedChange(false);
+        this.authenticateService.logout();
     }
 }

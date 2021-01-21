@@ -1,14 +1,11 @@
-import { Component, OnInit, Inject } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component, Inject, OnInit } from "@angular/core";
 import {
-  MatSnackBar,
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-  MatDialog,
+  MatDialog, MatDialogRef, MatSnackBar,
+  MAT_DIALOG_DATA
 } from "@angular/material";
+import { ActivatedRoute, Router } from "@angular/router";
 import { of } from "rxjs";
-import { catchError } from "rxjs/operators";
-import { SourceTypes, Organization, SourceVersion, SourceService, OrganizationServiceNoAuth, EnvService, MessageHandler, StatusCode, SourceOrganization, SourceClasification, JournalVersion, ResponseStatus, HandlerComponent, SourceStatus, Response, Hit } from 'toco-lib';
+import { Environment, HandlerComponent, Hit, JournalVersion, MessageHandler, Organization, OrganizationServiceNoAuth, Response, ResponseStatus, SourceClasification, SourceOrganization, SourceService, SourceStatus, SourceTypes, SourceVersion, StatusCode } from 'toco-lib';
 
 
 @Component({
@@ -37,7 +34,7 @@ export class SourceViewComponent implements OnInit {
     public dialog: MatDialog,
     private _sourceService: SourceService,
     private orgService: OrganizationServiceNoAuth,
-    private env: EnvService
+    private environment: Environment
   ) { }
 
   ngOnInit() {
@@ -46,8 +43,8 @@ export class SourceViewComponent implements OnInit {
       this.topMainOrganization = response;
 
     } else {
-      if (this.env.extraArgs["topOrganizationPID"]) {
-        this.topOrganizationPID = this.env.extraArgs["topOrganizationPID"];
+      if (this.environment.topOrganizationPID) {
+        this.topOrganizationPID = this.environment.topOrganizationPID;
         this.orgService
           .getOrganizationByPID(this.topOrganizationPID)
           .subscribe(

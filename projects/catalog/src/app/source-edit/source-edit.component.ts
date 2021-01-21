@@ -6,7 +6,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EnvService, Hit, JournalData, JournalVersion, MessageHandler, Organization, SourceData, SourceService, SourceTypes, SourceVersion, StatusCode, TaxonomyService } from 'toco-lib';
+import { Environment, Hit, JournalData, JournalVersion, MessageHandler, Organization, SourceData, SourceService, SourceTypes, SourceVersion, StatusCode } from 'toco-lib';
 
 @Component({
   selector: 'catalog-source-edit',
@@ -29,10 +29,10 @@ export class SourceEditComponent implements OnInit {
     private _router: Router,
     private _snackBar: MatSnackBar,
     private sourceService: SourceService,
-    private env: EnvService,
+    private environment: Environment,
   ) {
-    if (env.extraArgs && env.extraArgs["topOrganizationPID"]) {
-      this.topOrganizationPID = env.extraArgs["topOrganizationPID"];
+    if (environment.topOrganizationPID) {
+      this.topOrganizationPID = environment.topOrganizationPID;
     }
   }
 

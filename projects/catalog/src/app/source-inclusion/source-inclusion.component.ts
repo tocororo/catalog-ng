@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild, Inject } from "@angular/core";
-
-import { FormGroup, FormBuilder, FormControl } from "@angular/forms";
-
-
-import { MatDialog, MatStep, MatStepper, MAT_DIALOG_DATA } from "@angular/material";
+import { Component, Inject, OnInit } from "@angular/core";
+import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import { MatDialog, MAT_DIALOG_DATA } from "@angular/material";
 import { Router } from '@angular/router';
-import { Source, SourceVersion, Organization, SourceTypes, FormContainerAction, SourceService, SourceServiceNoAuth, OrganizationServiceNoAuth, EnvService, InputTextComponent, FormFieldType, HintValue, HintPosition, MessageHandler, Journal, JournalVersion, StatusCode, HandlerComponent, SelectOption, SourcePersonRole, ContainerPanelActionComponent, PanelActionContent, Hit } from 'toco-lib';
+import { ContainerPanelActionComponent, Environment, FormContainerAction, FormFieldType, HandlerComponent, HintPosition, HintValue, Hit, InputTextComponent, Journal, JournalVersion, MessageHandler, Organization, OrganizationServiceNoAuth, PanelActionContent, SelectOption, Source, SourcePersonRole, SourceService, SourceServiceNoAuth, SourceTypes, SourceVersion, StatusCode } from 'toco-lib';
+
+
+
 
 @Component({
   selector: "catalog-source-inclusion",
@@ -36,7 +36,7 @@ export class SourceInclusionComponent implements OnInit {
     public dialog: MatDialog,
     private _router: Router,
     private orgService: OrganizationServiceNoAuth,
-    private env: EnvService
+    private environment: Environment
   ) { }
 
 
@@ -46,8 +46,8 @@ export class SourceInclusionComponent implements OnInit {
       this.topMainOrganization = response;
 
     } else {
-      if (this.env.extraArgs["topOrganizationPID"]) {
-        this.topOrganizationPID = this.env.extraArgs["topOrganizationPID"];
+      if (this.environment.topOrganizationPID) {
+        this.topOrganizationPID = this.environment.topOrganizationPID;
         this.orgService
           .getOrganizationByPID(this.topOrganizationPID)
           .subscribe(

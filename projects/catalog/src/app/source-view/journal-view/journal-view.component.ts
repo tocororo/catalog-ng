@@ -4,9 +4,9 @@
  */
 
 
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { MatSnackBar, MatDialog } from '@angular/material';
-import { Organization, VocabulariesInmutableNames, JournalVersion, MetadataService, EnvService, MessageHandler, StatusCode, Hit } from 'toco-lib';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { Environment, Hit, JournalVersion, MessageHandler, MetadataService, Organization, StatusCode, VocabulariesInmutableNames } from 'toco-lib';
 import { SourceJournalViewVersionComponent } from './version/journal-view-version.component';
 
 
@@ -55,7 +55,7 @@ export class SourceJournalViewComponent implements OnInit {
     public panelOpenState = false;
 
 
-    public defaultLogo = this.env.sceibaHost + 'static/favicon.ico'
+    public defaultLogo = this.environment.sceibaHost + 'static/favicon.ico'
 
     /**
      * Button roperty, is to enable or disable if there are not more versions
@@ -128,7 +128,7 @@ export class SourceJournalViewComponent implements OnInit {
 
     constructor(
         private metadata: MetadataService,
-        private env: EnvService,
+        private environment: Environment,
         private _snackBar: MatSnackBar,
         public dialog: MatDialog
     ) { }

@@ -1,8 +1,6 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { MatPaginator, MatTableDataSource, MatSort } from "@angular/material";
-import { map } from "rxjs/operators";
+import { Component, OnInit } from "@angular/core";
 import { OAuthStorage } from "angular-oauth2-oidc";
-import { Source, Hit, Organization, Term, SourceService, EnvService, OrganizationServiceNoAuth } from 'toco-lib';
+import { Environment, Hit, Organization, OrganizationServiceNoAuth, Source, SourceService, Term } from 'toco-lib';
 @Component({
   selector: "catalog-mysources",
   templateUrl: "./mysources.component.html",
@@ -19,7 +17,7 @@ export class MySourcesComponent implements OnInit {
   constructor(
     private sourceService: SourceService,
     private oauthStorage: OAuthStorage,
-    private env: EnvService,
+    private environment: Environment,
     private orgService: OrganizationServiceNoAuth
   ) {}
 
@@ -35,13 +33,13 @@ export class MySourcesComponent implements OnInit {
     if(this.isAdmin){
       // TODO: use cache!!!
 
-      if (this.env.extraArgs && this.env.extraArgs['topOrganizationPID']) {
+      if (this.environment.topOrganizationPID) {
         if (localStorage.getItem('topMainOrganization') && localStorage.getItem('topMainOrganization') != '') {
           const response = JSON.parse(localStorage.getItem('topMainOrganization'));
           this.organizations = [response];
 
         } else {
-          this.orgService.getOrganizationByPID(this.env.extraArgs['topOrganizationPID']).subscribe(
+          this.orgService.getOrganizationByPID(this.environment.topOrganizationPID).subscribe(
             (response) => {
               this.organizations = [response];
             },

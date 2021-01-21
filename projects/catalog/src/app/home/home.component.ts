@@ -4,10 +4,10 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { MatPaginatorIntl, MatDialog, MatSnackBar } from '@angular/material';
-import { DialogCatalogJournalInfoDialog } from 'projects/catalog/src/app/catalog/catalog.component';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { OAuthStorage } from 'angular-oauth2-oidc';
-import { Organization, Journal, EnvService, SourceService, SourceServiceNoAuth, OrganizationServiceNoAuth, ResponseStatus, SourceTypes, JournalVersion, MessageHandler, StatusCode, Hit } from 'toco-lib';
+import { DialogCatalogJournalInfoDialog } from 'projects/catalog/src/app/catalog/catalog.component';
+import { Environment, Hit, Journal, JournalVersion, MessageHandler, Organization, OrganizationServiceNoAuth, ResponseStatus, SourceService, SourceServiceNoAuth, SourceTypes, StatusCode } from 'toco-lib';
 
 @Component({
     selector: 'catalog-home',
@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
     public error = false;
 
     constructor(
-        private env: EnvService,
+        private environment: Environment,
         private sourceService: SourceService,
         private oauthStorage: OAuthStorage,
         private sourceServiceNoAuth: SourceServiceNoAuth,
@@ -42,8 +42,8 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
 
-        if (this.env.extraArgs && this.env.extraArgs["topOrganizationPID"]) {
-          this.topOrganizationPID = this.env.extraArgs["topOrganizationPID"];
+        if (this.environment.topOrganizationPID) {
+          this.topOrganizationPID = this.environment.topOrganizationPID;
           if (localStorage.getItem('topMainOrganization') && localStorage.getItem('topMainOrganization') != '' ) {
             const response = JSON.parse(localStorage.getItem('topMainOrganization'));
             this.topMainOrganization = response;

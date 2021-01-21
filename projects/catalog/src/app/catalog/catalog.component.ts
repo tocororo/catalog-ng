@@ -1,40 +1,42 @@
-import { Component, OnInit, ViewChild, Inject, OnChanges } from "@angular/core";
 import {
   animate,
   state,
   style,
   transition,
-  trigger,
+  trigger
 } from "@angular/animations";
-import { merge, of as observableOf } from "rxjs";
-import { startWith, switchMap, map, catchError } from "rxjs/operators";
-import { MatPaginator, PageEvent } from "@angular/material/paginator";
-import { MatTableDataSource } from "@angular/material/table";
-
-
-
-
+import { HttpParams } from "@angular/common/http";
+import { Component, Inject, OnChanges, OnInit } from "@angular/core";
 import {
-  MatSnackBar,
   MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
+  MatDialogRef, MatSnackBar,
+
+
+  MAT_DIALOG_DATA
 } from "@angular/material";
-
-
+import { PageEvent } from "@angular/material/paginator";
+import { MatTableDataSource } from "@angular/material/table";
 import {
   ActivatedRoute,
-  ParamMap,
-  Route,
-  Router,
-  NavigationExtras,
-  convertToParamMap,
-  Params,
+
+
+
+
+  convertToParamMap, NavigationExtras, ParamMap,
+
+
+
+
+  Params, Router
 } from "@angular/router";
-import { ThrowStmt } from "@angular/compiler";
-import { HttpParams } from "@angular/common/http";
-import { Journal, FilterHttpMap, Organization, SourceService, SourceServiceNoAuth, MetadataService, FiltersService, EnvService, OrganizationServiceNoAuth, Hit, JournalData, JournalVersion, MessageHandler, StatusCode } from 'toco-lib';
+import { Environment, FilterHttpMap, Hit, Journal, JournalData, JournalVersion, MessageHandler, MetadataService, Organization, OrganizationServiceNoAuth, SourceServiceNoAuth, StatusCode } from 'toco-lib';
 import { CatalogFilterKeys } from './filters/filters.component';
+
+
+
+
+
+
 
 @Component({
   selector: "catalog-search",
@@ -105,7 +107,7 @@ export class CatalogComponent implements OnInit, OnChanges {
   constructor(
     private sourceServiceNoAuth: SourceServiceNoAuth,
     private metadata: MetadataService,
-    private env: EnvService,
+    private environment: Environment,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
@@ -119,8 +121,8 @@ export class CatalogComponent implements OnInit, OnChanges {
   // @ViewChild(FiltersComponent, { static: true }) filters: FiltersComponent;
 
   ngOnInit() {
-    if (this.env.extraArgs && this.env.extraArgs["topOrganizationPID"]) {
-      this.topOrganizationPID = this.env.extraArgs["topOrganizationPID"];
+    if (this.environment.topOrganizationPID) {
+      this.topOrganizationPID = this.environment.topOrganizationPID;
       this.orgService.getOrganizationByPID(this.topOrganizationPID).subscribe(
         (response) => {
           // console.log(response)

@@ -1,21 +1,21 @@
 
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { EnvService, Response } from 'toco-lib';
+import { Environment, Response } from 'toco-lib';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
 
-  constructor(private env: EnvService, protected http: HttpClient) { }
+  constructor(private environment: Environment, protected http: HttpClient) { }
 
   getOrganizationInfo(organization: string): Observable<Response<any>> {
-    return this.http.get<Response<any>>(this.env.sceibaApi + 'source/info/' + organization);
+    return this.http.get<Response<any>>(this.environment.sceibaApi + 'source/info/' + organization);
   }
   getSourcesOrgAggregation(uuid): Observable<Response<any>> {
-    const req = this.env.sceibaApi + 'source/aggs/org/' + uuid;
+    const req = this.environment.sceibaApi + 'source/aggs/org/' + uuid;
     return this.http.get<Response<any>>(req);
   }
 }

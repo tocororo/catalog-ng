@@ -4,11 +4,11 @@
  */
 
 import { Component } from '@angular/core';
-import { Subscription, PartialObserver } from 'rxjs';
-import { OAuthStorage, OAuthService } from 'angular-oauth2-oidc';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent } from '@angular/router';
+import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
+import { PartialObserver, Subscription } from 'rxjs';
+import { OauthAuthenticationService } from 'toco-lib';
 
-import { Router, NavigationStart, RouterEvent, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
-import { AuthenticationService } from 'toco-lib';
 
 @Component({
     selector: 'revistasmes-root',
@@ -54,7 +54,7 @@ export class AppComponent {
     constructor(
         private oauthStorage: OAuthStorage,
         private oauthService: OAuthService,
-        private authenticateService: AuthenticationService,
+        private authenticateService: OauthAuthenticationService,
         private router: Router) {
 
         this.isOnline = true; //navigator.onLine;

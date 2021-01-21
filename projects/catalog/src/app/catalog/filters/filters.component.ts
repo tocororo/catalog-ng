@@ -5,18 +5,21 @@
 
 import {
   Component,
-  OnInit,
-  OnChanges,
-  Input,
-  Output,
-  EventEmitter
+
+
+
+
+  EventEmitter, Input, OnInit,
+
+
+  Output
 } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { ParamMap, Params } from "@angular/router";
+import { FlatTreeNode, FormFieldType, Hit, Organization, PanelContent_Depr, Relationship, SelectOption, SelectOptionNode, SourceTypes, VocabulariesInmutableNames } from 'toco-lib';
 
-import { FormGroup, FormBuilder, FormControl } from "@angular/forms";
 
-import { ParamMap, ActivatedRoute, convertToParamMap, Params } from "@angular/router";
 
-import { EnvService, FlatTreeNode, FormFieldType, Hit, Organization, OrganizationServiceNoAuth, PanelContent_Depr, Relationship, SearchService, SelectOption, SelectOptionNode, SourceTypes, VocabulariesInmutableNames } from 'toco-lib';
 
 export const CatalogFilterKeys = {
   source_type: "source_type",

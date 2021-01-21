@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-import { AuthenticationService, NotificationListComponent } from 'toco-lib';
+import { RouterModule, Routes } from '@angular/router';
+import { NotificationListComponent, OauthAuthenticationService } from 'toco-lib';
 import { CatalogComponent } from './catalog/catalog.component';
 import { HomeComponent } from './home/home.component';
 import { MySourcesComponent } from './mysources/mysources.component';
@@ -12,6 +11,7 @@ import { SourceViewReadComponent } from './source-view/source-view-read/source-v
 import { SourceViewComponent } from './source-view/source-view.component';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+
 
 
 const routes: Routes = [
@@ -58,7 +58,7 @@ const routes: Routes = [
 {
     path: 'userprofile',
     component: UserProfileComponent,
-    canActivate: [AuthenticationService]
+    canActivate: [OauthAuthenticationService]
 },
 {
     path: 'sources',
@@ -96,12 +96,12 @@ const routes: Routes = [
             component: MySourcesComponent,
         }
     ],
-    canActivate: [AuthenticationService]
+    canActivate: [OauthAuthenticationService]
 },
 {
     path: 'notifications',
     component: NotificationListComponent,
-    canActivate: [AuthenticationService]
+    canActivate: [OauthAuthenticationService]
 },
 {
     path: '**',

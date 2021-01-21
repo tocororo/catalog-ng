@@ -5,7 +5,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { UserProfile, UserProfileService, EnvService } from 'toco-lib';
+import { Environment, UserProfile, UserProfileService } from 'toco-lib';
 ;
 
 @Component({
@@ -21,11 +21,11 @@ export class UserProfileComponent implements OnInit {
 
     constructor(
         private userProfileService: UserProfileService,
-        private env: EnvService,
+        private environment: Environment,
         private sanitizer: DomSanitizer) { }
 
     ngOnInit() {
-        this.changePassword = this.env.sceibaHost + 'account/settings/password/';
+        this.changePassword = this.environment.sceibaHost + 'account/settings/password/';
         this.user = new UserProfile();
         this.userProfileService.getUserInfo().subscribe({
             next: response => {
