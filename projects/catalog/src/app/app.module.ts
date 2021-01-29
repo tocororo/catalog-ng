@@ -1,16 +1,16 @@
 // import { BrowserModule } from '@angular/platform-browser';
 
-import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MarkdownModule } from 'ngx-markdown';
-import { AngularMaterialModule, AuthenticationModule, CoreModule, Environment, HTTP_INTERCEPTOR_PROVIDERS, NotificationModule, OauthAuthenticationService, OrganizationServiceNoAuth, OrganizationsModule, REQUEST_CACHE_DIFFERENT_TIME_WITH_MAP_PROVIDER, SharedModule, SourceService, SourceServiceNoAuth, TaxonomyService, TocoFormsModule, UserProfileService } from 'toco-lib';
+import { AngularMaterialModule, AuthenticationModule, CoreModule, Environment, HTTP_INTERCEPTOR_PROVIDERS, NotificationModule, OrganizationServiceNoAuth, OrganizationsModule, REQUEST_CACHE_DIFFERENT_TIME_WITH_MAP_PROVIDER, SharedModule, SourceService, SourceServiceNoAuth, TaxonomyService, TocoFormsModule, UserProfileService } from 'toco-lib';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CatalogComponent } from './catalog/catalog.component';
+import { CatalogComponent, DialogCatalogJournalInfoDialog } from './catalog/catalog.component';
 import { FiltersComponent } from './catalog/filters/filters.component';
 import { HomeComponent } from './home/home.component';
 import { MySourcesEditorComponent } from './mysources/editor/editor.component';
@@ -77,7 +77,8 @@ import { UserSearchComponent } from './user-search/user-search.component';
     SourceJournalViewInfoComponent,
     StaticPagesComponent,
     UserProfileComponent,
-    UserSearchComponent
+    UserSearchComponent,
+    DialogCatalogJournalInfoDialog
   ],
   entryComponents: [
     MySourcesManagerPermissionDialog,
@@ -87,7 +88,8 @@ import { UserSearchComponent } from './user-search/user-search.component';
     SourceEditOrganizationSelectTopDialog,
     SourceEditOrganizationSelectDialog,
     SourceInclusionAcceptComponent,
-    SourceViewSaveDialog
+    SourceViewSaveDialog,
+    DialogCatalogJournalInfoDialog
   ],
   imports: [
     BrowserAnimationsModule,
@@ -115,7 +117,7 @@ import { UserSearchComponent } from './user-search/user-search.component';
     OrganizationServiceNoAuth,
     HTTP_INTERCEPTOR_PROVIDERS,
     REQUEST_CACHE_DIFFERENT_TIME_WITH_MAP_PROVIDER,
-    { provide: HTTP_INTERCEPTORS, useClass: OauthAuthenticationService, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: OauthAuthenticationService, multi: true },
     { provide: Environment, useValue: environment }
   ],
   bootstrap: [AppComponent]

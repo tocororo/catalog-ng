@@ -2,8 +2,8 @@
 import { Component } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
-import { PartialObserver, Subscription } from 'rxjs';
-import { OauthAuthenticationService } from 'toco-lib';
+import { Subscription } from 'rxjs';
+import { Environment, OauthAuthenticationService, OauthInfo, UserProfile } from 'toco-lib';
 
 @Component({
     selector: 'catalog-root',
@@ -11,32 +11,28 @@ import { OauthAuthenticationService } from 'toco-lib';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  public oauthInfo: OauthInfo = {
+    serverHost: this.environment.sceibaHost,
+    loginUrl: this.environment.sceibaHost + 'oauth/authorize',
+    tokenEndpoint: this.environment.sceibaHost + 'oauth/token',
+    userInfoEndpoint: this.environment.sceibaApi + 'me',
+    appHost: this.environment.appHost,
+    appName: this.environment.appName,
+    oauthRedirectUri: this.environment.oauthRedirectUri,
+    oauthClientId: this.environment.oauthClientId,
+    oauthScope: this.environment.oauthScope,
+  }
+
     title = 'Catálogo';
     isOnline: boolean;
     islogged: boolean;
-    user: any;
+    userProfile: UserProfile;
     loading = false;
     private authenticateSuscription: Subscription = null;
-    private authenticateObserver: PartialObserver<boolean> = {
-        next: (islogged: boolean) => {
-            console.log(this.oauthStorage);
-
-            this.islogged = islogged;
-            if (this.oauthStorage.getItem('access_token')) {
-                this.user = this.oauthStorage.getItem('email');
-            }
-        },
-
-        error: (err: any) => {
-            console.log('The observable got an error notification: ' + err + '.');
-        },
-
-        complete: () => {
-            console.log('The observable got a complete notification.');
-        }
-    };
 
     constructor(
+        private environment: Environment,
         private oauthStorage: OAuthStorage,
         private oauthService: OAuthService,
         private authenticateService: OauthAuthenticationService,
@@ -63,10 +59,12 @@ export class AppComponent {
         );
     }
     ngOnInit(): void {
+      this.userProfile = JSON.parse(this.oauthStorage.getItem('user'));
+      console.log(this.userProfile)
         this.authenticateSuscription = this.authenticateService.authenticationSubjectObservable.subscribe(
           (user) => {
             if (user != null) {
-              this.user = user;
+              this.userProfile = user;
               // if (this.oauthStorage.getItem('access_token')) {
               //   this.user = this.oauthStorage.getItem('email');
               // }
@@ -75,7 +73,7 @@ export class AppComponent {
             }
           },
           (error: any) => {
-            this.user = null;
+            this.userProfile = null;
           },
           () => {
           }
@@ -90,7 +88,7 @@ export class AppComponent {
 
     public logoff() {
         this.oauthService.logOut();
-        this.oauthStorage.removeItem('email');
-        this.authenticateService.logout();
+        this.oauthStorage.removeItem("user");
+        this.userProfile = undefined;
     }
 }

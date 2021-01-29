@@ -181,3 +181,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 mat-checkbox .mat-checkbox-layout{
     white-space: normal !important;
 }
+
+
+.tooltip-beta-red{
+  background: mat-color($toco-warn, A700);
+  font-size: larger;
+}
+.triangle{
+  border-left: 80px solid mat-color($toco-warn, A700) !important;
+}
+.primary-color{
+   background-color: mat-color($toco-primary);
+   color: #fff;
+   padding: 16px;
+   margin: 16px;
+   border-radius: 4px;
+}

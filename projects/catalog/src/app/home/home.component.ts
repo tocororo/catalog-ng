@@ -44,29 +44,29 @@ export class HomeComponent implements OnInit {
 
         if (this.environment.topOrganizationPID) {
           this.topOrganizationPID = this.environment.topOrganizationPID;
-          if (localStorage.getItem('topMainOrganization') && localStorage.getItem('topMainOrganization') != '' ) {
-            const response = JSON.parse(localStorage.getItem('topMainOrganization'));
-            this.topMainOrganization = response;
-            // new Organization();
-            // this.topMainOrganization.deepcopy(response.metadata);
-            this.init();
-          } else {
-            this.orgService.getOrganizationByPID(this.topOrganizationPID).subscribe(
-              (response) => {
-                // console.log(response)
-                this.topMainOrganization = response;
-                // new Organization();
-                // this.topMainOrganization.deepcopy(response.metadata);
-                localStorage.setItem('topMainOrganization', JSON.stringify(response));
-                this.init();
-              },
-              (error) => {
-                console.log("error");
-                this.error = true;
-              },
-              () => {}
-            );
-          }
+          // if (localStorage.getItem('topMainOrganization') && localStorage.getItem('topMainOrganization') != '' ) {
+          //   const response = JSON.parse(localStorage.getItem('topMainOrganization'));
+          //   this.topMainOrganization = response;
+          //   // new Organization();
+          //   // this.topMainOrganization.deepcopy(response.metadata);
+          //   this.init();
+          // } else {
+          this.orgService.getOrganizationByPID(this.topOrganizationPID).subscribe(
+            (response) => {
+              // console.log(response)
+              this.topMainOrganization = response;
+              // new Organization();
+              // this.topMainOrganization.deepcopy(response.metadata);
+              localStorage.setItem('topMainOrganization', JSON.stringify(response));
+              this.init();
+            },
+            (error) => {
+              console.log("error");
+              this.error = true;
+            },
+            () => {}
+          );
+          // }
         }
         this.institutionsCount = 0;
         this.records = 0;
