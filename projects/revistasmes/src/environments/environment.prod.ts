@@ -7,10 +7,10 @@ class EnvironmentImpl implements Environment {
   sceibaApi = 'https://sceiba.cu/api/';
   cuorApi = 'https://orgs.sceiba.cu/api/';
 
-  appHost = 'https://sceiba.cu';
+  appHost = 'https://revistasmes.sceiba.cu';
   appName = 'Registro de Revistas Científicas del MES';
-  oauthRedirectUri = 'https://sceiba.cu/';
-  oauthClientId = 'ICC1j7NOH0067SgsMyKUXM9ZipavAXHPrbW1ll3V';
+  oauthRedirectUri = 'https://revistasmes.sceiba.cu/';
+  oauthClientId = 'tp64znMu6DHzqWOxc6Go1UDl6GDmEc7X0I4VK8iQ';
   oauthScope = 'user:email';
   topOrganizationPID = '';
   cachableUrls = [];
