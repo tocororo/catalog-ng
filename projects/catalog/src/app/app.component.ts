@@ -59,12 +59,16 @@ export class AppComponent {
         );
     }
     ngOnInit(): void {
-      this.userProfile = JSON.parse(this.oauthStorage.getItem('user'));
+      let request = JSON.parse(this.oauthStorage.getItem('user'));
+      if (request){
+        this.userProfile = request.data.userprofile;
+      }
+      
       console.log(this.userProfile)
         this.authenticateSuscription = this.authenticateService.authenticationSubjectObservable.subscribe(
-          (user) => {
-            if (user != null) {
-              this.userProfile = user;
+          (request) => {
+            if (request != null) {
+              this.userProfile = request.data.userprofile;
               // if (this.oauthStorage.getItem('access_token')) {
               //   this.user = this.oauthStorage.getItem('email');
               // }
