@@ -4,7 +4,6 @@
 <!-- <toco-page-header [info]="['Catálogo de Revistas Científicas Cubanas']">
     </toco-page-header> -->
 
-
 <mat-toolbar>
   <mat-toolbar-row fxLayout="row wrap" fxLayoutAlign="space-between center">
     <h1>Directorio</h1>
@@ -32,12 +31,13 @@
         </button>
       </mat-menu>
     </div>
-
   </mat-toolbar-row>
 </mat-toolbar>
 
-<toco-progress [loading]="!topMainOrganization" [position]="'absolute'"></toco-progress>
-
+<toco-progress
+  [loading]="!topMainOrganization"
+  [position]="'absolute'"
+></toco-progress>
 
 <div
   fxLayout="{{ currentlayout.layout }}"
@@ -48,19 +48,21 @@
   <catalog-search-filters
     fxLayout="row wrap"
     fxLayout.xs="column wrap"
-
     fxLayoutAlign="start center"
     fxLayoutAlign.xs="center center"
     fxLayoutGap="1em"
     [params]="filtersParams"
-    (paramsChange)=filtersChange($event)
+    (paramsChange)="filtersChange($event)"
     [topMainOrganization]="topMainOrganization"
   >
   </catalog-search-filters>
   <!-- fxFlex="{{ currentlayout.width }}" -->
 
   <div class="mat-elevation-z8 width-90 margin1em">
-    <toco-progress [loading]="isLoading()" [position]="'absolute'"></toco-progress>
+    <toco-progress
+      [loading]="isLoading()"
+      [position]="'absolute'"
+    ></toco-progress>
     <table
       *ngIf="!isEmpty()"
       mat-table
@@ -108,14 +110,20 @@
               fxLayout="row"
               fxLayoutAlign="center end"
             >
-              <button
+              <!-- <button
                 mat-stroked-button
                 color="primary"
                 (click)="viewJournal(element.id)"
               >
                 Ver
-              </button>
-              <!-- <a class="color-white" [routerLink]="['/directory', element.id]" style="white-space: normal;">Ir</a> -->
+              </button> -->
+              <a
+                mat-stroked-button
+                color="primary"
+                [routerLink]="['/directory', element.id]"
+                style="white-space: normal"
+                >Ir</a
+              >
             </div>
           </div>
         </td>
@@ -148,7 +156,6 @@
     </mat-paginator>
   </div>
 </div>
-
 
 <!--
       </mat-drawer-content>

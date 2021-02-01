@@ -1,6 +1,6 @@
-import { Component, OnInit, OnChanges, Input, ViewChild } from "@angular/core";
+import { Component, Input, OnChanges, OnInit, ViewChild } from "@angular/core";
 import { MatSnackBar } from '@angular/material';
-import { JournalVersion, JournalData, SourceTypes, SourceSystems, SourceClasification, VocabulariesInmutableNames, IdentifierSchemas, SourceService } from 'toco-lib';
+import { IdentifierSchemas, JournalData, JournalVersion, SourceClasification, SourceService, SourceSystems, SourceTypes, VocabulariesInmutableNames } from 'toco-lib';
 import { SourceEditIndexesComponent } from '../../../source-edit/source-indexes/source-indexes.component';
 import { SourceEditOrganizationsComponent } from '../../../source-edit/source-organizations/source-organizations.component';
 ;
@@ -73,7 +73,6 @@ export class SourceJournalViewInfoComponent implements OnInit, OnChanges {
     this.subjectTerms = new Array<SourceClasification>();
 
     this.vocabularies = VocabulariesInmutableNames;
-
     if (this.journalData.classifications) {
       this.journalData.classifications.forEach(
         (term: SourceClasification) => {

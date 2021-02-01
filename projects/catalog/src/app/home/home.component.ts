@@ -44,13 +44,13 @@ export class HomeComponent implements OnInit {
 
         if (this.environment.topOrganizationPID) {
           this.topOrganizationPID = this.environment.topOrganizationPID;
-          // if (localStorage.getItem('topMainOrganization') && localStorage.getItem('topMainOrganization') != '' ) {
-          //   const response = JSON.parse(localStorage.getItem('topMainOrganization'));
-          //   this.topMainOrganization = response;
-          //   // new Organization();
-          //   // this.topMainOrganization.deepcopy(response.metadata);
-          //   this.init();
-          // } else {
+          if (localStorage.getItem('topMainOrganization') && localStorage.getItem('topMainOrganization') != '' ) {
+            const response = JSON.parse(localStorage.getItem('topMainOrganization'));
+            this.topMainOrganization = response;
+            // new Organization();
+            // this.topMainOrganization.deepcopy(response.metadata);
+            this.init();
+          } else {
           this.orgService.getOrganizationByPID(this.topOrganizationPID).subscribe(
             (response) => {
               // console.log(response)
@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
             },
             () => {}
           );
-          // }
+          }
         }
         this.institutionsCount = 0;
         this.records = 0;
@@ -112,11 +112,11 @@ export class HomeComponent implements OnInit {
                   types.push(element);
                 }
                 if (element.source_type == SourceTypes.STUDENT.value) {
-                  element['label'] = SourceTypes.JOURNAL.label;
+                  element['label'] = SourceTypes.STUDENT.label;
                   types.push(element);
                 }
                 if (element.source_type == SourceTypes.POPULARIZATION.value) {
-                  element['label'] = SourceTypes.JOURNAL.label;
+                  element['label'] = SourceTypes.POPULARIZATION.label;
                   types.push(element);
                 }
               });

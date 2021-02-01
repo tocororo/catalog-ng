@@ -6,7 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MarkdownModule } from 'ngx-markdown';
-import { AngularMaterialModule, AuthenticationModule, CoreModule, Environment, HTTP_INTERCEPTOR_PROVIDERS, NotificationModule, OrganizationServiceNoAuth, OrganizationsModule, REQUEST_CACHE_DIFFERENT_TIME_WITH_MAP_PROVIDER, SharedModule, SourceService, SourceServiceNoAuth, TaxonomyService, TocoFormsModule, UserProfileService } from 'toco-lib';
+import { AngularMaterialModule, AuthenticationModule, CoreModule, Environment, HTTP_INTERCEPTOR_PROVIDERS, NotificationModule, OrganizationServiceNoAuth, OrganizationsModule, SharedModule, SourceService, SourceServiceNoAuth, TaxonomyService, TocoFormsModule, UserProfileService } from 'toco-lib';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -116,7 +116,7 @@ import { UserSearchComponent } from './user-search/user-search.component';
     TaxonomyService,
     OrganizationServiceNoAuth,
     HTTP_INTERCEPTOR_PROVIDERS,
-    REQUEST_CACHE_DIFFERENT_TIME_WITH_MAP_PROVIDER,
+    // REQUEST_CACHE_DIFFERENT_TIME_WITH_MAP_PROVIDER,
     // { provide: HTTP_INTERCEPTORS, useClass: OauthAuthenticationService, multi: true },
     { provide: Environment, useValue: environment }
   ],

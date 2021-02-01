@@ -1,9 +1,9 @@
 
 import { Injectable } from '@angular/core';
-import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { Source, SourceServiceNoAuth, SourceService } from 'toco-lib';
+import { Source, SourceService, SourceServiceNoAuth } from 'toco-lib';
 
 @Injectable()
 export class SourceResolver implements Resolve<Source>
@@ -17,9 +17,9 @@ export class SourceResolver implements Resolve<Source>
         // return this.service.getSourceByUUIDWithVersions(uuid).pipe(
         return this.service.getSourceByUUID(uuid).pipe(
             take(1),
-            map(node => {
-                if (node) {
-                    return node;
+            map(source => {
+                if (source) {
+                    return source;
                 } else {
                     this.router.navigate(['/']);
                 }

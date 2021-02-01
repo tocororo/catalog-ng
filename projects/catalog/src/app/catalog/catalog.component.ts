@@ -123,19 +123,28 @@ export class CatalogComponent implements OnInit, OnChanges {
   ngOnInit() {
     if (this.environment.topOrganizationPID) {
       this.topOrganizationPID = this.environment.topOrganizationPID;
-      this.orgService.getOrganizationByPID(this.topOrganizationPID).subscribe(
-        (response) => {
-          // console.log(response)
-          this.topMainOrganization = response;
-          // new Organization();
-          // this.topMainOrganization.deepcopy(response.metadata);
-          this.init()
-        },
-        (error) => {
-          console.log("error");
-        },
-        () => {}
-      );
+      if (localStorage.getItem('topMainOrganization') && localStorage.getItem('topMainOrganization') != '') {
+        const response = JSON.parse(localStorage.getItem('topMainOrganization'));
+        this.topMainOrganization = response;
+        // new Organization();
+        // this.topMainOrganization.deepcopy(response.metadata);
+        this.init();
+      } else {
+        this.orgService.getOrganizationByPID(this.topOrganizationPID).subscribe(
+          (response) => {
+            // console.log(response)
+            this.topMainOrganization = response;
+            // new Organization();
+            // this.topMainOrganization.deepcopy(response.metadata);
+            localStorage.setItem('topMainOrganization', JSON.stringify(response));
+            this.init();
+          },
+          (error) => {
+            console.log("error");
+          },
+          () => { }
+        );
+      }
     }
     // TODO: si no hay un top level organization entonces hay que usar otro tipo de control para las organizaciones...
   }
@@ -249,10 +258,10 @@ export class CatalogComponent implements OnInit, OnChanges {
 
         this.fetchJournalData();
 
-        console.log(params);
+        console.log('catalog comonent', params, this.filtersParams);
       },
-      error: (e) => {},
-      complete: () => {},
+      error: (e) => { },
+      complete: () => { },
     });
   }
 
@@ -383,7 +392,7 @@ export class CatalogComponent implements OnInit, OnChanges {
       (error) => {
         console.log("error");
       },
-      () => {}
+      () => { }
     );
   }
 }
@@ -404,7 +413,7 @@ export class DialogCatalogJournalInfoDialog implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogCatalogJournalInfoDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     console.log(this.data);

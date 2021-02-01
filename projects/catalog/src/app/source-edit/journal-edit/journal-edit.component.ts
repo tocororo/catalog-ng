@@ -16,7 +16,7 @@ import {
   FormControl, FormGroup
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import { CatalogService, ContainerPanelComponent, DatepickerComponent, DatepickerYearComponent, FormContainerAction, FormFieldType, HintPosition, HintValue, Hit, IdentifierSchemas, InputEmailComponent, InputRnpsComponent, InputTextComponent, InputUrlComponent, JournalData, JournalVersion, MetadataService, Organization, PanelContent, SelectComponent, SourceClasification, SourceService, SourceSystems, SourceTypes, TaxonomyService, Term, TextareaComponent, VocabulariesInmutableNames, VocabularyComponent, VocabularyTreeComponent } from 'toco-lib';
+import { ContainerPanelComponent, DatepickerYearComponent, FormContainerAction, FormFieldType, HintPosition, HintValue, Hit, IdentifierSchemas, InputEmailComponent, InputRnpsComponent, InputTextComponent, InputUrlComponent, JournalData, JournalVersion, MetadataService, Organization, PanelContent, SelectComponent, SourceClasification, SourceSystems, SourceTypes, Term, TextareaComponent, VocabulariesInmutableNames, VocabularyComponent } from 'toco-lib';
 
 
 @Component({
@@ -415,20 +415,20 @@ export class SourceEditJournalComponent implements OnInit {
         {
           formControl: InputTextComponent.getFormControlByDefault(),
           name: 'subjects',
-          label: 'Materias',
-          type: FormFieldType.vocabulary_tree,
-          controlType: VocabularyTreeComponent,
+          label: 'Materia',
+          type: FormFieldType.vocabulary,
+          controlType: VocabularyComponent,
           required: false,
           width: '45%',
           extraContent: {
-            multiple: true,
+            multiple: false,
             selectedTermsIds: this.journalData
               ? this.journalData.classifications.map(
                 (termSource) => termSource.id
               )
               : null,
             vocab: VocabulariesInmutableNames.SUBJECTS,
-            level: 1,
+            level: 0,
           },
         },
         {
@@ -753,6 +753,7 @@ export class SourceEditJournalComponent implements OnInit {
     console.log(this.informationFormGroup);
     console.log(this.organizationFormGroup);
     console.log(this.indexesFormGroup);
+    console.log('QQQQQQQQQQQQQQQQQQQQQQQQ')
     console.log(this.journalData);
   }
 
