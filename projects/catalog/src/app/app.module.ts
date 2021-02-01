@@ -122,4 +122,4 @@ import { UserSearchComponent } from './user-search/user-search.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class CatalogAppModule { }

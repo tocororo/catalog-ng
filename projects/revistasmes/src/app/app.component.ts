@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import { PartialObserver, Subscription } from 'rxjs';
-import { OauthAuthenticationService } from 'toco-lib';
+import { OauthAuthenticationService, OauthInfo, Environment, UserProfile } from 'toco-lib';
 
 
 @Component({
@@ -17,15 +17,28 @@ import { OauthAuthenticationService } from 'toco-lib';
 })
 export class AppComponent {
 
-    public title = 'Directorio MES';
+
+  public oauthInfo: OauthInfo = {
+    serverHost: this.environment.sceibaHost,
+    loginUrl: this.environment.sceibaHost + 'oauth/authorize',
+    tokenEndpoint: this.environment.sceibaHost + 'oauth/token',
+    userInfoEndpoint: this.environment.sceibaApi + 'me',
+    appHost: this.environment.appHost,
+    appName: this.environment.appName,
+    oauthRedirectUri: this.environment.oauthRedirectUri,
+    oauthClientId: this.environment.oauthClientId,
+    oauthScope: this.environment.oauthScope,
+  }
+  
+    public title = 'Registro de Revistas Científicas del MES';
 
     public isOnline: boolean;
 
     public islogged: boolean;
 
-    public user: any;
-
-    public loading = true;
+    userProfile: UserProfile;
+    loading = false;
+    private authenticateSuscription: Subscription = null;
 
     public footerSites: Array< { name: string, url: string, useRouterLink: boolean } >;
 
@@ -33,67 +46,65 @@ export class AppComponent {
 
     // public footerImage: string
 
-    private authenticateSuscription: Subscription = null;
-    private authenticateObserver: PartialObserver<boolean> = {
-        next: (islogged: boolean) => {
-            this.islogged = islogged;
-            if (this.oauthStorage.getItem('access_token')) {
-                this.user = this.oauthStorage.getItem('email');
-            }
-        },
-
-        error: (err: any) => {
-            console.log('The observable got an error notification: ' + err + '.');
-        },
-
-        complete: () => {
-            console.log('The observable got a complete notification.');
-        }
-    };
 
     constructor(
+        private environment: Environment,
         private oauthStorage: OAuthStorage,
         private oauthService: OAuthService,
         private authenticateService: OauthAuthenticationService,
         private router: Router) {
-
         this.isOnline = true; //navigator.onLine;
         this.router.events.subscribe(
             (event: RouterEvent) => {
                 if (event instanceof NavigationStart) {
                     this.loading = true;
-                }
+                  }
 
-                if (event instanceof NavigationEnd ||
+                  if (event instanceof NavigationEnd ||
                     event instanceof NavigationCancel ||
                     event instanceof NavigationError) {
                     this.loading = false;
-                }
-            },
-            (error: any) => {
+                  }
+              },
+              (error: any) => {
 
-            },
-            () => {
+              },
+              () => {
 
-            }
+              }
         );
     }
     ngOnInit(): void {
 
-        this.authenticateSuscription = this.authenticateService.authenticationSubjectObservable
-            .subscribe(this.authenticateObserver);
-
-        // this.footerImage = 'https://10.2.83.160:5000/static/images/sceiba-logo-white.png';
+        this.userProfile = JSON.parse(this.oauthStorage.getItem('user'));
+        console.log(this.userProfile)
+          this.authenticateSuscription = this.authenticateService.authenticationSubjectObservable.subscribe(
+            (user) => {
+              if (user != null) {
+                this.userProfile = user;
+                // if (this.oauthStorage.getItem('access_token')) {
+                //   this.user = this.oauthStorage.getItem('email');
+                // }
+              } else {
+                this.logoff();
+              }
+            },
+            (error: any) => {
+              this.userProfile = null;
+            },
+            () => {
+            }
+          );
         this.footerInformation =  Array();
         this.footerSites =  Array();
 
         this.footerSites.push({ name: "MES", url: "https://www.mes.gob.cu", useRouterLink: false});
-        this.footerSites.push({ name: "Sceiba", url: "https://sceiba-lab.upr.edu.cu", useRouterLink: false});
-        this.footerSites.push({ name: "Dirección Nacional de Publicaciones Seriadas", url: "http://www.seriadascubanas.cult.cu/http://www.seriadascubanas.cult.cu/", useRouterLink:false});
-        this.footerSites.push({ name: "Red Ciencia", url: "http://www.redciencia.cu/", useRouterLink: false});
+        // this.footerSites.push({ name: "Sceiba", url: "https://sceiba-lab.upr.edu.cu", useRouterLink: false});
+        // this.footerSites.push({ name: "Dirección Nacional de Publicaciones Seriadas", url: "http://www.seriadascubanas.cult.cu/http://www.seriadascubanas.cult.cu/", useRouterLink:false});
+        // this.footerSites.push({ name: "Red Ciencia", url: "http://www.redciencia.cu/", useRouterLink: false});
 
-        this.footerInformation.push({ name: "Términos de uso", url: "https://sceiba-lab.upr.edu.cu/page/politicas", useRouterLink: false});
-        this.footerInformation.push({ name: "Privacidad", url: "https://sceiba-lab.upr.edu.cu/page/politicas", useRouterLink: false});
+        // this.footerInformation.push({ name: "Términos de uso", url: "https://sceiba-lab.upr.edu.cu/page/politicas", useRouterLink: false});
+        // this.footerInformation.push({ name: "Privacidad", url: "https://sceiba-lab.upr.edu.cu/page/politicas", useRouterLink: false});
         this.footerInformation.push({ name: "Contacto", url: "/contact", useRouterLink: true});
         this.footerInformation.push({ name: "FAQs", url: "/faq", useRouterLink: true});
     }
@@ -106,8 +117,8 @@ export class AppComponent {
 
     public logoff() {
         this.oauthService.logOut();
-        this.oauthStorage.removeItem('email');
-        this.authenticateService.logguedChange(false);
+        this.oauthStorage.removeItem("user");
+        this.userProfile = undefined;
     }
 
 }
