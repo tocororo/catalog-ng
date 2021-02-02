@@ -1,7 +1,7 @@
 import { Environment } from 'toco-lib';
 
 class EnvironmentImpl implements Environment {
-  production = false;
+  production = true;
   sceibaHost = 'https://sceiba.cu/';
   cuorHost = 'https://orgs.sceiba.cu/';
   sceibaApi = 'https://sceiba.cu/api/';
@@ -12,7 +12,7 @@ class EnvironmentImpl implements Environment {
   oauthRedirectUri = 'https://revistasmes.sceiba.cu/';
   oauthClientId = 'tp64znMu6DHzqWOxc6Go1UDl6GDmEc7X0I4VK8iQ';
   oauthScope = 'user:email';
-  topOrganizationPID = '';
+  topOrganizationPID = 'orgaid.223';
   cachableUrls = [];
 }
 

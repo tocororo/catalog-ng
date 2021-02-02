@@ -41,7 +41,7 @@ export class HomeRevistasmesComponent implements OnInit {
     }
 
     ngOnInit() {
-
+      console.log(this.environment.topOrganizationPID)
         if (this.environment.topOrganizationPID) {
           this.topOrganizationPID = this.environment.topOrganizationPID;
           if (localStorage.getItem('topMainOrganization') && localStorage.getItem('topMainOrganization') != '' ) {

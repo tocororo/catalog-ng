@@ -162,7 +162,7 @@
                   "with": "projects/revistasmes/src/environments/environment.prod.ts"
                 }
               ],
-              "deployUrl": "https://revistasmes.sceiba.cu",
+              "deployUrl": "https://revistasmes.sceiba.cu/",
               "preserveSymlinks": true,
               "baseHref": "https://revistasmes.sceiba.cu",
               "optimization": true,
