@@ -153,7 +153,6 @@ export class SourceEditJournalComponent implements OnInit {
           value: this.journalData
             ? this.journalData.getIdentifierValue(IdentifierSchemas.issn_l)
             : '',
-          // value: this.journalVersion ? IssnValue.createIssnValueFromString(this.journalVersion.issn.l) : null
         },
         {
           formControl: InputTextComponent.getFormControlByDefault(),
@@ -167,7 +166,6 @@ export class SourceEditJournalComponent implements OnInit {
           value: this.journalData
             ? this.journalData.getIdentifierValue(IdentifierSchemas.issn_p)
             : '',
-          // value: this.journalVersion ? IssnValue.createIssnValueFromString(this.journalVersion.issn.p) : null
         },
         {
           formControl: InputTextComponent.getFormControlByDefault(),
@@ -181,7 +179,6 @@ export class SourceEditJournalComponent implements OnInit {
           value: this.journalData
             ? this.journalData.getIdentifierValue(IdentifierSchemas.issn_e)
             : '',
-          // value: this.journalVersion ? IssnValue.createIssnValueFromString(this.journalVersion.issn.e) : null
         },
         {
           formControl: InputRnpsComponent.getFormControlByDefault(),
@@ -190,7 +187,7 @@ export class SourceEditJournalComponent implements OnInit {
           type: FormFieldType.rnps,
           controlType: InputRnpsComponent,
           required: false,
-          startHint: new HintValue(HintPosition.start, 'XXXX.'),
+          startHint: new HintValue(HintPosition.start, 'XXXX'),
           width: '45%',
           value: this.journalData
             ? this.journalData.getIdentifierValue(IdentifierSchemas.prnps)
@@ -203,7 +200,7 @@ export class SourceEditJournalComponent implements OnInit {
           type: FormFieldType.rnps,
           controlType: InputRnpsComponent,
           required: false,
-          startHint: new HintValue(HintPosition.start, 'XXXX.'),
+          startHint: new HintValue(HintPosition.start, 'XXXX'),
           width: '45%',
           value: this.journalData
             ? this.journalData.getIdentifierValue(IdentifierSchemas.ernps)
