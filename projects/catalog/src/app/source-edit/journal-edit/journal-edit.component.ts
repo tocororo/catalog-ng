@@ -98,7 +98,7 @@ export class SourceEditJournalComponent implements OnInit {
     this.pageTitle = this.journalData.isNew
       ? 'Nueva Revista'
       : 'Editando : ' + this.journalData.title;
-    this.metadata.setTitleDescription(this.pageTitle, '');
+    this.metadata.setStandardMeta(this.pageTitle, '');
 
     console.log('journal edit INIT');
     this.resetStepper();
@@ -148,7 +148,7 @@ export class SourceEditJournalComponent implements OnInit {
           type: FormFieldType.text,
           controlType: InputTextComponent,
           required: false,
-          startHint: new HintValue(HintPosition.start, 'XXXX-XXXX'),
+          startHint: new HintValue(HintPosition.start, 'XXXX – XXXX'),
           width: '30%',
           value: this.journalData
             ? this.journalData.getIdentifierValue(IdentifierSchemas.issn_l)
@@ -161,7 +161,7 @@ export class SourceEditJournalComponent implements OnInit {
           type: FormFieldType.text,
           controlType: InputTextComponent,
           required: false,
-          startHint: new HintValue(HintPosition.start, 'XXXX-XXXX'),
+          startHint: new HintValue(HintPosition.start, 'XXXX – XXXX'),
           width: '30%',
           value: this.journalData
             ? this.journalData.getIdentifierValue(IdentifierSchemas.issn_p)
@@ -174,7 +174,7 @@ export class SourceEditJournalComponent implements OnInit {
           type: FormFieldType.text,
           controlType: InputTextComponent,
           required: false,
-          startHint: new HintValue(HintPosition.start, 'XXXX-XXXX'),
+          startHint: new HintValue(HintPosition.start, 'XXXX – XXXX'),
           width: '30%',
           value: this.journalData
             ? this.journalData.getIdentifierValue(IdentifierSchemas.issn_e)
