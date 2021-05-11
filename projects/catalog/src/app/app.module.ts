@@ -39,6 +39,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserSearchComponent } from './user-search/user-search.component';
 import { ViewComponent } from './instititional-repositories/view/view.component';
 import { EditComponent } from './instititional-repositories/edit/edit.component';
+import { AddComponent } from './instititional-repositories/add/add.component';
 
 
 @NgModule({
@@ -82,7 +83,8 @@ import { EditComponent } from './instititional-repositories/edit/edit.component'
     UserSearchComponent,
     DialogCatalogJournalInfoDialog,
     ViewComponent,
-    EditComponent
+    EditComponent,
+    AddComponent
   ],
   entryComponents: [
     MySourcesManagerPermissionDialog,
