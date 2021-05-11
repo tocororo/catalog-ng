@@ -37,6 +37,8 @@ import { SourceViewComponent, SourceViewSaveDialog } from './source-view/source-
 import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserSearchComponent } from './user-search/user-search.component';
+import { ViewComponent } from './instititional-repositories/view/view.component';
+import { EditComponent } from './instititional-repositories/edit/edit.component';
 
 
 @NgModule({
@@ -78,7 +80,9 @@ import { UserSearchComponent } from './user-search/user-search.component';
     StaticPagesComponent,
     UserProfileComponent,
     UserSearchComponent,
-    DialogCatalogJournalInfoDialog
+    DialogCatalogJournalInfoDialog,
+    ViewComponent,
+    EditComponent
   ],
   entryComponents: [
     MySourcesManagerPermissionDialog,
