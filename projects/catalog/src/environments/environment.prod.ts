@@ -9,6 +9,10 @@ class EnvironmentImpl implements Environment {
 
   appHost = 'https://sceiba.cu';
   appName = 'Sceiba';
+
+  websiteUsername_Twitter = '@SceibaCuba';
+  websiteUsername_Facebook = '@sceiba';
+
   oauthRedirectUri = 'https://sceiba.cu/';
   oauthClientId = 'ICC1j7NOH0067SgsMyKUXM9ZipavAXHPrbW1ll3V';
   oauthScope = 'user:email';

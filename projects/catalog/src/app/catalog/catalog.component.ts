@@ -149,7 +149,7 @@ export class CatalogComponent implements OnInit, OnChanges {
     // TODO: si no hay un top level organization entonces hay que usar otro tipo de control para las organizaciones...
   }
   init() {
-    this.metadata.setTitleDescription("Catálogo de Revistas Científicas", "");
+    this.metadata.setStandardMeta("Catálogo de Revistas Científicas", "", "");
     // this.paginator.firstPage();
     // this.paginator.pageSize = 5;
     this.searchParams = new HttpParams();
