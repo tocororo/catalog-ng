@@ -5,9 +5,9 @@
 
 import { Component } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent } from '@angular/router';
-import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
-import { PartialObserver, Subscription } from 'rxjs';
-import { OauthAuthenticationService, OauthInfo, Environment, UserProfile } from 'toco-lib';
+import { AuthConfig, JwksValidationHandler, OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
+import { Subscription } from 'rxjs';
+import { Environment, OauthAuthenticationService, OauthInfo, User, UserProfile } from 'toco-lib';
 
 
 @Component({
@@ -44,6 +44,10 @@ export class AppComponent {
 
     public footerInformation: Array< { name: string, url: string, useRouterLink: boolean } >;
 
+    public user: User;
+public urlSignUp = 'https://personas.sceiba.cu/auth/realms/sceiba/clients-registrations/openid-connect/sceiba-angular-dev';
+
+    public cuorHost: string;
     // public footerImage: string
 
 
@@ -53,6 +57,7 @@ export class AppComponent {
         private oauthService: OAuthService,
         private authenticateService: OauthAuthenticationService,
         private router: Router) {
+          this.configure();
         this.isOnline = true; //navigator.onLine;
         this.router.events.subscribe(
             (event: RouterEvent) => {
@@ -75,6 +80,7 @@ export class AppComponent {
         );
     }
     ngOnInit(): void {
+      this.cuorHost = this.environment.cuorHost;
         let request = JSON.parse(this.oauthStorage.getItem('user'));
         if (request){
           this.userProfile = request.data.userprofile;
@@ -118,10 +124,98 @@ export class AppComponent {
         }
     }
 
-    public logoff() {
+  /*   public logoff() {
         this.oauthService.logOut();
         this.oauthStorage.removeItem("user");
         this.userProfile = undefined;
-    }
+    } */
 
-}
+    private configRoles(){
+      let roles = '';
+      for (const rol in this.user.roles) {
+        const element = this.user.roles[rol];
+        roles += "," + element.name;
+      }
+      this.oauthStorage.setItem("roles", roles)
+    }
+    /**
+     * logout
+     */
+    
+    /**
+     * hasPermission return true if the user have permission
+     */
+    /* public get hasPermission(): boolean {
+      let permission = new Permission();
+    
+      if (permission.hasPermissions("curator") || permission.hasPermissions("admin")){
+        return true;
+      }
+      return false;
+    } */
+    
+      /**
+     * hasPermission return true if the user have permission
+     */
+    /* public get hasPermissionAdmin(): boolean {
+      let permission = new Permission();
+    
+      if (permission.hasPermissions("admin")){
+        return true;
+      }
+      return false;
+    } */
+    
+    public get isHome(){
+      return this.router.url == '/';
+    }
+    
+    private configure() {
+      this.oauthService.configure(authConfig);
+      this.oauthService.tokenValidationHandler = new JwksValidationHandler();
+      this.oauthService.loadDiscoveryDocumentAndTryLogin();
+    }
+    public login() {
+      this.oauthService.initImplicitFlow();
+    }
+    
+    public logoff() {
+        this.oauthService.logOut();
+    }
+    
+    public get name() {
+        let claims = this.oauthService.getIdentityClaims();
+        if (!claims) return null;
+        return claims['given_name'];
+    }
+    }
+    
+    
+    export const authConfig: AuthConfig = {
+    
+    // Url of the Identity Provider
+    issuer: "https://personas.sceiba.cu/auth/realms/sceiba",
+    
+    loginUrl: 'https://personas.sceiba.cu/auth/realms/sceiba/protocol/openid-connect/auth',
+    
+    tokenEndpoint: 'https://personas.sceiba.cu/auth/realms/sceiba/protocol/openid-connect/token',
+    
+    logoutUrl: 'https://personas.sceiba.cu/auth/realms/sceiba/protocol/openid-connect/logout',
+    
+    oidc: true,
+    
+    requireHttps: true,
+    
+    userinfoEndpoint: 'https://personas.sceiba.cu/auth/realms/sceiba/protocol/openid-connect/userinfo',
+    
+    // URL of the SPA to redirect the user to after login
+    redirectUri: 'https://localhost:4200',
+    
+    // The SPA's id. The SPA is registered with this id at the auth-server
+    clientId: 'sceiba-angular-dev',
+    
+    
+    // set the scope for the permissions the client should request
+    // The first three are defined by OIDC. The 4th is a usecase-specific one
+    scope: 'openid profile email',
+    }
