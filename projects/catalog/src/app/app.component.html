@@ -115,9 +115,8 @@
     <a mat-button [routerLink]="['/']" value="Inicio">Inicio</a>
     <!-- <a mat-button [routerLink]="['/about']" value="Acerca de">Acerca de</a> -->
     <a mat-button [routerLink]="['/directory']" value="Catálogo">Directorio</a>
-    <a mat-button [routerLink]="['/']" value="Reportes y estadísticas"
-      >Reportes y estadísticas</a
-    >
+    <a mat-button [routerLink]="['/repo-inst']" value="RepoInst">Repositorios Institucionales</a>
+    <a mat-button [routerLink]="['/']" value="Reportes y estadísticas">Reportes y estadísticas</a>
     <a
       mat-button
       *ngIf="userProfile"
@@ -134,7 +133,7 @@
     >
     </toco-authentication> -->
 
-    <a *ngIf="userProfile" mat-button [routerLink]="['/sources']"> Mis Registros </a>
+    <a *ngIf="userProfile" mat-button [routerLink]="['/sources']">Mis Registros</a>
     <!-- <a *ngIf="userProfile" mat-button [routerLink]="['/sources','permissions']"> Permisos </a> -->
   </mat-toolbar-row>
 </mat-toolbar>

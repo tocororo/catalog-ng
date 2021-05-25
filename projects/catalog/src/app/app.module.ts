@@ -1,3 +1,4 @@
+
 // import { BrowserModule } from '@angular/platform-browser';
 
 import { HttpClient } from '@angular/common/http';
@@ -37,10 +38,9 @@ import { SourceViewComponent, SourceViewSaveDialog } from './source-view/source-
 import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserSearchComponent } from './user-search/user-search.component';
-import { InstititionalRepositoriesViewComponent } from './instititional-repositories/view/instititional-repositories-view.component';
-import { InstititionalRepositoriesEditComponent } from './instititional-repositories/edit/instititional-repositories-edit.component';
-import { AddComponent } from './instititional-repositories/add/add.component';
-
+import { InstRepoViewComponent } from './inst-repo/view/inst-repo-view.component';
+import { InstRepoEditComponent } from './inst-repo/edit/inst-repo-edit.component';
+import { AddComponent } from './inst-repo/add/add.component';
 
 @NgModule({
   declarations: [
@@ -82,8 +82,8 @@ import { AddComponent } from './instititional-repositories/add/add.component';
     UserProfileComponent,
     UserSearchComponent,
     DialogCatalogJournalInfoDialog,
-    InstititionalRepositoriesViewComponent,
-    InstititionalRepositoriesEditComponent,
+    InstRepoViewComponent,
+    InstRepoEditComponent,
     AddComponent
   ],
   entryComponents: [
