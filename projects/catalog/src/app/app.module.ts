@@ -1,14 +1,20 @@
 
 // import { BrowserModule } from '@angular/platform-browser';
 
-import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { HttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { MarkdownModule } from 'ngx-markdown';
-import { AngularMaterialModule, AuthenticationModule, CoreModule, Environment, HTTP_INTERCEPTOR_PROVIDERS, NotificationModule, OrganizationServiceNoAuth, OrganizationsModule, SharedModule, SourceService, SourceServiceNoAuth, TaxonomyService, TocoFormsModule, UserProfileService } from 'toco-lib';
+
+import { AngularMaterialModule, AuthenticationModule, CoreModule, Environment, 
+  HTTP_INTERCEPTOR_PROVIDERS, NotificationModule, OrganizationServiceNoAuth, 
+  OrganizationsModule, SearchService, SharedModule, SourceService, SourceServiceNoAuth, 
+  TaxonomyService, TocoFormsModule, UserProfileService } from 'toco-lib';
+
 import { environment } from '../environments/environment';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CatalogComponent, DialogCatalogJournalInfoDialog } from './catalog/catalog.component';
@@ -82,9 +88,9 @@ import { AddComponent } from './inst-repo/add/add.component';
     UserProfileComponent,
     UserSearchComponent,
     DialogCatalogJournalInfoDialog,
+    AddComponent,
     InstRepoViewComponent,
-    InstRepoEditComponent,
-    AddComponent
+    InstRepoEditComponent
   ],
   entryComponents: [
     MySourcesManagerPermissionDialog,
@@ -116,6 +122,7 @@ import { AddComponent } from './inst-repo/add/add.component';
     })
   ],
   providers: [
+    SearchService,
     SourceService,
     SourceServiceNoAuth,
     UserProfileService,

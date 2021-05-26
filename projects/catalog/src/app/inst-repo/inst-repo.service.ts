@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Environment } from 'toco-lib';
 
 import { InstitutionalRepository } from './classes-for-toco-ng';
@@ -25,7 +25,8 @@ export class InstRepoService {
 
 	public editInstRepo(instRepo: InstitutionalRepository): Observable<any>
 	{
-		console.log('editInstRepo: There is not backend yet!', instRepo); return null;
+		console.log('editInstRepo: There is not backend yet!', instRepo);
+		return of(instRepo);
 
 		// TODO: Poner correctamente el campo `this._env.sceibaApi` o crear un `this._env.catalogApi`. 
 //		const url: string = this._env.sceibaApi + this._prefix + '/' + instRepo.id;

@@ -1,10 +1,10 @@
 
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 
-import { Hit, MessageHandler, StatusCode, HandlerComponent, IdentifierSchemas } from 'toco-lib';
+import { Hit, MessageHandler, DialogDeleteConfirmComponent, StatusCode, HandlerComponent, IdentifierSchemas } from 'toco-lib';
 
 import { InstitutionalRepository } from '../classes-for-toco-ng';
 import { InstRepoService } from '../inst-repo.service';
@@ -129,9 +129,15 @@ export class InstRepoEditComponent implements OnInit
 
 	public deleteIdentifier(pos: number): void
 	{
-		const dialogRef = this._dialog.open(InstRepoDialogDeleteConfirm, {
+		const dialogRef = this._dialog.open(DialogDeleteConfirmComponent, {
 			width: '40%',
-			data: { label: this.identifiersMainInstitution_FA.value[pos].idtype + ': ' + this.identifiersMainInstitution_FA.value[pos].value }
+			data: { 
+				'delTypeArt': 'el',
+				'delType': 'identificador',
+				'delValue':  ((this.identifiersMainInstitution_FA.value[pos].idtype) ? this.identifiersMainInstitution_FA.value[pos].idtype : 'vacio') 
+					+ ': ' 
+					+ ((this.identifiersMainInstitution_FA.value[pos].value) ? this.identifiersMainInstitution_FA.value[pos].value : 'vacio')
+			}
 		});
 
 		dialogRef.afterClosed().subscribe((isDeleted: boolean) => {
@@ -151,7 +157,7 @@ export class InstRepoEditComponent implements OnInit
 				console.log('update result: ', result);
 
 				const m = new MessageHandler(null, this._dialog);
-				m.showMessage(StatusCode.OK, 'El Repositorio Institucional fue modificado correctamente', HandlerComponent.dialog, 'Operación exitosa', '50%');
+				m.showMessage(StatusCode.OK, '¡El Repositorio Institucional fue modificado correctamente!', HandlerComponent.dialog, 'Operación exitosa', '50%');
 			},
 			error: (err: any) => {
 				console.log(err);
@@ -162,104 +168,3 @@ export class InstRepoEditComponent implements OnInit
 		});
 	}
 }
-
-@Component({
-	selector: 'inst-repo-delete-confirm-dialog',
-	template: `
-	<h1 mat-dialog-title> Está usted seguro que desea eliminar a</h1>
-	<div mat-dialog-content>
-		{{ data.label }}
-	</div>
-	<div mat-dialog-actions align="end">
-		<button mat-button (click)="onNoClick()">Cancelar</button>
-		<button mat-button [mat-dialog-close]="true" cdkFocusInitial color="warning">Eliminar</button>
-	</div>
-	`,
-	styleUrls: ['./inst-repo-edit.component.scss']
-})
-export class InstRepoDialogDeleteConfirm
-{
-	public constructor(
-		public dialogRef: MatDialogRef<InstRepoDialogDeleteConfirm>,
-		@Inject(MAT_DIALOG_DATA) public data)
-	{ }
-
-	public onNoClick(): void
-	{
-		this.dialogRef.close();
-	}
-}
-
-
-// export class OrgEditComponent implements OnInit 
-// {
-// 	public org: Organization = new Organization();
-
-// 	public orgFormGroup: FormGroup = this._formBuilder.group({ id: '' }, []);
-
-// 	constructor(
-// 		private _activatedRoute: ActivatedRoute,
-// 		private _formBuilder: FormBuilder,
-// 		private _orgService: OrgService,
-// 		private _dialog: MatDialog,
-// 		private _snackBar: MatSnackBar) { }
-
-
-// 	/******************************************************************
-// 	 * ACRONYMS FUNCTIONS
-// 	 ******************************************************************/
-// 	addAcronyms() {
-// 		this.org.acronyms.push("");
-// 		(this.orgFormGroup.get('acronyms') as FormArray).push(this._formBuilder.control(''));
-// 	}
-
-// 	deleteAcronyms(pos: number) {
-// 		const dialogRef = this._dialog.open(OrganizationDialogDeleteConfirm, {
-// 			width: '40%',
-// 			data: { label: (this.orgFormGroup.get('acronyms') as FormArray).value[pos] }
-// 		});
-
-// 		dialogRef.afterClosed().subscribe((isDeleted: boolean) => {
-// 			if (isDeleted) {
-// 				this.org.acronyms.splice(pos, 1);
-// 				(this.orgFormGroup.get('acronyms') as FormArray).removeAt(pos);
-// 			}
-// 		});
-// 	}
-
-// 	addItemsFormArray(items: any[]) {
-// 		let formArrayGroup = this._formBuilder.array([]);
-// 		if (isUndefined(items)) {
-// 			formArrayGroup.push(this._formBuilder.control(''));
-// 		}
-// 		else {
-// 			for (const key in items) {
-// 				formArrayGroup.push(this._formBuilder.control(items[key]));
-// 			}
-// 		}
-// 		return formArrayGroup
-// 	}
-
-// 	/******************************************************************
-// 	 * ALIASES FUNCTIONS
-// 	 ******************************************************************/
-// 	addAliases() {
-// 		this.org.aliases.push("");
-// 		(this.orgFormGroup.get('aliases') as FormArray).push(this._formBuilder.control(''));
-// 	}
-
-// 	deleteAliases(pos: number) {
-
-// 		const dialogRef = this._dialog.open(OrganizationDialogDeleteConfirm, {
-// 			width: '40%',
-// 			data: { label: (this.orgFormGroup.get('aliases') as FormArray).value[pos] }
-// 		});
-
-// 		dialogRef.afterClosed().subscribe((isDeleted: boolean) => {
-// 			if (isDeleted) {
-// 				this.org.aliases.splice(pos, 1);
-// 				(this.orgFormGroup.get('aliases') as FormArray).removeAt(pos);
-// 			}
-// 		});
-// 	}
-// }

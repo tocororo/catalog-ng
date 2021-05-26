@@ -58,8 +58,8 @@
                                     <input matInput [formControlName]="'value'" [placeholder]="'Valor'" />
                                 </mat-form-field>
 
-                                <button mat-icon-button matSuffix class="mat-18" (click)="deleteIdentifier(pos)"
-                                    [matTooltip]="'Eliminar'" [matTooltipClass]="'tooltip-red'"
+                                <button mat-icon-button matSuffix class="mat-18" color="primary" [disabled]="identifiersMainInstitution_FA.controls.length < 2"
+                                    (click)="deleteIdentifier(pos)" [matTooltip]="'Eliminar'" [matTooltipClass]="'tooltip-red'"
                                 >
                                     <mat-icon>delete</mat-icon>
                                 </button>
@@ -94,8 +94,8 @@
 
     </mat-card-content>
 
-    <mat-card-actions align="start">
-        <button mat-button [disabled]="instRepoFormGroup.invalid" (click)="update()">Editar</button>
+    <mat-card-actions align="end">
+        <button mat-stroked-button color="primary" [disabled]="instRepoFormGroup.invalid" (click)="update()">Editar</button>
     </mat-card-actions>
 
 </mat-card>
