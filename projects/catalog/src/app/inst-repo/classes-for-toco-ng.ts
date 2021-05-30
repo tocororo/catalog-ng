@@ -28,7 +28,7 @@ export class InstitutionalRepository extends Entity
     /**
      * Main Institution. 
      */
-	mainInstitution: MainInstitution;
+	mainInst: MainInstitution;
     /**
      * URL page for the institute. 
      */

@@ -17,13 +17,14 @@
             <!-- Start Name -->
             <mat-form-field class="w-100" [appearance]="'outline'">
                 <mat-label>Nombre</mat-label>
-                <input matInput [formControlName]="'name'" [required]="'true'" [placeholder]="'Escriba el nombre del Repositorio Institucional'" />
+                <input matInput [formControlName]="instRepo_ChildControlsPath.name" [required]="'true'" [placeholder]="'Escriba el nombre del Repositorio Institucional'" />
+                <mat-error *ngIf="getErrorState(instRepo_ChildControlsPath.name)">{{ getErrorMessage(instRepo_ChildControlsPath.name) }}</mat-error>
             </mat-form-field>
             <!-- End Name -->
 
             <!-- Start MainInstitution -->
             <mat-card class="mb-2">
-                <mat-card-content [formGroupName]="'mainInstitution'">
+                <mat-card-content [formGroupName]="instRepo_ChildControlsPath.mainInst">
                     <p>
                         <mat-label>Institución Principal</mat-label>
                     </p>
@@ -31,13 +32,14 @@
                     <!-- Start Name -->
                     <mat-form-field class="w-100" [appearance]="'outline'">
                         <mat-label>Nombre</mat-label>
-                        <input matInput [formControlName]="'name'" [required]="'true'" [placeholder]="'Escriba el nombre de la Institución Principal'" />
+                        <input matInput [formControlName]="instRepo_ChildControlsPath.mainInst_o_name" [required]="'true'" [placeholder]="'Escriba el nombre de la Institución Principal'" />
+                        <mat-error *ngIf="getErrorState(instRepo_ChildControlsPath.mainInst_name)">{{ getErrorMessage(instRepo_ChildControlsPath.mainInst_name) }}</mat-error>
                     </mat-form-field>
                     <!-- End Name -->
 
                     <!-- Start Identifiers -->
                     <mat-card class="mb-2">
-                        <mat-card-content [formArrayName]="'identifiers'">
+                        <mat-card-content [formArrayName]="instRepo_ChildControlsPath.mainInst_o_ids">
                             <p>
                                 <mat-label>Identidicadores</mat-label>
                             </p>

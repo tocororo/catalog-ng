@@ -12,7 +12,7 @@ const instRepoExample: any =
 {
     'metadata': {
         'name': 'Institutional Repository Name',
-        'mainInstitution': {
+        'mainInst': {
             'name': 'Main Institution - Institutional Repository',
             'identifiers': [
                 {

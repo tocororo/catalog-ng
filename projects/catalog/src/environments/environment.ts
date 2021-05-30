@@ -22,6 +22,9 @@ class EnvironmentImpl implements Environment {
   oauthScope = 'user:email';
   topOrganizationPID = 'orgaid.223';
   cachableUrls = [];
+
+  matomoUrl = 'https://crai-stats.upr.edu.cu/';
+  matomoSiteId = 7;
 }
 
 export const environment = new EnvironmentImpl();

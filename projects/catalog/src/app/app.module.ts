@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { AngularMaterialModule, AuthenticationModule, CoreModule, Environment, 
@@ -47,6 +49,11 @@ import { UserSearchComponent } from './user-search/user-search.component';
 import { InstRepoViewComponent } from './inst-repo/view/inst-repo-view.component';
 import { InstRepoEditComponent } from './inst-repo/edit/inst-repo-edit.component';
 import { AddComponent } from './inst-repo/add/add.component';
+
+export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
+{
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -105,6 +112,14 @@ import { AddComponent } from './inst-repo/add/add.component';
   ],
   imports: [
     BrowserAnimationsModule,
+    SharedModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+      }
+    }),
     ReactiveFormsModule,
     // BrowserModule,
     AppRoutingModule,
@@ -112,7 +127,6 @@ import { AddComponent } from './inst-repo/add/add.component';
     TocoFormsModule,
     OrganizationsModule,
     CoreModule,
-    SharedModule,
     AuthenticationModule,
     AngularMaterialModule,
     // TaxonomyModule,

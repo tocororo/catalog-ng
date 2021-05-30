@@ -1,10 +1,11 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormArray, Validators, ValidationErrors, FormBuilder } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
 
-import { Hit, MessageHandler, DialogDeleteConfirmComponent, StatusCode, HandlerComponent, IdentifierSchemas } from 'toco-lib';
+import { Hit, MessageHandler, DialogDeleteConfirmComponent, StatusCode, 
+	HandlerComponent, IdentifierSchemas, ChildControlsPath } from 'toco-lib';
 
 import { InstitutionalRepository } from '../classes-for-toco-ng';
 import { InstRepoService } from '../inst-repo.service';
@@ -16,11 +17,47 @@ import { InstRepoService } from '../inst-repo.service';
 })
 export class InstRepoEditComponent implements OnInit
 {
+	/**
+	 * An object of paths that is used to get the child controls in the `instRepoFormGroup` control. 
+	 * The value of its properties is a dot-delimited string value that defines the path to a child control. 
+	 */
+	public readonly instRepo_ChildControlsPath: ChildControlsPath = {
+		'name': 'name',
+		'mainInst': 'mainInst',
+		'mainInst_o_name': 'name',  /* _o = only */
+		'mainInst_o_ids': 'identifiers',  /* _o = only */
+		'mainInst_name': 'mainInst.name',
+		'mainInst_ids': 'mainInst.identifiers',
+		// '': '',
+		// '': '',
+		// '': ''
+	};
+
 	public selectOptionsIdType: { idtype: string, value: string }[];
 
 	public instRepoFormGroup: FormGroup;
 	public identifiersMainInstitution_FA: FormArray;
-	private _instRepo: InstitutionalRepository;
+	private _instRepo: InstitutionalRepository;  /* It is like a readonly field, and it is only used to initialize the form. */
+
+	/**
+	 * Represents the current control that is analyzed for displaying an error. 
+	 * It is only used internally. 
+	 */
+	private _controlToDisplayError: AbstractControl;
+	/**
+	 * Represents the current control text that is analyzed for identifying and displaying in an error. 
+	 * It is only used internally. 
+	 */
+	private _controlTextToDisplayInError: string;
+	/**
+	 * Represents the map of errors returned from failed validation checks. 
+	 * It is only used internally. 
+	 */
+	private _validationErrors: ValidationErrors;
+    /**
+     * Represents the validation error of required. 
+     */
+    private _validationError_required: string;
 
 	public constructor(private _activatedRoute: ActivatedRoute,
 		private _formBuilder: FormBuilder,
@@ -33,6 +70,11 @@ export class InstRepoEditComponent implements OnInit
 		this.instRepoFormGroup = undefined;
 		this.identifiersMainInstitution_FA = undefined;
 		this._instRepo = undefined;
+
+		this._controlToDisplayError = undefined;
+		this._controlTextToDisplayInError = '';
+		this._validationErrors = undefined;
+		this._validationError_required = `Escriba un valor válido para: `;
 	}
 
 	public ngOnInit(): void
@@ -65,13 +107,13 @@ export class InstRepoEditComponent implements OnInit
 				Validators.pattern('^[a-zA-Z\_][a-zA-Z\-\_\ \0-9]*$')
 			),
 
-			'mainInstitution': this._formBuilder.group({
-				'name': new FormControl(this._instRepo.mainInstitution.name, [
+			'mainInst': this._formBuilder.group({
+				'name': new FormControl(this._instRepo.mainInst.name, [
 					Validators.pattern('^[a-zA-Z\_][a-zA-Z\-\_\0-9]*$')
 					//Validators.pattern(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/i)
 				]),
 
-				'identifiers': (this.identifiersMainInstitution_FA = this._addItemsFormArrayIdentifiers(this._instRepo.mainInstitution.identifiers))
+				'identifiers': (this.identifiersMainInstitution_FA = this._addItemsFormArrayIdentifiers(this._instRepo.mainInst.identifiers))
 			}),
 
 			'url': new FormControl(this._instRepo.url, [
@@ -166,5 +208,63 @@ export class InstRepoEditComponent implements OnInit
 				m.showMessage(StatusCode.OK, err.message)
 			}
 		});
+	}
+
+    /**
+     * Returns true if the control is in an error state; otherwise, false. 
+     */
+    public getErrorState(controlName: string): boolean
+    {
+		this._controlToDisplayError = this.instRepoFormGroup.get(controlName);
+
+        /* The control does not display errors before the user has a 
+         * chance to edit the form. The checks for dirty and touched prevent errors 
+         * from showing until the user does one of two things: changes the value, 
+         * turning the control dirty; or blurs the form control element, setting the 
+         * control to touched. 
+         * Thus, it reveals an error message only if the control is invalid and 
+         * the control is either dirty or touched. */
+		return ((this._controlToDisplayError.invalid) && (this._controlToDisplayError.dirty || this._controlToDisplayError.touched));
+	}
+
+    /**
+     * Returns an error string if the control is in an error state; otherwise, empty string. 
+     */
+    public getErrorMessage(controlName: string): string
+	{
+		this._validationErrors = (this._controlToDisplayError = this.instRepoFormGroup.get(controlName)).errors;
+
+		/* Gets the correct control's text. */
+		switch(controlName)
+		{
+			case this.instRepo_ChildControlsPath.name:
+			{
+				this._controlTextToDisplayInError = 'Nombre';
+				break;
+			}
+
+			case this.instRepo_ChildControlsPath.mainInst_name:
+			{
+				this._controlTextToDisplayInError = 'Nombre de Institución Principal';
+				break;
+			}
+
+			default:
+			{
+				this._controlTextToDisplayInError = '';
+				break;
+			}
+		}
+
+        /* Shows the text errors. */
+        if (this._validationErrors)
+        {
+            if (this._validationErrors[Validators.required.name])
+            {
+                return (this._validationError_required + this._controlTextToDisplayInError);
+            }
+        }
+
+        return '';
 	}
 }
