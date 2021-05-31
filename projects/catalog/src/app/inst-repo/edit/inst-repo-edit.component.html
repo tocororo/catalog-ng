@@ -50,7 +50,7 @@
                             >
                                 <mat-form-field class="w-45">
                                     <mat-label>Id</mat-label>
-                                    <mat-select class="w-100" [formControlName]="instRepo_ChildControlsPath.mainInst_ids_o_idtype" [placeholder]="'Seleccione el tipo de id'">
+                                    <mat-select class="w-100" [formControlName]="instRepo_ChildControlsPath.mainInst_ids_o_idtype" [required]="'true'" [placeholder]="'Seleccione el tipo de id'">
                                         <mat-option *ngFor="let item of selectOptionsIdType" [value]="item.idtype">
                                             {{ item.value }}
                                         </mat-option>
@@ -60,7 +60,7 @@
 
                                 <mat-form-field class="w-45">
                                     <mat-label>Valor</mat-label>
-                                    <input matInput [formControlName]="instRepo_ChildControlsPath.mainInst_ids_o_value" [placeholder]="'Escriba un valor para el id'" />
+                                    <input matInput [formControlName]="instRepo_ChildControlsPath.mainInst_ids_o_value" [required]="'true'" [placeholder]="'Escriba un valor para el id'" />
                                     <mat-error *ngIf="getErrorState([ instRepo_ChildControlsPath.mainInst, instRepo_ChildControlsPath.mainInst_o_ids, pos, instRepo_ChildControlsPath.mainInst_ids_o_value ])">{{ getErrorMessage([ instRepo_ChildControlsPath.mainInst, instRepo_ChildControlsPath.mainInst_o_ids, pos, instRepo_ChildControlsPath.mainInst_ids_o_value ]) }}</mat-error>
                                 </mat-form-field>
 

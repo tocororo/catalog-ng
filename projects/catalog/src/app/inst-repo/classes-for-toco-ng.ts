@@ -38,3 +38,25 @@ export class InstitutionalRepository extends Entity
      */
     url_oai: string;
 }
+
+/**
+ * Represents an object of `MainInstitution` type with all its values set to empty. 
+ * The `identifiers` array field must have one empty value at least. 
+ */
+ export const mainInstEmpty: any = {
+    'name': '',
+    'identifiers': [{
+        'idtype': '',
+        'value': ''
+    }]
+ };
+
+/**
+ * Represents an object of `InstitutionalRepository` type with all its values set to empty. 
+ */
+ export const instRepoEmpty: any = {
+    'name': '',
+    'mainInst': mainInstEmpty,
+    'url': '',
+    'url_oai': ''
+ };

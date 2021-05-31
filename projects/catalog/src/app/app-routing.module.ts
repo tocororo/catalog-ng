@@ -46,6 +46,21 @@ const routes: Routes = [
 				path: ":uuid/view",
 				component: InstRepoViewComponent,
 				resolve: {
+					/**
+					 * This resolver is used on all views. In the case of viewing view, 
+					 * it needs to resolve an object from the backend. 
+					 */
+					'instRepo': InstRepoResolverService
+				}
+			},
+			{
+				path: "add",
+				component: InstRepoEditComponent,
+				resolve: {
+					/**
+					 * This resolver is used on all views. In the case of adding view, it needs to resolve 
+					 * an object with all its values set to empty. 
+					 */
 					'instRepo': InstRepoResolverService
 				}
 			},
@@ -53,6 +68,10 @@ const routes: Routes = [
 				path: ":uuid/edit",
 				component: InstRepoEditComponent,
 				resolve: {
+					/**
+					 * This resolver is used on all views. In the case of editing view, 
+					 * it needs to resolve an object from the backend. 
+					 */
 					'instRepo': InstRepoResolverService
 				}
 			}

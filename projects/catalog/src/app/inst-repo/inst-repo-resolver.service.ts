@@ -6,10 +6,19 @@ import { take, map } from 'rxjs/operators';
 
 import { IdentifierSchemas, SearchResponse, SearchService } from 'toco-lib';
 
-import { InstitutionalRepository } from './classes-for-toco-ng';
+import { InstitutionalRepository, instRepoEmpty } from './classes-for-toco-ng';
 
-const instRepoExample: any = 
-{
+/**
+ * Represents an object with all its values set to empty. 
+ */
+const instRepoEmpty_Resolved: any = {
+    'metadata': instRepoEmpty
+};
+
+/**
+ * Represents an object used as mock data. 
+ */
+const instRepoExample: any = {
     'metadata': {
         'name': 'Institutional Repository Name',
         'mainInst': {
@@ -34,6 +43,11 @@ const instRepoExample: any =
     }
 };
 
+/**
+ * This resolver is used on all views. In the case of adding view, it needs to resolve 
+ * an object with all its values set to empty. In the case of remaining views (viewing and editing views), 
+ * it needs to resolve an object from the backend. 
+ */
 @Injectable({
 	providedIn: 'root',
 })
@@ -44,8 +58,17 @@ export class InstRepoResolverService implements Resolve<SearchResponse<Instituti
 
 	public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<SearchResponse<InstitutionalRepository>>
 	{
+        /* With this verification, it knows the type of data it needs to resolve. */
+        if (route.url[(route.url.length - 1)].path == 'add')  /* The string 'add' is the value of the last route sub-path that is specified in the `app-routing.module.ts` file. */
+        {
+            /* In the case of adding view, it needs to resolve an object with all its values set to empty. */
+            return of(instRepoEmpty_Resolved);
+        }
+
+//// Backend data ////
         // let uuid = route.paramMap.get('uuid');
 
+        // /* In the case of remaining views (viewing and editing views), it needs to resolve an object from the backend. */
 		// return this.service.getInstRepoById(uuid).pipe(
         //     take(1),
         //     map(node => {
@@ -59,7 +82,12 @@ export class InstRepoResolverService implements Resolve<SearchResponse<Instituti
         //         }
         //     })
         // );
+//////////////////////
 
+
+//// Mock data ////
+        /* In the case of remaining views (viewing and editing views), it needs to resolve an object from the backend. */
 		return of(instRepoExample);
+///////////////////
 	}
 }
