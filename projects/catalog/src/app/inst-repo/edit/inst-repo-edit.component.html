@@ -5,7 +5,7 @@
     fxLayoutAlign="space-between center"
     style="height: 80px;"
 >
-    <span>{{ ((isAddingView) ? 'Adiciona' : 'Edita') }} el Repositorio Institucional</span>
+    <span>{{ ((isAddingView) ? 'Adiciona un nuevo' : 'Edita el') }} Repositorio Institucional</span>
 </mat-toolbar>
 
 <mat-card>
@@ -65,7 +65,7 @@
                                 </mat-form-field>
 
                                 <button mat-icon-button matSuffix class="mat-18" color="primary" [disabled]="identifiersMainInstitution_FA.controls.length == 1"
-                                    (click)="deleteIdentifier(pos)" [matTooltip]="'Eliminar'" [matTooltipClass]="'tooltip-red'"
+                                    (click)="deleteIdentifier(pos)" [matTooltip]="'Elimina el id'" [matTooltipClass]="'tooltip-red'"
                                 >
                                     <mat-icon>delete</mat-icon>
                                 </button>
@@ -73,7 +73,12 @@
                         </mat-card-content>
 
                         <mat-card-actions align="end">
-                            <button mat-stroked-button color="primary" (click)="addIdentifier()">Adicionar</button>
+                            <button mat-stroked-button color="primary" (click)="addIdentifier()"
+                                [matTooltip]="'Adiciona un nuevo id'"
+                                [matTooltipClass]="'tooltip-red'"
+                            >
+                                Adicionar
+                            </button>
                         </mat-card-actions>
                     </mat-card>
                     <!-- End Identifiers -->
@@ -103,7 +108,12 @@
     </mat-card-content>
 
     <mat-card-actions align="end">
-        <button mat-stroked-button color="primary" [disabled]="instRepoFormGroup.invalid" (click)="update()">{{ ((isAddingView) ? 'Adicionar' : 'Editar') }}</button>
+        <button mat-stroked-button color="primary" [disabled]="instRepoFormGroup.invalid" (click)="update()"
+            [matTooltip]="((isAddingView) ? 'Adiciona un nuevo' : 'Edita el') + ' ' + 'Repositorio Institucional'"
+            [matTooltipClass]="'tooltip-red'"
+        >
+            {{ ((isAddingView) ? 'Adicionar' : 'Editar') }}
+        </button>
     </mat-card-actions>
 
 </mat-card>
