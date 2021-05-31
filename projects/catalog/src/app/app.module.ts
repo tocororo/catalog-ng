@@ -48,7 +48,6 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserSearchComponent } from './user-search/user-search.component';
 import { InstRepoViewComponent } from './inst-repo/view/inst-repo-view.component';
 import { InstRepoEditComponent } from './inst-repo/edit/inst-repo-edit.component';
-import { AddComponent } from './inst-repo/add/add.component';
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 {
@@ -95,7 +94,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     UserProfileComponent,
     UserSearchComponent,
     DialogCatalogJournalInfoDialog,
-    AddComponent,
     InstRepoViewComponent,
     InstRepoEditComponent
   ],
