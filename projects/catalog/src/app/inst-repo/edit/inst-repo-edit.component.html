@@ -5,7 +5,7 @@
     fxLayoutAlign="space-between center"
     style="height: 80px;"
 >
-    <span>Edita el Repositorio Institucional</span>
+    <span>{{ ((isAddingView) ? 'Adiciona' : 'Edita') }} el Repositorio Institucional</span>
 </mat-toolbar>
 
 <mat-card>
@@ -103,7 +103,7 @@
     </mat-card-content>
 
     <mat-card-actions align="end">
-        <button mat-stroked-button color="primary" [disabled]="instRepoFormGroup.invalid" (click)="update()">Editar</button>
+        <button mat-stroked-button color="primary" [disabled]="instRepoFormGroup.invalid" (click)="update()">{{ ((isAddingView) ? 'Adicionar' : 'Editar') }}</button>
     </mat-card-actions>
 
 </mat-card>

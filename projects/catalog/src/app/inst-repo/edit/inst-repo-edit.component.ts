@@ -34,7 +34,12 @@ export class InstRepoEditComponent implements OnInit
 		'url_oai': 'url_oai'
 	};
 
-	public selectOptionsIdType: { idtype: string, value: string }[];
+	/**
+	 * Returns true if this component is used as an adding view; otherwise, false. 
+	 */
+	public isAddingView: boolean;
+
+	public selectOptionsIdType: { idtype: string, value: string }[ ];
 
 	public instRepoFormGroup: FormGroup;
 	public identifiersMainInstitution_FA: FormArray;
@@ -79,6 +84,9 @@ export class InstRepoEditComponent implements OnInit
 
 	public ngOnInit(): void
 	{
+		/* True if this component is used as an adding view; otherwise, false. */
+        this.isAddingView = (this._activatedRoute.snapshot.url[(this._activatedRoute.snapshot.url.length - 1)].path == 'add')  /* The string 'add' is the value of the last route sub-path that is specified in the `app-routing.module.ts` file. */
+
 		for (const key in IdentifierSchemas)
 		{
 			this.selectOptionsIdType.push({ 'idtype': IdentifierSchemas[key], 'value': IdentifierSchemas[key] });
