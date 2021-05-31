@@ -19,7 +19,8 @@ export class InstRepoEditComponent implements OnInit
 {
 	/**
 	 * An object of paths that is used to get the child controls in the `instRepoFormGroup` control. 
-	 * The value of its properties is a dot-delimited string value that defines the path to a child control. 
+	 * The value of its properties is a dot-delimited string value or an array of string/number values 
+	 * that define the path to a child control. 
 	 */
 	public readonly instRepo_ChildControlsPath: ChildControlsPath = {
 		'name': 'name',
@@ -27,10 +28,10 @@ export class InstRepoEditComponent implements OnInit
 		'mainInst_o_name': 'name',  /* _o = only */
 		'mainInst_o_ids': 'identifiers',  /* _o = only */
 		'mainInst_name': 'mainInst.name',
-		'mainInst_ids': 'mainInst.identifiers',
-		// '': '',
-		// '': '',
-		// '': ''
+		'mainInst_ids_o_idtype': 'idtype',  /* _o = only */
+		'mainInst_ids_o_value': 'value',  /* _o = only */
+		'url': 'url',
+		'url_oai': 'url_oai'
 	};
 
 	public selectOptionsIdType: { idtype: string, value: string }[];
@@ -45,11 +46,6 @@ export class InstRepoEditComponent implements OnInit
 	 */
 	private _controlToDisplayError: AbstractControl;
 	/**
-	 * Represents the current control text that is analyzed for identifying and displaying in an error. 
-	 * It is only used internally. 
-	 */
-	private _controlTextToDisplayInError: string;
-	/**
 	 * Represents the map of errors returned from failed validation checks. 
 	 * It is only used internally. 
 	 */
@@ -58,6 +54,10 @@ export class InstRepoEditComponent implements OnInit
      * Represents the validation error of required. 
      */
     private _validationError_required: string;
+    /**
+     * Represents the validation error of invalid character. 
+     */
+	private _validationError_invalidCharacter: string;
 
 	public constructor(private _activatedRoute: ActivatedRoute,
 		private _formBuilder: FormBuilder,
@@ -72,9 +72,9 @@ export class InstRepoEditComponent implements OnInit
 		this._instRepo = undefined;
 
 		this._controlToDisplayError = undefined;
-		this._controlTextToDisplayInError = '';
 		this._validationErrors = undefined;
-		this._validationError_required = `Escriba un valor válido para: `;
+		this._validationError_required = `Escriba un valor válido.`;
+		this._validationError_invalidCharacter = `Cambie o borre los caracteres inválidos.`;
 	}
 
 	public ngOnInit(): void
@@ -213,7 +213,7 @@ export class InstRepoEditComponent implements OnInit
     /**
      * Returns true if the control is in an error state; otherwise, false. 
      */
-    public getErrorState(controlName: string): boolean
+    public getErrorState(controlName: Array<string | number> | string): boolean
     {
 		this._controlToDisplayError = this.instRepoFormGroup.get(controlName);
 
@@ -230,38 +230,21 @@ export class InstRepoEditComponent implements OnInit
     /**
      * Returns an error string if the control is in an error state; otherwise, empty string. 
      */
-    public getErrorMessage(controlName: string): string
+    public getErrorMessage(controlName: Array<string | number> | string): string
 	{
 		this._validationErrors = (this._controlToDisplayError = this.instRepoFormGroup.get(controlName)).errors;
 
-		/* Gets the correct control's text. */
-		switch(controlName)
-		{
-			case this.instRepo_ChildControlsPath.name:
-			{
-				this._controlTextToDisplayInError = 'Nombre';
-				break;
-			}
-
-			case this.instRepo_ChildControlsPath.mainInst_name:
-			{
-				this._controlTextToDisplayInError = 'Nombre de Institución Principal';
-				break;
-			}
-
-			default:
-			{
-				this._controlTextToDisplayInError = '';
-				break;
-			}
-		}
-
-        /* Shows the text errors. */
+        /* Shows the text errors. They have a descendant order of importance. */
         if (this._validationErrors)
         {
+			if (this._validationErrors[Validators.pattern.name])
+			{
+				return this._validationError_invalidCharacter;
+			}
+
             if (this._validationErrors[Validators.required.name])
             {
-                return (this._validationError_required + this._controlTextToDisplayInError);
+                return this._validationError_required;
             }
         }
 
