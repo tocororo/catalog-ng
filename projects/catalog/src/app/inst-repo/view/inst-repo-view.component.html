@@ -10,7 +10,8 @@
     <span>Detalles del Repositorio Institucional</span>
     <a mat-icon-button *ngIf="hasPermission" class="mat-18 ml-05" color="primary"
         [routerLink]="['/repo-inst/' + instRepo.id + '/edit']" value="RepoInst"
-        [matTooltip]="'Edita el Repositorio Institucional'" [matTooltipClass]="'tooltip-red'"
+        [matTooltip]="'Muestra la vista de editar el Repositorio Institucional'"
+        [matTooltipClass]="'tooltip-red'"
     >
         <mat-icon>mode_edit</mat-icon>
     </a>
@@ -27,16 +28,16 @@
 
     <mat-card-actions align="end" class="mrb-0">
         <button mat-stroked-button *ngIf="hasPermission" color="primary" (click)="edit()"
-            [matTooltip]="'Edita el Repositorio Institucional'"
+            [matTooltip]="'Muestra la vista de editar el Repositorio Institucional'"
             [matTooltipClass]="'tooltip-red'"
         >
-            Editar
+            Ir a editar
         </button>
         <button mat-stroked-button color="primary" (click)="goBack()"
-            [matTooltip]="'Ir atrás'"
+            [matTooltip]="'Muestra la vista anterior'"
             [matTooltipClass]="'tooltip-red'"
         >
-            OK
+            Ir atrás
         </button>
     </mat-card-actions>
 
