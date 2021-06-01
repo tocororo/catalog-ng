@@ -37,13 +37,13 @@ export class InstRepoEditComponent implements OnInit
 	/**
 	 * Returns true if the component has a task in progress; otherwise, false. 
 	 * Example of task is: loading, updating, etc. 
-	 * Its value is `true` by default because it represents the loading task. 
+	 * By default, its value is `true` because it represents the loading task. 
 	 */
 	public hasTaskInProgress: boolean;
 
 	/**
 	 * Returns true if the component is used as an adding view; otherwise, false. 
-	 * Its value is `false` by default. 
+	 * By default, its value is `false`. 
 	 */
 	public isAddingView: boolean;
 
@@ -234,7 +234,9 @@ export class InstRepoEditComponent implements OnInit
 				this.hasTaskInProgress = false;
 
 				const m = new MessageHandler(null, this._dialog);
-				m.showMessage(StatusCode.OK, '¡El Repositorio Institucional fue modificado correctamente!', HandlerComponent.dialog, 'Operación exitosa', '50%');
+				m.showMessage(StatusCode.OK, 
+					'¡El Repositorio Institucional fue' + ' ' + ((this.isAddingView) ? 'adicionado' : 'editado') + ' ' + 'correctamente!', 
+					HandlerComponent.dialog, 'Operación exitosa', '50%');
 			}
 		});
 	}

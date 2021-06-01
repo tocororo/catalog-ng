@@ -13,7 +13,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { AngularMaterialModule, AuthenticationModule, CoreModule, Environment, 
   HTTP_INTERCEPTOR_PROVIDERS, NotificationModule, OrganizationServiceNoAuth, 
   OrganizationsModule, SearchService, SharedModule, SourceService, SourceServiceNoAuth, 
-  TaxonomyService, TocoFormsModule, UserProfileService } from 'toco-lib';
+  StaticsModule, TaxonomyService, TocoFormsModule, UserProfileService } from 'toco-lib';
 
 import { environment } from '../environments/environment';
 
@@ -125,6 +125,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     TocoFormsModule,
     OrganizationsModule,
     CoreModule,
+    StaticsModule,
     AuthenticationModule,
     AngularMaterialModule,
     // TaxonomyModule,

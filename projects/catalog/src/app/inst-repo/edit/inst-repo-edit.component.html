@@ -74,7 +74,7 @@
                             </div>
                         </mat-card-content>
 
-                        <mat-card-actions align="end">
+                        <mat-card-actions align="end" class="mrb-0">
                             <button mat-stroked-button color="primary" (click)="addIdentifier()"
                                 [matTooltip]="'Adiciona un nuevo id'"
                                 [matTooltipClass]="'tooltip-red'"
@@ -109,7 +109,7 @@
 
     </mat-card-content>
 
-    <mat-card-actions align="end">
+    <mat-card-actions align="end" class="mrb-0">
         <button mat-stroked-button color="primary" [disabled]="instRepoFormGroup.invalid" (click)="update()"
             [matTooltip]="((isAddingView) ? 'Adiciona un nuevo' : 'Edita el') + ' ' + 'Repositorio Institucional'"
             [matTooltipClass]="'tooltip-red'"

@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MatSnackBar } from '@angular/material';
 
 import { Hit, MessageHandler, DialogDeleteConfirmComponent, StatusCode, 
@@ -24,7 +24,7 @@ export class InstRepoViewComponent implements OnInit
 
 	public instRepo: InstitutionalRepository;  /* It is like a readonly field, and it is only used to initialize the view. */
 
-	public constructor(private _activatedRoute: ActivatedRoute,
+	public constructor(private _router: Router, private _activatedRoute: ActivatedRoute,
 		private _snackBar: MatSnackBar
 	)
 	{
@@ -41,8 +41,6 @@ export class InstRepoViewComponent implements OnInit
 				/* It is not necessary to realize deep copy because the `instRepo` field 
 				 * is like a readonly field, and it is only used to initialize the view. */
 				this.instRepo = data.instRepo.metadata;
-
-//				this._initFormData();
 
 				/* The component ends its loading task. It is set here and not in the `complete` property because the `complete` notification is not sent. */
 				this.hasTaskInProgress = false;
@@ -67,5 +65,23 @@ export class InstRepoViewComponent implements OnInit
 		// TODO: Implement this property. 
 
 		return true;
+	}
+
+	/**
+	 * Does the tasks to go to the editing view. 
+	 */
+	public edit(): void
+	{
+		/* Navigates to the editing view. */
+		this._router.navigate(['repo-inst', this.instRepo.id, 'edit']);
+	}
+
+	/**
+	 * Does the tasks to go back to the previous view. 
+	 */	
+	public goBack(): void
+	{
+		/* Relatively navigates back to the previous view. */
+		this._router.navigate(['../'], { relativeTo: this._activatedRoute });
 	}
 }

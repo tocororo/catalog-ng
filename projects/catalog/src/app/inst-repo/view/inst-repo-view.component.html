@@ -15,3 +15,29 @@
         <mat-icon>mode_edit</mat-icon>
     </a>
 </mat-toolbar>
+
+<mat-card *ngIf="instRepo">
+
+    <mat-card-content>
+        <static-text [desc]="'Nombre'" [value]="instRepo.name"></static-text>
+
+        <static-text [desc]="'Url'" [value]="instRepo.url"></static-text>
+        <static-text [desc]="'Url-OAI'" [value]="instRepo.url_oai"></static-text>
+    </mat-card-content>
+
+    <mat-card-actions align="end" class="mrb-0">
+        <button mat-stroked-button *ngIf="hasPermission" color="primary" (click)="edit()"
+            [matTooltip]="'Edita el Repositorio Institucional'"
+            [matTooltipClass]="'tooltip-red'"
+        >
+            Editar
+        </button>
+        <button mat-stroked-button color="primary" (click)="goBack()"
+            [matTooltip]="'Ir atrás'"
+            [matTooltipClass]="'tooltip-red'"
+        >
+            OK
+        </button>
+    </mat-card-actions>
+
+</mat-card>
