@@ -35,7 +35,15 @@ export class InstRepoEditComponent implements OnInit
 	};
 
 	/**
-	 * Returns true if this component is used as an adding view; otherwise, false. 
+	 * Returns true if the component has a task in progress; otherwise, false. 
+	 * Example of task is: loading, updating, etc. 
+	 * Its value is `true` by default because it represents the loading task. 
+	 */
+	public hasTaskInProgress: boolean;
+
+	/**
+	 * Returns true if the component is used as an adding view; otherwise, false. 
+	 * Its value is `false` by default. 
 	 */
 	public isAddingView: boolean;
 
@@ -70,6 +78,11 @@ export class InstRepoEditComponent implements OnInit
 		private _dialog: MatDialog,
 		private _snackBar: MatSnackBar)
 	{
+		/* The component begins its loading task. */
+		this.hasTaskInProgress = true;
+
+		this.isAddingView = false;
+
 		this.selectOptionsIdType = [ ];
 
 		this.instRepoFormGroup = undefined;
@@ -84,7 +97,7 @@ export class InstRepoEditComponent implements OnInit
 
 	public ngOnInit(): void
 	{
-		/* True if this component is used as an adding view; otherwise, false. */
+		/* True if the component is used as an adding view; otherwise, false. */
         this.isAddingView = (this._activatedRoute.snapshot.url[(this._activatedRoute.snapshot.url.length - 1)].path == 'add')  /* The string 'add' is the value of the last route sub-path that is specified in the `app-routing.module.ts` file. */
 
 		for (const key in IdentifierSchemas)
@@ -92,15 +105,25 @@ export class InstRepoEditComponent implements OnInit
 			this.selectOptionsIdType.push({ 'idtype': IdentifierSchemas[key], 'value': IdentifierSchemas[key] });
 		}
 
-		this._activatedRoute.data.subscribe(
-			(data: { 'instRepo': Hit<InstitutionalRepository> }) => {
+		this._activatedRoute.data.subscribe({
+			next: (data: { 'instRepo': Hit<InstitutionalRepository> }) => {
 				/* It is not necessary to realize deep copy because the `_instRepo` field 
 				 * is like a readonly field, and it is only used to initialize the form. */
 				this._instRepo = data.instRepo.metadata;
 
 				this._initFormData();
+
+				/* The component ends its loading task. It is set here and not in the `complete` property because the `complete` notification is not sent. */
+				this.hasTaskInProgress = false;
+			},
+			error: (err: any) => {
+				/* The component ends its loading task. */
+				this.hasTaskInProgress = false;
+
+				const m = new MessageHandler(this._snackBar);
+				m.showMessage(StatusCode.OK, err.message)
 			}
-		);
+		});
 
 		console.log('Data got for editing: ', this._instRepo, this.instRepoFormGroup);
 	}
@@ -196,20 +219,28 @@ export class InstRepoEditComponent implements OnInit
 
 	public update(): void
 	{
+		/* The component begins its updating task. */
+		this.hasTaskInProgress = true;
+
 		console.log('update: ', this.instRepoFormGroup.valid, this.instRepoFormGroup);
 
 		this._instRepoService.editInstRepo(this.instRepoFormGroup.value).subscribe({
 			next: (result: Hit<InstitutionalRepository>) => {
 				console.log('update result: ', result);
-
-				const m = new MessageHandler(null, this._dialog);
-				m.showMessage(StatusCode.OK, '¡El Repositorio Institucional fue modificado correctamente!', HandlerComponent.dialog, 'Operación exitosa', '50%');
 			},
 			error: (err: any) => {
-				console.log(err);
+				/* The component ends its updating task. */
+				this.hasTaskInProgress = false;
 
 				const m = new MessageHandler(this._snackBar);
 				m.showMessage(StatusCode.OK, err.message)
+			},
+			complete: () => {
+				/* The component ends its updating task. */
+				this.hasTaskInProgress = false;
+
+				const m = new MessageHandler(null, this._dialog);
+				m.showMessage(StatusCode.OK, '¡El Repositorio Institucional fue modificado correctamente!', HandlerComponent.dialog, 'Operación exitosa', '50%');
 			}
 		});
 	}
