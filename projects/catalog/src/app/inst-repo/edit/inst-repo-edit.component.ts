@@ -167,10 +167,7 @@ export class InstRepoEditComponent implements OnInit
 		{
 			resFormArray.push(this._formBuilder.group(
 				{
-					'idtype': new FormControl(item.idtype, [
-						Validators.pattern('^[a-zA-Z\-\_]*$')
-						//Validators.pattern(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/i)
-					]),
+					'idtype': new FormControl(item.idtype),
 					'value': new FormControl(item.value, [
 						Validators.pattern('^[a-zA-Z\_][a-zA-Z\-\_\0-9]*$')
 					])
@@ -185,10 +182,7 @@ export class InstRepoEditComponent implements OnInit
 	{
 		this.identifiersMainInstitution_FA.push(this._formBuilder.group(
 			{
-				'idtype': new FormControl('', [
-					Validators.pattern('^[a-zA-Z\-\_]*$')
-					//Validators.pattern(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/i)
-				]),
+				'idtype': new FormControl(''),
 				'value': new FormControl('', [
 					Validators.pattern('^[a-zA-Z\_][a-zA-Z\-\_\0-9]*$')
 				])
