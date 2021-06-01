@@ -20,10 +20,41 @@
 <mat-card *ngIf="instRepo">
 
     <mat-card-content>
-        <static-text [desc]="'Nombre'" [value]="instRepo.name"></static-text>
 
-        <static-text [desc]="'Url'" [value]="instRepo.url"></static-text>
-        <static-text [desc]="'Url-OAI'" [value]="instRepo.url_oai"></static-text>
+        <form>
+
+            <static-text [desc]="'Nombre'" [value]="instRepo.name"></static-text>
+
+            <mat-card class="mb-2">
+                <mat-card-content>
+                    <p>
+                        <mat-label>Institución Principal</mat-label>
+                    </p>
+
+                    <static-text [desc]="'Nombre'" [value]="instRepo.mainInst.name"></static-text>
+
+                    <mat-card class="mb-2">
+                        <mat-card-content>
+                            <p>
+                                <mat-label>Identidicadores</mat-label>
+                            </p>
+
+                            <div *ngFor="let identifier of instRepo.mainInst.identifiers"
+                                class="w-100 my-outline-without-hover" fxLayout="row wrap" fxLayoutAlign="space-between center"
+                            >
+                                <static-text [width]="'45%'" [appearance]="'standard'" [desc]="'Id'" [value]="identifier.idtype"></static-text>
+                                <static-text [width]="'45%'" [appearance]="'standard'" [desc]="'Valor'" [value]="identifier.value"></static-text>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                </mat-card-content>
+            </mat-card>
+
+            <static-text [desc]="'Url'" [value]="instRepo.url"></static-text>
+            <static-text [desc]="'Url-OAI'" [value]="instRepo.url_oai"></static-text>
+
+        </form>
+
     </mat-card-content>
 
     <mat-card-actions align="end" class="mrb-0">

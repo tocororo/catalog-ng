@@ -199,7 +199,7 @@ mat-checkbox .mat-checkbox-layout{
 }
 
 .my-outline{
-    border: 2px solid mat-color($toco-primary, 50);
+    border: 1px solid mat-color($toco-primary, 50);
     border-radius: 4px;
     padding: 8px;
     padding-bottom: 0px;
@@ -207,5 +207,12 @@ mat-checkbox .mat-checkbox-layout{
  }
  .my-outline:hover{
     border: 2px solid mat-color($toco-primary);
+ }
+ .my-outline-without-hover{
+    border: 1px solid mat-color($toco-primary, 50);
+    border-radius: 4px;
+    padding: 8px;
+    padding-bottom: 0px;
+    margin-bottom: 24px;
  }
  
