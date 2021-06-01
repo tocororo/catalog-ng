@@ -20,6 +20,7 @@ const instRepoEmpty_Resolved: any = {
  */
 const instRepoExample: any = {
     'metadata': {
+        'id': '876acbf2-5a67-4b5c-92ca-040761d54595',
         'name': 'Institutional Repository Name',
         'mainInst': {
             'name': 'Main Institution - Institutional Repository',

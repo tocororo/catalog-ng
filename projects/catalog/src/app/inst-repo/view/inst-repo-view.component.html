@@ -7,20 +7,11 @@
     fxLayoutAlign="center center"
     style="height: 80px;"
 >
-<!-- [routerLink]="['/repo-inst/876acbf2-5a67-4b5c-92ca-040761d54595/edit']"
-[routerLink]="/{{org.id}}/edit"  -->
-
     <span>Detalles del Repositorio Institucional</span>
-    <button mat-icon-button *ngIf="hasPermission" color="primary" 
-
+    <a mat-icon-button *ngIf="hasPermission" class="mat-18 ml-05" color="primary"
+        [routerLink]="['/repo-inst/' + instRepo.id + '/edit']" value="RepoInst"
         [matTooltip]="'Edita el Repositorio Institucional'" [matTooltipClass]="'tooltip-red'"
     >
-        <mat-icon class="mat-18">mode_edit</mat-icon>
-    </button>
-
-    <button mat-icon-button matSuffix class="mat-18" color="primary"
-        (click)="deleteIdentifier(pos)" [matTooltip]="'Elimina el id'" [matTooltipClass]="'tooltip-red'"
-    >
-        <mat-icon>delete</mat-icon>
-    </button>
+        <mat-icon>mode_edit</mat-icon>
+    </a>
 </mat-toolbar>

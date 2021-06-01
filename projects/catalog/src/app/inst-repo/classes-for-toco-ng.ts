@@ -1,10 +1,10 @@
 
-import { Entity, Identifier } from "toco-lib";
+import { Entity, EntityBase, Identifier } from "toco-lib";
 
 /**
  * Entity for main Institution based on schema `...-v1.0.0.json`. 
  */
-export class MainInstitution extends Entity
+export class MainInstitution extends EntityBase
 {
     /**
      * The name typically used to refer to the institute. 
@@ -55,6 +55,7 @@ export class InstitutionalRepository extends Entity
  * Represents an object of `InstitutionalRepository` type with all its values set to empty. 
  */
  export const instRepoEmpty: any = {
+    'id':'',
     'name': '',
     'mainInst': mainInstEmpty,
     'url': '',
