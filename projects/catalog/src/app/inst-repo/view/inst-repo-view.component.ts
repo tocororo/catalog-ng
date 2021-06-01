@@ -1,10 +1,9 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
-import { Hit, MessageHandler, DialogDeleteConfirmComponent, StatusCode, 
-	HandlerComponent, IdentifierSchemas, ChildControlsPath } from 'toco-lib';
+import { Hit, MessageHandler, StatusCode } from 'toco-lib';
 
 import { InstitutionalRepository } from '../classes-for-toco-ng';
 

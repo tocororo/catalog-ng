@@ -50,7 +50,7 @@
                                 class="w-100 my-outline" [formGroup]="identifiersMainInstitution_FA.controls[pos]"
                                 fxLayout="row wrap" fxLayoutAlign="space-between center"
                             >
-                                <mat-form-field class="w-45">
+                                <mat-form-field class="w-45" [appearance]="'legacy'">
                                     <mat-label>Id</mat-label>
                                     <mat-select class="w-100" [formControlName]="instRepo_ChildControlsPath.mainInst_ids_o_idtype" [required]="'true'" [placeholder]="'Seleccione el tipo de id'">
                                         <mat-option *ngFor="let item of selectOptionsIdType" [value]="item.idtype">
@@ -60,7 +60,7 @@
                                     <mat-error *ngIf="getErrorState([ instRepo_ChildControlsPath.mainInst, instRepo_ChildControlsPath.mainInst_o_ids, pos, instRepo_ChildControlsPath.mainInst_ids_o_idtype ])">{{ getErrorMessage([ instRepo_ChildControlsPath.mainInst, instRepo_ChildControlsPath.mainInst_o_ids, pos, instRepo_ChildControlsPath.mainInst_ids_o_idtype ]) }}</mat-error>
                                 </mat-form-field>
 
-                                <mat-form-field class="w-45">
+                                <mat-form-field class="w-45" [appearance]="'legacy'">
                                     <mat-label>Valor</mat-label>
                                     <input matInput [formControlName]="instRepo_ChildControlsPath.mainInst_ids_o_value" [required]="'true'" [placeholder]="'Escriba un valor para el id'" />
                                     <mat-error *ngIf="getErrorState([ instRepo_ChildControlsPath.mainInst, instRepo_ChildControlsPath.mainInst_o_ids, pos, instRepo_ChildControlsPath.mainInst_ids_o_value ])">{{ getErrorMessage([ instRepo_ChildControlsPath.mainInst, instRepo_ChildControlsPath.mainInst_o_ids, pos, instRepo_ChildControlsPath.mainInst_ids_o_value ]) }}</mat-error>
