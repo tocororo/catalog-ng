@@ -1,129 +1,91 @@
 
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import { NotificationListComponent, OauthAuthenticationService } from "toco-lib";
+import { NotificationListComponent, OauthAuthenticationService } from 'toco-lib';
 
-import { CatalogComponent } from "./catalog/catalog.component";
-import { HomeComponent } from "./home/home.component";
-import { InstRepoViewComponent } from "./inst-repo/view/inst-repo-view.component";
-import { InstRepoEditComponent } from "./inst-repo/edit/inst-repo-edit.component";
-import { InstRepoResolverService } from "./inst-repo/inst-repo-resolver.service";
-import { MySourcesComponent } from "./mysources/mysources.component";
-import { SourceEditComponent } from "./source-edit/source-edit.component";
-import { SourceInclusionComponent } from "./source-inclusion/source-inclusion.component";
-import { SourceResolver, SourceResolverAuth } from "./source-resolver";
-import { SourceViewReadComponent } from "./source-view/source-view-read/source-view-read.component";
-import { SourceViewComponent } from "./source-view/source-view.component";
-import { StaticPagesComponent } from "./static-pages/static-pages.component";
-import { UserProfileComponent } from "./user-profile/user-profile.component";
+import { CatalogComponent } from './catalog/catalog.component';
+import { HomeComponent } from './home/home.component';
+import { MySourcesComponent } from './mysources/mysources.component';
+import { SourceEditComponent } from './source-edit/source-edit.component';
+import { SourceInclusionComponent } from './source-inclusion/source-inclusion.component';
+import { SourceResolver, SourceResolverAuth } from './source-resolver';
+import { SourceViewReadComponent } from './source-view/source-view-read/source-view-read.component';
+import { SourceViewComponent } from './source-view/source-view.component';
+import { StaticPagesComponent } from './static-pages/static-pages.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
 	{
-		path: "",
-		component: HomeComponent,
+		path: 'inst-repo',
+		loadChildren: () => import('./inst-repo/inst-repo.module').then(mod => mod.InstRepoModule),
+		data: {
+			preload: true  /* In orden to use a custom preloading strategy (`SelectiveModulesPreload`). */
+		}
 	},
 	{
-		path: "directory",
+		path: 'directory',
 		children: [
 			{
-				path: ":uuid",
+				path: ':uuid',
 				component: SourceViewReadComponent,
 				resolve: {
 					record: SourceResolver,
 				},
 			},
 			{
-				path: "",
+				path: '',
 				component: CatalogComponent,
 			},
 		],
 	},
 	{
-		path: "repo-inst",
-		children: [
-			{
-				path: ":uuid/view",
-				component: InstRepoViewComponent,
-				resolve: {
-					/**
-					 * This resolver is used on all views. In the case of viewing view, 
-					 * it needs to resolve an object from the backend. 
-					 */
-					'instRepo': InstRepoResolverService
-				}
-			},
-			{
-				path: "add",
-				component: InstRepoEditComponent,
-				resolve: {
-					/**
-					 * This resolver is used on all views. In the case of adding view, it needs to resolve 
-					 * an object with all its values set to empty. 
-					 */
-					'instRepo': InstRepoResolverService
-				}
-			},
-			{
-				path: ":uuid/edit",
-				component: InstRepoEditComponent,
-				resolve: {
-					/**
-					 * This resolver is used on all views. In the case of editing view, 
-					 * it needs to resolve an object from the backend. 
-					 */
-					'instRepo': InstRepoResolverService
-				}
-			}
-		],
-	},
-	{
-		path: "faq",
+		path: 'faq',
 		component: StaticPagesComponent,
-		data: { src: "assets/markdown/faq.md", title: "FAQ" },
+		data: { src: 'assets/markdown/faq.md', title: 'FAQ' },
 	},
 	{
-		path: "about",
+		path: 'about',
 		component: StaticPagesComponent,
-		data: { src: "assets/markdown/about.md", title: "Sobre Nosotros" },
+		data: { src: 'assets/markdown/about.md', title: 'Sobre Nosotros' },
 	},
 	{
-		path: "help",
+		path: 'help',
 		component: StaticPagesComponent,
-		data: { src: "assets/markdown/help.md", title: "Ayuda" },
+		data: { src: 'assets/markdown/help.md', title: 'Ayuda' },
 	},
 	{
-		path: "contact",
+		path: 'contact',
 		component: StaticPagesComponent,
-		data: { src: "assets/markdown/contact.md", title: "Contacto" },
+		data: { src: 'assets/markdown/contact.md', title: 'Contacto' },
 	},
 	{
-		path: "userprofile",
+		path: 'userprofile',
 		component: UserProfileComponent,
 		canActivate: [OauthAuthenticationService],
 	},
 	{
-		path: "sources",
+		path: 'sources',
 		// loadChildren: () => import('@toco/tools/journal').then(mod => mod.JournalModule),
 		children: [
 			{
-				path: "new",
+				path: 'new',
 				children: [
 					{
-						path: "journal",
+						path: 'journal',
 						component: SourceInclusionComponent,
 					},
 				],
 			},
 			{
-				path: ":uuid/view",
+				path: ':uuid/view',
 				component: SourceViewComponent,
 				resolve: {
 					source: SourceResolverAuth,
 				},
 			},
 			{
-				path: ":uuid/edit",
+				path: ':uuid/edit',
 				component: SourceEditComponent,
 				resolve: {
 					source: SourceResolverAuth,
@@ -134,20 +96,25 @@ const routes: Routes = [
 			//     component: GrantPermissionsComponent,
 			// },
 			{
-				path: "",
+				path: '',
 				component: MySourcesComponent
 			}
 		],
 		canActivate: [OauthAuthenticationService]
 	},
 	{
-		path: "notifications",
+		path: 'notifications',
 		component: NotificationListComponent,
 		canActivate: [OauthAuthenticationService]
 	},
 	{
-		path: "**",
-		redirectTo: ""
+		path: '',
+		component: HomeComponent,
+	},
+	{
+		path: '**',
+		redirectTo: '',
+		pathMatch: 'full'
 	}
 ];
 

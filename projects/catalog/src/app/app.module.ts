@@ -3,8 +3,8 @@
 
 import { NgModule } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -13,7 +13,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { AngularMaterialModule, AuthenticationModule, CoreModule, Environment, 
   HTTP_INTERCEPTOR_PROVIDERS, NotificationModule, OrganizationServiceNoAuth, 
   OrganizationsModule, SearchService, SharedModule, SourceService, SourceServiceNoAuth, 
-  StaticsModule, TaxonomyService, TocoFormsModule, UserProfileService } from 'toco-lib';
+  TaxonomyService, TocoFormsModule, UserProfileService } from 'toco-lib';
 
 import { environment } from '../environments/environment';
 
@@ -46,8 +46,6 @@ import { SourceViewComponent, SourceViewSaveDialog } from './source-view/source-
 import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserSearchComponent } from './user-search/user-search.component';
-import { InstRepoViewComponent } from './inst-repo/view/inst-repo-view.component';
-import { InstRepoEditComponent } from './inst-repo/edit/inst-repo-edit.component';
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 {
@@ -94,8 +92,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     UserProfileComponent,
     UserSearchComponent,
     DialogCatalogJournalInfoDialog,
-    InstRepoViewComponent,
-    InstRepoEditComponent
   ],
   entryComponents: [
     MySourcesManagerPermissionDialog,
@@ -125,7 +121,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     TocoFormsModule,
     OrganizationsModule,
     CoreModule,
-    StaticsModule,
     AuthenticationModule,
     AngularMaterialModule,
     // TaxonomyModule,

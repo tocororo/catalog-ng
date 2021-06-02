@@ -72,7 +72,7 @@ export class InstRepoViewComponent implements OnInit
 	public edit(): void
 	{
 		/* Navigates to the editing view. */
-		this._router.navigate(['repo-inst', this.instRepo.id, 'edit']);
+		this._router.navigate(['inst-repo', this.instRepo.id, 'edit']);
 	}
 
 	/**
