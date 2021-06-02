@@ -8,13 +8,12 @@
     style="height: 80px;"
 >
     <span>Detalles del Repositorio Institucional</span>
-    <a mat-icon-button *ngIf="hasPermission" class="mat-18 ml-05" color="primary"
-        [routerLink]="['/repo-inst/' + instRepo.id + '/edit']" value="RepoInst"
+    <button mat-mini-fab *ngIf="hasPermission" class="mat-18 ml-05" color="primary" (click)="edit()"
         [matTooltip]="'Muestra la vista de editar el Repositorio Institucional'"
         [matTooltipClass]="'tooltip-red'"
     >
         <mat-icon>mode_edit</mat-icon>
-    </a>
+    </button>
 </mat-toolbar>
 
 <mat-card *ngIf="instRepo">

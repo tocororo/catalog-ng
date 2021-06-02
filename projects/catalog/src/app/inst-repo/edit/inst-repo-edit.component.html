@@ -66,7 +66,7 @@
                                     <mat-error *ngIf="getErrorState([ instRepo_ChildControlsPath.mainInst, instRepo_ChildControlsPath.mainInst_o_ids, pos, instRepo_ChildControlsPath.mainInst_ids_o_value ])">{{ getErrorMessage([ instRepo_ChildControlsPath.mainInst, instRepo_ChildControlsPath.mainInst_o_ids, pos, instRepo_ChildControlsPath.mainInst_ids_o_value ]) }}</mat-error>
                                 </mat-form-field>
 
-                                <button mat-icon-button class="mat-18" color="primary" [disabled]="identifiersMainInstitution_FA.controls.length == 1"
+                                <button mat-mini-fab class="mat-18" color="primary" [disabled]="identifiersMainInstitution_FA.controls.length == 1"
                                     (click)="deleteIdentifier(pos)" [matTooltip]="'Elimina el id'" [matTooltipClass]="'tooltip-red'"
                                 >
                                     <mat-icon>delete</mat-icon>
