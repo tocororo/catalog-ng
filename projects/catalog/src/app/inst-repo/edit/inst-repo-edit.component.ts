@@ -5,9 +5,8 @@ import { AbstractControl, FormControl, FormGroup, FormArray, Validators, Validat
 import { MatDialog, MatSnackBar } from '@angular/material';
 
 import { Hit, MessageHandler, DialogDeleteConfirmComponent, StatusCode, 
-	HandlerComponent, IdentifierSchemas, ChildControlsPath } from 'toco-lib';
+	HandlerComponent, IdentifierSchemas, ChildControlsPath, InstitutionalRepository } from 'toco-lib';
 
-import { InstitutionalRepository } from '../classes-for-toco-ng';
 import { InstRepoService } from '../inst-repo.service';
 
 @Component({

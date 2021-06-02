@@ -2,9 +2,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { Environment } from 'toco-lib';
 
-import { InstitutionalRepository } from './classes-for-toco-ng';
+import { Environment, InstitutionalRepository } from 'toco-lib';
 
 @Injectable({
 	providedIn: 'root'

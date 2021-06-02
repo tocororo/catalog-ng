@@ -3,9 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 
-import { Hit, MessageHandler, StatusCode } from 'toco-lib';
-
-import { InstitutionalRepository } from '../classes-for-toco-ng';
+import { Hit, InstitutionalRepository, MessageHandler, StatusCode } from 'toco-lib';
 
 @Component({
 	selector: 'catalog-inst-repo-view',

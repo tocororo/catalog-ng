@@ -4,9 +4,7 @@ import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@a
 import { Observable, of } from 'rxjs';
 import { take, map } from 'rxjs/operators';
 
-import { IdentifierSchemas, SearchResponse, SearchService } from 'toco-lib';
-
-import { InstitutionalRepository, instRepoEmpty } from './classes-for-toco-ng';
+import { IdentifierSchemas, InstitutionalRepository, instRepoEmpty, SearchResponse, SearchService } from 'toco-lib';
 
 /**
  * Represents an object with all its values set to empty. 
