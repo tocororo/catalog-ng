@@ -5,6 +5,9 @@ import { MatSnackBar } from '@angular/material';
 
 import { Hit, InstitutionalRepository, MessageHandler, StatusCode } from 'toco-lib';
 
+/**
+ * Represents a control that allows to see the details of an Institutional Repository. 
+ */
 @Component({
 	selector: 'catalog-inst-repo-view',
 	templateUrl: './inst-repo-view.component.html',
@@ -15,13 +18,14 @@ export class InstRepoViewComponent implements OnInit
 	/**
 	 * Returns true if the component has a task in progress; otherwise, false. 
 	 * Example of task is: loading, updating, etc. 
-	 * Its value is `true` by default because it represents the loading task. 
+	 * By default, its value is `true` because it represents the loading task. 
 	 */
 	public hasTaskInProgress: boolean;
 
 	public instRepo: InstitutionalRepository;  /* It is like a readonly field, and it is only used to initialize the view. */
 
-	public constructor(private _router: Router, private _activatedRoute: ActivatedRoute,
+	public constructor(private _router: Router, 
+		private _activatedRoute: ActivatedRoute,
 		private _snackBar: MatSnackBar
 	)
 	{

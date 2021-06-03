@@ -43,9 +43,9 @@ const instRepoExample: any = {
 };
 
 /**
- * This resolver is used on all views. In the case of adding view, it needs to resolve 
- * an object with all its values set to empty. In the case of remaining views (viewing and editing views), 
- * it needs to resolve an object from the backend. 
+ * This resolver is used on all views in order to get information from the backend about an Institutional Repository. 
+ * In the case of adding view, it needs to resolve an object with all its values set to empty. 
+ * In the case of remaining views (viewing and editing views), it needs to resolve an object from the backend. 
  */
 @Injectable({
 	providedIn: 'root',

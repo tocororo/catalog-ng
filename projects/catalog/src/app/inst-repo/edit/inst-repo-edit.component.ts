@@ -9,6 +9,9 @@ import { Hit, MessageHandler, DialogDeleteConfirmComponent, StatusCode,
 
 import { InstRepoService } from '../inst-repo.service';
 
+/**
+ * Represents a control that allows to add or edit an Institutional Repository. 
+ */
 @Component({
 	selector: 'catalog-inst-repo-edit',
 	templateUrl: './inst-repo-edit.component.html',
