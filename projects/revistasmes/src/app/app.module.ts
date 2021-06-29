@@ -19,8 +19,6 @@ import { HttpClient } from '@angular/common/http';
 import { CatalogAppModule } from 'projects/catalog/src/app/app.module';
 import { environment } from '../environments/environment';
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

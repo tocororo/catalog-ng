@@ -1,3 +1,4 @@
+
 // import { BrowserModule } from '@angular/platform-browser';
 
 import { HttpClient } from '@angular/common/http';
@@ -9,7 +10,12 @@ import { TranslateLoader } from '@ngx-translate/core/lib/translate.loader';
 import { TranslateModule } from '@ngx-translate/core/public_api';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader/lib/http-loader';
 import { MarkdownModule } from 'ngx-markdown';
-import { AngularMaterialModule, AuthenticationModule, CoreModule, Environment, HTTP_INTERCEPTOR_PROVIDERS, NotificationModule, OrganizationServiceNoAuth, OrganizationsModule, SharedModule, SourceService, SourceServiceNoAuth, TaxonomyService, TocoFormsModule, UserProfileService } from 'toco-lib';
+import {
+  AngularMaterialModule, AuthenticationModule, CoreModule, Environment,
+  HTTP_INTERCEPTOR_PROVIDERS, NotificationModule, OrganizationServiceNoAuth,
+  OrganizationsModule, SearchService, SharedModule, SourceService, SourceServiceNoAuth,
+  TaxonomyService, TocoFormsModule, UserProfileService
+} from 'toco-lib';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -41,6 +47,9 @@ import { SourceViewComponent, SourceViewSaveDialog } from './source-view/source-
 import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserSearchComponent } from './user-search/user-search.component';
+
+
+
 
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
@@ -104,6 +113,14 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
   ],
   imports: [
     BrowserAnimationsModule,
+    SharedModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+      }
+    }),
     ReactiveFormsModule,
     // BrowserModule,
     AppRoutingModule,
@@ -111,7 +128,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     TocoFormsModule,
     OrganizationsModule,
     CoreModule,
-    SharedModule,
     AuthenticationModule,
     AngularMaterialModule,
     // TaxonomyModule,
@@ -128,6 +144,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     }),
   ],
   providers: [
+    SearchService,
     SourceService,
     SourceServiceNoAuth,
     UserProfileService,

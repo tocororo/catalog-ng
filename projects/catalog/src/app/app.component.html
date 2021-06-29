@@ -91,6 +91,40 @@
       </button>
 
     </div>
+  <mat-toolbar-row
+    fxLayout="row wrap"
+    fxLayoutAlign="center"
+    fxLayout.xs="column"
+    fxLayoutAlign="center center"
+    style="height: auto !important; min-height: 56px"
+  >
+    <a mat-button [routerLink]="['/']" value="Inicio">Inicio</a>
+    <!-- <a mat-button [routerLink]="['/about']" value="Acerca de">Acerca de</a> -->
+    <a mat-button [routerLink]="['/directory']" value="Catálogo">Directorio</a>
+    <a mat-button [routerLink]="['/']" value="Reportes y estadísticas">Reportes y estadísticas</a>
+
+    <a mat-button [routerLink]="['/inst-repo/876acbf2-5a67-4b5c-92ca-040761d54595/view']" value="RepoInst">[View - Repositorio Institucional]</a>
+    <a mat-button [routerLink]="['/inst-repo/add']" value="RepoInst">[Add - Repositorio Institucional]</a>
+    <a mat-button [routerLink]="['/inst-repo/876acbf2-5a67-4b5c-92ca-040761d54595/edit']" value="RepoInst">[Edit - Repositorio Institucional]</a>
+
+    <a
+      mat-button
+      *ngIf="userProfile"
+      [routerLink]="['/sources/new/journal']"
+      value="Incluye tu revista"
+      >Incluye tu revista</a
+    >
+    <!-- <toco-authentication
+      [oauthInfo]="oauthInfo"
+      [isButtonLogin]="'true'"
+      [isButtonLoginIcon]="'true'"
+      [isButtonLoginText]="'Autenticarse'"
+      *ngIf="!userProfile"
+    >
+    </toco-authentication> -->
+
+    <a *ngIf="userProfile" mat-button [routerLink]="['/sources']">Mis Registros</a>
+    <!-- <a *ngIf="userProfile" mat-button [routerLink]="['/sources','permissions']"> Permisos </a> -->
   </mat-toolbar-row>
 </mat-toolbar>
 

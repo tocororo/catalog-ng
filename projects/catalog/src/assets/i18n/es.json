@@ -2,6 +2,7 @@
     "CONJUNCION_Y": "y",
     "BETA": "BETA",
     "BETA_TOOLTIP": "Este es un producto BETA configurado con propósitos de prueba. Algunas características pueden no funcionar correctamente.",
+    "SCEIBA_ORGANIZACIONES_TOOLTIP": "Ir al inicio de Sceiba Organizaciones",
     "MENU_INICIO": "Menu de inicio",
     "IDIOMA": "Idioma",
     "REDES_SOC": "Redes sociales",
@@ -12,6 +13,7 @@
     "REGISTRARSE": "Registrarse",
     "ACERCA_DE": "Acerca de",
     "PRIVACIDAD": "Privacidad",
+    "FAQS": "FAQs",
     "CONTACTOS": "Contactos",
     "DES_ORGANIZACIONES": "Desambiguar organizaciones",
     "IMPORT": "Importar",
@@ -62,5 +64,11 @@
         "INPUT_SEARCH_LABEL": "Buscar",
         "INPUT_SEARCH_PLACEHOLDER": "Escriba un criterio y presione Enter",
         "BUTTON_SEARCH": "Buscar"
+    },
+    "TOCO_AUTHENTICATION": {
+        "MAT_CARD_TITLE_AUTH": "Autenticación con",
+        "AUTENTICARSE": "Autenticarse",
+        "H1_HOLA": "Hola",
+        "BUTTON_SALIR": "Salir"
     }
 }

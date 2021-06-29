@@ -1,5 +1,5 @@
 /*
- *   Copyright (c) 2020 Universidad de Pinar del Río "Hermanos Saíz Montes de Oca"
+ *   Copyright (c) 2020 Universidad de Pinar del Río 'Hermanos Saíz Montes de Oca'
  *   All rights reserved.
  */
 
@@ -20,72 +20,68 @@ import { HomeRevistasmesComponent } from './home/home.component';
 
 const routes: Routes = [
   {
-    path: "",
-    component: HomeRevistasmesComponent,
-  },
-  {
-    path: "directory",
+    path: 'directory',
     children: [
       {
-        path: ":uuid",
+        path: ':uuid',
         component: SourceViewReadComponent,
         resolve: {
           record: SourceResolver,
         },
       },
       {
-        path: "",
+        path: '',
         component: CatalogComponent,
       },
     ],
   },
   {
-    path: "faq",
+    path: 'faq',
     component: StaticPagesComponent,
-    data: { src: "assets/markdown/faq.md", title: "FAQ" },
+    data: { src: 'assets/markdown/faq.md', title: 'FAQ' },
   },
   {
-    path: "about",
+    path: 'about',
     component: StaticPagesComponent,
-    data: { src: "assets/markdown/about.md", title: "Sobre Nosotros" },
+    data: { src: 'assets/markdown/about.md', title: 'Sobre Nosotros' },
   },
   {
-    path: "help",
+    path: 'help',
     component: StaticPagesComponent,
-    data: { src: "assets/markdown/help.md", title: "Ayuda" },
+    data: { src: 'assets/markdown/help.md', title: 'Ayuda' },
   },
   {
-    path: "contact",
+    path: 'contact',
     component: StaticPagesComponent,
-    data: { src: "assets/markdown/contact.md", title: "Contacto" },
+    data: { src: 'assets/markdown/contact.md', title: 'Contacto' },
   },
   {
-    path: "userprofile",
+    path: 'userprofile',
     component: UserProfileComponent,
     canActivate: [OauthAuthenticationService],
   },
   {
-    path: "sources",
+    path: 'sources',
     // loadChildren: () => import('@toco/tools/journal').then(mod => mod.JournalModule),
     children: [
       {
-        path: "new",
+        path: 'new',
         children: [
           {
-            path: "journal",
+            path: 'journal',
             component: SourceInclusionComponent,
           },
         ],
       },
       {
-        path: ":uuid/view",
+        path: ':uuid/view',
         component: SourceViewComponent,
         resolve: {
           source: SourceResolverAuth,
         },
       },
       {
-        path: ":uuid/edit",
+        path: ':uuid/edit',
         component: SourceEditComponent,
         resolve: {
           source: SourceResolverAuth,
@@ -96,20 +92,25 @@ const routes: Routes = [
       //     component: GrantPermissionsComponent,
       // },
       {
-        path: "",
+        path: '',
         component: MySourcesComponent,
       },
     ],
     canActivate: [OauthAuthenticationService],
   },
   {
-    path: "notifications",
+    path: 'notifications',
     component: NotificationListComponent,
     canActivate: [OauthAuthenticationService],
   },
   {
-    path: "**",
-    redirectTo: "",
+    path: '',
+    component: HomeRevistasmesComponent,
+  },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
   },
 ];
 
