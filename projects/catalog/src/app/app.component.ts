@@ -1,9 +1,11 @@
 
 import { Component } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core/lib/translate.service';
 import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import { Subscription } from 'rxjs';
 import { Environment, OauthAuthenticationService, OauthInfo, UserProfile } from 'toco-lib';
+
 
 @Component({
     selector: 'catalog-root',
@@ -11,6 +13,28 @@ import { Environment, OauthAuthenticationService, OauthInfo, UserProfile } from 
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+ /**
+   * Returns the available language texts.
+   */
+  public languageTexts: string[];
+  /**
+   * Returns the available language abbreviations.
+   */
+  public languageAbbrs: string[];
+  /**
+   * Returns the language selected.
+   * The default language is Spanish; that is, the zero index.
+   */
+  public languageSelected: number;
+
+  public footerSites: Array<{ name: string, url: string, useRouterLink: boolean }>;
+
+  public footerInformation: Array<{ name: string, url: string, useRouterLink: boolean }>;
+
+  public urlLogin: string;
+
+  public sceibaHost: string;
+
 
   public oauthInfo: OauthInfo = {
     serverHost: this.environment.sceibaHost,
@@ -31,14 +55,13 @@ export class AppComponent {
     loading = false;
     private authenticateSuscription: Subscription = null;
 
-    public footerInformation: Array< { name: string, url: string, useRouterLink: boolean } >;
-    public footerSites: Array< { name: string, url: string, useRouterLink: boolean } >;
     constructor(
         private environment: Environment,
         private oauthStorage: OAuthStorage,
         private oauthService: OAuthService,
         private authenticateService: OauthAuthenticationService,
-        private router: Router) {
+        private router: Router,
+        private _transServ: TranslateService ) {
         this.isOnline = true; //navigator.onLine;
         this.router.events.subscribe(
             (event: RouterEvent) => {
@@ -61,11 +84,35 @@ export class AppComponent {
         );
     }
     ngOnInit(): void {
+      this.languageTexts = [ 'Español', 'English' ];
+      this.languageAbbrs = [ 'es', 'en' ];
+      this.languageSelected = 0;  /* The default language is Spanish; that is, the zero index. */
+      this._transServ.setDefaultLang('es');
+      this._transServ.use('es');
+      this._transServ.addLangs(this.languageAbbrs);
+      //this._recaptchaDynamicLanguageLoaderServ.updateLanguage('es');
+
+      this.sceibaHost = this.environment.sceibaHost;
+
+      this.footerSites = Array();
+      this.footerInformation = Array();
+
+      // this.footerSites.push({ name: "MES", url: "https://www.mes.gob.cu", useRouterLink: false});
+      // this.footerSites.push({ name: "ONEI", url: "http://www.onei.gob.cu/", useRouterLink:false});
+      // this.footerSites.push({ name: "GRID", url: "https://www.grid.ac", useRouterLink: false});
+      // this.footerSites.push({ name: "ROR", url: "https://ror.org/", useRouterLink: false});
+      // this.footerSites.push({ name: "Wikidata", url: "https://www.wikidata.org/wiki/Wikidata:Main_Page", useRouterLink: false});
+
+      this.footerInformation.push({ name: "ACERCA_DE", url: "/about", useRouterLink: true });
+      this.footerInformation.push({ name: "PRIVACIDAD", url: "/policy", useRouterLink: true });
+      // this.footerInformation.push({ name: "PRIVACIDAD", url: "https://sceiba-lab.upr.edu.cu/page/politicas", useRouterLink: false});
+      this.footerInformation.push({ name: "CONTACTOS", url: "/contact", useRouterLink: true });
+
       let request = JSON.parse(this.oauthStorage.getItem('user'));
       if (request){
         this.userProfile = request.data.userprofile;
       }
-      
+
       console.log(this.userProfile)
         this.authenticateSuscription = this.authenticateService.authenticationSubjectObservable.subscribe(
           (request) => {
@@ -85,15 +132,6 @@ export class AppComponent {
           }
         );
 
-        this.footerSites.push({ name: "MES", url: "https://www.mes.gob.cu", useRouterLink: false});
-        // this.footerSites.push({ name: "Sceiba", url: "https://sceiba-lab.upr.edu.cu", useRouterLink: false});
-        // this.footerSites.push({ name: "Dirección Nacional de Publicaciones Seriadas", url: "http://www.seriadascubanas.cult.cu/http://www.seriadascubanas.cult.cu/", useRouterLink:false});
-        // this.footerSites.push({ name: "Red Ciencia", url: "http://www.redciencia.cu/", useRouterLink: false});
-
-        // this.footerInformation.push({ name: "Términos de uso", url: "https://sceiba-lab.upr.edu.cu/page/politicas", useRouterLink: false});
-        // this.footerInformation.push({ name: "Privacidad", url: "https://sceiba-lab.upr.edu.cu/page/politicas", useRouterLink: false});
-        this.footerInformation.push({ name: "Contacto", url: "/contact", useRouterLink: true});
-        this.footerInformation.push({ name: "FAQs", url: "/faq", useRouterLink: true});
     }
 
     ngOnDestroy(): void {

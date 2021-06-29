@@ -5,6 +5,9 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateLoader } from '@ngx-translate/core/lib/translate.loader';
+import { TranslateModule } from '@ngx-translate/core/public_api';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader/lib/http-loader';
 import { MarkdownModule } from 'ngx-markdown';
 import { AngularMaterialModule, AuthenticationModule, CoreModule, Environment, HTTP_INTERCEPTOR_PROVIDERS, NotificationModule, OrganizationServiceNoAuth, OrganizationsModule, SharedModule, SourceService, SourceServiceNoAuth, TaxonomyService, TocoFormsModule, UserProfileService } from 'toco-lib';
 import { environment } from '../environments/environment';
@@ -12,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CatalogComponent, DialogCatalogJournalInfoDialog } from './catalog/catalog.component';
 import { FiltersComponent } from './catalog/filters/filters.component';
+import { SceibaFooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { MySourcesEditorComponent } from './mysources/editor/editor.component';
 import { MySourcesManagerComponent, MySourcesManagerPermissionDialog } from './mysources/manager/manager.component';
@@ -37,6 +41,12 @@ import { SourceViewComponent, SourceViewSaveDialog } from './source-view/source-
 import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserSearchComponent } from './user-search/user-search.component';
+
+
+export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
+{
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 
 @NgModule({
@@ -78,7 +88,8 @@ import { UserSearchComponent } from './user-search/user-search.component';
     StaticPagesComponent,
     UserProfileComponent,
     UserSearchComponent,
-    DialogCatalogJournalInfoDialog
+    DialogCatalogJournalInfoDialog,
+    SceibaFooterComponent,
   ],
   entryComponents: [
     MySourcesManagerPermissionDialog,
@@ -107,7 +118,14 @@ import { UserSearchComponent } from './user-search/user-search.component';
     FlexLayoutModule,
     MarkdownModule.forRoot({
       loader: HttpClient
-    })
+    }),
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+      }
+    }),
   ],
   providers: [
     SourceService,
