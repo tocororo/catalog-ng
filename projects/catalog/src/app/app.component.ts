@@ -1,7 +1,7 @@
 
 import { Component } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core/lib/translate.service';
+import { TranslateService } from '@ngx-translate/core';
 import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import { Subscription } from 'rxjs';
 import { Environment, OauthAuthenticationService, OauthInfo, UserProfile } from 'toco-lib';
@@ -61,7 +61,7 @@ export class AppComponent {
         private oauthService: OAuthService,
         private authenticateService: OauthAuthenticationService,
         private router: Router,
-        private _transServ: TranslateService ) {
+        private _transServ: TranslateService) {
         this.isOnline = true; //navigator.onLine;
         this.router.events.subscribe(
             (event: RouterEvent) => {

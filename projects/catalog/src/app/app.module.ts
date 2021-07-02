@@ -1,22 +1,24 @@
 
 // import { BrowserModule } from '@angular/platform-browser';
 
-import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateLoader } from '@ngx-translate/core/lib/translate.loader';
-import { TranslateModule } from '@ngx-translate/core/public_api';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader/lib/http-loader';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MarkdownModule } from 'ngx-markdown';
+
 import {
   AngularMaterialModule, AuthenticationModule, CoreModule, Environment,
   HTTP_INTERCEPTOR_PROVIDERS, NotificationModule, OrganizationServiceNoAuth,
   OrganizationsModule, SearchService, SharedModule, SourceService, SourceServiceNoAuth,
   TaxonomyService, TocoFormsModule, UserProfileService
 } from 'toco-lib';
+
 import { environment } from '../environments/environment';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CatalogComponent, DialogCatalogJournalInfoDialog } from './catalog/catalog.component';
@@ -48,15 +50,10 @@ import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserSearchComponent } from './user-search/user-search.component';
 
-
-
-
-
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
-
 
 @NgModule({
   declarations: [
@@ -134,14 +131,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     FlexLayoutModule,
     MarkdownModule.forRoot({
       loader: HttpClient
-    }),
-    TranslateModule.forRoot({
-      loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
-      }
-    }),
+    })
   ],
   providers: [
     SearchService,

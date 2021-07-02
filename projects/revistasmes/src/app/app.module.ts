@@ -1,4 +1,18 @@
+
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClient } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MarkdownModule } from 'ngx-markdown';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+import { NotificationModule, TocoFormsModule, OrganizationsModule,
+  CoreModule, SharedModule, AuthenticationModule, AngularMaterialModule,
+  SourceService, SourceServiceNoAuth, UserProfileService, TaxonomyService,
+  OrganizationServiceNoAuth, HTTP_INTERCEPTOR_PROVIDERS, Environment } from 'toco-lib';
+
 import { AppComponent } from './app.component';
 import { HomeRevistasmesComponent } from './home/home.component';
 import { MySourcesManagerPermissionDialog } from 'projects/catalog/src/app/mysources/manager/manager.component';
@@ -9,15 +23,14 @@ import { SourceEditOrganizationSelectTopDialog, SourceEditOrganizationSelectDial
 import { SourceInclusionAcceptComponent } from 'projects/catalog/src/app/source-inclusion/source-inclusion.component';
 import { SourceViewSaveDialog } from 'projects/catalog/src/app/source-view/source-view.component';
 import { DialogCatalogJournalInfoDialog } from 'projects/catalog/src/app/catalog/catalog.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { NotificationModule, TocoFormsModule, OrganizationsModule, CoreModule, SharedModule, AuthenticationModule, AngularMaterialModule, SourceService, SourceServiceNoAuth, UserProfileService, TaxonomyService, OrganizationServiceNoAuth, HTTP_INTERCEPTOR_PROVIDERS, Environment } from 'toco-lib';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MarkdownModule } from 'ngx-markdown';
-import { HttpClient } from '@angular/common/http';
 import { CatalogAppModule } from 'projects/catalog/src/app/app.module';
 import { environment } from '../environments/environment';
+
+export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
+{
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -37,6 +50,14 @@ import { environment } from '../environments/environment';
   ],
   imports: [
     BrowserAnimationsModule,
+    SharedModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+      }
+    }),
     ReactiveFormsModule,
     // BrowserModule,
     AppRoutingModule,
@@ -44,7 +65,6 @@ import { environment } from '../environments/environment';
     TocoFormsModule,
     OrganizationsModule,
     CoreModule,
-    SharedModule,
     AuthenticationModule,
     AngularMaterialModule,
     // TaxonomyModule,
