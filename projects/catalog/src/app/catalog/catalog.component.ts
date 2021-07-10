@@ -30,7 +30,7 @@ import {
   Params, Router
 } from "@angular/router";
 import { Environment, FilterHttpMap, Hit, Journal, JournalData, JournalVersion, MessageHandler, MetadataService, Organization, OrganizationServiceNoAuth, SourceServiceNoAuth, StatusCode } from 'toco-lib';
-import { CatalogFilterKeys } from './filters/filters.component';
+import { CatalogFilterKeys } from "./filters/filters.component";
 
 
 

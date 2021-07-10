@@ -2,11 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { OAuthStorage } from "angular-oauth2-oidc";
 import { Environment, Hit, Organization, OrganizationServiceNoAuth, Source, SourceService, Term } from 'toco-lib';
 @Component({
-  selector: "catalog-mysources",
-  templateUrl: "./mysources.component.html",
-  styleUrls: ["./mysources.component.scss"],
+  selector: "catalog-permissions",
+  templateUrl: "./permissions.component.html",
+  styleUrls: ["./permissions.component.scss"],
 })
-export class MySourcesComponent implements OnInit {
+export class PermissionsComponent implements OnInit {
 
   asEditor: Array<Source>;
   asManager: Array<Source>;
