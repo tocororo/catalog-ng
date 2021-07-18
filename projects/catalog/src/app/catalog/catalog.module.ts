@@ -40,6 +40,7 @@ import { SourceViewComponent, SourceViewSaveDialog } from './source-view/source-
     SourceJournalViewVersionFieldComponent,
     SourceJournalViewVersionComponent,
     SourceJournalViewInfoComponent,
+    DialogCatalogJournalInfoDialog,
   ],
   entryComponents: [
     SourceEditAddIndexComponent,

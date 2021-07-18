@@ -6,7 +6,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { OAuthStorage } from 'angular-oauth2-oidc';
-import { DialogCatalogJournalInfoDialog } from 'projects/catalog/src/app/catalog-old/catalog.component';
 import { Environment, Hit, Journal, JournalVersion, MessageHandler, Organization, OrganizationServiceNoAuth, ResponseStatus, SourceService, SourceServiceNoAuth, SourceTypes, StatusCode } from 'toco-lib';
 
 @Component({
@@ -142,14 +141,14 @@ export class HomeComponent implements OnInit {
               let journalVersion = new JournalVersion();
               journalVersion.data.deepcopy(response.metadata);
               journalVersion.source_uuid = response.id;
-              const dialogRef = this.dialog.open(DialogCatalogJournalInfoDialog, {
-                data: {
-                  journalVersion: journalVersion,
-                  journalUUID: uuid
-                }
-              });
+              // const dialogRef = this.dialog.open(DialogCatalogJournalInfoDialog, {
+              //   data: {
+              //     journalVersion: journalVersion,
+              //     journalUUID: uuid
+              //   }
+              // });
 
-              dialogRef.afterClosed();
+              // dialogRef.afterClosed();
             } else {
               const m = new MessageHandler(this._snackBar);
               m.showMessage(
