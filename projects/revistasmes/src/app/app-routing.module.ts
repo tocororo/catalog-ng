@@ -10,10 +10,10 @@ import { SourceEditComponent } from 'projects/catalog/src/app/catalog/source-edi
 import { SourceInclusionComponent } from 'projects/catalog/src/app/catalog/source-inclusion/source-inclusion.component';
 import { SourceViewReadComponent } from 'projects/catalog/src/app/catalog/source-view/source-view-read/source-view-read.component';
 import { SourceViewComponent } from 'projects/catalog/src/app/catalog/source-view/source-view.component';
-import { MySourcesComponent } from 'projects/catalog/src/app/mysources/mysources.component';
-import { UserProfileComponent } from 'projects/catalog/src/app/mysources/user-profile/user-profile.component';
+import { PermissionsComponent } from 'projects/catalog/src/app/permissions/permissions.component';
 import { SourceResolver, SourceResolverAuth } from 'projects/catalog/src/app/source-resolver';
 import { StaticPagesComponent } from 'projects/catalog/src/app/static-pages/static-pages.component';
+import { UserProfileComponent } from 'projects/catalog/src/app/user/user-profile/user-profile.component';
 import { NotificationListComponent, OauthAuthenticationService } from 'toco-lib';
 import { HomeRevistasmesComponent } from './home/home.component';
 
@@ -93,7 +93,7 @@ const routes: Routes = [
       // },
       {
         path: '',
-        component: MySourcesComponent,
+        component: PermissionsComponent,
       },
     ],
     canActivate: [OauthAuthenticationService],

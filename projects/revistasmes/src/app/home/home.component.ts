@@ -6,7 +6,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { OAuthStorage } from 'angular-oauth2-oidc';
-import { DialogCatalogJournalInfoDialog } from 'projects/catalog/src/app/catalog-old/catalog.component';
+import { DialogCatalogJournalInfoDialog } from 'projects/catalog/src/app/catalog/catalog.component';
 import { Environment, Hit, Journal, JournalVersion, MessageHandler, Organization, OrganizationServiceNoAuth, ResponseStatus, SourceService, SourceServiceNoAuth, SourceTypes, StatusCode } from 'toco-lib';
 
 @Component({
