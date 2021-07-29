@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CoreModule, OrganizationsModule, SharedModule, TocoFormsModule } from 'toco-lib';
 import { MySourcesEditorComponent } from './editor/editor.component';
 import { MySourcesManagerComponent, MySourcesManagerPermissionDialog } from './manager/manager.component';
 import { MySourcesOrganizationsComponent, MySourcesOrganizationsPermissionDialog } from './organizations/organizations.component';
@@ -10,6 +12,7 @@ import { PermissionsRoutingModule } from './permissions-routing.module';
 import { PermissionsComponent } from './permissions.component';
 import { MySourcesTermsAdminComponent } from './terms-admin/terms-admin.component';
 import { MySourcesTermsComponent, MySourcesTermsPermissionDialog } from './terms/terms.component';
+import { UserSearchComponent } from './user-search/user-search.component';
 
 
 
@@ -27,6 +30,7 @@ import { MySourcesTermsComponent, MySourcesTermsPermissionDialog } from './terms
     MySourcesSourcePermissionComponent,
     MySourcesOrganizationPermissionComponent,
     MySourcesTermPermissionComponent,
+    UserSearchComponent
   ],
   entryComponents: [
       MySourcesManagerPermissionDialog,
@@ -34,7 +38,12 @@ import { MySourcesTermsComponent, MySourcesTermsPermissionDialog } from './terms
       MySourcesTermsPermissionDialog,],
   imports: [
     CommonModule,
-    PermissionsRoutingModule
+    PermissionsRoutingModule,
+    SharedModule,
+    CoreModule,
+    TocoFormsModule,
+    OrganizationsModule,
+    ReactiveFormsModule
   ]
 })
 export class PermissionsModule { }

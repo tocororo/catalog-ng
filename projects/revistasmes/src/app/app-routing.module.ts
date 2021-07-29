@@ -13,7 +13,7 @@ import { SourceViewComponent } from 'projects/catalog/src/app/catalog/source-vie
 import { PermissionsComponent } from 'projects/catalog/src/app/permissions/permissions.component';
 import { SourceResolver, SourceResolverAuth } from 'projects/catalog/src/app/source-resolver';
 import { StaticPagesComponent } from 'projects/catalog/src/app/static-pages/static-pages.component';
-import { UserProfileComponent } from 'projects/catalog/src/app/user/user-profile/user-profile.component';
+import { UserProfileComponent } from 'projects/catalog/src/app/user-profile/user-profile.component';
 import { NotificationListComponent, OauthAuthenticationService } from 'toco-lib';
 import { HomeRevistasmesComponent } from './home/home.component';
 

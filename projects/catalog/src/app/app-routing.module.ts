@@ -5,7 +5,7 @@ import { NotificationListComponent, OauthAuthenticationService } from 'toco-lib'
 import { HomeComponent } from './home/home.component';
 import { SourceResolver, SourceResolverAuth } from './source-resolver';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
-import { UserProfileComponent } from './user/user-profile/user-profile.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 

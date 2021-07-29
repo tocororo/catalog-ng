@@ -100,7 +100,7 @@ export class HomeComponent implements OnInit {
     }
 
     init(){
-      this.sourceServiceNoAuth.getSourcesStats(this.topMainOrganization.id).subscribe(
+      this.sourceServiceNoAuth.getSourcesStats(null).subscribe(
         response => {
           if(response && response.status == ResponseStatus.SUCCESS){
               this.stats = response.data.aggr;
@@ -116,6 +116,18 @@ export class HomeComponent implements OnInit {
                 }
                 if (element.source_type == SourceTypes.POPULARIZATION.value) {
                   element['label'] = SourceTypes.POPULARIZATION.label;
+                  types.push(element);
+                }
+                if (element.source_type == SourceTypes.REPOSITORY.value) {
+                  element['label'] = SourceTypes.REPOSITORY.label;
+                  types.push(element);
+                }
+                if (element.source_type == SourceTypes.WEBSITE.value) {
+                  element['label'] = SourceTypes.WEBSITE.label;
+                  types.push(element);
+                }
+                if (element.source_type == SourceTypes.OTHER.value) {
+                  element['label'] = SourceTypes.OTHER.label;
                   types.push(element);
                 }
               });

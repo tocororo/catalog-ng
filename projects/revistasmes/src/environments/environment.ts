@@ -6,10 +6,10 @@ import { Environment } from 'toco-lib';
 
 class EnvironmentImpl implements Environment {
   production = false;
-  sceibaHost = 'https://sceiba.cu/';
-  cuorHost = 'https://orgs.sceiba.cu/';
-  sceibaApi = 'https://sceiba.cu/api/';
-  cuorApi = 'https://orgs.sceiba.cu/api/';
+  sceibaHost = 'https://192.168.1.102:5000/';
+  cuorHost = 'https://192.168.1.102:5001/';
+  sceibaApi = 'https://192.168.1.102:5000/api/';
+  cuorApi = 'https://192.168.1.102:5001/api/';
 
   appHost = 'https://127.0.0.1:4200';
   appName = 'Registro de Revistas Científicas del MES';

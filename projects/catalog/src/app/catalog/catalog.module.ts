@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { CoreModule, OrganizationsModule, SharedModule, TocoFormsModule } from 'toco-lib';
 import { CatalogRoutingModule } from './catalog-routing.module';
 import { CatalogComponent, DialogCatalogJournalInfoDialog } from './catalog.component';
 import { FiltersComponent } from './filters/filters.component';
@@ -52,7 +53,11 @@ import { SourceViewComponent, SourceViewSaveDialog } from './source-view/source-
   ],
   imports: [
     CommonModule,
-    CatalogRoutingModule
+    CatalogRoutingModule,
+    SharedModule,
+    CoreModule,
+    TocoFormsModule,
+    OrganizationsModule
   ]
 })
 export class CatalogModule { }

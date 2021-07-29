@@ -21,8 +21,7 @@ import { AppComponent } from './app.component';
 import { SceibaFooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
-import { UserProfileComponent } from './user/user-profile/user-profile.component';
-import { UserSearchComponent } from './user/user-search/user-search.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 
@@ -39,8 +38,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     HomeComponent,
     SceibaFooterComponent,
     StaticPagesComponent,
-    UserProfileComponent,
-    UserSearchComponent
+    UserProfileComponent
   ],
   imports: [
     BrowserAnimationsModule,

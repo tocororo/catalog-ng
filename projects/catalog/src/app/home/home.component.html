@@ -7,25 +7,6 @@
 </ng-container>
 
 <ng-container *ngIf="stats">
-  <div class="m-1" fxLayout="row" fxLayoutAlign="center">
-    <mat-card class="w-60" fxLayout="row wrap" fxLayoutAlign="center">
-      <img
-        fxFlex="2 1 calc(80% - 100px)"
-        height="250"
-        matCardImage
-        style="margin-bottom: -16px; object-fit: cover"
-        src="assets/images/photo-of-people-having-meeting.jpg"
-      />
-
-      <mat-card-content fxLayout="column" style="padding: 2em">
-        <h2>{{ stats.sources_count }} Revistas</h2>
-        <h2>{{ records }} Artículos</h2>
-        <h2 *ngIf="stats.org.metadata.relationships">
-          {{ stats.org.metadata.relationships.length }} Instituciones
-        </h2>
-      </mat-card-content>
-    </mat-card>
-  </div>
   <section
     fxLayout="row wrap"
     fxLayout.xs="column"
@@ -33,9 +14,29 @@
     fxLayoutGap="2em"
     style="padding: 1em"
   >
+  <div class="text" markdown [src]="assets/markdown/home.md" style="margin: 2em;"></div>
+
+  <mat-card class="w-card" [ngStyle]="{ 'min-height': '160px' }">
+    <mat-card-title-group>
+      <mat-card-title>Últimos Ingresos</mat-card-title>
+    </mat-card-title-group>
+    <mat-card-content>
+      <mat-nav-list dense>
+        <a
+          mat-list-item
+          *ngFor="let source of stats.last_sources"
+          (click)="viewJournal(source.id)"
+        >
+          {{ source.name }}
+        </a>
+        <!-- <a mat-list-item href="">Revista Cubana de Ciencia de la Información</a>
+      <a mat-list-item href="">Revista 16 de Abril</a> -->
+      </mat-nav-list>
+    </mat-card-content>
+  </mat-card>
   <mat-card class="w-card">
     <mat-card-title-group>
-      <mat-card-title>Tipo de Revistas</mat-card-title>
+      <mat-card-title>Tipo de Fuente</mat-card-title>
       <!-- <mat-card-subtitle>Subtitle</mat-card-subtitle> -->
       <!-- <img matCardImage src="Side image"> -->
     </mat-card-title-group>
@@ -65,23 +66,59 @@
       </mat-nav-list>
     </mat-card-content>
   </mat-card>
-    <mat-card class="w-card" [ngStyle]="{ 'min-height': '160px' }">
-      <mat-card-title-group>
-        <mat-card-title>Últimos Ingresos</mat-card-title>
-      </mat-card-title-group>
-      <mat-card-content>
-        <mat-nav-list dense>
+  <mat-card class="w-card">
+    <mat-card-title-group>
+      <mat-card-title>Materias</mat-card-title>
+    </mat-card-title-group>
+    <mat-card-content>
+      <mat-nav-list dense>
+        <p *ngFor="let item of stats.subjects">
           <a
             mat-list-item
-            *ngFor="let source of stats.last_sources"
-            (click)="viewJournal(source.id)"
+            *ngIf="!item.source_count || item.source_count == 0"
+            [routerLink]="['/directory']"
+            [queryParams]="{ term: item.uuid }"
           >
-            {{ source.name }}
+            {{ item.description }}
           </a>
-          <!-- <a mat-list-item href="">Revista Cubana de Ciencia de la Información</a>
-        <a mat-list-item href="">Revista 16 de Abril</a> -->
-        </mat-nav-list>
-      </mat-card-content>
-    </mat-card>
+          <a
+            mat-list-item
+            *ngIf="item.source_count > 0"
+            [routerLink]="['/directory']"
+            [queryParams]="{ term: item.uuid }"
+          >
+            {{ item.description }} - {{ item.source_count }}
+          </a>
+        </p>
+      </mat-nav-list>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="w-card">
+    <mat-card-title-group>
+      <mat-card-title>Indices</mat-card-title>
+    </mat-card-title-group>
+    <mat-card-content>
+      <mat-nav-list dense>
+        <p *ngFor="let item of stats.indexes">
+          <a
+            mat-list-item
+            *ngIf="!item.source_count || item.source_count == 0"
+            [routerLink]="['/directory']"
+            [queryParams]="{ term: item.uuid }"
+          >
+            {{ item.description }}
+          </a>
+          <a
+            mat-list-item
+            *ngIf="item.source_count > 0"
+            [routerLink]="['/directory']"
+            [queryParams]="{ term: item.uuid }"
+          >
+            {{ item.description }} - {{ item.source_count }}
+          </a>
+        </p>
+      </mat-nav-list>
+    </mat-card-content>
+  </mat-card>
   </section>
 </ng-container>

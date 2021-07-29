@@ -6,8 +6,8 @@
 import { Component } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent } from '@angular/router';
 import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
-import { PartialObserver, Subscription } from 'rxjs';
-import { OauthAuthenticationService, OauthInfo, Environment, UserProfile } from 'toco-lib';
+import { Subscription } from 'rxjs';
+import { Environment, OauthAuthenticationService, OauthInfo, UserProfile } from 'toco-lib';
 
 
 @Component({
@@ -29,7 +29,7 @@ export class AppComponent {
     oauthClientId: this.environment.oauthClientId,
     oauthScope: this.environment.oauthScope,
   }
-  
+
     public title = 'Registro de Revistas Científicas del MES';
 
     public isOnline: boolean;
@@ -76,14 +76,17 @@ export class AppComponent {
     }
     ngOnInit(): void {
         let request = JSON.parse(this.oauthStorage.getItem('user'));
+        console.log('request',request);
+
         if (request){
-          this.userProfile = request.data.userprofile;
+          this.userProfile = request.data;
         }
-        
+
         console.log(this.userProfile)
           this.authenticateSuscription = this.authenticateService.authenticationSubjectObservable.subscribe(
             (request) => {
               if (request != null) {
+                console.log('request',request);
                 this.userProfile = request.data.userprofile;
                 // if (this.oauthStorage.getItem('access_token')) {
                 //   this.user = this.oauthStorage.getItem('email');
