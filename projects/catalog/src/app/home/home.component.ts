@@ -15,9 +15,6 @@ import { Environment, Hit, Journal, JournalVersion, MessageHandler, Organization
 })
 export class HomeComponent implements OnInit {
 
-    public topOrganizationPID: string;
-    public topMainOrganization: Hit<Organization> = null;
-
     public institutionsCount: number;
 
     public records: number;
@@ -41,37 +38,13 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
 
-        if (this.environment.topOrganizationPID) {
-          this.topOrganizationPID = this.environment.topOrganizationPID;
-          if (localStorage.getItem('topMainOrganization') && localStorage.getItem('topMainOrganization') != '' ) {
-            const response = JSON.parse(localStorage.getItem('topMainOrganization'));
-            this.topMainOrganization = response;
-            // new Organization();
-            // this.topMainOrganization.deepcopy(response.metadata);
-            this.init();
-          } else {
-          this.orgService.getOrganizationByPID(this.topOrganizationPID).subscribe(
-            (response) => {
-              // console.log(response)
-              this.topMainOrganization = response;
-              // new Organization();
-              // this.topMainOrganization.deepcopy(response.metadata);
-              localStorage.setItem('topMainOrganization', JSON.stringify(response));
-              this.init();
-            },
-            (error) => {
-              console.log("error");
-              this.error = true;
-            },
-            () => {}
-          );
-          }
-        }
+
         this.institutionsCount = 0;
         this.records = 0;
         this.sourcesCount = 0;
 
         this.lastSources = new Array();
+        this.init()
 
         // this.catalogService.getSourcesOrgAggregation(this.topOrganizationPID).subscribe(
         //     response => {
@@ -120,6 +93,10 @@ export class HomeComponent implements OnInit {
                 }
                 if (element.source_type == SourceTypes.REPOSITORY.value) {
                   element['label'] = SourceTypes.REPOSITORY.label;
+                  types.push(element);
+                }
+                if (element.source_type == SourceTypes.SERIAL.value) {
+                  element['label'] = SourceTypes.SERIAL.label;
                   types.push(element);
                 }
                 if (element.source_type == SourceTypes.WEBSITE.value) {

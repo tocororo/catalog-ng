@@ -6,10 +6,10 @@ import { Environment } from 'toco-lib';
 
 class EnvironmentImpl implements Environment {
   production = false;
-  sceibaHost = 'https://192.168.1.102:5000/';
-  cuorHost = 'https://192.168.1.102:5001/';
-  sceibaApi = 'https://192.168.1.102:5000/api/';
-  cuorApi = 'https://192.168.1.102:5001/api/';
+  sceibaHost = 'https://127.0.0.1:5000/';
+  cuorHost = 'https://127.0.0.1:5001/';
+  sceibaApi = 'https://127.0.0.1:5000/api/';
+  cuorApi = 'https://127.0.0.1:5001/api/';
 
   appHost = 'https://127.0.0.1:4200';
   appName = 'Sceiba Catalogo';
@@ -20,7 +20,7 @@ class EnvironmentImpl implements Environment {
   oauthRedirectUri = 'https://127.0.0.1:4200/';
   oauthClientId = 'PWjZsqMDI2RHZ5Hs0ZGli6Z5F5cF6xZ7t1AhiDUM';
   oauthScope = 'user:email';
-  topOrganizationPID = 'orgaid.223';
+  topOrganizationPID = '';
   cachableUrls = [];
 
   matomoUrl = 'https://crai-stats.upr.edu.cu/';

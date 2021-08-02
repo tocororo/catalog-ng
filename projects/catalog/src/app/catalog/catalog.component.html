@@ -35,7 +35,7 @@
     </mat-toolbar>
 
     <toco-progress
-      [loading]="!topMainOrganization"
+      [loading]="!initfilters"
       [position]="'absolute'"
     ></toco-progress>
 
@@ -43,7 +43,7 @@
       fxLayout="{{ currentlayout.layout }}"
       fxLayout.xs="column nowrap"
       fxLayoutAlign="{{ currentlayout.aling }}"
-      *ngIf="topMainOrganization"
+      *ngIf="initfilters"
     >
       <catalog-search-filters
         fxLayout="row wrap"

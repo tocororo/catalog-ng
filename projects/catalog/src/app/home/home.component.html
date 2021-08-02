@@ -14,7 +14,16 @@
     fxLayoutGap="2em"
     style="padding: 1em"
   >
-  <div class="text" markdown [src]="assets/markdown/home.md" style="margin: 2em;"></div>
+  <mat-card class="w-card" [ngStyle]="{ 'min-height': '160px' }">
+    <mat-card-title-group>
+      <mat-card-title>{{ 'SCEIBA_CATALOGO' | translate }}</mat-card-title>
+    </mat-card-title-group>
+    <mat-card-content>
+      <div class="text" markdown [src]="'assets/markdown/home.md'" style="margin: 2em;"></div>
+    </mat-card-content>
+  </mat-card>
+
+
 
   <mat-card class="w-card" [ngStyle]="{ 'min-height': '160px' }">
     <mat-card-title-group>
@@ -34,7 +43,8 @@
       </mat-nav-list>
     </mat-card-content>
   </mat-card>
-  <mat-card class="w-card">
+
+  <mat-card class="w-card" [ngStyle]="{ 'min-height': '160px' }">
     <mat-card-title-group>
       <mat-card-title>Tipo de Fuente</mat-card-title>
       <!-- <mat-card-subtitle>Subtitle</mat-card-subtitle> -->
@@ -47,7 +57,7 @@
           <a
             mat-list-item
             *ngIf="!item.source_count || item.source_count == 0"
-            [routerLink]="['/directory']"
+            [routerLink]="['/sources']"
             [queryParams]="{ source_type: item.source_type }"
           >
             {{ item.label }}
@@ -55,18 +65,19 @@
           <a
             mat-list-item
             *ngIf="item.source_count > 0"
-            [routerLink]="['/directory']"
+            [routerLink]="['/sources']"
             [queryParams]="{ source_type: item.source_type }"
           >
             {{ item.label }} - {{ item.source_count }}
           </a>
         </p>
-        <!-- <a mat-list-item [routerLink]="['/directory']" [queryParams]="{source_type: 'POPULARIZATION'}">Revistas Dibulgación Científicas</a>
-        <a mat-list-item [routerLink]="['/directory']" [queryParams]="{source_type: 'JOURNAL'}">Revistas Científicas</a> -->
+        <!-- <a mat-list-item [routerLink]="['/sources']" [queryParams]="{source_type: 'POPULARIZATION'}">Revistas Dibulgación Científicas</a>
+        <a mat-list-item [routerLink]="['/sources']" [queryParams]="{source_type: 'JOURNAL'}">Revistas Científicas</a> -->
       </mat-nav-list>
     </mat-card-content>
   </mat-card>
-  <mat-card class="w-card">
+
+  <mat-card class="w-card" [ngStyle]="{ 'min-height': '160px' }">
     <mat-card-title-group>
       <mat-card-title>Materias</mat-card-title>
     </mat-card-title-group>
@@ -76,16 +87,16 @@
           <a
             mat-list-item
             *ngIf="!item.source_count || item.source_count == 0"
-            [routerLink]="['/directory']"
-            [queryParams]="{ term: item.uuid }"
+            [routerLink]="['/sources']"
+            [queryParams]="{ subjects: item.uuid }"
           >
             {{ item.description }}
           </a>
           <a
             mat-list-item
             *ngIf="item.source_count > 0"
-            [routerLink]="['/directory']"
-            [queryParams]="{ term: item.uuid }"
+            [routerLink]="['/sources']"
+            [queryParams]="{ subjects: item.uuid }"
           >
             {{ item.description }} - {{ item.source_count }}
           </a>
@@ -93,7 +104,8 @@
       </mat-nav-list>
     </mat-card-content>
   </mat-card>
-  <mat-card class="w-card">
+
+  <mat-card class="w-card" [ngStyle]="{ 'min-height': '160px' }">
     <mat-card-title-group>
       <mat-card-title>Indices</mat-card-title>
     </mat-card-title-group>
@@ -103,16 +115,16 @@
           <a
             mat-list-item
             *ngIf="!item.source_count || item.source_count == 0"
-            [routerLink]="['/directory']"
-            [queryParams]="{ term: item.uuid }"
+            [routerLink]="['/sources']"
+            [queryParams]="{ indexes: item.uuid }"
           >
             {{ item.description }}
           </a>
           <a
             mat-list-item
             *ngIf="item.source_count > 0"
-            [routerLink]="['/directory']"
-            [queryParams]="{ term: item.uuid }"
+            [routerLink]="['/sources']"
+            [queryParams]="{ indexes: item.uuid }"
           >
             {{ item.description }} - {{ item.source_count }}
           </a>

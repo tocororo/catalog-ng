@@ -59,6 +59,7 @@ import { CatalogFilterKeys } from "./filters/filters.component";
 export class CatalogComponent implements OnInit, OnChanges {
   // journalList: Journal[] = [];
   loading = true;
+  initfilters = false;
   private hasErrors = false;
   dataSource = new MatTableDataSource<Journal>();
   columnsToDisplay = ["title", "rnps", "p-issn"];//, "url"];
@@ -121,7 +122,7 @@ export class CatalogComponent implements OnInit, OnChanges {
   // @ViewChild(FiltersComponent, { static: true }) filters: FiltersComponent;
 
   ngOnInit() {
-    if (this.environment.topOrganizationPID) {
+    if (this.environment.topOrganizationPID != '') {
       this.topOrganizationPID = this.environment.topOrganizationPID;
       if (localStorage.getItem('topMainOrganization') && localStorage.getItem('topMainOrganization') != '') {
         const response = JSON.parse(localStorage.getItem('topMainOrganization'));
@@ -145,9 +146,12 @@ export class CatalogComponent implements OnInit, OnChanges {
           () => { }
         );
       }
+    } else {
+      this.init();
     }
     // TODO: si no hay un top level organization entonces hay que usar otro tipo de control para las organizaciones...
   }
+
   init() {
     this.metadata.setStandardMeta("Catálogo de Revistas Científicas", "", "");
     // this.paginator.firstPage();
@@ -189,6 +193,8 @@ export class CatalogComponent implements OnInit, OnChanges {
             CatalogFilterKeys.source_type,
             params.get(CatalogFilterKeys.source_type)
           );
+        } else {
+          this.searchParams = this.searchParams.delete(CatalogFilterKeys.source_type);
         }
         // TODO: this is not nice, but..
         let query = "";
@@ -254,9 +260,10 @@ export class CatalogComponent implements OnInit, OnChanges {
         }
 
         this.searchParams = this.searchParams.set("q", query);
-        console.log(this.searchParams);
+        console.log(this.searchParams, 'SEARCH PAAAAAARAMS');
 
         this.fetchJournalData();
+        this.initfilters = true;
 
         console.log('catalog comonent', params, this.filtersParams);
       },

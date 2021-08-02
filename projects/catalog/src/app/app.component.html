@@ -19,10 +19,11 @@
         style="white-space: normal; display: flex; align-items: center"
       >
         <img
-          src="/assets/icons/logo.sceiba.letras.svg"
-          alt="Sceiba"
+          src="/assets/icons/catalog.svg"
+          alt="{{ 'SCEIBA_CATALOGO' | translate }}"
           style="height: 50px; margin-right: 6px"
         />
+        <span class="mat-h3">{{ 'SCEIBA_CATALOGO' | translate }}</span>
       </a>
     </div>
 
@@ -102,7 +103,7 @@
   >
     <a mat-button [routerLink]="['/']" value="Inicio">Inicio</a>
     <!-- <a mat-button [routerLink]="['/about']" value="Acerca de">Acerca de</a> -->
-    <a mat-button [routerLink]="['/directory']" value="Catálogo">Directorio</a>
+    <a mat-button [routerLink]="['/sources']" value="Catálogo">Directorio</a>
     <a mat-button [routerLink]="['/']" value="Reportes y estadísticas">Reportes y estadísticas</a>
 
     <a mat-button [routerLink]="['/inst-repo/876acbf2-5a67-4b5c-92ca-040761d54595/view']" value="RepoInst">[View - Repositorio Institucional]</a>

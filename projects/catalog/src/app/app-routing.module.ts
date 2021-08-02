@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: 'sources',
     loadChildren: () => import('./catalog/catalog.module').then(m => m.CatalogModule),
-    canActivate: [OauthAuthenticationService]
+    // canActivate: [OauthAuthenticationService]
   },
   {
     path: 'permissions',
