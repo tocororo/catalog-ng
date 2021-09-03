@@ -29,7 +29,7 @@ import {
 
   Params, Router
 } from "@angular/router";
-import { Environment, FilterHttpMap, Hit, Journal, JournalData, JournalVersion, MessageHandler, MetadataService, Organization, OrganizationServiceNoAuth, SourceServiceNoAuth, StatusCode } from 'toco-lib';
+import { Environment, FilterHttpMap, Hit, Journal, JournalData, JournalVersion, MessageHandler, MetadataService, Organization, OrganizationServiceNoAuth, Source, SourceServiceNoAuth, StatusCode } from 'toco-lib';
 import { CatalogFilterKeys } from "./filters/filters.component";
 
 
@@ -61,9 +61,9 @@ export class CatalogComponent implements OnInit, OnChanges {
   loading = true;
   initfilters = false;
   private hasErrors = false;
-  dataSource = new MatTableDataSource<Journal>();
-  columnsToDisplay = ["title", "rnps", "p-issn"];//, "url"];
-  expandedElement: Journal;
+  dataSource = new MatTableDataSource<Source>();
+  columnsToDisplay = ["title"];//, "url"];
+  expandedElement: Source;
   length = 0;
   pageSize = 5;
   pageIndex = 0;
@@ -319,13 +319,14 @@ export class CatalogComponent implements OnInit, OnChanges {
       (values) => {
         this.length = values.hits.total;
 
-        const arr = new Array<Journal>();
+        const arr = new Array<Source>();
         values.hits.hits.forEach((item) => {
-          console.log(item);
-          const j = new Journal();
+          console.log(item,);
+          const j = new Source();
           j.deepcopy(item.metadata);
           j.uuid = item.metadata["source_uuid"];
           j.data.deepcopy(item.metadata);
+          j.id = item.id;
           console.log(j);
 
           arr.push(j);

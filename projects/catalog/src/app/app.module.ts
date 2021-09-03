@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MarkdownModule } from 'ngx-markdown';
 import {
   AngularMaterialModule, AuthenticationModule, CoreModule, Environment,
@@ -22,6 +23,7 @@ import { SceibaFooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 
 
@@ -38,11 +40,13 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     HomeComponent,
     SceibaFooterComponent,
     StaticPagesComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserAnimationsModule,
     SharedModule,
+    NgxChartsModule,
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,

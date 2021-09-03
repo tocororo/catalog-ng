@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SourceTypes, SourceVersion, SourceService, JournalData, JournalVersion, SourceData, MessageHandler, StatusCode } from 'toco-lib';
+import { SourceTypes, SourceVersion, SourceService, JournalData, JournalVersion, SourceData, MessageHandler, StatusCode, IdentifierSchemas } from 'toco-lib';
 @Component({
   selector: 'catalog-source-view-read',
   templateUrl: './source-view-read.component.html',
@@ -9,6 +9,8 @@ import { SourceTypes, SourceVersion, SourceService, JournalData, JournalVersion,
 })
 export class SourceViewReadComponent implements OnInit {
   public sourceType = SourceTypes;
+  public IdentifierSchemas = IdentifierSchemas;
+
   public source: SourceVersion;
   public editingSource: SourceVersion;
   public dialogCommentText = "";
@@ -26,8 +28,8 @@ export class SourceViewReadComponent implements OnInit {
       (response) => {
         console.log("VIEW READ SOURCE")
         console.log(response);
-        if (response.record && response.record.metadata) {
-          let src = response.record.metadata;
+        if (response.source && response.source.metadata) {
+          let src = response.source.metadata;
           let data;
           switch (src.source_type) {
             case this.sourceType.JOURNAL.value:
@@ -42,8 +44,10 @@ export class SourceViewReadComponent implements OnInit {
               data = new SourceData();
               data.deepcopy(src);
               this.source = new SourceVersion();
-              this.source.source_uuid = data.id;
+              this.source.id = response.source.id;
+              this.source.source_uuid = response.source.id;
               this.source.data.deepcopy(data);
+              this.source.data.id = response.source.id;
           }
         } else {
           const m = new MessageHandler(this._snackBar);
@@ -58,5 +62,12 @@ export class SourceViewReadComponent implements OnInit {
       }
     );
   }
+  getIdentifier(idtype: IdentifierSchemas) {
+    var r = this.source
+    ? this.source.data.getIdentifierValue(idtype)
+    : "";
+
+  return r;
+}
 
 }

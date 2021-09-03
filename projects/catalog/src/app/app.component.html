@@ -101,14 +101,14 @@
     fxLayoutAlign="center center"
     style="height: auto !important; min-height: 56px"
   >
-    <a mat-button [routerLink]="['/']" value="Inicio">Inicio</a>
+    <a mat-button [routerLink]="['/']" value="Inicio">{{ 'HOME' | translate }}</a>
     <!-- <a mat-button [routerLink]="['/about']" value="Acerca de">Acerca de</a> -->
-    <a mat-button [routerLink]="['/sources']" value="Catálogo">Directorio</a>
-    <a mat-button [routerLink]="['/']" value="Reportes y estadísticas">Reportes y estadísticas</a>
+    <a mat-button [routerLink]="['/sources']" value="Catálogo">{{ 'CATALOGO' | translate }}</a>
+    <a mat-button [routerLink]="['/statistics']" value="Reportes y estadísticas">{{ 'REPORTS_STATISTICS' | translate }}</a>
 
-    <a mat-button [routerLink]="['/inst-repo/876acbf2-5a67-4b5c-92ca-040761d54595/view']" value="RepoInst">[View - Repositorio Institucional]</a>
+    <!-- <a mat-button [routerLink]="['/inst-repo/876acbf2-5a67-4b5c-92ca-040761d54595/view']" value="RepoInst">[View - Repositorio Institucional]</a>
     <a mat-button [routerLink]="['/inst-repo/add']" value="RepoInst">[Add - Repositorio Institucional]</a>
-    <a mat-button [routerLink]="['/inst-repo/876acbf2-5a67-4b5c-92ca-040761d54595/edit']" value="RepoInst">[Edit - Repositorio Institucional]</a>
+    <a mat-button [routerLink]="['/inst-repo/876acbf2-5a67-4b5c-92ca-040761d54595/edit']" value="RepoInst">[Edit - Repositorio Institucional]</a> -->
 
     <a
       mat-button

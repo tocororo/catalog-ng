@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SourceResolverAuth } from '../source-resolver';
+import { SourceResolver, SourceResolverAuth } from '../source-resolver';
 import { CatalogComponent } from './catalog.component';
 import { SourceEditComponent } from './source-edit/source-edit.component';
 import { SourceInclusionComponent } from './source-inclusion/source-inclusion.component';
+import { SourceViewReadComponent } from './source-view/source-view-read/source-view-read.component';
 import { SourceViewComponent } from './source-view/source-view.component';
 
 
@@ -20,6 +21,13 @@ const routes: Routes = [
         component: SourceInclusionComponent,
       },
     ],
+  },
+  {
+    path: ':uuid',
+    component: SourceViewReadComponent,
+    resolve: {
+      source: SourceResolver,
+    },
   },
   {
     path: ':uuid/view',

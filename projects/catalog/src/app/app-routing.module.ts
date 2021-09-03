@@ -5,6 +5,7 @@ import { NotificationListComponent, OauthAuthenticationService } from 'toco-lib'
 import { HomeComponent } from './home/home.component';
 import { SourceResolver, SourceResolverAuth } from './source-resolver';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
@@ -27,22 +28,22 @@ const routes: Routes = [
   },{
     path: 'faq',
     component: StaticPagesComponent,
-    data: { src: 'assets/markdown/faq.md', title: 'FAQ' },
+    data: { src: 'assets/markdown/faq', title: 'FAQ' },
   },
   {
     path: 'about',
     component: StaticPagesComponent,
-    data: { src: 'assets/markdown/about.md', title: 'Sobre Nosotros' },
+    data: { src: 'assets/markdown/about', title: 'Sobre Nosotros' },
   },
   {
     path: 'help',
     component: StaticPagesComponent,
-    data: { src: 'assets/markdown/help.md', title: 'Ayuda' },
+    data: { src: 'assets/markdown/help', title: 'Ayuda' },
   },
   {
     path: 'contact',
     component: StaticPagesComponent,
-    data: { src: 'assets/markdown/contact.md', title: 'Contacto' },
+    data: { src: 'assets/markdown/contact', title: 'Contacto' },
   },
   {
     path: 'userprofile',
@@ -53,6 +54,10 @@ const routes: Routes = [
     path: 'notifications',
     component: NotificationListComponent,
     canActivate: [OauthAuthenticationService]
+  },
+  {
+    path: 'statistics',
+    component: StatisticsComponent,
   },
   {
     path: '',

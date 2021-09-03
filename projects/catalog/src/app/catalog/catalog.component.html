@@ -6,7 +6,7 @@
 
     <mat-toolbar>
       <mat-toolbar-row fxLayout="row wrap" fxLayoutAlign="space-between center">
-        <h1>Directorio</h1>
+        <h1>{{ 'CATALOGO' | translate }}</h1>
 
         <div fxLayoutAlign="end center" fxLayout="row">
           <button mat-icon-button [matMenuTriggerFor]="menu">
@@ -113,14 +113,14 @@
                   <!-- <button
                     mat-stroked-button
                     color="primary"
-                    (click)="viewJournal(element.id)"
+                    (click)="viewJournal(element.data.id)"
                   >
                     Ver
                   </button> -->
                   <a
                     mat-stroked-button
                     color="primary"
-                    [routerLink]="['/directory', element.id]"
+                    [routerLink]="['/sources', element.id]"
                     style="white-space: normal"
                     >Ir</a
                   >

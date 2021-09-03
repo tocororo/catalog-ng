@@ -1,3 +1,4 @@
+# Catálogo de Sceiba
 * Aplicación para la búsqueda y gestión de las fuentes primarias de Sceiba. 
 * Controla el proceso de recolección de resultados de investigación de fuentes primarias.
 
