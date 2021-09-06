@@ -10,6 +10,7 @@ import { MySourcesSourcePermissionComponent } from './permission/source-permissi
 import { MySourcesTermPermissionComponent } from './permission/term-permission/term-permission.component';
 import { PermissionsRoutingModule } from './permissions-routing.module';
 import { PermissionsComponent } from './permissions.component';
+import { RoleComponent } from './role/role.component';
 import { MySourcesTermsAdminComponent } from './terms-admin/terms-admin.component';
 import { MySourcesTermsComponent, MySourcesTermsPermissionDialog } from './terms/terms.component';
 import { UserSearchComponent } from './user-search/user-search.component';
@@ -30,7 +31,8 @@ import { UserSearchComponent } from './user-search/user-search.component';
     MySourcesSourcePermissionComponent,
     MySourcesOrganizationPermissionComponent,
     MySourcesTermPermissionComponent,
-    UserSearchComponent
+    UserSearchComponent,
+    RoleComponent
   ],
   entryComponents: [
       MySourcesManagerPermissionDialog,
