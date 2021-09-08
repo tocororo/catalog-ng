@@ -62,6 +62,7 @@ export class CatalogComponent implements OnInit, OnChanges {
   initfilters = false;
   private hasErrors = false;
   dataSource = new MatTableDataSource<Source>();
+  filteredDataSource = new MatTableDataSource<Source>();
   columnsToDisplay = ["title"];//, "url"];
   expandedElement: Source;
   length = 0;
@@ -332,6 +333,7 @@ export class CatalogComponent implements OnInit, OnChanges {
           arr.push(j);
         });
         this.dataSource.data = arr;
+        this.filteredDataSource.data = arr;
         console.log(values);
       },
       (err: any) => {
@@ -402,6 +404,9 @@ export class CatalogComponent implements OnInit, OnChanges {
       },
       () => { }
     );
+  }
+  onFilteredData(filteredData) {
+    this.filteredDataSource.data = filteredData;
   }
 }
 

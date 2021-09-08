@@ -63,10 +63,16 @@
           [loading]="isLoading()"
           [position]="'absolute'"
         ></toco-progress>
+
+        <catalog-toco-search
+        [data]="dataSource.data"
+        (filteredData)="onFilteredData($event)"
+        ></catalog-toco-search>
+
         <table
           *ngIf="!isEmpty()"
           mat-table
-          [dataSource]="dataSource"
+          [dataSource]="filteredDataSource"
           multiTemplateDataRows
         >
           <ng-container matColumnDef="title">
