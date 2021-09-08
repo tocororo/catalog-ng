@@ -1,0 +1,26 @@
+:host ::ng-deep {
+.mat-form-field-flex{
+  //height: 74px;
+  font-size: 17px;
+}
+  }
+
+.container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+}
+
+.input-field {
+  padding-top: 31.5px;
+  min-width: 89%;
+  height: 100px;
+}
+
+.form-button {
+  height: 61px;
+  margin-left: 1em;
+  font-size: 17px;
+}

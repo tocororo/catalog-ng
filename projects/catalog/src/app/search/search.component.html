@@ -1,0 +1,16 @@
+<div class="container p-1 w-100">
+<mat-form-field class="input-field" appearance="outline">
+  <mat-label>{{'TOCO_SEARCH_QUERY_INPUT.INPUT_SEARCH_LABEL' | translate}}</mat-label>
+  <input (keyup.enter)="onSearch()"
+         matInput autocomplete="off"
+         placeholder="{{'TOCO_SEARCH_QUERY_INPUT.INPUT_SEARCH_PLACEHOLDER' | translate}}"
+         type="text"
+         [(ngModel)]="value"
+  >
+</mat-form-field>
+    <button mat-raised-button color="primary"
+            class="form-button" (click)="onSearch()"
+    >
+      {{'TOCO_SEARCH_QUERY_INPUT.BUTTON_SEARCH' | translate}}
+    </button>
+</div>
