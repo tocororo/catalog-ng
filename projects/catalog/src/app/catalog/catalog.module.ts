@@ -19,9 +19,10 @@ import { SourceJournalViewVersionTermComponent } from './source-view/journal-vie
 import { SourceJournalViewVersionComponent } from './source-view/journal-view/version/journal-view-version.component';
 import { SourceViewReadComponent } from './source-view/source-view-read/source-view-read.component';
 import { SourceViewComponent, SourceViewSaveDialog } from './source-view/source-view.component';
+import {SearchComponent} from '../search/search.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
-export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
-{
+export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
@@ -48,6 +49,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     SourceJournalViewVersionComponent,
     SourceJournalViewInfoComponent,
     DialogCatalogJournalInfoDialog,
+    SearchComponent,
   ],
   entryComponents: [
     SourceEditAddIndexComponent,
@@ -66,11 +68,12 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     OrganizationsModule,
     TranslateModule.forChild({
       loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
       }
     }),
+    ReactiveFormsModule,
   ]
 })
 export class CatalogModule { }
