@@ -5,7 +5,7 @@ import {
   NavigationError,
   NavigationStart,
   Router,
-  RouterEvent,
+  RouterEvent
 } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { OAuthService, OAuthStorage } from "angular-oauth2-oidc";
@@ -14,7 +14,7 @@ import {
   Environment,
   OauthAuthenticationService,
   OauthInfo,
-  UserProfile,
+  User
 } from "toco-lib";
 
 @Component({
@@ -68,7 +68,7 @@ export class AppComponent {
   title = "Catálogo";
   isOnline: boolean;
   islogged: boolean;
-  userProfile: UserProfile;
+  user: User;
   loading = false;
   private authenticateSuscription: Subscription = null;
 
@@ -138,15 +138,15 @@ export class AppComponent {
 
     let request = JSON.parse(this.oauthStorage.getItem("user"));
     if (request) {
-      this.userProfile = request.data.userprofile;
+      this.user = request;
     }
 
-    console.log(this.userProfile);
+    console.log(this.user);
     this.authenticateSuscription =
       this.authenticateService.authenticationSubjectObservable.subscribe(
         (request) => {
           if (request != null) {
-            this.userProfile = request.data.userprofile;
+            this.user = request;
             // if (this.oauthStorage.getItem('access_token')) {
             //   this.user = this.oauthStorage.getItem('email');
             // }
@@ -155,7 +155,7 @@ export class AppComponent {
           }
         },
         (error: any) => {
-          this.userProfile = null;
+          this.user = null;
         },
         () => {}
       );
@@ -170,7 +170,7 @@ export class AppComponent {
   public logoff() {
     this.oauthService.logOut();
     this.oauthStorage.removeItem("user");
-    this.userProfile = undefined;
+    this.user = undefined;
   }
 
   /**

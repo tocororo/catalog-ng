@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, OnInit, ViewChild } from "@angular/core";
 import { MatSnackBar } from '@angular/material';
 import { IdentifierSchemas, JournalData, JournalVersion, SourceClasification, SourceService, SourceSystems, SourceTypes, VocabulariesInmutableNames } from 'toco-lib';
 import { SourceEditIndexesComponent } from '../../../source-edit/source-indexes/source-indexes.component';
-import { SourceEditOrganizationsComponent } from '../../../source-edit/source-organizations/source-organizations.component';
+import { SourceEditOrganizationsComponent } from '../../../source-organizations/source-organizations.component';
 ;
 
 /**

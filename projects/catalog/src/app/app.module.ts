@@ -22,9 +22,8 @@ import { AppComponent } from './app.component';
 import { SceibaFooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
 import { StatisticsComponent } from './statistics/statistics.component';
-
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 

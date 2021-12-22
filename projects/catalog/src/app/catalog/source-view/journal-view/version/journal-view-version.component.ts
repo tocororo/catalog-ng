@@ -1,16 +1,10 @@
 import {
-  Component,
-  OnInit,
-  OnChanges,
-  Input,
-  Output,
-  EventEmitter,
-  ViewChild,
+    Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild
 } from "@angular/core";
 import { MatSnackBar } from '@angular/material';
-import { JournalVersion, JournalDataType, SourceClasification, VocabulariesInmutableNames, MessageHandler, StatusCode, SourceOrganization, JournalData } from 'toco-lib';
+import { JournalData, JournalDataType, JournalVersion, MessageHandler, SourceClasification, SourceOrganization, StatusCode, VocabulariesInmutableNames } from 'toco-lib';
 import { SourceEditIndexesComponent } from '../../../source-edit/source-indexes/source-indexes.component';
-import { SourceEditOrganizationsComponent } from '../../../source-edit/source-organizations/source-organizations.component';
+import { SourceEditOrganizationsComponent } from '../../../source-organizations/source-organizations.component';
 
 @Component({
   selector: "catalog-journal-view-version",
