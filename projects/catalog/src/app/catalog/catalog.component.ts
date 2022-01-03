@@ -29,7 +29,7 @@ import {
 
   Params, Router
 } from "@angular/router";
-import { Environment, FilterHttpMap, Hit, Journal, JournalData, JournalVersion, MessageHandler, MetadataService, Organization, OrganizationServiceNoAuth, Source, SourceServiceNoAuth, StatusCode } from 'toco-lib';
+import { Environment, FilterHttpMap, Hit, HitList, Journal, JournalData, JournalVersion, MessageHandler, MetadataService, Organization, OrganizationServiceNoAuth, Source, SourceServiceNoAuth, StatusCode } from 'toco-lib';
 import { CatalogFilterKeys } from "./filters/filters.component";
 
 
@@ -61,7 +61,7 @@ export class CatalogComponent implements OnInit, OnChanges {
   loading = true;
   initfilters = false;
   private hasErrors = false;
-  dataSource = new MatTableDataSource<Source>();
+  dataSource = new HitList<Source>();
   columnsToDisplay = ["title"];//, "url"];
   expandedElement: Source;
   length = 0;
@@ -318,21 +318,21 @@ export class CatalogComponent implements OnInit, OnChanges {
     this.sourceServiceNoAuth.getSources(this.searchParams).subscribe(
       (values) => {
         this.length = values.hits.total;
+        this.dataSource = values.hits;
+        // const arr = new Array<Source>();
+        // values.hits.hits.forEach((item) => {
+        //   console.log(item,);
+        //   const j = new Source();
+        //   j.deepcopy(item.metadata);
+        //   j.uuid = item.metadata["source_uuid"];
+        //   j.data.deepcopy(item.metadata);
+        //   j.id = item.id;
+        //   console.log(j);
 
-        const arr = new Array<Source>();
-        values.hits.hits.forEach((item) => {
-          console.log(item,);
-          const j = new Source();
-          j.deepcopy(item.metadata);
-          j.uuid = item.metadata["source_uuid"];
-          j.data.deepcopy(item.metadata);
-          j.id = item.id;
-          console.log(j);
-
-          arr.push(j);
-        });
-        this.dataSource.data = arr;
-        console.log(values);
+        //   arr.push(j);
+        // });
+        // this.dataSource.data = arr;
+        console.log("------------------------------------------", this.dataSource);
       },
       (err: any) => {
         console.log("error: " + err + ".");
@@ -347,16 +347,18 @@ export class CatalogComponent implements OnInit, OnChanges {
   public onScrollUp() {
     // console.log("scrolled up!!");
   }
-  public isEmpty() {
-    if (this.dataSource.data.length === 0 && this.hasErrors) {
-      //this.loading = false;
-      return true;
-    }
-    return false;
-  }
+  // public isEmpty() {
+  //   if (this.dataSource.data.length === 0 && this.hasErrors) {
+  //     //this.loading = false;
+  //     return true;
+  //   }
+  //   return false;
+  // }
+
   public isLoading() {
     return this.loading;
   }
+
   public openme(): boolean {
     const a = navigator.userAgent.match(/Android/i);
     const b = navigator.userAgent.match(/BlackBerry/i);

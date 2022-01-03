@@ -10,6 +10,7 @@ class EnvironmentImpl implements Environment {
   cuorHost = 'https://localhost:5001/';
   sceibaApi = 'https://localhost:5000/api/';
   cuorApi = 'https://localhost:5001/api/';
+  cuorAngular = 'https://localhost:4201/';
 
   appHost = 'https://localhost:4200';
   appName = 'Sceiba Catalogo';

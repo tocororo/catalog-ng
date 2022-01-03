@@ -18,12 +18,10 @@
 </div> -->
 
 <ng-container *ngIf="source" [ngSwitch]="source.data.source_type">
-  <mat-toolbar>
-    <mat-toolbar-row fxLayout="row wrap" fxLayoutAlign="space-between center">
-      <h1>{{ source.data.name }}</h1>
-    </mat-toolbar-row>
-  </mat-toolbar>
-
+  <div fxLayout="row wrap" fxLayoutAlign="space-between center" style="height: 80px; padding: 0px 16px;">
+    <span class="mat-h2">{{ source.data.name | translate }}</span>
+    <div fxLayoutAlign="end center" fxLayout="row"></div>
+  </div>
   <ng-container *ngIf="source">
     <catalog-journal-view-info
       #view

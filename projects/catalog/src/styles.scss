@@ -330,3 +330,18 @@ body { margin: 0; }
     border-color: mat-color($toco-primary);
  }
 
+ catalog-search-filters{
+    container-panel{
+        width: 18em !important;
+        margin: 0 !important;
+        border-right: 1px solid #0000001f;
+        border-radius: 26px;
+    }
+    toco-select-filter, toco-select-org, toco-vocabulary{
+        margin: 8px 0 !important;
+    }
+    .container-panel-mat-card{
+        box-shadow: none !important;
+    }
+ } 
+

@@ -7,6 +7,7 @@ import { CoreModule, OrganizationsModule, SharedModule, TocoFormsModule } from '
 import { CatalogRoutingModule } from './catalog-routing.module';
 import { CatalogComponent, DialogCatalogJournalInfoDialog } from './catalog.component';
 import { FiltersComponent } from './filters/filters.component';
+import { SearchListComponent } from './search-list/search-list.component';
 import { SourceClassificationsComponent } from './source-classifications/source-classifications.component';
 import { SourceEditJournalComponent } from './source-edit/journal-edit/journal-edit.component';
 import { SourceEditComponent } from './source-edit/source-edit.component';
@@ -51,7 +52,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     SourceJournalViewInfoComponent,
     DialogCatalogJournalInfoDialog,
     SourceViewDefaultComponent,
-    SourceClassificationsComponent
+    SourceClassificationsComponent,
+    SearchListComponent
   ],
   entryComponents: [
     SourceEditAddIndexComponent,
