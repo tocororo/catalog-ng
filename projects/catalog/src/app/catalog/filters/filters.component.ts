@@ -185,7 +185,7 @@ export class FiltersComponent implements OnInit {
 
     this.filterPanel = {
       name: 'filterPanel',
-      label: 'Filtros',
+      label: '',
       description: '',
       iconName: 'filter',
       controlType: ContainerPanelComponent,

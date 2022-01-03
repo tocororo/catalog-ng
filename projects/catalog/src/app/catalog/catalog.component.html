@@ -3,80 +3,43 @@
 
 <!-- <toco-page-header [info]="['Catálogo de Revistas Científicas Cubanas']">
     </toco-page-header> -->
-    <div fxLayout="row wrap" fxLayoutAlign="space-between center" style="height: 80px; padding: 0px 16px;">
-      <span class="mat-h2">{{ 'CATALOGO' | translate }}</span>
-      <div fxLayoutAlign="end center" fxLayout="row">
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>view_quilt</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="changeLayoutPosition(0)">
-            <mat-icon>arrow_forward</mat-icon>
-            <span>{{ layoutPosition[0].name }}</span>
-          </button>
-          <button mat-menu-item (click)="changeLayoutPosition(1)">
-            <mat-icon>arrow_back</mat-icon>
-            <span>{{ layoutPosition[1].name }}</span>
-          </button>
-          <button mat-menu-item (click)="changeLayoutPosition(2)">
-            <mat-icon>arrow_upward</mat-icon>
-            <span>{{ layoutPosition[2].name }}</span>
-          </button>
-          <button mat-menu-item (click)="changeLayoutPosition(3)">
-            <mat-icon>arrow_downward</mat-icon>
-            <span>{{ layoutPosition[3].name }}</span>
-          </button>
-        </mat-menu>
-      </div>
-    </div>
-    
-
-    <toco-progress
-      [loading]="!initfilters"
-      [position]="'absolute'"
-    ></toco-progress>
-
-    <div
-      fxLayout="{{ currentlayout.layout }}"
-      fxLayout.xs="column nowrap"
-      fxLayoutAlign="{{ currentlayout.aling }}"
-      *ngIf="initfilters"
-    >
-      <catalog-search-filters
-        fxLayout="row wrap"
-        fxLayout.xs="column wrap"
-        fxLayoutAlign="start center"
-        fxLayoutAlign.xs="center center"
-        fxLayoutGap="1em"
-        [params]="filtersParams"
-        (paramsChange)="filtersChange($event)"
-        [topMainOrganization]="topMainOrganization"
+<div fxLayout="row wrap" fxLayoutAlign="space-between center" style="height: 80px; padding: 0px 16px;">
+	<span class="mat-h2">{{ 'CATALOGO' | translate }}</span>
+	<button
+        mat-icon-button
+        (click)="drawer.toggle()"
+        matTooltip="Filtros avanzados"
       >
-      </catalog-search-filters>
-      <!-- fxFlex="{{ currentlayout.width }}" -->
+        <mat-icon>filter_list</mat-icon>
+      </button>
+</div>
 
-      <div class="width-90 margin1em">
-        <toco-progress
-          [loading]="isLoading()"
-          [position]="'absolute'"
-        ></toco-progress>
-        
-        <search-list [hitList]="dataSource"></search-list>
 
-        <mat-paginator
-          [length]="length"
-          [pageSize]="pageSize"
-          [pageIndex]="pageIndex"
-          [pageSizeOptions]="pageSizeOptions"
-          (page)="pageChange($event)"
-        >
-        </mat-paginator>
-      </div>
-    </div>
+<toco-progress [loading]="!initfilters" [position]="'absolute'"></toco-progress>
+<div *ngIf="initfilters"> <!-- fxLayout="{{ currentlayout.layout }}" fxLayout.xs="column nowrap" fxLayoutAlign="{{ currentlayout.aling }}" -->
+	<mat-drawer-container autosize style="background-color: white;">
+		<mat-drawer #drawer mode="side" opened position="start">
+			<catalog-search-filters fxLayout="row wrap" fxLayout.xs="column wrap" fxLayoutAlign="start center"
+				fxLayoutAlign.xs="center center" fxLayoutGap="1em" [params]="filtersParams"
+				(paramsChange)="filtersChange($event)" [topMainOrganization]="topMainOrganization">
+			</catalog-search-filters>
+			<!-- fxFlex="{{ currentlayout.width }}" -->
+		</mat-drawer>
+		<div class="mx-1">
+			<toco-progress [loading]="isLoading()" [position]="'absolute'"></toco-progress>
 
-    <!--
+			<search-list [hitList]="dataSource"></search-list>
+
+			<mat-paginator [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex"
+				[pageSizeOptions]="pageSizeOptions" (page)="pageChange($event)">
+			</mat-paginator>
+		</div>
+	</mat-drawer-container>
+</div>
+
+<!--
           </mat-drawer-content>
 
         </mat-drawer-container> -->
 
-    <!-- </div> -->
+<!-- </div> -->

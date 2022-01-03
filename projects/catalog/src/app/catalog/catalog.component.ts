@@ -6,10 +6,10 @@ import {
   trigger
 } from "@angular/animations";
 import { HttpParams } from "@angular/common/http";
-import { Component, Inject, OnChanges, OnInit } from "@angular/core";
+import { AfterViewInit, Component, HostListener, Inject, OnChanges, OnInit, ViewChild } from "@angular/core";
 import {
   MatDialog,
-  MatDialogRef, MatSnackBar,
+  MatDialogRef, MatDrawer, MatSnackBar,
 
 
   MAT_DIALOG_DATA
@@ -56,7 +56,7 @@ import { CatalogFilterKeys } from "./filters/filters.component";
     ]),
   ],
 })
-export class CatalogComponent implements OnInit, OnChanges {
+export class CatalogComponent implements OnInit, AfterViewInit {
   // journalList: Journal[] = [];
   loading = true;
   initfilters = false;
@@ -105,6 +105,7 @@ export class CatalogComponent implements OnInit, OnChanges {
   public topOrganizationPID = null;
   public topMainOrganization: Hit<Organization> = null;
 
+  @ViewChild(MatDrawer, { static: false }) drawer: MatDrawer;
   constructor(
     private sourceServiceNoAuth: SourceServiceNoAuth,
     private metadata: MetadataService,
@@ -117,10 +118,25 @@ export class CatalogComponent implements OnInit, OnChanges {
   ) {
 
   }
-  // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  /* ****************************************************
+    HIDE FILTERS ACCORDING TO VIEW SIZE  
+  **************************************************** */
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event){
+    // console.log("window:resize", window.innerWidth);
+    if (window.innerWidth <= 740){
+      this.drawer.opened = false;
+    } else {
+      this.drawer.opened = true;
+    }
+  }
 
-  // @ViewChild(FiltersComponent, { static: true }) filters: FiltersComponent;
-
+  ngAfterViewInit(){
+    this.onResize(null)
+  }
+  /* ****************************************************
+    end HIDE FILTERS ACCORDING TO VIEW SIZE  
+  **************************************************** */
   ngOnInit() {
     if (this.environment.topOrganizationPID != '') {
       this.topOrganizationPID = this.environment.topOrganizationPID;
