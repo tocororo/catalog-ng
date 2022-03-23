@@ -16,7 +16,7 @@ import {
 } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { ParamMap, Params } from "@angular/router";
-import { ContainerPanelComponent, FlatTreeNode, FormFieldType, HintPosition, HintValue, Hit, InputTextComponent, Organization, PanelContent, Relationship, SelectComponent, SelectFilterComponent, SelectOption, SelectOptionNode, SourceTypes, VocabulariesInmutableNames, VocabularyComponent } from 'toco-lib';
+import { ContainerPanelComponent, FlatTreeNode, FormFieldType, HintPosition, HintValue, Hit, InputTextComponent, Organization, PanelContent, Relationship, SelectComponent, SelectFilterComponent, SelectOption, SelectOptionNode, SourceTypes, VocabulariesInmutableNames, VocabularyComponent, SelectOrgsComponent } from 'toco-lib';
 
 
 
@@ -90,11 +90,9 @@ export class FiltersComponent implements OnInit {
     }
 
     if (this.params.has(CatalogFilterKeys.institutions)) {
-      console.log("AQUI HAY ALGO COJONE !!!!! ", this.params.get(CatalogFilterKeys.institutions))
       this.filters.set(CatalogFilterKeys.institutions,
         this.params.get(CatalogFilterKeys.institutions)
       );
-      console.log("CLARO QWUE HAY!!!!!!  ", this.filters.get(CatalogFilterKeys.institutions))
     }
     if (this.params.has(CatalogFilterKeys.indexes)) {
       this.filters.set(CatalogFilterKeys.indexes,
@@ -130,7 +128,7 @@ export class FiltersComponent implements OnInit {
         // this.institutionSelection = values[CatalogFilterKeys.institutions];
         // this.changeTreeFilter();
         console.log('emit values...', values)
-        this.changeTermMultipleFilter(values, CatalogFilterKeys.institutions, 'value');
+        this.changeTermMultipleFilter(values, CatalogFilterKeys.institutions, 'id');
         this.changeTermMultipleFilter(values, CatalogFilterKeys.subjects);
         this.changeTermMultipleFilter(values, CatalogFilterKeys.grupo_mes);
         this.changeTermMultipleFilter(values, CatalogFilterKeys.indexes);
@@ -140,9 +138,9 @@ export class FiltersComponent implements OnInit {
           values[CatalogFilterKeys.source_type].length > 0
         ) {
           this.filters.set(CatalogFilterKeys.source_type,
-            values[CatalogFilterKeys.source_type]);
+            values[CatalogFilterKeys.source_type][0]['value']);
         } else {
-          this.filters.set(CatalogFilterKeys.source_type, '');
+          this.filters.delete(CatalogFilterKeys.source_type);
         }
         console.log('filters...', this.filters)
         // if (
@@ -187,7 +185,7 @@ export class FiltersComponent implements OnInit {
 
     this.filterPanel = {
       name: 'filterPanel',
-      label: 'Filtros',
+      label: '',
       description: '',
       iconName: 'filter',
       controlType: ContainerPanelComponent,
@@ -196,20 +194,24 @@ export class FiltersComponent implements OnInit {
         [
           {
             formControl: InputTextComponent.getFormControlByDefault(),
-            name: 'source_type',
-            label: 'Tipo de Revista',
-            type: FormFieldType.select_expr,
-            controlType: SelectComponent,
+            name: CatalogFilterKeys.source_type,
+            label: 'Tipo',
+            controlType: SelectFilterComponent,
+            startHint: new HintValue(HintPosition.start, ''),
             required: false,
             width: "100%",
-            value: this.filters.has(CatalogFilterKeys.source_type) ? this.filters.get(CatalogFilterKeys.source_type) : [],
             extraContent: {
               multiple: false,
+              selectedTermsIds: this.filters.has(CatalogFilterKeys.source_type) ? this.filters.get(CatalogFilterKeys.source_type).split(",") : [],
               getOptions: () => {
                 const opts: SelectOption[] = [
                   {
                     label: SourceTypes.JOURNAL.label,
                     value: SourceTypes.JOURNAL.value
+                  },
+                  {
+                    label: SourceTypes.REPOSITORY.label,
+                    value: SourceTypes.REPOSITORY.value
                   },
                   {
                     label: SourceTypes.STUDENT.label,
@@ -218,6 +220,18 @@ export class FiltersComponent implements OnInit {
                   {
                     label: SourceTypes.POPULARIZATION.label,
                     value: SourceTypes.POPULARIZATION.value
+                  },
+                  {
+                    label: SourceTypes.SERIAL.label,
+                    value: SourceTypes.SERIAL.value
+                  },
+                  {
+                    label: SourceTypes.WEBSITE.label,
+                    value: SourceTypes.WEBSITE.value
+                  },
+                  {
+                    label: SourceTypes.OTHER.label,
+                    value: SourceTypes.OTHER.value
                   }
                 ];
                 return opts;
@@ -228,37 +242,37 @@ export class FiltersComponent implements OnInit {
             formControl: InputTextComponent.getFormControlByDefault(),
             name: CatalogFilterKeys.institutions,
             label: "Instituciones",
-            type: FormFieldType.select_filter,
-            controlType: SelectFilterComponent,
+            controlType: SelectOrgsComponent,
             startHint: new HintValue(HintPosition.start, ''),
             required: false,
             width: "100%",
             extraContent: {
               multiple: true,
-              selectedTermsIds: this.filters.has(CatalogFilterKeys.institutions) ? this.filters.get(CatalogFilterKeys.institutions).split(",") : [],
+              orgFilter: { type: 'country' , value: 'Cuba' },
+              selectedOrgsIds: this.filters.has(CatalogFilterKeys.institutions) ? this.filters.get(CatalogFilterKeys.institutions).split(",") : [],
               // observable: this.searchService.getOrganizationById(this.topOrganizationPID),
-              getOptions: () => {
-                const opts: SelectOption[] = [];
-                console.log(this.topMainOrganization.metadata.relationships)
-                this.topMainOrganization.metadata.relationships.forEach((child: Relationship) => {
-                  opts.push({
-                    value: child.id,
-                    label: child.label,
-                  });
-                });
-                console.log(opts)
-                return opts;
-              },
-              selectionChange: selection => {
-                console.log(selection);
-              }
+              // getOptions: () => {
+              //   const opts: SelectOption[] = [];
+              //   console.log(this.topMainOrganization.metadata.relationships)
+              //   this.topMainOrganization.metadata.relationships.forEach((child: Relationship) => {
+              //     opts.push({
+              //       value: child.id,
+              //       label: child.label,
+              //     });
+              //   });
+              //   console.log(opts)
+              //   return opts;
+              // },
+              // selectionChange: selection => {
+              //   console.log(selection);
+              // }
             }
           },
           {
             formControl: InputTextComponent.getFormControlByDefault(),
             name: CatalogFilterKeys.subjects,
             label: "Materias",
-            type: FormFieldType.vocabulary,
+            // type: FormFieldType.vocabulary,
             controlType: VocabularyComponent,
             startHint: new HintValue(HintPosition.start, ''),
             required: false,
@@ -274,7 +288,7 @@ export class FiltersComponent implements OnInit {
             formControl: InputTextComponent.getFormControlByDefault(),
             name: CatalogFilterKeys.indexes,
             label: "Indizaciones",
-            type: FormFieldType.vocabulary,
+            // type: FormFieldType.vocabulary,
             controlType: VocabularyComponent,
             startHint: new HintValue(HintPosition.start, ''),
             required: false,

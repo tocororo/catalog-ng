@@ -6,12 +6,12 @@ import { Environment } from 'toco-lib';
 
 class EnvironmentImpl implements Environment {
   production = false;
-  sceibaHost = 'https://sceiba.cu/';
-  cuorHost = 'https://orgs.sceiba.cu/';
-  sceibaApi = 'https://sceiba.cu/api/';
-  cuorApi = 'https://orgs.sceiba.cu/api/';
+  sceibaHost = 'https://localhost:5000/';
+  cuorHost = 'https://localhost:5001/';
+  sceibaApi = 'https://localhost:5000/api/';
+  cuorApi = 'https://localhost:5001/api/';
 
-  appHost = 'https://127.0.0.1:4200';
+  appHost = 'https://127.0.0.1:4000';
   appName = 'Registro de Revistas Científicas del MES';
 
   websiteUsername_Twitter = '@SceibaCuba';

@@ -6,10 +6,10 @@ import {
   trigger
 } from "@angular/animations";
 import { HttpParams } from "@angular/common/http";
-import { Component, Inject, OnChanges, OnInit } from "@angular/core";
+import { AfterViewInit, Component, HostListener, Inject, OnChanges, OnInit, ViewChild } from "@angular/core";
 import {
   MatDialog,
-  MatDialogRef, MatSnackBar,
+  MatDialogRef, MatDrawer, MatSnackBar,
 
 
   MAT_DIALOG_DATA
@@ -29,8 +29,8 @@ import {
 
   Params, Router
 } from "@angular/router";
-import { Environment, FilterHttpMap, Hit, Journal, JournalData, JournalVersion, MessageHandler, MetadataService, Organization, OrganizationServiceNoAuth, SourceServiceNoAuth, StatusCode } from 'toco-lib';
-import { CatalogFilterKeys } from './filters/filters.component';
+import { Environment, FilterHttpMap, Hit, HitList, Journal, JournalData, JournalVersion, MessageHandler, MetadataService, Organization, OrganizationServiceNoAuth, Source, SourceServiceNoAuth, StatusCode } from 'toco-lib';
+import { CatalogFilterKeys } from "./filters/filters.component";
 
 
 
@@ -56,13 +56,14 @@ import { CatalogFilterKeys } from './filters/filters.component';
     ]),
   ],
 })
-export class CatalogComponent implements OnInit, OnChanges {
+export class CatalogComponent implements OnInit, AfterViewInit {
   // journalList: Journal[] = [];
   loading = true;
+  initfilters = false;
   private hasErrors = false;
-  dataSource = new MatTableDataSource<Journal>();
-  columnsToDisplay = ["title", "rnps", "p-issn"];//, "url"];
-  expandedElement: Journal;
+  dataSource = new HitList<Source>();
+  columnsToDisplay = ["title"];//, "url"];
+  expandedElement: Source;
   length = 0;
   pageSize = 5;
   pageIndex = 0;
@@ -104,6 +105,7 @@ export class CatalogComponent implements OnInit, OnChanges {
   public topOrganizationPID = null;
   public topMainOrganization: Hit<Organization> = null;
 
+  @ViewChild(MatDrawer, { static: false }) drawer: MatDrawer;
   constructor(
     private sourceServiceNoAuth: SourceServiceNoAuth,
     private metadata: MetadataService,
@@ -116,12 +118,27 @@ export class CatalogComponent implements OnInit, OnChanges {
   ) {
 
   }
-  // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  /* ****************************************************
+    HIDE FILTERS ACCORDING TO VIEW SIZE  
+  **************************************************** */
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event){
+    // console.log("window:resize", window.innerWidth);
+    if (window.innerWidth <= 740){
+      this.drawer.opened = false;
+    } else {
+      this.drawer.opened = true;
+    }
+  }
 
-  // @ViewChild(FiltersComponent, { static: true }) filters: FiltersComponent;
-
+  ngAfterViewInit(){
+    this.onResize(null)
+  }
+  /* ****************************************************
+    end HIDE FILTERS ACCORDING TO VIEW SIZE  
+  **************************************************** */
   ngOnInit() {
-    if (this.environment.topOrganizationPID) {
+    if (this.environment.topOrganizationPID != '') {
       this.topOrganizationPID = this.environment.topOrganizationPID;
       if (localStorage.getItem('topMainOrganization') && localStorage.getItem('topMainOrganization') != '') {
         const response = JSON.parse(localStorage.getItem('topMainOrganization'));
@@ -145,9 +162,12 @@ export class CatalogComponent implements OnInit, OnChanges {
           () => { }
         );
       }
+    } else {
+      this.init();
     }
     // TODO: si no hay un top level organization entonces hay que usar otro tipo de control para las organizaciones...
   }
+
   init() {
     this.metadata.setStandardMeta("Catálogo de Revistas Científicas", "", "");
     // this.paginator.firstPage();
@@ -189,6 +209,8 @@ export class CatalogComponent implements OnInit, OnChanges {
             CatalogFilterKeys.source_type,
             params.get(CatalogFilterKeys.source_type)
           );
+        } else {
+          this.searchParams = this.searchParams.delete(CatalogFilterKeys.source_type);
         }
         // TODO: this is not nice, but..
         let query = "";
@@ -254,9 +276,10 @@ export class CatalogComponent implements OnInit, OnChanges {
         }
 
         this.searchParams = this.searchParams.set("q", query);
-        console.log(this.searchParams);
+        console.log(this.searchParams, 'SEARCH PAAAAAARAMS');
 
         this.fetchJournalData();
+        this.initfilters = true;
 
         console.log('catalog comonent', params, this.filtersParams);
       },
@@ -311,20 +334,21 @@ export class CatalogComponent implements OnInit, OnChanges {
     this.sourceServiceNoAuth.getSources(this.searchParams).subscribe(
       (values) => {
         this.length = values.hits.total;
+        this.dataSource = values.hits;
+        // const arr = new Array<Source>();
+        // values.hits.hits.forEach((item) => {
+        //   console.log(item,);
+        //   const j = new Source();
+        //   j.deepcopy(item.metadata);
+        //   j.uuid = item.metadata["source_uuid"];
+        //   j.data.deepcopy(item.metadata);
+        //   j.id = item.id;
+        //   console.log(j);
 
-        const arr = new Array<Journal>();
-        values.hits.hits.forEach((item) => {
-          console.log(item);
-          const j = new Journal();
-          j.deepcopy(item.metadata);
-          j.uuid = item.metadata["source_uuid"];
-          j.data.deepcopy(item.metadata);
-          console.log(j);
-
-          arr.push(j);
-        });
-        this.dataSource.data = arr;
-        console.log(values);
+        //   arr.push(j);
+        // });
+        // this.dataSource.data = arr;
+        console.log("------------------------------------------", this.dataSource);
       },
       (err: any) => {
         console.log("error: " + err + ".");
@@ -339,16 +363,18 @@ export class CatalogComponent implements OnInit, OnChanges {
   public onScrollUp() {
     // console.log("scrolled up!!");
   }
-  public isEmpty() {
-    if (this.dataSource.data.length === 0 && this.hasErrors) {
-      //this.loading = false;
-      return true;
-    }
-    return false;
-  }
+  // public isEmpty() {
+  //   if (this.dataSource.data.length === 0 && this.hasErrors) {
+  //     //this.loading = false;
+  //     return true;
+  //   }
+  //   return false;
+  // }
+
   public isLoading() {
     return this.loading;
   }
+
   public openme(): boolean {
     const a = navigator.userAgent.match(/Android/i);
     const b = navigator.userAgent.match(/BlackBerry/i);
