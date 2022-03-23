@@ -2,6 +2,13 @@
     <mat-card-content>
       <div *ngFor="let hit of hitList.hits; let pos = index" [ngStyle]="{'margin': '1em 8px'}">
 
+        <ng-container *ngIf="!hit.metadata">
+          <h2>
+            ERROR: No Metadata
+          </h2>
+          SceibaID: {{hit.id}}
+        </ng-container>
+        <ng-container *ngIf="hit.metadata">
         <h2>
           <!-- <span mat-icon-button *ngIf="hasPermission" routerLink="/{{hit.metadata.id}}/edit" matTooltip="Editar la Organización">
             <mat-icon class="mat-18">mode_edit</mat-icon>
@@ -11,10 +18,11 @@
           </span>
         </h2>
 
+
         <ul fxLayout="row wrap" *ngIf="hit.metadata.aliases && hit.metadata.aliases.length > 0">
           <span>Conocida como:</span>
           <li *ngFor="let alias of hit.metadata.aliases; let i = index" class="li-margin-style">
-            {{alias}} 
+            {{alias}}
             <ng-container *ngIf="i < hit.metadata.aliases.length - 1"> | </ng-container>
           </li>
         </ul>
@@ -29,17 +37,17 @@
           </li>
         </ul>
 
-        
+
         <ul fxLayout="row wrap" *ngIf="hit.metadata.identifiers && hit.metadata.identifiers.length > 0">
           <span>Identificadores:</span>
           <li *ngFor="let identifier of hit.metadata.identifiers; let i = index" class="li-margin-style">
-            {{identifier.idtype}}: {{identifier.value}} 
+            {{identifier.idtype}}: {{identifier.value}}
             <ng-container *ngIf="i < hit.metadata.identifiers.length - 1"> | </ng-container>
           </li>
         </ul>
         <hr class="hr-grey-ligth" *ngIf="pos < hitList.hits.length - 1">
         <!-- <toco-org-view [org]="hit.metadata"></toco-org-view> -->
-
+      </ng-container>
       </div>
     </mat-card-content>
 

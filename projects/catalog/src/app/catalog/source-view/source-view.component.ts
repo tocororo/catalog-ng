@@ -6,6 +6,7 @@ import {
 import { ActivatedRoute, Router } from "@angular/router";
 import { of } from "rxjs";
 import { Environment, HandlerComponent, Hit, JournalVersion, MessageHandler, Organization, OrganizationServiceNoAuth, Response, ResponseStatus, SourceClasification, SourceOrganization, SourceService, SourceStatus, SourceTypes, SourceVersion, StatusCode } from 'toco-lib';
+import { Utils } from "../../utils";
 
 
 @Component({
@@ -38,36 +39,16 @@ export class SourceViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (localStorage.getItem('topMainOrganization') && localStorage.getItem('topMainOrganization') != '') {
-      const response = JSON.parse(localStorage.getItem('topMainOrganization'));
-      this.topMainOrganization = response;
-
-    } else {
-      if (this.environment.topOrganizationPID) {
-        this.topOrganizationPID = this.environment.topOrganizationPID;
-        this.orgService
-          .getOrganizationByPID(this.topOrganizationPID)
-          .subscribe(
-            (response) => {
-              this.topMainOrganization = response;
-              // this.topMainOrganization.deepcopy(response.metadata);
-            },
-            (error) => {
-              console.log("error");
-            },
-            () => { }
-          );
-      }
-    }
+    this.topMainOrganization = Utils.getTopOrganization(this.orgService, this.environment);
 
     this.route.data.subscribe(
       (response) => {
         console.log("VIEW SOURCE");
         console.log(response);
-        let src = response.source.data.source.record.metadata;
+        let src = response.source.data.source.record;
         this.allows = response.source.data.source.allows;
         try {
-          this.init(src.id, src);
+          this.init(src.id, src.metadata);
         } catch (error) {
           const m = new MessageHandler(this._snackBar);
           m.showMessage(StatusCode.serverError, response.toString());
