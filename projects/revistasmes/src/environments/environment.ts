@@ -7,9 +7,9 @@ import { Environment } from 'toco-lib';
 class EnvironmentImpl implements Environment {
   production = false;
   sceibaHost = 'https://localhost:5000/';
-  cuorHost = 'https://localhost:5001/';
+  cuorHost = 'https://localhost:5000/';
   sceibaApi = 'https://localhost:5000/api/';
-  cuorApi = 'https://localhost:5001/api/';
+  cuorApi = 'https://localhost:5000/api/';
 
   appHost = 'https://127.0.0.1:4000';
   appName = 'Registro de Revistas Científicas del MES';

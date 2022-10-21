@@ -6,10 +6,10 @@ import { Environment } from 'toco-lib';
 
 class EnvironmentImpl implements Environment {
   production = false;
-  sceibaHost = 'https://localhost:5000/';
-  cuorHost = 'https://localhost:5001/';
+  sceibaHost = 'https://localhost:5000';
+  cuorHost = 'https://localhost:5000';
   sceibaApi = 'https://localhost:5000/api/';
-  cuorApi = 'https://localhost:5001/api/';
+  cuorApi = 'https://localhost:5000/api/organizations/';
   cuorAngular = 'https://localhost:4201/';
 
   appHost = 'https://localhost:4200';
