@@ -1,6 +1,5 @@
 
 import { Component, Input, OnInit } from '@angular/core';
-import { environment } from 'projects/catalog/src/environments/environment';
 // import { OAuthStorage } from 'angular-oauth2-oidc';
 import { HitList, Source } from 'toco-lib';
 
@@ -15,14 +14,13 @@ export class SearchListComponent implements OnInit
 	@Input()
 	public hitList: HitList<Source>;
 
-	cuorAngular = environment.cuorAngular
 
     public constructor()
 	{ }
 
 	public ngOnInit(): void
 	{
-		
+
 	}
 	/**
 	* hasPermission return true if the user have permission
