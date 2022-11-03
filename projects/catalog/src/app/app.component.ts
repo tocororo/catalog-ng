@@ -129,7 +129,6 @@ export class AppComponent {
       url: "/policy",
       useRouterLink: true,
     });
-    // this.footerInformation.push({ name: "PRIVACIDAD", url: "https://sceiba-lab.upr.edu.cu/page/politicas", useRouterLink: false});
     this.footerInformation.push({
       name: "CONTACTOS",
       url: "/contact",

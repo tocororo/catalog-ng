@@ -87,5 +87,6 @@
 
     "TOCO_NG_PAGINA_NO_ENCONT_DISCULPA": "Sorry, the page you requested could not be found!",
     "TOCO_NG_PAGINA_NO_ENCONT_REDIRECCION": "Let us take you Home",
-    "TOCO_NG_PAGINA_NO_ENCONT_IMG_ALT_TEXT": "Sceiba"
+    "TOCO_NG_PAGINA_NO_ENCONT_IMG_ALT_TEXT": "Sceiba",
+    "TOCO_NG_ERROR_MSG_TEXTO_INVAL": "Input error"
 }

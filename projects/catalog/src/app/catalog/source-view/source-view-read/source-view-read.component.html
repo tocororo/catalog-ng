@@ -23,72 +23,72 @@
     <div fxLayoutAlign="end center" fxLayout="row"></div>
   </div>
   <ng-container *ngIf="source">
-    <catalog-journal-view-info
+    <catalog-source-view-version-info
       #view
       *ngSwitchCase="sourceType.JOURNAL.value"
-      [journalVersion]="source"
+      [sourceVersion]="source"
       [showVersionLabel]="false"
     >
-    </catalog-journal-view-info>
+    </catalog-source-view-version-info>
 
     <mat-card *ngSwitchDefault>
       <mat-card-content>
         <p>
-          <catalog-journal-view-info-field
+          <catalog-source-view-version-info-field
             [label]="'Título'"
             [value]="source.data.name"
-          ></catalog-journal-view-info-field>
+          ></catalog-source-view-version-info-field>
         </p>
         <p>
-          <catalog-journal-view-info-field
+          <catalog-source-view-version-info-field
             *ngIf="source.data.source_type"
             [label]="'Tipo'"
             [value]="sourceType[source.data.source_type].label"
-          ></catalog-journal-view-info-field>
+          ></catalog-source-view-version-info-field>
         </p>
 
         <mat-label style="font-weight: bold">ISSN: </mat-label>
         <div style="margin-left: 0.8em">
           <p>
-            <catalog-journal-view-info-field
+            <catalog-source-view-version-info-field
               [label]="'Impreso'"
               [value]="getIdentifier(IdentifierSchemas.issn_p)"
-            ></catalog-journal-view-info-field>
+            ></catalog-source-view-version-info-field>
           </p>
           <p>
-            <catalog-journal-view-info-field
+            <catalog-source-view-version-info-field
               [label]="'Electrónico'"
               [value]="getIdentifier(IdentifierSchemas.issn_e)"
-            ></catalog-journal-view-info-field>
+            ></catalog-source-view-version-info-field>
           </p>
           <p>
-            <catalog-journal-view-info-field
+            <catalog-source-view-version-info-field
               [label]="'De enlace'"
               [value]="getIdentifier(IdentifierSchemas.issn_l)"
-            ></catalog-journal-view-info-field>
+            ></catalog-source-view-version-info-field>
           </p>
         </div>
         <mat-label style="font-weight: bold">RNPS: </mat-label>
         <div style="margin-left: 0.8em">
           <p>
-            <catalog-journal-view-info-field
+            <catalog-source-view-version-info-field
               [label]="'Impreso'"
               [value]="getIdentifier(IdentifierSchemas.prnps)"
-            ></catalog-journal-view-info-field>
+            ></catalog-source-view-version-info-field>
           </p>
           <p>
-            <catalog-journal-view-info-field
+            <catalog-source-view-version-info-field
               [label]="'Electrónico'"
               [value]="getIdentifier(IdentifierSchemas.ernps)"
-            ></catalog-journal-view-info-field>
+            ></catalog-source-view-version-info-field>
           </p>
         </div>
 
         <p>
-          <catalog-journal-view-info-field
+          <catalog-source-view-version-info-field
             [label]="'URL'"
             [value]="getIdentifier(IdentifierSchemas.url)"
-          ></catalog-journal-view-info-field>
+          ></catalog-source-view-version-info-field>
         </p>
 
         <mat-card style="margin: 1em; background-color: whitesmoke">

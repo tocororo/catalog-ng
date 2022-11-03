@@ -319,6 +319,18 @@ export class SourceViewComponent implements OnInit {
   public can_publish() {
     return this.allows == "publish";
   }
+
+  public source_type_label(){
+    switch (this.editingVersion.data.source_type) {
+      case SourceTypes.JOURNAL.value:
+        return SourceTypes.JOURNAL.label;
+      case SourceTypes.REPOSITORY.value:
+        return SourceTypes.REPOSITORY.label
+      default:
+        return SourceTypes.OTHER.label;
+    }
+  }
+
 }
 
 @Component({

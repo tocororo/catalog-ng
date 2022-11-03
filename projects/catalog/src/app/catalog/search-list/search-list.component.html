@@ -20,7 +20,7 @@
 
 
         <ul fxLayout="row wrap" *ngIf="hit.metadata.aliases && hit.metadata.aliases.length > 0">
-          <span>Conocida como:</span>
+          <span><b>Conocida como:</b></span>
           <li *ngFor="let alias of hit.metadata.aliases; let i = index" class="li-margin-style">
             {{alias}}
             <ng-container *ngIf="i < hit.metadata.aliases.length - 1"> | </ng-container>
@@ -28,7 +28,7 @@
         </ul>
 
         <ul fxLayout="row wrap" *ngIf="hit.metadata.organizations && hit.metadata.organizations.length > 0">
-          <span>Organizaciones asociadas:</span>
+          <span><b>Organizaciones asociadas:</b></span>
           <li *ngFor="let organization of hit.metadata.organizations; let i = index" class="li-margin-style">
             <!-- <a href="{{cuorAngular}}{{organization.id}}/view" target="blanck" style="cursor: pointer;"> -->
             <span> {{organization.name}} </span>
@@ -39,7 +39,7 @@
 
 
         <ul fxLayout="row wrap" *ngIf="hit.metadata.identifiers && hit.metadata.identifiers.length > 0">
-          <span>Identificadores:</span>
+          <span><b>Identificadores:</b></span>
           <li *ngFor="let identifier of hit.metadata.identifiers; let i = index" class="li-margin-style">
             {{identifier.idtype}}: {{identifier.value}}
             <ng-container *ngIf="i < hit.metadata.identifiers.length - 1"> | </ng-container>

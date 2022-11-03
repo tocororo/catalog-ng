@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SourceResolver, SourceResolverAuth } from '../source-resolver';
+import { SourceResolver } from '../source-resolver';
 import { CatalogComponent } from './catalog.component';
+import { SourceViewGuard } from './permission.service';
 import { SourceEditComponent } from './source-edit/source-edit.component';
 import { SourceInclusionComponent } from './source-inclusion/source-inclusion.component';
 import { SourceViewReadComponent } from './source-view/source-view-read/source-view-read.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
   {
     path: ':uuid',
     component: SourceViewReadComponent,
+    canActivate: [SourceViewGuard],
     resolve: {
       source: SourceResolver,
     },
@@ -33,14 +35,14 @@ const routes: Routes = [
     path: ':uuid/view',
     component: SourceViewComponent,
     resolve: {
-      source: SourceResolverAuth,
+      source: SourceResolver,
     },
   },
   {
     path: ':uuid/edit',
     component: SourceEditComponent,
     resolve: {
-      source: SourceResolverAuth,
+      source: SourceResolver,
     },
   },
 ];

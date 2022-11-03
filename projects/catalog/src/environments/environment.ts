@@ -6,10 +6,10 @@ import { Environment } from 'toco-lib';
 
 class EnvironmentImpl implements Environment {
   production = false;
-  sceibaHost = 'https://localhost:5000';
-  cuorHost = 'https://localhost:5000';
+  sceibaHost = 'https://localhost:5000/';
+  cuorHost = 'https://localhost:5000/';
   sceibaApi = 'https://localhost:5000/api/';
-  cuorApi = 'https://localhost:5000/api/organizations/';
+  cuorApi = 'https://localhost:5000/api/';
   cuorAngular = 'https://localhost:4201/';
 
   appHost = 'https://localhost:4200';
@@ -19,7 +19,7 @@ class EnvironmentImpl implements Environment {
   websiteUsername_Facebook = '@sceiba';
 
   oauthRedirectUri = 'https://localhost:4200/';
-  oauthClientId = 'uLYRoa4mN5870eBby4bElHkrzpDUPFlWTios9njy';
+  oauthClientId = 'AwNeWXGng8C2KraEoYpqFMecao9CCyEDsOlsRIfs';
   oauthScope = 'user:email';
   topOrganizationPID = '';
   cachableUrls = [];

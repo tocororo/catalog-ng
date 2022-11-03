@@ -11,7 +11,7 @@ import { SourceInclusionComponent } from 'projects/catalog/src/app/catalog/sourc
 import { SourceViewReadComponent } from 'projects/catalog/src/app/catalog/source-view/source-view-read/source-view-read.component';
 import { SourceViewComponent } from 'projects/catalog/src/app/catalog/source-view/source-view.component';
 import { PermissionsComponent } from 'projects/catalog/src/app/permissions/permissions.component';
-import { SourceResolver, SourceResolverAuth } from 'projects/catalog/src/app/source-resolver';
+import { SourceResolver } from 'projects/catalog/src/app/source-resolver';
 import { StaticPagesComponent } from 'projects/catalog/src/app/static-pages/static-pages.component';
 import { UserProfileComponent } from 'projects/catalog/src/app/user-profile/user-profile.component';
 import { NotificationListComponent, OauthAuthenticationService } from 'toco-lib';
@@ -77,14 +77,14 @@ const routes: Routes = [
         path: ':uuid/view',
         component: SourceViewComponent,
         resolve: {
-          source: SourceResolverAuth,
+          source: SourceResolver,
         },
       },
       {
         path: ':uuid/edit',
         component: SourceEditComponent,
         resolve: {
-          source: SourceResolverAuth,
+          source: SourceResolver,
         },
       },
       // {
@@ -117,6 +117,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [SourceResolver, SourceResolverAuth],
+  providers: [SourceResolver],
 })
 export class AppRoutingModule {}

@@ -88,5 +88,6 @@
 
     "TOCO_NG_PAGINA_NO_ENCONT_DISCULPA": "¡Lo sentimos, la página que usted solicitó no pudo ser encontrada!",
     "TOCO_NG_PAGINA_NO_ENCONT_REDIRECCION": "Vamos a llevarlo a la página Principal",
-    "TOCO_NG_PAGINA_NO_ENCONT_IMG_ALT_TEXT": "Sceiba"
+    "TOCO_NG_PAGINA_NO_ENCONT_IMG_ALT_TEXT": "Sceiba",
+    "TOCO_NG_ERROR_MSG_TEXTO_INVAL": "Error en la entrada"
 }

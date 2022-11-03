@@ -6,7 +6,7 @@ import {
   trigger
 } from "@angular/animations";
 import { HttpParams } from "@angular/common/http";
-import { AfterViewInit, Component, HostListener, Inject, OnChanges, OnInit, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, HostListener, Inject, OnInit, ViewChild } from "@angular/core";
 import {
   MatDialog,
   MatDialogRef, MatDrawer, MatSnackBar,
@@ -15,7 +15,6 @@ import {
   MAT_DIALOG_DATA
 } from "@angular/material";
 import { PageEvent } from "@angular/material/paginator";
-import { MatTableDataSource } from "@angular/material/table";
 import {
   ActivatedRoute,
 
@@ -29,7 +28,7 @@ import {
 
   Params, Router
 } from "@angular/router";
-import { Environment, FilterHttpMap, Hit, HitList, Journal, JournalData, JournalVersion, MessageHandler, MetadataService, Organization, OrganizationServiceNoAuth, Source, SourceServiceNoAuth, StatusCode } from 'toco-lib';
+import { Environment, FilterHttpMap, Hit, HitList, JournalData, JournalVersion, MessageHandler, MetadataService, Organization, OrganizationServiceNoAuth, Source, SourceServiceNoAuth, StatusCode } from 'toco-lib';
 import { CatalogFilterKeys } from "./filters/filters.component";
 
 
@@ -119,7 +118,7 @@ export class CatalogComponent implements OnInit, AfterViewInit {
 
   }
   /* ****************************************************
-    HIDE FILTERS ACCORDING TO VIEW SIZE  
+    HIDE FILTERS ACCORDING TO VIEW SIZE
   **************************************************** */
   @HostListener('window:resize', ['$event'])
   onResize(event: Event){
@@ -135,7 +134,7 @@ export class CatalogComponent implements OnInit, AfterViewInit {
     this.onResize(null)
   }
   /* ****************************************************
-    end HIDE FILTERS ACCORDING TO VIEW SIZE  
+    end HIDE FILTERS ACCORDING TO VIEW SIZE
   **************************************************** */
   ngOnInit() {
     if (this.environment.topOrganizationPID != '') {
@@ -178,7 +177,6 @@ export class CatalogComponent implements OnInit, AfterViewInit {
         this.filtersParams = params;
         // this.searchParams = this.searchParams.set('size', this.pageSize.toString(10));
         // this.searchParams = this.searchParams.set('page', this.pageIndex.toString(10));
-
         if (params.has("size")) {
           // this.pageSize = Number.parseInt(params.get("size"), 10);
           this.searchParams = this.searchParams.set("size", params.get("size"));
@@ -214,7 +212,15 @@ export class CatalogComponent implements OnInit, AfterViewInit {
         }
         // TODO: this is not nice, but..
         let query = "";
+
+        if (params.has(CatalogFilterKeys.title)) {
+          query = query.concat(params.get(CatalogFilterKeys.title));
+        }
+
         if (this.topMainOrganization) {
+          if(query != ''){
+            query = this.queryAddAndOp(query);
+          }
           query = "(organizations.id:" + this.topMainOrganization.id + ")";
         }
 
@@ -427,11 +433,11 @@ export class CatalogComponent implements OnInit, AfterViewInit {
   selector: "dialog-catalog-journal-info",
   template: `
     <mat-dialog-content class="height-auto">
-      <catalog-journal-view-info
-        [journalVersion]="data.journalVersion"
+      <catalog-source-view-version-info
+        [sourceVersion]="data.journalVersion"
         [showVersionLabel]="false"
       >
-      </catalog-journal-view-info>
+      </catalog-source-view-version-info>
     </mat-dialog-content>
   `,
 })

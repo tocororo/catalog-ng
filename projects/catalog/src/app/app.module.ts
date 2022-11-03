@@ -21,6 +21,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SceibaFooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
+import { SceibaMenuAppsComponent } from './menu-apps/menu-apps.component';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -40,7 +41,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     SceibaFooterComponent,
     StaticPagesComponent,
     UserProfileComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    SceibaMenuAppsComponent
   ],
   imports: [
     BrowserAnimationsModule,

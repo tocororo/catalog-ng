@@ -14,7 +14,7 @@
               Sceiba - Registro de Revistas Científicas del MES
           </a>
       </div>
-  
+
       <div
           class="center-elements"
           appearance="legacy"
@@ -23,29 +23,29 @@
           fxLayoutAlign="center"
           fxLayoutGap="15px"
       >
-  
+
         <button mat-icon-button [matMenuTriggerFor]="menuApps" matTooltip="Aplicaciones">
           <mat-icon>apps</mat-icon>
         </button>
-  
+
         <button mat-icon-button [matMenuTriggerFor]="menuHelp" matTooltip="Ayuda">
             <mat-icon class="mat-18">help</mat-icon>
         </button>
-  
+
         <button mat-icon-button *ngIf="userProfile" [matMenuTriggerFor]="menuUser" matTooltip="{{ userProfile.user.email }}">
           <mat-icon class="mat-18">person_pin</mat-icon>
         </button>
-  
+
         <toco-authentication [oauthInfo]="oauthInfo" [isButtonLogin]="'true'" [isButtonLoginIcon]="'true'"
           [isButtonLoginText]="'Autenticarse'" *ngIf="!userProfile">
         </toco-authentication>
-  
+
       </div>
-  
+
     </mat-toolbar-row>
   </mat-toolbar>
-  
-  
+
+
   <mat-toolbar
     class="mat-elevation-z6"
     color="primary"
@@ -74,17 +74,17 @@
         >
           <mat-icon>share</mat-icon>
         </button>
-  
+
         <button mat-icon-button [matMenuTriggerFor]="menuHelp" matTooltip="Ayuda">
           <mat-icon>help</mat-icon>
         </button>
-  
+
         <toco-notification-button
           *ngIf="userProfile"
           [color]="'primary'"
           [buttonType]="'mat-icon-button'"
         ></toco-notification-button>
-  
+
         <toco-authentication
           [oauthInfo]="oauthInfo"
           [isButtonLogin]="'true'"
@@ -93,7 +93,7 @@
           *ngIf="!userProfile"
         >
         </toco-authentication>
-  
+
         <button
           mat-icon-button
           *ngIf="userProfile"
@@ -104,7 +104,7 @@
         </button>
       </div>
     </mat-toolbar-row> -->
-  
+
     <mat-toolbar-row
       fxLayout="row wrap"
       fxLayoutAlign="center"
@@ -133,12 +133,12 @@
         *ngIf="!userProfile"
       >
       </toco-authentication> -->
-  
+
       <a *ngIf="userProfile" mat-button [routerLink]="['/sources']"> Mis Registros </a>
       <!-- <a *ngIf="userProfile" mat-button [routerLink]="['/sources','permissions']"> Permisos </a> -->
     </mat-toolbar-row>
   </mat-toolbar>
-  
+
   <mat-menu #menuUser="matMenu">
     <a mat-menu-item [routerLink]="['/userprofile']">
       <mat-icon>account_circle</mat-icon>
@@ -149,7 +149,7 @@
       Salir
     </button>
   </mat-menu>
-  
+
   <mat-menu #menuNetwork="matMenu">
     <a mat-menu-item href="https://www.facebook.com/CubaMES/" target="_blank">
       <!-- <mat-icon>info</mat-icon> -->
@@ -160,7 +160,7 @@
       Twitter
     </a>
   </mat-menu>
-  
+
   <mat-menu #menuHelp="matMenu">
     <!-- <a mat-menu-item [routerLink]="['/help']">
         <mat-icon>help_outline</mat-icon>
@@ -179,16 +179,16 @@
       Contactos
     </a>
   </mat-menu>
-  
-  
+
+
   <mat-menu #menuApps="matMenu">
-  
+
     <div fxLayout="row wrap" fxLayoutAlign="space-around center">
       <a href="https://sceiba.cu" target="__blanck" class="apps" matTooltip="Sceiba">
         <img class="app-featured" src="/assets/icons/sceiba.svg" alt="Sceiba" style="width: 55px; height: 55px;">
       </a>
       <mat-divider class="w-90"></mat-divider>
-  
+
       <a href="https://catalogo.sceiba.cu" target="__blanck" class="apps" matTooltip="Catálogo">
         <img src="/assets/icons/catalog.svg" alt="Catálogo" style="width: 55px; height: 55px;">
       </a>
@@ -205,16 +205,15 @@
       </a>
     </div>
   </mat-menu>
-  
-  
+
+
   <toco-progress [loading]="loading"> </toco-progress>
-  
+
   <router-outlet></router-outlet>
-  
+
   <div [ngStyle]="{ 'margin-top': '2em' }">
     <toco-footer
       [sites]="footerSites"
       [information]="footerInformation"
     ></toco-footer>
   </div>
-  

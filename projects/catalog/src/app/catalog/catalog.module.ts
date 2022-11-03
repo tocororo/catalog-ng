@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { CoreModule, OrganizationsModule, SharedModule, TocoFormsModule } from 'toco-lib';
+import { CoreModule, OrganizationsModule, SharedModule, StaticsModule, TocoFormsModule } from 'toco-lib';
 import { CatalogRoutingModule } from './catalog-routing.module';
 import { CatalogComponent, DialogCatalogJournalInfoDialog } from './catalog.component';
 import { FiltersComponent } from './filters/filters.component';
@@ -14,14 +14,16 @@ import { SourceEditComponent } from './source-edit/source-edit.component';
 import { SourceEditAddIndexComponent, SourceEditIndexesComponent } from './source-edit/source-indexes/source-indexes.component';
 import { SourceInclusionAcceptComponent, SourceInclusionComponent } from './source-inclusion/source-inclusion.component';
 import { SourceEditOrganizationsComponent, SourceEditOrganizationSelectDialog, SourceEditOrganizationSelectTopDialog } from './source-organizations/source-organizations.component';
-import { SourceJournalViewInfoComponent, SourceJournalViewInfoFieldComponent } from './source-view/journal-view/info/journal-view-info.component';
-import { SourceJournalViewComponent } from './source-view/journal-view/journal-view.component';
-import { SourceJournalViewVersionFieldComponent } from './source-view/journal-view/version-field/journal-view-version-field.component';
-import { SourceJournalViewVersionTermComponent } from './source-view/journal-view/version-term/journal-view-version-term.component';
-import { SourceJournalViewVersionComponent } from './source-view/journal-view/version/journal-view-version.component';
 import { SourceViewDefaultComponent } from './source-view/source-view-default/source-view-default.component';
 import { SourceViewReadComponent } from './source-view/source-view-read/source-view-read.component';
 import { SourceViewComponent, SourceViewSaveDialog } from './source-view/source-view.component';
+import { SourceViewVersionInfoComponent, SourceViewVersionInfoFieldComponent } from './source-view/version-view/info/source-view-info.component';
+import { SourceViewInfoSourceDefaultComponent } from './source-view/version-view/info/view-info-default';
+import { SourceViewInfoJournalComponent } from './source-view/version-view/info/view-info-journal';
+import { SourceJournalViewVersionFieldComponent } from './source-view/version-view/version-field/journal-view-version-field.component';
+import { SourceJournalViewVersionTermComponent } from './source-view/version-view/version-term/journal-view-version-term.component';
+import { SourceVersionViewComponent } from './source-view/version-view/version-view.component';
+import { SourceJournalViewVersionComponent } from './source-view/version-view/version/journal-view-version.component';
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 {
@@ -44,12 +46,14 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     SourceViewComponent,
     SourceViewSaveDialog,
     SourceViewReadComponent,
-    SourceJournalViewInfoFieldComponent,
-    SourceJournalViewComponent,
+    SourceVersionViewComponent,
     SourceJournalViewVersionTermComponent,
     SourceJournalViewVersionFieldComponent,
     SourceJournalViewVersionComponent,
-    SourceJournalViewInfoComponent,
+    SourceViewVersionInfoComponent,
+    SourceViewVersionInfoFieldComponent,
+    SourceViewInfoSourceDefaultComponent,
+    SourceViewInfoJournalComponent,
     DialogCatalogJournalInfoDialog,
     SourceViewDefaultComponent,
     SourceClassificationsComponent,
@@ -61,13 +65,14 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     SourceEditOrganizationSelectDialog,
     SourceInclusionAcceptComponent,
     SourceViewSaveDialog,
-    DialogCatalogJournalInfoDialog
+    DialogCatalogJournalInfoDialog,
   ],
   imports: [
     CommonModule,
     CatalogRoutingModule,
     SharedModule,
     CoreModule,
+    StaticsModule,
     TocoFormsModule,
     OrganizationsModule,
     TranslateModule.forChild({

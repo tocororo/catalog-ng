@@ -24,15 +24,18 @@
 </mat-card>
 
 
-<ng-container *ngIf="!loading && !error && editingVersion" [ngSwitch]="editingVersion.data.source_type">
+<ng-container *ngIf="!loading && !error && editingVersion">
   <mat-toolbar
     fxLayout="row wrap"
     fxLayoutAlign="space-between center"
     [ngStyle]="{ width: '100%', 'height': 'auto', 'padding': '16px', 'min-height': '56px'}"
   >
+
     <span [ngStyle]="{'white-space': 'normal'}">
-      {{ editingVersion.data.name }}
+      {{source_type_label()}}: {{ editingVersion.data.name }}
     </span>
+
+
     <div fxLayout="row wrap" fxLayoutGap="20px">
       <button mat-stroked-button color="primary" (click)="desapprove()" *ngIf="can_publish() && is_approved()">
         Despublicar
@@ -49,21 +52,14 @@
       </button>
     </div>
   </mat-toolbar>
-
-  <ng-container *ngIf="editingVersion && versions && topMainOrganization">
+  <ng-container *ngIf="editingVersion && versions">
   <catalog-journal-view
     #view
-    *ngSwitchCase="sourceType.JOURNAL.value"
-    [editingJournal]="editingVersion"
+    [editingSource]="editingVersion"
     [versions]="versions"
     [topMainOrganization]="topMainOrganization"
   >
   </catalog-journal-view>
-
-  <p #view *ngSwitchDefault>
-    {{ sourceType.JOURNAL.value }}
-    {{ editingVersion.data.source_type }}
-  </p>
   </ng-container>
 
 

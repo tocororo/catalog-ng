@@ -16,12 +16,13 @@ import {
 } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { ParamMap, Params } from "@angular/router";
-import { ContainerPanelComponent, FlatTreeNode, FormFieldType, HintPosition, HintValue, Hit, InputTextComponent, Organization, PanelContent, Relationship, SelectComponent, SelectFilterComponent, SelectOption, SelectOptionNode, SourceTypes, VocabulariesInmutableNames, VocabularyComponent, SelectOrgsComponent } from 'toco-lib';
+import { ContainerPanelComponent, FlatTreeNode, FormFieldType, HintPosition, HintValue, Hit, InputTextComponent, Organization, PanelContent, SelectFilterComponent, SelectOption, SelectOptionNode, SelectOrgsComponent, SourceTypes, VocabulariesInmutableNames, VocabularyComponent } from 'toco-lib';
 
 
 
 
 export const CatalogFilterKeys = {
+  title: "title",
   source_type: "source_type",
   institutions: "organizations",
   subjects: "subjects",
@@ -83,6 +84,12 @@ export class FiltersComponent implements OnInit {
 
   private initFilters() {
 
+    if (this.params.has(CatalogFilterKeys.title)) {
+      this.filters.set(CatalogFilterKeys.title,
+        this.params.get(CatalogFilterKeys.title)
+      );
+    }
+
     if (this.params.has(CatalogFilterKeys.grupo_mes)) {
       this.filters.set(CatalogFilterKeys.grupo_mes,
         this.params.get(CatalogFilterKeys.grupo_mes)
@@ -128,6 +135,13 @@ export class FiltersComponent implements OnInit {
         // this.institutionSelection = values[CatalogFilterKeys.institutions];
         // this.changeTreeFilter();
         console.log('emit values...', values)
+        if(values[CatalogFilterKeys.title] &&
+          values[CatalogFilterKeys.title].length > 3){
+            this.filters.set(CatalogFilterKeys.title,
+              values[CatalogFilterKeys.title])
+        } else {
+          this.filters.delete(CatalogFilterKeys.title);
+        }
         this.changeTermMultipleFilter(values, CatalogFilterKeys.institutions, 'id');
         this.changeTermMultipleFilter(values, CatalogFilterKeys.subjects);
         this.changeTermMultipleFilter(values, CatalogFilterKeys.grupo_mes);
@@ -192,6 +206,17 @@ export class FiltersComponent implements OnInit {
       formSection: this.formGroup,
       formSectionContent:
         [
+          {
+            formControl: InputTextComponent.getFormControlByDefault(),
+            name: 'title',
+            label: 'Título',
+            type: FormFieldType.text,
+            controlType: InputTextComponent,
+            required: false,
+            width: '100%',
+            startHint: new HintValue(HintPosition.start, ''),
+            value: this.filters.get(CatalogFilterKeys.title)
+          },
           {
             formControl: InputTextComponent.getFormControlByDefault(),
             name: CatalogFilterKeys.source_type,

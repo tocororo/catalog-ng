@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotificationListComponent, OauthAuthenticationService } from 'toco-lib';
 import { HomeComponent } from './home/home.component';
-import { SourceResolver, SourceResolverAuth } from './source-resolver';
+import { SourceResolver } from './source-resolver';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -80,7 +80,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
   exports: [RouterModule],
-  providers: [SourceResolver, SourceResolverAuth],
+  providers: [SourceResolver],
 })
 export class AppRoutingModule
 { }

@@ -79,7 +79,7 @@ export class AppComponent {
         console.log('request',request);
 
         if (request){
-          this.userProfile = request.data;
+          this.userProfile = request.data.userprofile;
         }
 
         console.log(this.userProfile)

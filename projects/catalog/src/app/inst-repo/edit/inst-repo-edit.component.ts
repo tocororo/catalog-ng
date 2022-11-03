@@ -1,16 +1,13 @@
 
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { AbstractControl, FormControl, FormGroup, FormArray, Validators, ValidationErrors, FormBuilder } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
+import { ChildControlsPath, DialogDeleteConfirmComponent, Hit, IdentifierSchemas, InstitutionalRepository, MessageHandler, StatusCode } from 'toco-lib';
 
-import { Hit, MessageHandler, DialogDeleteConfirmComponent, StatusCode, 
-	HandlerComponent, IdentifierSchemas, ChildControlsPath, InstitutionalRepository } from 'toco-lib';
-
-import { InstRepoService } from '../inst-repo.service';
 
 /**
- * Represents a control that allows to add or edit an Institutional Repository. 
+ * Represents a control that allows to add or edit an Institutional Repository.
  */
 @Component({
 	selector: 'catalog-inst-repo-edit',
@@ -20,9 +17,9 @@ import { InstRepoService } from '../inst-repo.service';
 export class InstRepoEditComponent implements OnInit
 {
 	/**
-	 * An object of paths that is used to get the child controls in the `instRepoFormGroup` control. 
-	 * The value of its properties is a dot-delimited string value or an array of string/number values 
-	 * that define the path to a child control. 
+	 * An object of paths that is used to get the child controls in the `instRepoFormGroup` control.
+	 * The value of its properties is a dot-delimited string value or an array of string/number values
+	 * that define the path to a child control.
 	 */
 	public readonly instRepo_ChildControlsPath: ChildControlsPath = {
 		'name': 'name',
@@ -37,15 +34,15 @@ export class InstRepoEditComponent implements OnInit
 	};
 
 	/**
-	 * Returns true if the component has a task in progress; otherwise, false. 
-	 * Example of task is: loading, updating, etc. 
-	 * By default, its value is `true` because it represents the loading task. 
+	 * Returns true if the component has a task in progress; otherwise, false.
+	 * Example of task is: loading, updating, etc.
+	 * By default, its value is `true` because it represents the loading task.
 	 */
 	public hasTaskInProgress: boolean;
 
 	/**
-	 * Returns true if the component is used as an adding view; otherwise, false. 
-	 * By default, its value is `false`. 
+	 * Returns true if the component is used as an adding view; otherwise, false.
+	 * By default, its value is `false`.
 	 */
 	public isAddingView: boolean;
 
@@ -56,27 +53,26 @@ export class InstRepoEditComponent implements OnInit
 	private _instRepo: InstitutionalRepository;  /* It is like a readonly field, and it is only used to initialize the form. */
 
 	/**
-	 * Represents the current control that is analyzed for displaying an error. 
-	 * It is only used internally. 
+	 * Represents the current control that is analyzed for displaying an error.
+	 * It is only used internally.
 	 */
 	private _controlToDisplayError: AbstractControl;
 	/**
-	 * Represents the map of errors returned from failed validation checks. 
-	 * It is only used internally. 
+	 * Represents the map of errors returned from failed validation checks.
+	 * It is only used internally.
 	 */
 	private _validationErrors: ValidationErrors;
     /**
-     * Represents the validation error of required. 
+     * Represents the validation error of required.
      */
     private _validationError_required: string;
     /**
-     * Represents the validation error of invalid character. 
+     * Represents the validation error of invalid character.
      */
 	private _validationError_invalidCharacter: string;
 
 	public constructor(private _activatedRoute: ActivatedRoute,
 		private _formBuilder: FormBuilder,
-		private _instRepoService: InstRepoService,
 		private _dialog: MatDialog,
 		private _snackBar: MatSnackBar)
 	{
@@ -109,7 +105,7 @@ export class InstRepoEditComponent implements OnInit
 
 		this._activatedRoute.data.subscribe({
 			next: (data: { 'instRepo': Hit<InstitutionalRepository> }) => {
-				/* It is not necessary to realize deep copy because the `_instRepo` field 
+				/* It is not necessary to realize deep copy because the `_instRepo` field
 				 * is like a readonly field, and it is only used to initialize the form. */
 				this._instRepo = data.instRepo.metadata;
 
@@ -131,12 +127,12 @@ export class InstRepoEditComponent implements OnInit
 	}
 
 	/**
-	 * Initializes the form data. 
+	 * Initializes the form data.
 	 */
 	private _initFormData(): void
 	{
 		this.instRepoFormGroup = this._formBuilder.group({
-			'name': new FormControl(this._instRepo.name, 
+			'name': new FormControl(this._instRepo.name,
 				Validators.pattern('^[a-zA-Z\_][a-zA-Z\-\_\ \0-9]*$')
 			),
 
@@ -196,11 +192,11 @@ export class InstRepoEditComponent implements OnInit
 	{
 		const dialogRef = this._dialog.open(DialogDeleteConfirmComponent, {
 			width: '40%',
-			data: { 
+			data: {
 				'delTypeArt': 'el',
 				'delType': 'identificador',
-				'delValue':  ((this.identifiersMainInstitution_FA.value[pos].idtype) ? this.identifiersMainInstitution_FA.value[pos].idtype : 'vacio') 
-					+ ': ' 
+				'delValue':  ((this.identifiersMainInstitution_FA.value[pos].idtype) ? this.identifiersMainInstitution_FA.value[pos].idtype : 'vacio')
+					+ ': '
 					+ ((this.identifiersMainInstitution_FA.value[pos].value) ? this.identifiersMainInstitution_FA.value[pos].value : 'vacio')
 			}
 		});
@@ -220,48 +216,48 @@ export class InstRepoEditComponent implements OnInit
 
 		console.log('update: ', this.instRepoFormGroup.valid, this.instRepoFormGroup);
 
-		this._instRepoService.editInstRepo(this.instRepoFormGroup.value).subscribe({
-			next: (result: Hit<InstitutionalRepository>) => {
-				console.log('update result: ', result);
-			},
-			error: (err: any) => {
-				/* The component ends its updating task. */
-				this.hasTaskInProgress = false;
+		// this._instRepoService.editInstRepo(this.instRepoFormGroup.value).subscribe({
+		// 	next: (result: Hit<InstitutionalRepository>) => {
+		// 		console.log('update result: ', result);
+		// 	},
+		// 	error: (err: any) => {
+		// 		/* The component ends its updating task. */
+		// 		this.hasTaskInProgress = false;
 
-				const m = new MessageHandler(this._snackBar);
-				m.showMessage(StatusCode.OK, err.message)
-			},
-			complete: () => {
-				/* The component ends its updating task. */
-				this.hasTaskInProgress = false;
+		// 		const m = new MessageHandler(this._snackBar);
+		// 		m.showMessage(StatusCode.OK, err.message)
+		// 	},
+		// 	complete: () => {
+		// 		/* The component ends its updating task. */
+		// 		this.hasTaskInProgress = false;
 
-				const m = new MessageHandler(null, this._dialog);
-				m.showMessage(StatusCode.OK, 
-					'¡El Repositorio Institucional fue' + ' ' + ((this.isAddingView) ? 'adicionado' : 'editado') + ' ' + 'correctamente!', 
-					HandlerComponent.dialog, 'Operación exitosa', '50%');
-			}
-		});
+		// 		const m = new MessageHandler(null, this._dialog);
+		// 		m.showMessage(StatusCode.OK,
+		// 			'¡El Repositorio Institucional fue' + ' ' + ((this.isAddingView) ? 'adicionado' : 'editado') + ' ' + 'correctamente!',
+		// 			HandlerComponent.dialog, 'Operación exitosa', '50%');
+		// 	}
+		// });
 	}
 
     /**
-     * Returns true if the control is in an error state; otherwise, false. 
+     * Returns true if the control is in an error state; otherwise, false.
      */
     public getErrorState(controlName: Array<string | number> | string): boolean
     {
 		this._controlToDisplayError = this.instRepoFormGroup.get(controlName);
 
-        /* The control does not display errors before the user has a 
-         * chance to edit the form. The checks for dirty and touched prevent errors 
-         * from showing until the user does one of two things: changes the value, 
-         * turning the control dirty; or blurs the form control element, setting the 
-         * control to touched. 
-         * Thus, it reveals an error message only if the control is invalid and 
+        /* The control does not display errors before the user has a
+         * chance to edit the form. The checks for dirty and touched prevent errors
+         * from showing until the user does one of two things: changes the value,
+         * turning the control dirty; or blurs the form control element, setting the
+         * control to touched.
+         * Thus, it reveals an error message only if the control is invalid and
          * the control is either dirty or touched. */
 		return ((this._controlToDisplayError.invalid) && (this._controlToDisplayError.dirty || this._controlToDisplayError.touched));
 	}
 
     /**
-     * Returns an error string if the control is in an error state; otherwise, empty string. 
+     * Returns an error string if the control is in an error state; otherwise, empty string.
      */
     public getErrorMessage(controlName: Array<string | number> | string): string
 	{

@@ -1,40 +1,40 @@
 
 <mat-card *ngIf="source">
   <mat-card-header>
-    <catalog-journal-view-info-field
+    <catalog-source-view-version-info-field
         [label]="'Título'"
         [value]="source.data.title"
-      ></catalog-journal-view-info-field>
+      ></catalog-source-view-version-info-field>
 
     <mat-card-title> </mat-card-title>
 
   </mat-card-header>
   <mat-card-content>
     <p>
-      <catalog-journal-view-info-field *ngIf="source.data.source_type"
+      <catalog-source-view-version-info-field *ngIf="source.data.source_type"
         [label]="'Tipo'"
         [value]="tipos[source.data.source_type].label"
-      ></catalog-journal-view-info-field>
+      ></catalog-source-view-version-info-field>
     </p>
     <p>
-      <catalog-journal-view-info-field
+      <catalog-source-view-version-info-field
         [label]="'URL'"
         [value]="getIdentifier(IdentifierSchemas.url)"
-      ></catalog-journal-view-info-field>
+      ></catalog-source-view-version-info-field>
     </p>
 
     <p>
-      <catalog-journal-view-info-field
+      <catalog-source-view-version-info-field
         [label]="'OAIURL'"
         [value]="getIdentifier(IdentifierSchemas.oaiurl)"
-      ></catalog-journal-view-info-field>
+      ></catalog-source-view-version-info-field>
     </p>
 
     <p>
-      <catalog-journal-view-info-field *ngIf="source.data.source_system"
+      <catalog-source-view-version-info-field *ngIf="source.data.source_system"
         [label]="'Sistema'"
         [value]="sistemas[source.data.source_system].label"
-      ></catalog-journal-view-info-field>
+      ></catalog-source-view-version-info-field>
     </p>
 
 
