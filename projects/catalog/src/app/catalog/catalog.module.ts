@@ -14,6 +14,7 @@ import { SourceEditComponent } from './source-edit/source-edit.component';
 import { SourceEditAddIndexComponent, SourceEditIndexesComponent } from './source-edit/source-indexes/source-indexes.component';
 import { SourceInclusionAcceptComponent, SourceInclusionComponent } from './source-inclusion/source-inclusion.component';
 import { SourceEditOrganizationsComponent, SourceEditOrganizationSelectDialog, SourceEditOrganizationSelectTopDialog } from './source-organizations/source-organizations.component';
+import { SourceRepositoryViewComponent } from './source-view/repository-view/repository-view.component';
 import { SourceViewDefaultComponent } from './source-view/source-view-default/source-view-default.component';
 import { SourceViewReadComponent } from './source-view/source-view-read/source-view-read.component';
 import { SourceViewComponent, SourceViewSaveDialog } from './source-view/source-view.component';
@@ -57,7 +58,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     DialogCatalogJournalInfoDialog,
     SourceViewDefaultComponent,
     SourceClassificationsComponent,
-    SearchListComponent
+    SearchListComponent,
+    SourceRepositoryViewComponent
   ],
   entryComponents: [
     SourceEditAddIndexComponent,

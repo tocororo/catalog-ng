@@ -2,16 +2,16 @@
 
   <mat-card-header>
       <mat-card-title>
-          {{ title }}
+          {{ source.data.title }}
       </mat-card-title>
-      <mat-label *ngIf="terms.length == 0" class="text-muted text-through">Vacío</mat-label>
+      <mat-label *ngIf="source.data.classifications.length == 0" class="text-muted text-through">Vacío</mat-label>
   </mat-card-header>
 
   <mat-card-content>
 
       <mat-chip-list class="mat-chip-list-stacked" fxLayout="row" fxLayoutAlign="start center">
 
-          <ng-container *ngFor="let termSource of terms">
+          <ng-container *ngFor="let termSource of source.data.classifications">
 
               <mat-chip>
                   {{ termSource.description }}

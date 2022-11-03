@@ -127,8 +127,8 @@
         #versionsPanel
         [editingJournal]="editingSource"
         [currentJournal]="selectedSource"
-        (editingJournalChange)="
-          journalViewInfo.editingJournalChange(editingSource)
+        (editingSourceChange)="
+          journalViewInfo.editingSourceChange(editingSource)
         "
         fxFlex="1 2 calc(15em + 20px)"
         style="margin: 0.5em"

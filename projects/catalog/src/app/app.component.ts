@@ -191,4 +191,7 @@ export class AppComponent {
       }
     }
   }
+  public get isHome() {
+    return this.router.url == '/';
+  }
 }

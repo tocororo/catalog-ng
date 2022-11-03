@@ -6,11 +6,10 @@ import { Environment } from 'toco-lib';
 
 class EnvironmentImpl implements Environment {
   production = false;
-  sceibaHost = 'https://localhost:5000/';
-  cuorHost = 'https://localhost:5000/';
-  sceibaApi = 'https://localhost:5000/api/';
-  cuorApi = 'https://localhost:5000/api/';
-  cuorAngular = 'https://localhost:4201/';
+  sceibaHost = 'https://cuba-iroko.sceiba.org/';
+  cuorHost = 'https://cuba-iroko.sceiba.org/';
+  sceibaApi = 'https://cuba-iroko.sceiba.org/api/';
+  cuorApi = 'https://cuba-iroko.sceiba.org/api/';
 
   appHost = 'https://localhost:4200';
   appName = 'Sceiba Catalogo';
@@ -19,7 +18,7 @@ class EnvironmentImpl implements Environment {
   websiteUsername_Facebook = '@sceiba';
 
   oauthRedirectUri = 'https://localhost:4200/';
-  oauthClientId = 'AwNeWXGng8C2KraEoYpqFMecao9CCyEDsOlsRIfs';
+  oauthClientId = 'vvi64JKH9LxtFs6RbBFI3ERrfxcYWYd0QltCPXnK';
   oauthScope = 'user:email';
   topOrganizationPID = '';
   cachableUrls = [];

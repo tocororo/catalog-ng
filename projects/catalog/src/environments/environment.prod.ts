@@ -2,19 +2,19 @@ import { Environment } from 'toco-lib';
 
 class EnvironmentImpl implements Environment {
   production = false;
-  sceibaHost = 'https://sceiba.cu/';
-  cuorHost = 'https://orgs.sceiba.cu/';
-  sceibaApi = 'https://sceiba.cu/api/';
-  cuorApi = 'https://orgs.sceiba.cu/api/';
+  sceibaHost = 'https://cuba.sceiba.org/';
+  cuorHost = 'https://cuba.sceiba.org/';
+  sceibaApi = 'https://cuba.sceiba.org/api/';
+  cuorApi = 'https://cuba.sceiba.org/api/';
 
-  appHost = 'https://sceiba.cu';
+  appHost = 'https://cuba.sceiba.org';
   appName = 'Sceiba';
 
   websiteUsername_Twitter = '@SceibaCuba';
   websiteUsername_Facebook = '@sceiba';
 
-  oauthRedirectUri = 'https://sceiba.cu/';
-  oauthClientId = 'ICC1j7NOH0067SgsMyKUXM9ZipavAXHPrbW1ll3V';
+  oauthRedirectUri = 'https://cuba.sceiba.org/catalog/';
+  oauthClientId = 'BCVhHINtHeBRkbNRnOZozCi6jbCDJoMM2KbRsh0G';
   oauthScope = 'user:email';
   topOrganizationPID = '';
   cachableUrls = [];
