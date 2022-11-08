@@ -20,8 +20,8 @@
       <mat-card-content fxLayout="column" style="padding: 2em">
         <h2>{{ stats.sources_count }} Revistas</h2>
         <h2>{{ records }} Artículos</h2>
-        <h2 *ngIf="stats.org.metadata.relationships">
-          {{ stats.org.metadata.relationships.length }} Instituciones
+        <h2 *ngIf="stats.org.relationships">
+          {{ stats.org.relationships.length }} Instituciones
         </h2>
       </mat-card-content>
     </mat-card>

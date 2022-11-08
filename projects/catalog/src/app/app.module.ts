@@ -44,6 +44,10 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
     StatisticsComponent,
     SceibaMenuAppsComponent
   ],
+  exports:[
+    SceibaFooterComponent,
+    SceibaMenuAppsComponent
+  ],
   imports: [
     BrowserAnimationsModule,
     SharedModule,

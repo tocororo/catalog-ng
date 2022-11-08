@@ -221,7 +221,7 @@ export class CatalogComponent implements OnInit, AfterViewInit {
           if(query != ''){
             query = this.queryAddAndOp(query);
           }
-          query = "(organizations.id:" + this.topMainOrganization.id + ")";
+          query = query.concat("(organizations.id:" + this.topMainOrganization.id + ")");
         }
 
         if (params.has(CatalogFilterKeys.institutions)) {

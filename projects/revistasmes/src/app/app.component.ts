@@ -5,9 +5,10 @@
 
 import { Component } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 import { Subscription } from 'rxjs';
-import { Environment, OauthAuthenticationService, OauthInfo, UserProfile } from 'toco-lib';
+import { Environment, OauthAuthenticationService, OauthInfo, User } from 'toco-lib';
 
 
 @Component({
@@ -16,7 +17,19 @@ import { Environment, OauthAuthenticationService, OauthInfo, UserProfile } from 
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
+  /**
+   * Returns the available language texts.
+   */
+   public languageTexts: string[];
+   /**
+    * Returns the available language abbreviations.
+    */
+   public languageAbbrs: string[];
+   /**
+    * Returns the language selected.
+    * The default language is Spanish; that is, the zero index.
+    */
+   public languageSelected: number;
 
   public oauthInfo: OauthInfo = {
     serverHost: this.environment.sceibaHost,
@@ -36,7 +49,7 @@ export class AppComponent {
 
     public islogged: boolean;
 
-    userProfile: UserProfile;
+    user: User;
     loading = false;
     private authenticateSuscription: Subscription = null;
 
@@ -52,7 +65,8 @@ export class AppComponent {
         private oauthStorage: OAuthStorage,
         private oauthService: OAuthService,
         private authenticateService: OauthAuthenticationService,
-        private router: Router) {
+        private router: Router,
+        private _transServ: TranslateService) {
         this.isOnline = true; //navigator.onLine;
         this.router.events.subscribe(
             (event: RouterEvent) => {
@@ -75,19 +89,23 @@ export class AppComponent {
         );
     }
     ngOnInit(): void {
-        let request = JSON.parse(this.oauthStorage.getItem('user'));
-        console.log('request',request);
+      this.languageTexts = ["Español", "English"];
+      this.languageAbbrs = ["es", "en"];
+      this.languageSelected = 0; /* The default language is Spanish; that is, the zero index. */
+      this._transServ.setDefaultLang("es");
+      this._transServ.use("es");
+      this._transServ.addLangs(this.languageAbbrs);
+      let request = JSON.parse(this.oauthStorage.getItem("user"));
+      if (request) {
+        this.user = request;
+      }
 
-        if (request){
-          this.userProfile = request.data.userprofile;
-        }
-
-        console.log(this.userProfile)
+        console.log(this.user)
           this.authenticateSuscription = this.authenticateService.authenticationSubjectObservable.subscribe(
             (request) => {
               if (request != null) {
                 console.log('request',request);
-                this.userProfile = request.data.userprofile;
+                this.user = request;
                 // if (this.oauthStorage.getItem('access_token')) {
                 //   this.user = this.oauthStorage.getItem('email');
                 // }
@@ -96,7 +114,7 @@ export class AppComponent {
               }
             },
             (error: any) => {
-              this.userProfile = null;
+              this.user = null;
             },
             () => {
             }
@@ -124,7 +142,27 @@ export class AppComponent {
     public logoff() {
         this.oauthService.logOut();
         this.oauthStorage.removeItem("user");
-        this.userProfile = undefined;
+        this.user = undefined;
     }
+
+      /**
+   * Sets the current language.
+   * @param index Zero-based index that indicates the current language.
+   */
+  public setLanguage(index: number): void {
+    switch ((this.languageSelected = index)) {
+      case 0 /* Spanish */: {
+        this._transServ.use("es");
+        //this._recaptchaDynamicLanguageLoaderServ.updateLanguage('es');
+        return;
+      }
+
+      case 1 /* English */: {
+        this._transServ.use("en");
+        //this._recaptchaDynamicLanguageLoaderServ.updateLanguage('en');
+        return;
+      }
+    }
+  }
 
 }

@@ -10,7 +10,7 @@
               Algunas características pueden no funcionar correctamente."> <strong> BETA </strong> </span>
           </div>
           <a mat-button [routerLink]="['/']" style="    min-width: fit-content; display: flex; align-items: center;">
-              <img src="/assets/icons/mes.svg" alt="MES" style="height: 50px; margin-right: 6px;">
+              <img src="/assets/icons/mes.png" alt="MES" style="height: 50px; margin-right: 6px;">
               Sceiba - Registro de Revistas Científicas del MES
           </a>
       </div>
@@ -24,6 +24,14 @@
           fxLayoutGap="15px"
       >
 
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menuLanguages"
+        matTooltip="{{ 'IDIOMA' | translate }}"
+      >
+        <mat-icon class="mat-18">translate</mat-icon>
+      </button>
+
         <button mat-icon-button [matMenuTriggerFor]="menuApps" matTooltip="Aplicaciones">
           <mat-icon>apps</mat-icon>
         </button>
@@ -32,12 +40,12 @@
             <mat-icon class="mat-18">help</mat-icon>
         </button>
 
-        <button mat-icon-button *ngIf="userProfile" [matMenuTriggerFor]="menuUser" matTooltip="{{ userProfile.user.email }}">
+        <button mat-icon-button *ngIf="user" [matMenuTriggerFor]="menuUser" matTooltip="{{ user.email }}">
           <mat-icon class="mat-18">person_pin</mat-icon>
         </button>
 
         <toco-authentication [oauthInfo]="oauthInfo" [isButtonLogin]="'true'" [isButtonLoginIcon]="'true'"
-          [isButtonLoginText]="'Autenticarse'" *ngIf="!userProfile">
+          [isButtonLoginText]="'Autenticarse'" *ngIf="!user">
         </toco-authentication>
 
       </div>
@@ -120,7 +128,7 @@
       >
       <a
         mat-button
-        *ngIf="userProfile"
+        *ngIf="user"
         [routerLink]="['/sources/new/journal']"
         value="Incluye tu revista"
         >Incluye tu revista</a
@@ -134,7 +142,7 @@
       >
       </toco-authentication> -->
 
-      <a *ngIf="userProfile" mat-button [routerLink]="['/sources']"> Mis Registros </a>
+      <a *ngIf="user" mat-button [routerLink]="['/sources']"> Mis Registros </a>
       <!-- <a *ngIf="userProfile" mat-button [routerLink]="['/sources','permissions']"> Permisos </a> -->
     </mat-toolbar-row>
   </mat-toolbar>
@@ -161,6 +169,17 @@
     </a>
   </mat-menu>
 
+  <mat-menu #menuLanguages="matMenu">
+    <a *ngFor="let lang of languageTexts; let i=index" mat-menu-item (click)="setLanguage(i)">
+      <mat-icon *ngIf="i == languageSelected; else elseTemplate_radio_button_unchecked">radio_button_checked</mat-icon>
+      {{ lang }}
+    </a>
+
+    <ng-template #elseTemplate_radio_button_unchecked>
+      <mat-icon>radio_button_unchecked</mat-icon>
+    </ng-template>
+  </mat-menu>
+
   <mat-menu #menuHelp="matMenu">
     <!-- <a mat-menu-item [routerLink]="['/help']">
         <mat-icon>help_outline</mat-icon>
@@ -182,28 +201,7 @@
 
 
   <mat-menu #menuApps="matMenu">
-
-    <div fxLayout="row wrap" fxLayoutAlign="space-around center">
-      <a href="https://sceiba.cu" target="__blanck" class="apps" matTooltip="Sceiba">
-        <img class="app-featured" src="/assets/icons/sceiba.svg" alt="Sceiba" style="width: 55px; height: 55px;">
-      </a>
-      <mat-divider class="w-90"></mat-divider>
-
-      <a href="https://catalogo.sceiba.cu" target="__blanck" class="apps" matTooltip="Catálogo">
-        <img src="/assets/icons/catalog.svg" alt="Catálogo" style="width: 55px; height: 55px;">
-      </a>
-      <a href="https://orgs.sceiba.cu" target="__blanck" class="apps" matTooltip="Organizaciones">
-        <img src="/assets/icons/organizacion.svg" alt="Organizaciones" style="width: 55px; height: 55px;">
-      </a>
-      <a href="https://vocs.sceiba.cu" target="__blanck" class="apps" matTooltip="Vocabularios">
-        <img src="/assets/icons/vocabs.svg" alt="Vocabularios" style="width: 55px; height: 55px;">
-      </a>
-      <mat-divider class="w-90"></mat-divider>
-      <a href="https://sceiba.cu" target="__blanck" class="apps" matTooltip="Registro de Revistas Científicas del MES">
-        <img class="app-featured" src="/assets/icons/mes.svg" alt="Registro de Revistas Científicas del MES"
-          style="width: 55px; height: 55px;">
-      </a>
-    </div>
+    <sceiba-menu-apps></sceiba-menu-apps>
   </mat-menu>
 
 
@@ -212,8 +210,14 @@
   <router-outlet></router-outlet>
 
   <div [ngStyle]="{ 'margin-top': '2em' }">
-    <toco-footer
+    <!--<div [ngStyle]="{'margin-top': '2em'}"> -->
+  <app-footer
+    [sites]="footerSites"
+    [information]="footerInformation"
+  >
+  </app-footer>
+    <!-- <toco-footer
       [sites]="footerSites"
       [information]="footerInformation"
-    ></toco-footer>
+    ></toco-footer> -->
   </div>

@@ -1,7 +1,7 @@
 <div fxLayout="row wrap" fxLayoutAlign="space-around flex-end">
   <a
-    href="https://cuba.sceiba.org"
-    target="__blank"
+    href="{{env.sceiba}}"
+    target="_blank"
     class="apps mat-caption"
     matTooltip="{{ 'SCEIBA' | translate }}"
   >
@@ -11,8 +11,8 @@
   <mat-divider class="w-90"></mat-divider>
 
   <a
-    href="https://cuba.sceiba.org/search"
-    target="__blank"
+    href="{{env.sceiba}}/search"
+    target="_blank"
     class="apps mat-caption"
     matTooltip="{{ 'SCEIBA_DESCUBRE_SUB' | translate }}"
   >
@@ -20,7 +20,8 @@
     <span>{{ "BUSQUEDA" | translate }}</span>
   </a>
   <a
-    [routerLink]="['/']"
+    href="{{env.catalog}}"
+    target="_blank"
     class="apps mat-caption"
     matTooltip="{{ 'SCEIBA_CATALOGO_SUB' | translate }}"
   >
@@ -32,7 +33,7 @@
   </a>
 
   <a
-    href="https://cuba-revistasmes.sceiba.org"
+    href="{{env.revistasmes}}"
     target="_blank"
     class="apps mat-caption"
     matTooltip="{{ 'DIRECTORIO_MES_SUB' | translate }}"
@@ -47,7 +48,7 @@
   <mat-divider class="w-90"></mat-divider>
 
   <a
-    href="https://cuba-organizaciones.sceiba.org"
+    href="{{env.organizations}}"
     target="_blank"
     class="apps mat-caption"
     matTooltip="{{ 'SCEIBA_ORGANIZACIONES_SUB' | translate }}"
@@ -60,7 +61,7 @@
     <span>{{ "ORGANIZACION" | translate }}</span>
   </a>
   <a
-    href="https://cuba-personas.sceiba.org"
+    href="{{env.persons}}"
     target="_blank"
     class="apps mat-caption"
     matTooltip="{{ 'PERSONAS_SUB' | translate }}"
@@ -73,7 +74,7 @@
     <span>{{ "PERSONAS" | translate }}</span>
   </a>
   <a
-    href="https://vocabularios.sceiba.cu"
+    href="{{env.vocabularies}}"
     target="_blank"
     class="apps mat-caption"
     matTooltip="{{ 'SCEIBA_VOCABULARIOS_SUB' | translate }}"
@@ -88,7 +89,7 @@
   <mat-divider class="w-90"></mat-divider>
 
   <a
-    href="https://courses.sceiba.org"
+    href="{{env.moodle}}"
     target="_blank"
     class="apps mat-caption"
     matTooltip="{{ 'SMOODLE_SUB' | translate }}"
@@ -101,7 +102,7 @@
     <span>{{ "SMOODLE" | translate }}</span>
   </a>
   <a
-    href="https://evaluaciones.sceiba.org"
+    href="{{env.evaluations}}"
     target="_blank"
     class="apps mat-caption"
     matTooltip="{{ 'EVALUACION' | translate }}"
