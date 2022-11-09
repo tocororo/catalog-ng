@@ -460,12 +460,47 @@ export class SourceEditJournalComponent implements OnInit {
           formControl: InputTextComponent.getFormControlByDefault(),
           name: 'frequency',
           label: 'Frecuencia',
-          type: FormFieldType.text,
-          controlType: InputTextComponent,
+          type: FormFieldType.select_expr,
+          controlType: SelectComponent,
           required: false,
           startHint: new HintValue(HintPosition.start, ''),
           width: '30%',
           value: this.journalData ? this.journalData.frequency : '',
+          extraContent: {
+            multiple: false,
+            getOptions: () => {
+              return [
+                {
+                  label: "Anual",
+                  value: "anual",
+                },
+                {
+                  label: "Semestral",
+                  value: "semestral",
+                },
+                {
+                  label: "Cuatrimestral",
+                  value: "cuatrimestral",
+                },
+                {
+                  label: "Trimestral",
+                  value: "trimestral",
+                },
+                {
+                  label: "Bimestral",
+                  value: "bimestral",
+                },
+                {
+                  label: "Publicación continua",
+                  value: "publicación continua",
+                },
+                {
+                  label: "Otro",
+                  value: "otro",
+                },
+              ];
+            },
+          },
         },
         // {
         //   // TODO: el top level de unesco de materias....
