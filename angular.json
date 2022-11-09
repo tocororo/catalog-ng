@@ -45,10 +45,13 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
+              "commonChunk": true,
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
+              "subresourceIntegrity": false,
+              "verbose": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -169,13 +172,13 @@
               "outputHashing": "all",
               "sourceMap": false,
               "extractCss": true,
-              "namedChunks": true,
+              "namedChunks": false,
               "commonChunk": true,
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "subresourceIntegrity": true,
+              "subresourceIntegrity": false,
               "verbose": true,
               "budgets": [
                 {
