@@ -4,6 +4,7 @@
 
 import { Environment } from 'toco-lib';
 
+
 class EnvironmentImpl implements Environment {
   production = false;
   sceibaHost = 'https://localhost:5000/';
@@ -35,6 +36,18 @@ class EnvironmentImpl implements Environment {
   vocabularies = 'https://vocabularios.sceiba.cu/';
   moodle = 'https://courses.sceiba.org/';
   evaluations = 'https://evaluaciones.sceiba.org/';
+
+  oauthInfo = {
+    serverHost: this.sceibaHost,
+    loginUrl: this.sceibaHost + 'oauth/internal/authorize',
+    tokenEndpoint: this.sceibaHost + 'oauth/token',
+    userInfoEndpoint: this.sceibaApi + 'me',
+    appHost: this.appHost,
+    appName: this.appName,
+    oauthRedirectUri: this.oauthRedirectUri,
+    oauthClientId: this.oauthClientId,
+    oauthScope: this.oauthScope,
+  }
 }
 
 export const environment = new EnvironmentImpl();

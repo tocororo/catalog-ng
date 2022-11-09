@@ -53,17 +53,7 @@ export class AppComponent {
 
   public sceibaHost: string;
 
-  public oauthInfo: OauthInfo = {
-    serverHost: this.environment.sceibaHost,
-    loginUrl: this.environment.sceibaHost + "oauth/authorize",
-    tokenEndpoint: this.environment.sceibaHost + "oauth/token",
-    userInfoEndpoint: this.environment.sceibaApi + "me",
-    appHost: this.environment.appHost,
-    appName: this.environment.appName,
-    oauthRedirectUri: this.environment.oauthRedirectUri,
-    oauthClientId: this.environment.oauthClientId,
-    oauthScope: this.environment.oauthScope,
-  };
+  public oauthInfo: OauthInfo;
 
   title = "Catálogo";
   isOnline: boolean;
@@ -80,6 +70,8 @@ export class AppComponent {
     private router: Router,
     private _transServ: TranslateService
   ) {
+    let env: any = this.environment;
+    this.oauthInfo = env.oauthInfo;
     this.isOnline = true; //navigator.onLine;
     this.router.events.subscribe(
       (event: RouterEvent) => {
@@ -192,6 +184,6 @@ export class AppComponent {
     }
   }
   public get isHome() {
-    return this.router.url == '/';
+    return this.router.url == "/";
   }
 }
