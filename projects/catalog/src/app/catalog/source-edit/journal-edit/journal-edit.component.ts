@@ -660,6 +660,7 @@ export class SourceEditJournalComponent implements OnInit {
 
   private fillJournalFields() {
     // this.journalVersion.source_type = this.informationFormGroup.value['source_type'];
+    this.journalData.name = this.journalData.title;
 
     this.journalData.setIdentifierValue(
       IdentifierSchemas.issn_p,
