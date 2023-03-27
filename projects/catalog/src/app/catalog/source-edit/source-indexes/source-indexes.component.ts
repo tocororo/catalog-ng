@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnChanges, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ContainerPanelComponent, FormContainerAction, FormFieldType, HintPosition, HintValue, InputTextComponent, InputUrlComponent, PanelActionContent, PanelContent, PanelContent_Depr, SelectComponent, SelectOption, SourceClasification, SourceData, TaxonomyService, Term, TermNode, VocabulariesInmutableNames } from 'toco-lib';
 
@@ -244,7 +244,7 @@ export class SourceEditIndexesComponent implements OnInit, OnChanges {
 })
 export class SourceEditAddIndexComponent implements OnInit {
   indexPanel: PanelActionContent = null;
-  indexFormGroup: FormGroup;
+  indexFormGroup: UntypedFormGroup;
 
   addIndexAction: FormContainerAction;
 
@@ -255,7 +255,7 @@ export class SourceEditAddIndexComponent implements OnInit {
 
   constructor(
     private service: TaxonomyService,
-    private _formBuilder: FormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     // console.log(data);

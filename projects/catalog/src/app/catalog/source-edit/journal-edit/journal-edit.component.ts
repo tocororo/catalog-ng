@@ -10,10 +10,10 @@ import {
   Output
 } from '@angular/core';
 import {
-  FormBuilder,
+  UntypedFormBuilder,
 
 
-  FormControl, FormGroup
+  UntypedFormControl, UntypedFormGroup
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ContainerPanelComponent, DatepickerYearComponent, FormContainerAction, FormFieldType, HintPosition, HintValue, Hit, IdentifierSchemas, InputEmailComponent, InputRnpsComponent, InputTextComponent, InputUrlComponent, JournalData, JournalVersion, MetadataService, Organization, PanelContent, SelectComponent, SourceClasification, SourceSystems, SourceTypes, Term, TextareaComponent, VocabulariesInmutableNames, VocabularyComponent } from 'toco-lib';
@@ -49,19 +49,19 @@ export class SourceEditJournalComponent implements OnInit {
 
   // journal identifiers variables for step 0
   identifiersPanel: PanelContent = null;
-  identifiersFormGroup: FormGroup;
+  identifiersFormGroup: UntypedFormGroup;
 
   // journal information variables for step 1
   informationPanel: PanelContent = null;
-  informationFormGroup: FormGroup;
-  informationSocialFormGroup: FormGroup;
+  informationFormGroup: UntypedFormGroup;
+  informationSocialFormGroup: UntypedFormGroup;
 
   journalCover: SourceClasification;
 
-  organizationFormGroup: FormGroup;
+  organizationFormGroup: UntypedFormGroup;
 
   // indexes: SourceClasification[] = [];
-  indexesFormGroup: FormGroup;
+  indexesFormGroup: UntypedFormGroup;
 
   // institutions: SourceClasification[] = [];
   // entityFormGroup: FormGroup;
@@ -69,7 +69,7 @@ export class SourceEditJournalComponent implements OnInit {
   // indexes (databases), variables for step 3
 
   finalPanel: PanelContent = null;
-  finalFormGroup: FormGroup;
+  finalFormGroup: UntypedFormGroup;
 
   // actions, if needed
   stepAction1: FormContainerAction;
@@ -88,7 +88,7 @@ export class SourceEditJournalComponent implements OnInit {
   public constructor(
     private metadata: MetadataService,
     public snackBar: MatSnackBar,
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) { }
 
   ngOnInit() {
@@ -616,7 +616,7 @@ export class SourceEditJournalComponent implements OnInit {
 
   initStep2() {
     this.organizationFormGroup = this.formBuilder.group({
-      institutions: new FormControl(''),
+      institutions: new UntypedFormControl(''),
     });
   }
 

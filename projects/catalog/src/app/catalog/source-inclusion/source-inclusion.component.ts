@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from "@angular/forms";
 import { MatDialog, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Router } from '@angular/router';
 import { ContainerPanelActionComponent, Environment, FormContainerAction, FormFieldType, HandlerComponent, HintPosition, HintValue, Hit, InputTextComponent, Journal, JournalVersion, MessageHandler, Organization, OrganizationServiceNoAuth, PanelActionContent, SelectOption, Source, SourcePersonRole, SourceService, SourceServiceNoAuth, SourceTypes, SourceVersion, StatusCode } from 'toco-lib';
@@ -27,12 +27,12 @@ export class SourceInclusionComponent implements OnInit {
 
   public searchJournalAction: FormContainerAction;
   findPanel: PanelActionContent;
-  findFormGroup: FormGroup;
+  findFormGroup: UntypedFormGroup;
 
   constructor(
     private sourceService: SourceService,
     private sourceServiceNoAuth: SourceServiceNoAuth,
-    private _formBuilder: FormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     public dialog: MatDialog,
     private _router: Router,
     private orgService: OrganizationServiceNoAuth,
@@ -259,13 +259,13 @@ export class SourceInclusionComponent implements OnInit {
 export class SourceInclusionAcceptComponent implements OnInit {
 
   agreementPanel: PanelActionContent;
-  agreementFormGroup: FormGroup;
+  agreementFormGroup: UntypedFormGroup;
 
   accept;
   acceptAction: FormContainerAction;
 
   constructor(
-    private _formBuilder: FormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
 
@@ -274,7 +274,7 @@ export class SourceInclusionAcceptComponent implements OnInit {
 
   ngOnInit() {
     this.agreementFormGroup = this._formBuilder.group({
-      agree: new FormControl(false)
+      agree: new UntypedFormControl(false)
     });
     this.agreementPanel =
     {
