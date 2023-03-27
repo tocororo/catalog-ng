@@ -1,7 +1,6 @@
-
 /* You can add global styles to this file, and also import other style files */
+@use '~@angular/material' as mat;
 
-@import '~@angular/material/theming';
 
 @import './styles/typography';
 @import './styles/app-theme';
@@ -143,35 +142,35 @@ $md-greylight: (
 
 
 /* - colors - */
-$toco-primary: mat-palette($md-azul);
-$toco-accent: mat-palette($md-grey);
+$toco-primary: mat.define-palette($md-azul);
+$toco-accent: mat.define-palette($md-grey);
 //$toco-warn: mat-palette($mat-grey, 200, 100, 900);
-$toco-warn: mat-palette($md-greylight, A700);
+$toco-warn: mat.define-palette($md-greylight, A700);
 
-$toco-theme: mat-light-theme($toco-primary, $toco-accent, $toco-warn);
+$toco-theme: mat.define-light-theme($toco-primary, $toco-accent, $toco-warn);
 
-@include angular-material-theme($toco-theme);
+@include mat.all-component-themes($toco-theme);
 @include toco-app-theme($toco-theme);
 
 .alternate-theme {
-    $alternate-primary: mat-palette($md-grey);
-    $alternate-accent:  mat-palette($md-azullight);
-    $toco-warn: mat-palette($md-greylight);
+    $alternate-primary: mat.define-palette($md-grey);
+    $alternate-accent:  mat.define-palette($md-azullight);
+    $toco-warn: mat.define-palette($md-greylight);
 
-    $alternate-theme: mat-light-theme($alternate-primary, $alternate-accent, $toco-warn);
+    $alternate-theme: mat.define-light-theme($alternate-primary, $alternate-accent, $toco-warn);
 
-    @include angular-material-theme($alternate-theme);
+    @include mat.all-component-themes($alternate-theme);
     @include toco-app-theme($toco-theme);
 }
 
 .alternate-theme-footer {
-    $alternate-primary: mat-palette($md-greylight);
-    $alternate-accent:  mat-palette($md-azullight);
-    $toco-warn: mat-palette($md-azul);
+    $alternate-primary: mat.define-palette($md-greylight);
+    $alternate-accent:  mat.define-palette($md-azullight);
+    $toco-warn: mat.define-palette($md-azul);
 
-    $alternate-theme: mat-light-theme($alternate-primary, $alternate-accent, $toco-warn);
+    $alternate-theme: mat.define-light-theme($alternate-primary, $alternate-accent, $toco-warn);
 
-    @include angular-material-theme($alternate-theme);
+    @include mat.all-component-themes($alternate-theme);
     @include toco-app-theme($toco-theme);
 }
 
@@ -184,14 +183,14 @@ mat-checkbox .mat-checkbox-layout{
 
 
 .tooltip-beta-red{
-  background: mat-color($toco-warn, A700);
+  background: mat.get-color-from-palette($toco-warn, A700);
   font-size: larger;
 }
 .triangle{
-  border-left: 80px solid mat-color($toco-warn, A700) !important;
+  border-left: 80px solid mat.get-color-from-palette($toco-warn, A700) !important;
 }
 .primary-color{
-   background-color: mat-color($toco-primary);
+   background-color: mat.get-color-from-palette($toco-primary);
    color: #fff;
    padding: 16px;
    margin: 16px;
