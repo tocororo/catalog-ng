@@ -22,7 +22,7 @@
             "main": "projects/catalog/src/main.ts",
             "polyfills": "projects/catalog/src/polyfills.ts",
             "tsConfig": "projects/catalog/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "projects/catalog/src/favicon.ico",
               "projects/catalog/src/assets"
@@ -46,7 +46,6 @@
               "extractCss": true,
               "namedChunks": false,
               "commonChunk": true,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -147,7 +146,7 @@
             "main": "projects/revistasmes/src/main.ts",
             "polyfills": "projects/revistasmes/src/polyfills.ts",
             "tsConfig": "projects/revistasmes/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "projects/revistasmes/src/favicon.ico",
               "projects/revistasmes/src/assets"
@@ -174,7 +173,6 @@
               "extractCss": true,
               "namedChunks": false,
               "commonChunk": true,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
