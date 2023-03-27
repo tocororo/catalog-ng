@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SourceTypes, SourceVersion, SourceService, JournalData, JournalVersion, SourceData, MessageHandler, StatusCode, IdentifierSchemas } from 'toco-lib';
 @Component({

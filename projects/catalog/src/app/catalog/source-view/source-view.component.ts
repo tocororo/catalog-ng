@@ -1,8 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
-import {
-  MatDialog, MatDialogRef, MatSnackBar,
-  MAT_DIALOG_DATA
-} from "@angular/material";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
 import { of } from "rxjs";
 import { Environment, HandlerComponent, Hit, JournalVersion, MessageHandler, Organization, OrganizationServiceNoAuth, Response, ResponseStatus, SourceClasification, SourceOrganization, SourceService, SourceStatus, SourceTypes, SourceVersion, StatusCode } from 'toco-lib';

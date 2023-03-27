@@ -1,7 +1,7 @@
 import {
   Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild
 } from "@angular/core";
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { JournalData, JournalDataType, JournalVersion, MessageHandler, SourceClasification, SourceOrganization, StatusCode, VocabulariesInmutableNames } from 'toco-lib';
 import { SourceEditIndexesComponent } from '../../../source-edit/source-indexes/source-indexes.component';
 import { SourceEditOrganizationsComponent } from '../../../source-organizations/source-organizations.component';

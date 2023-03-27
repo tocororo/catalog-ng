@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ContainerPanelComponent, FormContainerAction, FormFieldType, HintPosition, HintValue, InputTextComponent, InputUrlComponent, PanelActionContent, PanelContent, PanelContent_Depr, SelectComponent, SelectOption, SourceClasification, SourceData, TaxonomyService, Term, TermNode, VocabulariesInmutableNames } from 'toco-lib';
 
 @Component({

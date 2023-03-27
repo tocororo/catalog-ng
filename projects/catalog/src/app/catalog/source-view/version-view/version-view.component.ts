@@ -5,7 +5,8 @@
 
 
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Environment, Hit, JournalVersion, MessageHandler, MetadataService, Organization, SourceVersion, StatusCode, VocabulariesInmutableNames } from 'toco-lib';
 import { SourceJournalViewVersionComponent } from './version/journal-view-version.component';
 
