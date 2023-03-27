@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Inject, OnChanges } from "@angular/core";
 
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from "@angular/material/dialog";
+import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialog as MatDialog } from "@angular/material/legacy-dialog";
 import { FormArray } from "@angular/forms";
 import { SourceData, Organization, SourceOrganizationRole, OrganizationServiceNoAuth, SourceOrganization, MessageHandler, StatusCode, HandlerComponent, OrganizationRelationships, Relationship, Hit, OrganizationFlatNode } from 'toco-lib';
 

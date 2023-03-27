@@ -4,7 +4,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Environment, Hit, JournalData, JournalVersion, MessageHandler, Organization, SourceData, SourceService, SourceTypes, SourceVersion, StatusCode } from 'toco-lib';
 

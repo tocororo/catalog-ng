@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from "@angular/forms";
-import { MatDialog, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatLegacyDialog as MatDialog, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from "@angular/material/legacy-dialog";
 import { Router } from '@angular/router';
 import { ContainerPanelActionComponent, Environment, FormContainerAction, FormFieldType, HandlerComponent, HintPosition, HintValue, Hit, InputTextComponent, Journal, JournalVersion, MessageHandler, Organization, OrganizationServiceNoAuth, PanelActionContent, SelectOption, Source, SourcePersonRole, SourceService, SourceServiceNoAuth, SourceTypes, SourceVersion, StatusCode } from 'toco-lib';
 

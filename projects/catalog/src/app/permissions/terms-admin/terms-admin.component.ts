@@ -6,7 +6,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { FlatTreeControl } from "@angular/cdk/tree";
-import { MatDialog } from "@angular/material/dialog";
+import { MatLegacyDialog as MatDialog } from "@angular/material/legacy-dialog";
 import { MatTreeFlattener, MatTreeFlatDataSource } from "@angular/material/tree";
 import { SelectionModel } from "@angular/cdk/collections";
 import { of } from "rxjs";
