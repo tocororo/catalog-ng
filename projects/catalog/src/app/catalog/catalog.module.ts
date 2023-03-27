@@ -32,58 +32,50 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 }
 
 @NgModule({
-  declarations: [
-    CatalogComponent,
-    FiltersComponent,
-    SourceEditComponent,
-    SourceEditIndexesComponent,
-    SourceEditAddIndexComponent,
-    SourceEditOrganizationsComponent,
-    SourceEditOrganizationSelectTopDialog,
-    SourceEditOrganizationSelectDialog,
-    SourceEditJournalComponent,
-    SourceInclusionComponent,
-    SourceInclusionAcceptComponent,
-    SourceViewComponent,
-    SourceViewSaveDialog,
-    SourceViewReadComponent,
-    SourceVersionViewComponent,
-    SourceJournalViewVersionTermComponent,
-    SourceJournalViewVersionFieldComponent,
-    SourceJournalViewVersionComponent,
-    SourceViewVersionInfoComponent,
-    SourceViewVersionInfoFieldComponent,
-    SourceViewInfoSourceDefaultComponent,
-    SourceViewInfoJournalComponent,
-    DialogCatalogJournalInfoDialog,
-    SourceViewDefaultComponent,
-    SourceClassificationsComponent,
-    SearchListComponent,
-    SourceRepositoryViewComponent
-  ],
-  entryComponents: [
-    SourceEditAddIndexComponent,
-    SourceEditOrganizationSelectTopDialog,
-    SourceEditOrganizationSelectDialog,
-    SourceInclusionAcceptComponent,
-    SourceViewSaveDialog,
-    DialogCatalogJournalInfoDialog,
-  ],
-  imports: [
-    CommonModule,
-    CatalogRoutingModule,
-    SharedModule,
-    CoreModule,
-    StaticsModule,
-    TocoFormsModule,
-    OrganizationsModule,
-    TranslateModule.forChild({
-      loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
-      }
-    }),
-  ]
+    declarations: [
+        CatalogComponent,
+        FiltersComponent,
+        SourceEditComponent,
+        SourceEditIndexesComponent,
+        SourceEditAddIndexComponent,
+        SourceEditOrganizationsComponent,
+        SourceEditOrganizationSelectTopDialog,
+        SourceEditOrganizationSelectDialog,
+        SourceEditJournalComponent,
+        SourceInclusionComponent,
+        SourceInclusionAcceptComponent,
+        SourceViewComponent,
+        SourceViewSaveDialog,
+        SourceViewReadComponent,
+        SourceVersionViewComponent,
+        SourceJournalViewVersionTermComponent,
+        SourceJournalViewVersionFieldComponent,
+        SourceJournalViewVersionComponent,
+        SourceViewVersionInfoComponent,
+        SourceViewVersionInfoFieldComponent,
+        SourceViewInfoSourceDefaultComponent,
+        SourceViewInfoJournalComponent,
+        DialogCatalogJournalInfoDialog,
+        SourceViewDefaultComponent,
+        SourceClassificationsComponent,
+        SearchListComponent,
+        SourceRepositoryViewComponent
+    ],
+    imports: [
+        CommonModule,
+        CatalogRoutingModule,
+        SharedModule,
+        CoreModule,
+        StaticsModule,
+        TocoFormsModule,
+        OrganizationsModule,
+        TranslateModule.forChild({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (createTranslateLoader),
+                deps: [HttpClient]
+            }
+        }),
+    ]
 })
 export class CatalogModule { }
