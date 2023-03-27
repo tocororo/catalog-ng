@@ -22,7 +22,6 @@
             "main": "projects/catalog/src/main.ts",
             "polyfills": "projects/catalog/src/polyfills.ts",
             "tsConfig": "projects/catalog/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/catalog/src/favicon.ico",
               "projects/catalog/src/assets"
@@ -30,7 +29,13 @@
             "styles": [
               "projects/catalog/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -63,7 +68,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -145,7 +151,6 @@
             "main": "projects/revistasmes/src/main.ts",
             "polyfills": "projects/revistasmes/src/polyfills.ts",
             "tsConfig": "projects/revistasmes/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/revistasmes/src/favicon.ico",
               "projects/revistasmes/src/assets"
@@ -153,7 +158,13 @@
             "styles": [
               "projects/revistasmes/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -189,7 +200,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
