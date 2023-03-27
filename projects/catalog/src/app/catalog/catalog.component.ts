@@ -104,7 +104,7 @@ export class CatalogComponent implements OnInit, AfterViewInit {
   public topOrganizationPID = null;
   public topMainOrganization: Hit<Organization> = null;
 
-  @ViewChild(MatDrawer, { static: false }) drawer: MatDrawer;
+  @ViewChild(MatDrawer) drawer: MatDrawer;
   constructor(
     private sourceServiceNoAuth: SourceServiceNoAuth,
     private metadata: MetadataService,

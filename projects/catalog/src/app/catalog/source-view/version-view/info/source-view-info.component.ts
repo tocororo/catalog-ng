@@ -34,10 +34,10 @@ export class SourceViewVersionInfoComponent implements OnInit, OnChanges {
 
   public IdentifierSchemas = IdentifierSchemas;
 
-  @ViewChild(SourceEditOrganizationsComponent, { static: false })
+  @ViewChild(SourceEditOrganizationsComponent)
   orgs: SourceEditOrganizationsComponent;
 
-  @ViewChild(SourceEditIndexesComponent, { static: false })
+  @ViewChild(SourceEditIndexesComponent)
   indexes: SourceEditIndexesComponent;
 
   public sourceTypes = SourceTypes;

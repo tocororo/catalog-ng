@@ -83,7 +83,7 @@ export class SourceVersionViewComponent implements OnInit {
     public showVersions = false;
     public editVersion = false;
 
-    @ViewChild(SourceJournalViewVersionComponent, { static: false })
+    @ViewChild(SourceJournalViewVersionComponent)
     versionComponent: SourceJournalViewVersionComponent;
 
 

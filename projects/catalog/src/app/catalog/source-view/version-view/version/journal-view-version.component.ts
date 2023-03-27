@@ -41,10 +41,10 @@ export class SourceJournalViewVersionComponent implements OnInit, OnChanges {
   loading = true;
 
 
-  @ViewChild(SourceEditOrganizationsComponent, { static: false })
+  @ViewChild(SourceEditOrganizationsComponent)
   orgs: SourceEditOrganizationsComponent;
 
-  @ViewChild(SourceEditIndexesComponent, { static: false })
+  @ViewChild(SourceEditIndexesComponent)
   indexes: SourceEditIndexesComponent;
 
 
