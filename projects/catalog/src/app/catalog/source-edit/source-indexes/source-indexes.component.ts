@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnChanges, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-import { MatLegacyDialog as MatDialog, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ContainerPanelComponent, FormContainerAction, FormFieldType, HintPosition, HintValue, InputTextComponent, InputUrlComponent, PanelActionContent, PanelContent, PanelContent_Depr, SelectComponent, SelectOption, SourceClasification, SourceData, TaxonomyService, Term, TermNode, VocabulariesInmutableNames } from 'toco-lib';
 
 @Component({

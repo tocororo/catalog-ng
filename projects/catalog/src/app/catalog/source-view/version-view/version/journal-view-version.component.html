@@ -275,9 +275,9 @@
         >
       </mat-card-header>
       <mat-card-content>
-        <mat-chip-list>
+        <mat-chip-listbox>
           <ng-container *ngFor="let termSource of currentLicenceTerms">
-            <mat-chip>
+            <mat-chip-option>
               <button
                 mat-icon-button
                 color="accent"
@@ -287,9 +287,9 @@
                 <mat-icon class="mat-18">merge_type</mat-icon>
               </button>
               {{ termSource.description }}
-            </mat-chip>
+            </mat-chip-option>
           </ng-container>
-        </mat-chip-list>
+        </mat-chip-listbox>
       </mat-card-content>
     </mat-card>
 
@@ -314,7 +314,7 @@
         >
       </mat-card-header>
       <mat-card-content>
-        <mat-chip-list>
+        <mat-chip-listbox>
           <ng-container *ngFor="let termSource of currentSubjectTerms">
             <mat-chip>
               <!-- <button
@@ -328,7 +328,7 @@
               {{ termSource.description }}
             </mat-chip>
           </ng-container>
-        </mat-chip-list>
+        </mat-chip-listbox>
       </mat-card-content>
     </mat-card>
 

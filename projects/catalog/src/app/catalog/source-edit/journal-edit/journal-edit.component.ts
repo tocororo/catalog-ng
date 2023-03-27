@@ -15,7 +15,7 @@ import {
 
   UntypedFormControl, UntypedFormGroup
 } from '@angular/forms';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ContainerPanelComponent, DatepickerYearComponent, FormContainerAction, FormFieldType, HintPosition, HintValue, Hit, IdentifierSchemas, InputEmailComponent, InputRnpsComponent, InputTextComponent, InputUrlComponent, JournalData, JournalVersion, MetadataService, Organization, PanelContent, SelectComponent, SourceClasification, SourceSystems, SourceTypes, Term, TextareaComponent, VocabulariesInmutableNames, VocabularyComponent } from 'toco-lib';
 
 
