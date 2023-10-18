@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import {
-  MatDialog, MatDialogRef, MatSnackBar,
-  MAT_DIALOG_DATA
+  MAT_DIALOG_DATA,
+  MatDialog, MatDialogRef, MatSnackBar
 } from "@angular/material";
 import { ActivatedRoute, Router } from "@angular/router";
 import { of } from "rxjs";
@@ -56,6 +56,8 @@ export class SourceViewComponent implements OnInit {
       },
       (err: any) => {
         console.log("error: " + err + ".");
+        console.log('bbb');
+
       },
       () => {
         console.log("complete");

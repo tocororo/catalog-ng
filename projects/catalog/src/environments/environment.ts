@@ -6,18 +6,18 @@ import { Environment } from 'toco-lib';
 
 class EnvironmentImpl implements Environment {
   production = false;
-  sceibaHost = 'https://localhost:5000/';
-  cuorHost = 'https://localhost:5000/';
-  sceibaApi = 'https://localhost:5000/api/';
-  cuorApi = 'https://localhost:5000/api/';
+  sceibaHost = 'https://10.2.6.208/';
+  cuorHost = 'https://10.2.6.208/';
+  sceibaApi = 'https://10.2.6.208/api/';
+  cuorApi = 'https://10.2.6.208/api/';
 
-  appHost = 'https://localhost:4200';
+  appHost = 'https://127.0.0.1:4200';
   appName = 'Revistas MES - Sceiba';
 
   websiteUsername_Twitter = '@SceibaCuba';
   websiteUsername_Facebook = '@sceiba';
 
-  oauthRedirectUri = 'https://localhost:4200/';
+  oauthRedirectUri = 'https://127.0.0.1:4200/';
   oauthClientId = '035fMpN08wTdlDXEKhj8RRWF6bVH4HARWBkGLuWq';
   oauthScope = 'user:email';
   topOrganizationPID = 'orgaid.223';
@@ -38,7 +38,7 @@ class EnvironmentImpl implements Environment {
 
   oauthInfo = {
     serverHost: this.sceibaHost,
-    loginUrl: this.sceibaHost + 'oauth/internal/authorize',
+    loginUrl: this.sceibaHost + 'oauth/authorize',
     tokenEndpoint: this.sceibaHost + 'oauth/token',
     userInfoEndpoint: this.sceibaApi + 'me',
     appHost: this.appHost,
