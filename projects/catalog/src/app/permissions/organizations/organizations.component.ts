@@ -1,7 +1,8 @@
 import { CollectionViewer, SelectionChange } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, Inject, Injectable, Input, OnInit } from '@angular/core';
-import { MatTreeFlattener, MatTreeFlatDataSource, MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
 
 import { BehaviorSubject, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -30,7 +31,7 @@ export class DynamicDataSource {
     private orgService: OrganizationServiceNoAuth) { }
 
   connect(collectionViewer: CollectionViewer): Observable<DynamicFlatNode[]> {
-    this._treeControl.expansionModel.onChange.subscribe(change => {
+    this._treeControl.expansionModel.changed.subscribe(change => {
       if ((change as SelectionChange<DynamicFlatNode>).added ||
         (change as SelectionChange<DynamicFlatNode>).removed) {
         this.handleTreeControl(change as SelectionChange<DynamicFlatNode>);

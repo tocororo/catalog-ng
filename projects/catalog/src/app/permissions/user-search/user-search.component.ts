@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { User, UserProfileService } from 'toco-lib';
 
 @Component({
@@ -9,7 +9,7 @@ import { User, UserProfileService } from 'toco-lib';
 })
 export class UserSearchComponent implements OnInit {
 
-  userCtrl = new FormControl();
+  userCtrl = new UntypedFormControl();
   filteredUser = new Array<User>();
 
   // @Input()

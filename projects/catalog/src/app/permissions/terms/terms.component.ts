@@ -1,6 +1,7 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { MatTreeFlattener, MatTreeFlatDataSource, MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
 import { of } from 'rxjs';
 import { Term, TermNode, TaxonomyService } from 'toco-lib';
 

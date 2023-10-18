@@ -33,60 +33,49 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeRevistasmesComponent
-  ],
-  entryComponents: [
-    MySourcesManagerPermissionDialog,
-    MySourcesOrganizationsPermissionDialog,
-    MySourcesTermsPermissionDialog,
-    SourceEditAddIndexComponent,
-    SourceEditOrganizationSelectTopDialog,
-    SourceEditOrganizationSelectDialog,
-    SourceInclusionAcceptComponent,
-    SourceViewSaveDialog,
-    DialogCatalogJournalInfoDialog
-  ],
-  imports: [
-    BrowserAnimationsModule,
-    SharedModule,
-    TranslateModule.forRoot({
-      loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
-      }
-    }),
-    ReactiveFormsModule,
-    // BrowserModule,
-    AppRoutingModule,
-    NotificationModule,
-    TocoFormsModule,
-    OrganizationsModule,
-    CoreModule,
-    AuthenticationModule,
-    AngularMaterialModule,
-    // TaxonomyModule,
-    FlexLayoutModule,
-    MarkdownModule.forRoot({
-      loader: HttpClient
-    }),
-    CatalogModule,
-    PermissionsModule,
-    CatalogAppModule
-  ],
-  providers: [
-    SourceService,
-    SourceServiceNoAuth,
-    UserProfileService,
-    TaxonomyService,
-    OrganizationServiceNoAuth,
-    HTTP_INTERCEPTOR_PROVIDERS,
-    // REQUEST_CACHE_DIFFERENT_TIME_WITH_MAP_PROVIDER,
-    // { provide: HTTP_INTERCEPTORS, useClass: OauthAuthenticationService, multi: true },
-    { provide: Environment, useValue: environment }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HomeRevistasmesComponent
+    ],
+    imports: [
+        BrowserAnimationsModule,
+        SharedModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (createTranslateLoader),
+                deps: [HttpClient]
+            }
+        }),
+        ReactiveFormsModule,
+        // BrowserModule,
+        AppRoutingModule,
+        NotificationModule,
+        TocoFormsModule,
+        OrganizationsModule,
+        CoreModule,
+        AuthenticationModule,
+        AngularMaterialModule,
+        // TaxonomyModule,
+        FlexLayoutModule,
+        MarkdownModule.forRoot({
+            loader: HttpClient
+        }),
+        CatalogModule,
+        PermissionsModule,
+        CatalogAppModule
+    ],
+    providers: [
+        SourceService,
+        SourceServiceNoAuth,
+        UserProfileService,
+        TaxonomyService,
+        OrganizationServiceNoAuth,
+        HTTP_INTERCEPTOR_PROVIDERS,
+        // REQUEST_CACHE_DIFFERENT_TIME_WITH_MAP_PROVIDER,
+        // { provide: HTTP_INTERCEPTORS, useClass: OauthAuthenticationService, multi: true },
+        { provide: Environment, useValue: environment }
+    ],
+    bootstrap: [AppComponent]
 })
 export class RevistasmesAppModule { }

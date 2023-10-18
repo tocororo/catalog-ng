@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, ViewChild } from "@angular/core";
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { IdentifierSchemas, JournalData, SourceClasification, SourceData, SourceService, SourceTypes, SourceVersion, VocabulariesInmutableNames } from 'toco-lib';
 import { SourceEditIndexesComponent } from '../../../source-edit/source-indexes/source-indexes.component';
 import { SourceEditOrganizationsComponent } from '../../../source-organizations/source-organizations.component';
@@ -34,10 +34,10 @@ export class SourceViewVersionInfoComponent implements OnInit, OnChanges {
 
   public IdentifierSchemas = IdentifierSchemas;
 
-  @ViewChild(SourceEditOrganizationsComponent, { static: false })
+  @ViewChild(SourceEditOrganizationsComponent)
   orgs: SourceEditOrganizationsComponent;
 
-  @ViewChild(SourceEditIndexesComponent, { static: false })
+  @ViewChild(SourceEditIndexesComponent)
   indexes: SourceEditIndexesComponent;
 
   public sourceTypes = SourceTypes;

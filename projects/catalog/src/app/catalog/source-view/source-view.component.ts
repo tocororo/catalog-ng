@@ -1,8 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
-import {
-  MAT_DIALOG_DATA,
-  MatDialog, MatDialogRef, MatSnackBar
-} from "@angular/material";
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
 import { of } from "rxjs";
 import { Environment, HandlerComponent, Hit, JournalVersion, MessageHandler, Organization, OrganizationServiceNoAuth, Response, ResponseStatus, SourceClasification, SourceOrganization, SourceService, SourceStatus, SourceTypes, SourceVersion, StatusCode } from 'toco-lib';
@@ -14,6 +12,7 @@ import { Utils } from "../../utils";
   templateUrl: "./source-view.component.html",
   styleUrls: ["./source-view.component.scss"],
 })
+
 export class SourceViewComponent implements OnInit {
   public sourceType = SourceTypes;
 

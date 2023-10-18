@@ -18,34 +18,30 @@ import { UserSearchComponent } from './user-search/user-search.component';
 
 
 @NgModule({
-  declarations: [
-    PermissionsComponent,
-    MySourcesEditorComponent,
-    MySourcesManagerComponent,
-    MySourcesManagerPermissionDialog,
-    MySourcesOrganizationsComponent,
-    MySourcesOrganizationsPermissionDialog,
-    MySourcesTermsAdminComponent,
-    MySourcesTermsComponent,
-    MySourcesTermsPermissionDialog,
-    MySourcesSourcePermissionComponent,
-    MySourcesOrganizationPermissionComponent,
-    MySourcesTermPermissionComponent,
-    UserSearchComponent,
-    RoleComponent
-  ],
-  entryComponents: [
-      MySourcesManagerPermissionDialog,
-      MySourcesOrganizationsPermissionDialog,
-      MySourcesTermsPermissionDialog,],
-  imports: [
-    CommonModule,
-    PermissionsRoutingModule,
-    SharedModule,
-    CoreModule,
-    TocoFormsModule,
-    OrganizationsModule,
-    ReactiveFormsModule
-  ]
+    declarations: [
+        PermissionsComponent,
+        MySourcesEditorComponent,
+        MySourcesManagerComponent,
+        MySourcesManagerPermissionDialog,
+        MySourcesOrganizationsComponent,
+        MySourcesOrganizationsPermissionDialog,
+        MySourcesTermsAdminComponent,
+        MySourcesTermsComponent,
+        MySourcesTermsPermissionDialog,
+        MySourcesSourcePermissionComponent,
+        MySourcesOrganizationPermissionComponent,
+        MySourcesTermPermissionComponent,
+        UserSearchComponent,
+        RoleComponent
+    ],
+    imports: [
+        CommonModule,
+        PermissionsRoutingModule,
+        SharedModule,
+        CoreModule,
+        TocoFormsModule,
+        OrganizationsModule,
+        ReactiveFormsModule
+    ]
 })
 export class PermissionsModule { }

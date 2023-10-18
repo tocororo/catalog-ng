@@ -22,7 +22,6 @@
             "main": "projects/catalog/src/main.ts",
             "polyfills": "projects/catalog/src/polyfills.ts",
             "tsConfig": "projects/catalog/tsconfig.app.json",
-            "aot": false,
             "assets": [
               "projects/catalog/src/favicon.ico",
               "projects/catalog/src/assets"
@@ -30,7 +29,13 @@
             "styles": [
               "projects/catalog/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -43,10 +48,8 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "commonChunk": true,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -65,7 +68,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -101,19 +105,6 @@
             "scripts": []
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/catalog/tsconfig.app.json",
-              "projects/catalog/tsconfig.spec.json",
-              "projects/catalog/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
@@ -147,7 +138,6 @@
             "main": "projects/revistasmes/src/main.ts",
             "polyfills": "projects/revistasmes/src/polyfills.ts",
             "tsConfig": "projects/revistasmes/tsconfig.app.json",
-            "aot": false,
             "assets": [
               "projects/revistasmes/src/favicon.ico",
               "projects/revistasmes/src/assets"
@@ -155,7 +145,13 @@
             "styles": [
               "projects/revistasmes/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -171,10 +167,8 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "commonChunk": true,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -193,7 +187,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -229,19 +224,6 @@
             "scripts": []
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/revistasmes/tsconfig.app.json",
-              "projects/revistasmes/tsconfig.spec.json",
-              "projects/revistasmes/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
@@ -255,6 +237,5 @@
           }
         }
       }
-    }},
-  "defaultProject": "catalog"
+    }}
 }

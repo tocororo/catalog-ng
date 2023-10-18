@@ -14,7 +14,7 @@ import {
 
   Output
 } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
 import { ParamMap, Params } from "@angular/router";
 import { ContainerPanelComponent, FlatTreeNode, FormFieldType, HintPosition, HintValue, Hit, InputTextComponent, Organization, PanelContent, SelectFilterComponent, SelectOption, SelectOptionNode, SelectOrgsComponent, SourceTypes, VocabulariesInmutableNames, VocabularyComponent } from 'toco-lib';
 
@@ -47,7 +47,7 @@ export class FiltersComponent implements OnInit {
   paramsChange: EventEmitter<Params> = new EventEmitter();
 
   filterPanel: PanelContent = null;
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
 
   institutionTree: SelectOptionNode[] = [];
   institutionSelection: FlatTreeNode[];
@@ -57,7 +57,7 @@ export class FiltersComponent implements OnInit {
   filters: Map<string, string> = new Map<string, string>();
 
   constructor(
-    private _formBuilder: FormBuilder
+    private _formBuilder: UntypedFormBuilder
   ) {
 
   }

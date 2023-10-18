@@ -7,13 +7,9 @@ import {
 } from "@angular/animations";
 import { HttpParams } from "@angular/common/http";
 import { AfterViewInit, Component, HostListener, Inject, OnInit, ViewChild } from "@angular/core";
-import {
-  MatDialog,
-  MatDialogRef, MatDrawer, MatSnackBar,
-
-
-  MAT_DIALOG_DATA
-} from "@angular/material";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatDrawer } from "@angular/material/sidenav";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { PageEvent } from "@angular/material/paginator";
 import {
   ActivatedRoute,
@@ -104,7 +100,7 @@ export class CatalogComponent implements OnInit, AfterViewInit {
   public topOrganizationPID = null;
   public topMainOrganization: Hit<Organization> = null;
 
-  @ViewChild(MatDrawer, { static: false }) drawer: MatDrawer;
+  @ViewChild(MatDrawer) drawer: MatDrawer;
   constructor(
     private sourceServiceNoAuth: SourceServiceNoAuth,
     private metadata: MetadataService,
