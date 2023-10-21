@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { CoreModule, OrganizationsModule, SharedModule, StaticsModule, TocoFormsModule } from 'toco-lib';
+import { CoreModule, OrganizationsModule, StaticsModule, TocoFormsModule } from 'toco-lib';
+import { SharedModule } from '../shared/shared.module';
 import { CatalogRoutingModule } from './catalog-routing.module';
 import { CatalogComponent, DialogCatalogJournalInfoDialog } from './catalog.component';
 import { FiltersComponent } from './filters/filters.component';
@@ -13,7 +15,7 @@ import { SourceEditJournalComponent } from './source-edit/journal-edit/journal-e
 import { SourceEditComponent } from './source-edit/source-edit.component';
 import { SourceEditAddIndexComponent, SourceEditIndexesComponent } from './source-edit/source-indexes/source-indexes.component';
 import { SourceInclusionAcceptComponent, SourceInclusionComponent } from './source-inclusion/source-inclusion.component';
-import { SourceEditOrganizationsComponent, SourceEditOrganizationSelectDialog, SourceEditOrganizationSelectTopDialog } from './source-organizations/source-organizations.component';
+import { SourceEditOrganizationSelectDialog, SourceEditOrganizationSelectTopDialog, SourceEditOrganizationsComponent } from './source-organizations/source-organizations.component';
 import { SourceRepositoryViewComponent } from './source-view/repository-view/repository-view.component';
 import { SourceViewDefaultComponent } from './source-view/source-view-default/source-view-default.component';
 import { SourceViewReadComponent } from './source-view/source-view-read/source-view-read.component';
@@ -68,6 +70,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
         CoreModule,
         StaticsModule,
         TocoFormsModule,
+        FormsModule,
         OrganizationsModule,
         TranslateModule.forChild({
             loader: {

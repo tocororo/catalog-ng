@@ -8,17 +8,9 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MarkdownModule } from 'ngx-markdown';
 import { CatalogAppModule } from 'projects/catalog/src/app/app.module';
-import { DialogCatalogJournalInfoDialog } from 'projects/catalog/src/app/catalog/catalog.component';
 import { CatalogModule } from 'projects/catalog/src/app/catalog/catalog.module';
-import { SourceEditAddIndexComponent } from 'projects/catalog/src/app/catalog/source-edit/source-indexes/source-indexes.component';
-import { SourceInclusionAcceptComponent } from 'projects/catalog/src/app/catalog/source-inclusion/source-inclusion.component';
-import { SourceEditOrganizationSelectDialog, SourceEditOrganizationSelectTopDialog } from 'projects/catalog/src/app/catalog/source-organizations/source-organizations.component';
-import { SourceViewSaveDialog } from 'projects/catalog/src/app/catalog/source-view/source-view.component';
-import { MySourcesManagerPermissionDialog } from 'projects/catalog/src/app/permissions/manager/manager.component';
-import { MySourcesOrganizationsPermissionDialog } from 'projects/catalog/src/app/permissions/organizations/organizations.component';
 import { PermissionsModule } from 'projects/catalog/src/app/permissions/permissions.module';
-import { MySourcesTermsPermissionDialog } from 'projects/catalog/src/app/permissions/terms/terms.component';
-import { AngularMaterialModule, AuthenticationModule, CoreModule, Environment, HTTP_INTERCEPTOR_PROVIDERS, NotificationModule, OrganizationServiceNoAuth, OrganizationsModule, SharedModule, SourceService, SourceServiceNoAuth, TaxonomyService, TocoFormsModule, UserProfileService } from 'toco-lib';
+import { AuthenticationModule, CoreModule, Environment, HTTP_INTERCEPTOR_PROVIDERS, NotificationModule, OrganizationServiceNoAuth, OrganizationsModule, SourceService, SourceServiceNoAuth, TaxonomyService, TocoFormsModule, UserProfileService } from 'toco-lib';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -55,7 +47,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
         OrganizationsModule,
         CoreModule,
         AuthenticationModule,
-        AngularMaterialModule,
         // TaxonomyModule,
         FlexLayoutModule,
         MarkdownModule.forRoot({

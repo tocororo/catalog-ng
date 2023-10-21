@@ -4,8 +4,7 @@ import {
   NavigationEnd,
   NavigationError,
   NavigationStart,
-  Router,
-  RouterEvent
+  Router
 } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { OAuthService, OAuthStorage } from "angular-oauth2-oidc";
@@ -74,7 +73,7 @@ export class AppComponent {
     this.oauthInfo = env.oauthInfo;
     this.isOnline = true; //navigator.onLine;
     this.router.events.subscribe(
-      (event: RouterEvent) => {
+      (event) => {
         if (event instanceof NavigationStart) {
           this.loading = true;
         }

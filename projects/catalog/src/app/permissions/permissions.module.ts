@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CoreModule, OrganizationsModule, SharedModule, TocoFormsModule } from 'toco-lib';
+import { CoreModule, OrganizationsModule, TocoFormsModule } from 'toco-lib';
+import { SharedModule } from '../shared/shared.module';
 import { MySourcesEditorComponent } from './editor/editor.component';
 import { MySourcesManagerComponent, MySourcesManagerPermissionDialog } from './manager/manager.component';
 import { MySourcesOrganizationsComponent, MySourcesOrganizationsPermissionDialog } from './organizations/organizations.component';

@@ -3,35 +3,49 @@ import {
   state,
   style,
   transition,
-  trigger
+  trigger,
 } from "@angular/animations";
 import { HttpParams } from "@angular/common/http";
-import { AfterViewInit, Component, HostListener, Inject, OnInit, ViewChild } from "@angular/core";
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import {
+  AfterViewInit,
+  Component,
+  HostListener,
+  Inject,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from "@angular/material/dialog";
+import { PageEvent } from "@angular/material/paginator";
 import { MatDrawer } from "@angular/material/sidenav";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { PageEvent } from "@angular/material/paginator";
 import {
   ActivatedRoute,
-
-
-
-
-  convertToParamMap, NavigationExtras, ParamMap,
-
-
-
-
-  Params, Router
+  NavigationExtras,
+  ParamMap,
+  Params,
+  Router,
+  convertToParamMap,
 } from "@angular/router";
-import { Environment, FilterHttpMap, Hit, HitList, JournalData, JournalVersion, MessageHandler, MetadataService, Organization, OrganizationServiceNoAuth, Source, SourceServiceNoAuth, StatusCode } from 'toco-lib';
+import {
+  Environment,
+  FilterHttpMap,
+  Hit,
+  HitList,
+  JournalData,
+  JournalVersion,
+  MessageHandler,
+  MetadataService,
+  Organization,
+  OrganizationServiceNoAuth,
+  Source,
+  SourceServiceNoAuth,
+  StatusCode,
+} from "toco-lib";
 import { CatalogFilterKeys } from "./filters/filters.component";
-
-
-
-
-
-
 
 @Component({
   selector: "catalog-search",
@@ -57,7 +71,7 @@ export class CatalogComponent implements OnInit, AfterViewInit {
   initfilters = false;
   private hasErrors = false;
   dataSource = new HitList<Source>();
-  columnsToDisplay = ["title"];//, "url"];
+  columnsToDisplay = ["title"]; //, "url"];
   expandedElement: Source;
   length = 0;
   pageSize = 5;
@@ -110,33 +124,38 @@ export class CatalogComponent implements OnInit, AfterViewInit {
     private activatedRoute: ActivatedRoute,
     private orgService: OrganizationServiceNoAuth,
     private router: Router
-  ) {
-
-  }
+  ) {}
   /* ****************************************************
     HIDE FILTERS ACCORDING TO VIEW SIZE
   **************************************************** */
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event){
+  @HostListener("window:resize", ["$event"])
+  onResize(event: Event) {
     // console.log("window:resize", window.innerWidth);
-    if (window.innerWidth <= 740){
-      this.drawer.opened = false;
-    } else {
-      this.drawer.opened = true;
+    if (this.drawer) {
+      if (window.innerWidth <= 740) {
+        this.drawer.opened = false;
+      } else {
+        this.drawer.opened = true;
+      }
     }
   }
 
-  ngAfterViewInit(){
-    this.onResize(null)
+  ngAfterViewInit() {
+    this.onResize(null);
   }
   /* ****************************************************
     end HIDE FILTERS ACCORDING TO VIEW SIZE
   **************************************************** */
   ngOnInit() {
-    if (this.environment.topOrganizationPID != '') {
+    if (this.environment.topOrganizationPID != "") {
       this.topOrganizationPID = this.environment.topOrganizationPID;
-      if (localStorage.getItem('topMainOrganization') && localStorage.getItem('topMainOrganization') != '') {
-        const response = JSON.parse(localStorage.getItem('topMainOrganization'));
+      if (
+        localStorage.getItem("topMainOrganization") &&
+        localStorage.getItem("topMainOrganization") != ""
+      ) {
+        const response = JSON.parse(
+          localStorage.getItem("topMainOrganization")
+        );
         this.topMainOrganization = response;
         // new Organization();
         // this.topMainOrganization.deepcopy(response.metadata);
@@ -148,13 +167,16 @@ export class CatalogComponent implements OnInit, AfterViewInit {
             this.topMainOrganization = response;
             // new Organization();
             // this.topMainOrganization.deepcopy(response.metadata);
-            localStorage.setItem('topMainOrganization', JSON.stringify(response));
+            localStorage.setItem(
+              "topMainOrganization",
+              JSON.stringify(response)
+            );
             this.init();
           },
           (error) => {
             console.log("error");
           },
-          () => { }
+          () => {}
         );
       }
     } else {
@@ -204,7 +226,9 @@ export class CatalogComponent implements OnInit, AfterViewInit {
             params.get(CatalogFilterKeys.source_type)
           );
         } else {
-          this.searchParams = this.searchParams.delete(CatalogFilterKeys.source_type);
+          this.searchParams = this.searchParams.delete(
+            CatalogFilterKeys.source_type
+          );
         }
         // TODO: this is not nice, but..
         let query = "";
@@ -214,10 +238,12 @@ export class CatalogComponent implements OnInit, AfterViewInit {
         }
 
         if (this.topMainOrganization) {
-          if(query != ''){
+          if (query != "") {
             query = this.queryAddAndOp(query);
           }
-          query = query.concat("(organizations.id:" + this.topMainOrganization.id + ")");
+          query = query.concat(
+            "(organizations.id:" + this.topMainOrganization.id + ")"
+          );
         }
 
         if (params.has(CatalogFilterKeys.institutions)) {
@@ -278,15 +304,15 @@ export class CatalogComponent implements OnInit, AfterViewInit {
         }
 
         this.searchParams = this.searchParams.set("q", query);
-        console.log(this.searchParams, 'SEARCH PAAAAAARAMS');
+        console.log(this.searchParams, "SEARCH PAAAAAARAMS");
 
         this.fetchJournalData();
         this.initfilters = true;
 
-        console.log('catalog comonent', params, this.filtersParams);
+        console.log("catalog comonent", params, this.filtersParams);
       },
-      error: (e) => { },
-      complete: () => { },
+      error: (e) => {},
+      complete: () => {},
     });
   }
 
@@ -350,7 +376,10 @@ export class CatalogComponent implements OnInit, AfterViewInit {
         //   arr.push(j);
         // });
         // this.dataSource.data = arr;
-        console.log("------------------------------------------", this.dataSource);
+        console.log(
+          "------------------------------------------",
+          this.dataSource
+        );
       },
       (err: any) => {
         console.log("error: " + err + ".");
@@ -396,7 +425,7 @@ export class CatalogComponent implements OnInit, AfterViewInit {
   viewJournal(uuid: string): void {
     this.sourceServiceNoAuth.getSourceByUUID(uuid).subscribe(
       (response: Hit<JournalData>) => {
-        console.log(response)
+        console.log(response);
         if (response) {
           let journalVersion = new JournalVersion();
 
@@ -404,7 +433,7 @@ export class CatalogComponent implements OnInit, AfterViewInit {
           journalVersion.id = uuid;
           const dialogRef = this.dialog.open(DialogCatalogJournalInfoDialog, {
             data: {
-              journalVersion: journalVersion
+              journalVersion: journalVersion,
             },
           });
 
@@ -420,7 +449,7 @@ export class CatalogComponent implements OnInit, AfterViewInit {
       (error) => {
         console.log("error");
       },
-      () => { }
+      () => {}
     );
   }
 }
@@ -441,7 +470,7 @@ export class DialogCatalogJournalInfoDialog implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogCatalogJournalInfoDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     console.log(this.data);
