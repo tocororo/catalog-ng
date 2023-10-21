@@ -7,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { OAuthStorage } from 'angular-oauth2-oidc';
-import { DialogCatalogJournalInfoDialog } from 'projects/catalog/src/app/catalog/catalog.component';
+
 import { Environment, Hit, Journal, JournalVersion, MessageHandler, Organization, OrganizationServiceNoAuth, ResponseStatus, SourceService, SourceServiceNoAuth, SourceTypes, StatusCode } from 'toco-lib';
+import { DialogCatalogJournalInfoDialog } from '../../../../catalog/src/app/catalog/catalog.component';
 
 @Component({
     selector: 'revistasmes-home',

@@ -5,10 +5,10 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SourceResolver } from 'projects/catalog/src/app/source-resolver';
-import { StaticPagesComponent } from 'projects/catalog/src/app/static-pages/static-pages.component';
-import { UserProfileComponent } from 'projects/catalog/src/app/user-profile/user-profile.component';
 import { NotificationListComponent, OauthAuthenticationService } from 'toco-lib';
+import { SourceResolver } from '../../../catalog/src/app/source-resolver';
+import { StaticPagesComponent } from '../../../catalog/src/app/static-pages/static-pages.component';
+import { UserProfileComponent } from '../../../catalog/src/app/user-profile/user-profile.component';
 import { HomeRevistasmesComponent } from './home/home.component';
 
 
@@ -26,22 +26,22 @@ const routes: Routes = [
   {
     path: 'faq',
     component: StaticPagesComponent,
-    data: { src: 'assets/markdown/faq.md', title: 'FAQ' },
+    data: { src: 'assets/markdown/faq', title: 'FAQ' },
   },
   {
     path: 'about',
     component: StaticPagesComponent,
-    data: { src: 'assets/markdown/about.md', title: 'Sobre Nosotros' },
+    data: { src: 'assets/markdown/about', title: 'Sobre Nosotros' },
   },
   {
     path: 'help',
     component: StaticPagesComponent,
-    data: { src: 'assets/markdown/help.md', title: 'Ayuda' },
+    data: { src: 'assets/markdown/help', title: 'Ayuda' },
   },
   {
     path: 'contact',
     component: StaticPagesComponent,
-    data: { src: 'assets/markdown/contact.md', title: 'Contacto' },
+    data: { src: 'assets/markdown/contact', title: 'Contacto' },
   },
   {
     path: 'userprofile',
