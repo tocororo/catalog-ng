@@ -1,13 +1,13 @@
 
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { OAuthStorage } from 'angular-oauth2-oidc';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { Source, SourceService, SourceServiceNoAuth } from 'toco-lib';
 
 @Injectable()
-export class SourceResolver implements Resolve<Source>
+export class SourceResolver 
 {
     constructor(
       private service: SourceService,

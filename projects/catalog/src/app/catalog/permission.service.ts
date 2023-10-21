@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
 import { OAuthStorage } from "angular-oauth2-oidc";
 import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-export class SourceViewGuard implements CanActivate{
+export class SourceViewGuard {
 
   constructor(
     private oauthStorage: OAuthStorage,
