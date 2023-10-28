@@ -16,6 +16,7 @@ const routes: Routes = [
   {
     path: 'sources',
     loadChildren: () => import('../../../catalog/src/app/catalog/catalog.module').then(m => m.CatalogModule),
+    data: { topOrganizationPID: 'orgaid.223'},
     // canActivate: [OauthAuthenticationService]
   },
   {
@@ -26,22 +27,22 @@ const routes: Routes = [
   {
     path: 'faq',
     component: StaticPagesComponent,
-    data: { src: 'assets/markdown/faq', title: 'FAQ' },
+    data: { src: 'assets/markdown/revistasmes/faq', title: 'FAQ' },
   },
   {
     path: 'about',
     component: StaticPagesComponent,
-    data: { src: 'assets/markdown/about', title: 'Sobre Nosotros' },
+    data: { src: 'assets/markdown/revistasmes/about', title: 'Sobre Nosotros' },
   },
   {
     path: 'help',
     component: StaticPagesComponent,
-    data: { src: 'assets/markdown/help', title: 'Ayuda' },
+    data: { src: 'assets/markdown/revistasmes/help', title: 'Ayuda' },
   },
   {
     path: 'contact',
     component: StaticPagesComponent,
-    data: { src: 'assets/markdown/contact', title: 'Contacto' },
+    data: { src: 'assets/markdown/revistasmes/contact', title: 'Contacto' },
   },
   {
     path: 'userprofile',
