@@ -15,7 +15,7 @@
       </div>
       <a
         mat-button
-        [routerLink]="['/']"
+        [routerLink]="[env.catalog,'']"
         style="white-space: normal; display: flex; align-items: center"
       >
         <img
@@ -101,14 +101,14 @@
     fxLayoutAlign="center center"
     style="height: auto !important; min-height: 56px"
   >
-    <a mat-button [routerLink]="['/']" >{{ 'HOME' | translate }}</a>
-    <!-- <a mat-button [routerLink]="['/about']" value="Acerca de">Acerca de</a> -->
-    <a mat-button [routerLink]="['/sources']" >{{ 'SCEIBA_CATALOGO' | translate }}</a>
-    <a mat-button [routerLink]="['/statistics']" >{{ 'REPORTS_STATISTICS' | translate }}</a>
+    <a mat-button [routerLink]="[env.catalog,'']" >{{ 'HOME' | translate }}</a>
+    <!-- <a mat-button [routerLink]="[env.catalog,'about']" value="Acerca de">Acerca de</a> -->
+    <a mat-button [routerLink]="[env.catalog,'sources']" >{{ 'SCEIBA_CATALOGO' | translate }}</a>
+    <a mat-button [routerLink]="[env.catalog,'statistics']" >{{ 'REPORTS_STATISTICS' | translate }}</a>
 
 
 
-    <!-- <a *ngIf="user" mat-button [routerLink]="['/sources','permissions']"> Permisos </a> -->
+    <!-- <a *ngIf="user" mat-button [routerLink]="[env.catalog,'sources','permissions']"> Permisos </a> -->
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -136,20 +136,20 @@
 </mat-menu> -->
 
 <mat-menu #menuHelp="matMenu">
-  <!-- <a mat-menu-item [routerLink]="['/help']">
+  <!-- <a mat-menu-item [routerLink]="[env.catalog,'help']">
       <mat-icon>help_outline</mat-icon>
       {{ 'AYUDA' | translate }}
   </a> -->
 
-  <a mat-menu-item [routerLink]="['/about']">
+  <a mat-menu-item [routerLink]="[env.catalog,'about']">
     <mat-icon>info</mat-icon>
     {{ 'ACERCA_DE' | translate }}
   </a>
-  <a mat-menu-item [routerLink]="['/policy']">
+  <a mat-menu-item [routerLink]="[env.catalog,'policy']">
     <mat-icon>security</mat-icon>
     {{ 'PRIVACIDAD' | translate }}
   </a>
-  <a mat-menu-item [routerLink]="['/contact']">
+  <a mat-menu-item [routerLink]="[env.catalog,'contact']">
     <mat-icon>contacts</mat-icon>
     {{ 'CONTACTOS' | translate }}
   </a>
@@ -174,15 +174,15 @@
 </mat-menu>
 
 <mat-menu #menuUser="matMenu">
-  <!-- <a mat-menu-item [routerLink]="['/disambiguate']" *ngIf="hasPermission">
+  <!-- <a mat-menu-item [routerLink]="[env.catalog,'disambiguate']" *ngIf="hasPermission">
     <mat-icon>mode_edit</mat-icon>
     {{ 'DES_ORGANIZACIONES' | translate }}
   </a>
-  <a mat-menu-item [routerLink]="['/import']" *ngIf="hasPermissionAdmin">
+  <a mat-menu-item [routerLink]="[env.catalog,'import']" *ngIf="hasPermissionAdmin">
     <mat-icon>file_upload</mat-icon>
     <span class="mymatBadge" matBadge="beta" matBadgeColor="warn" matBadgePosition="after">{{ 'IMPORT' | translate }}</span>
   </a> -->
-  <a mat-menu-item [routerLink]="['/permissions']"><mat-icon>vpn_key</mat-icon>
+  <a mat-menu-item [routerLink]="[env.catalog,'permissions']"><mat-icon>vpn_key</mat-icon>
     {{ 'CATALOG_PERMISSIONS' | translate }}</a>
 
   <a mat-menu-item href="{{ sceibaHost }}account/settings/profile/">

@@ -66,7 +66,7 @@ export class AppComponent {
   }>;
 
   // public footerImage: string
-
+  public env: Environment;
   constructor(
     private environment: Environment,
     private oauthStorage: OAuthStorage,
@@ -75,8 +75,8 @@ export class AppComponent {
     private router: Router,
     private _transServ: TranslateService
   ) {
-    let env: any = this.environment;
-    this.oauthInfo = env.oauthInfo;
+    this.env = this.environment;
+    this.oauthInfo = this.env.oauthInfo;
     this.isOnline = true; //navigator.onLine;
     this.router.events.subscribe(
       (event) => {

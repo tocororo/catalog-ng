@@ -59,6 +59,7 @@ export class AppComponent {
   islogged: boolean;
   user: User;
   loading = false;
+  public env: Environment;
   private authenticateSuscription: Subscription = null;
 
   constructor(
@@ -69,8 +70,8 @@ export class AppComponent {
     private router: Router,
     private _transServ: TranslateService
   ) {
-    let env: any = this.environment;
-    this.oauthInfo = env.oauthInfo;
+    this.env = this.environment;
+    this.oauthInfo = this.env.oauthInfo;
     this.isOnline = true; //navigator.onLine;
     this.router.events.subscribe(
       (event) => {
